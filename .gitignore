@@ -1,69 +1,60 @@
-# Prerequisites
+# ===== Prerequisites =====
 *.d
 
-# Compiled Object files
-*.slo
-*.lo
+# ===== Object files =====
 *.o
 *.obj
+*.elf
 
-# Precompiled Headers
+# ===== Linker output =====
+*.map
+*.hex
+*.bin
+*.list
+
+# ===== Precompiled Headers =====
 *.gch
 *.pch
 
-# Linker files
-*.ilk
+# ===== Libraries =====
+*.lib
+*.a
 
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
+# ===== Shared objects (cross-platform) =====
+*.dll
 *.so
 *.dylib
-*.dll
-*.so.*
 
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
+# ===== Executables =====
 *.exe
 *.out
-*.app
 
-# Build directories
-build/
-Build/
-build-*/
-
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
-
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
+# ===== Debug / analysis files =====
+*.su
 *.dwo
 
-# test output & cache
-Testing/
-.cache/
+# ===== STM32CubeIDE build directories =====
+Debug/
+Release/
+build/
+
+# ===== STM32CubeIDE project settings =====
+# Keep for team use:
+# .project
+# .cproject
+.settings/
+
+# ===== Workspace-level files =====
+.metadata/
+
+# ===== Logs / temp =====
+*.log
+*~
+
+# ===== VS Code =====
+.vscode/
+.clang-format
+
+# ===== OS-generated files =====
+.DS_Store
+Thumbs.db
