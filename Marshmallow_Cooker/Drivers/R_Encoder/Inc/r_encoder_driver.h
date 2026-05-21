@@ -13,4 +13,4 @@ void r_encoder_init(r_encoder_t* encoder, TIM_HandleTypeDef* htim);
 void update_r_encoder(r_encoder_t* encoder);
 void reset_r_encoder(r_encoder_t* encoder);
 
-#endif
+#endif /* R_ENCODER_DRIVER_C */
