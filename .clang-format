@@ -1,0 +1,24 @@
+BasedOnStyle: LLVM
+IndentWidth: 2
+UseTab: Never
+
+PointerAlignment: Left
+BreakBeforeBraces: Attach
+IndentCaseLabels: true
+
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+
+ColumnLimit: 120
+BinPackArguments: false
+BinPackParameters: false
+PenaltyBreakBeforeFirstCallParameter: 1000
+PenaltyExcessCharacter: 100000
+
+AlignTrailingComments: false
+SpacesBeforeTrailingComments: 1
+
+BreakAfterReturnType: None
+IndentWrappedFunctionNames: false
+SpaceBeforeParens: ControlStatements
