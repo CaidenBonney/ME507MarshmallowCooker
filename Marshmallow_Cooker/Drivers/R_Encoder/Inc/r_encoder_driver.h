@@ -1,16 +1,24 @@
-#ifndef R_ENCODER_DRIVER_C
-#define R_ENCODER_DRIVER_C
+#ifndef R_ENCODER_DRIVER_H
+#define R_ENCODER_DRIVER_H
 #include "stm32f4xx_hal.h"
 
-typedef struct {
-  TIM_HandleTypeDef* htim;
-  int16_t velocity;
-  int32_t position;
-  uint32_t last_counter_value;
-} r_encoder_t;
+class REncoder {
+public:
+  REncoder(TIM_HandleTypeDef* htim);
+  void update();
+  void reset();
 
-void r_encoder_init(r_encoder_t* encoder, TIM_HandleTypeDef* htim);
-void update_r_encoder(r_encoder_t* encoder);
-void reset_r_encoder(r_encoder_t* encoder);
+  int16_t getVelocity() const;
+  int32_t getPosition() const;
 
-#endif /* R_ENCODER_DRIVER_C */
+private:
+  static constexpr int32_t kCounterRange = 65536;
+  static constexpr int32_t kHalfCounterRange = kCounterRange / 2;
+
+  TIM_HandleTypeDef* htim_;
+  int16_t velocity_;
+  int32_t position_;
+  uint32_t last_counter_value_;
+};
+
+#endif /* R_ENCODER_DRIVER_H */
