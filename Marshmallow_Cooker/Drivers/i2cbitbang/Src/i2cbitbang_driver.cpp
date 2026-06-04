@@ -16,12 +16,12 @@ void i2cbitbang::conf_hardware(void)
 	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOA || i2cbbConfigTable[instance].GPIOdta_port == GPIOA) __HAL_RCC_GPIOA_CLK_ENABLE();
 	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOB || i2cbbConfigTable[instance].GPIOdta_port == GPIOB) __HAL_RCC_GPIOB_CLK_ENABLE();
 	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOC || i2cbbConfigTable[instance].GPIOdta_port == GPIOC) __HAL_RCC_GPIOC_CLK_ENABLE();
-	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOD || i2cbbConfigTable[instance].GPIOdta_port == GPIOD) __HAL_RCC_GPIOD_CLK_ENABLE();
-	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOE || i2cbbConfigTable[instance].GPIOdta_port == GPIOE) __HAL_RCC_GPIOE_CLK_ENABLE();
-	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOF || i2cbbConfigTable[instance].GPIOdta_port == GPIOF) __HAL_RCC_GPIOF_CLK_ENABLE();
-	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOG || i2cbbConfigTable[instance].GPIOdta_port == GPIOG) __HAL_RCC_GPIOG_CLK_ENABLE();
+	//if (i2cbbConfigTable[instance].GPIOclk_port == GPIOD || i2cbbConfigTable[instance].GPIOdta_port == GPIOD) __HAL_RCC_GPIOD_CLK_ENABLE();
+	//if (i2cbbConfigTable[instance].GPIOclk_port == GPIOE || i2cbbConfigTable[instance].GPIOdta_port == GPIOE) __HAL_RCC_GPIOE_CLK_ENABLE();
+	//if (i2cbbConfigTable[instance].GPIOclk_port == GPIOF || i2cbbConfigTable[instance].GPIOdta_port == GPIOF) __HAL_RCC_GPIOF_CLK_ENABLE();
+	//if (i2cbbConfigTable[instance].GPIOclk_port == GPIOG || i2cbbConfigTable[instance].GPIOdta_port == GPIOG) __HAL_RCC_GPIOG_CLK_ENABLE();
 	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOH || i2cbbConfigTable[instance].GPIOdta_port == GPIOH) __HAL_RCC_GPIOH_CLK_ENABLE();
-	if (i2cbbConfigTable[instance].GPIOclk_port == GPIOI || i2cbbConfigTable[instance].GPIOdta_port == GPIOI) __HAL_RCC_GPIOH_CLK_ENABLE();
+	//if (i2cbbConfigTable[instance].GPIOclk_port == GPIOI || i2cbbConfigTable[instance].GPIOdta_port == GPIOI) __HAL_RCC_GPIOH_CLK_ENABLE();
 
 	HAL_GPIO_WritePin(i2cbbConfigTable[instance].GPIOdta_port,
 						 i2cbbConfigTable[instance].pinDta,
