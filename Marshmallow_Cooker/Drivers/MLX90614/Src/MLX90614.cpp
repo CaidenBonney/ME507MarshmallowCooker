@@ -53,6 +53,54 @@ HAL_StatusTypeDef MLX90614::readObjectF(float& temperatureF)
     return HAL_OK;
 }
 
+HAL_StatusTypeDef MLX90614::update()
+{
+    float ambientTempC = 0.0f;
+    float objectTempC = 0.0f;
+
+    HAL_StatusTypeDef ambientStatus = readAmbientC(ambientTempC);
+    HAL_StatusTypeDef objectStatus = readObjectC(objectTempC);
+
+    if (ambientStatus == HAL_OK) {
+        ambient_temperature_c_ = ambientTempC;
+    }
+
+    if (objectStatus == HAL_OK) {
+        object_temperature_c_ = objectTempC;
+    }
+
+    last_status_ = (ambientStatus == HAL_OK && objectStatus == HAL_OK)
+                        ? HAL_OK
+                        : HAL_ERROR;
+
+    return last_status_;
+}
+
+float MLX90614::getAmbientC() const
+{
+    return ambient_temperature_c_;
+}
+
+float MLX90614::getAmbientF() const
+{
+    return celsiusToFahrenheit(ambient_temperature_c_);
+}
+
+float MLX90614::getObjectC() const
+{
+    return object_temperature_c_;
+}
+
+float MLX90614::getObjectF() const
+{
+    return celsiusToFahrenheit(object_temperature_c_);
+}
+
+HAL_StatusTypeDef MLX90614::getLastStatus() const
+{
+    return last_status_;
+}
+
 HAL_StatusTypeDef MLX90614::readTemperatureRegister(uint8_t reg,
                                                     float& temperatureC)
 {

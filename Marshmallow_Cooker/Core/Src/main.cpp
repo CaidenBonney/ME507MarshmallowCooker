@@ -34,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-static constexpr uint32_t kTemperatureReadPeriodMs = 250;
+static constexpr uint32_t kTemperatureReadPeriodMs = 500;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,7 +53,6 @@ UART_HandleTypeDef huart2;
 REncoder r_encoder(&htim3);
 MLX90614 temperature_sensor(&hi2c3);
 
-volatile float object_temperature_f = 0.0f;
 volatile HAL_StatusTypeDef temperature_sensor_status = HAL_ERROR;
 /* USER CODE END PV */
 
@@ -64,7 +63,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
-static void UpdateObjectTemperatureF(void);
+static void UpdateTemperatureSensor(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -75,14 +74,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
   }
 }
 
-static void UpdateObjectTemperatureF(void) {
-  float temperature_f = 0.0f;
-  HAL_StatusTypeDef status = temperature_sensor.readObjectF(temperature_f);
-
-  temperature_sensor_status = status;
-  if (status == HAL_OK) {
-    object_temperature_f = temperature_f;
-  }
+static void UpdateTemperatureSensor(void) {
+  temperature_sensor_status = temperature_sensor.update();
 }
 /* USER CODE END 0 */
 
@@ -119,7 +112,7 @@ int main(void)
   MX_I2C3_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  UpdateObjectTemperatureF();
+  UpdateTemperatureSensor();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -133,7 +126,14 @@ int main(void)
 
     if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
       last_temperature_read_ms = now_ms;
-      UpdateObjectTemperatureF();
+      UpdateTemperatureSensor();
+      if (temperature_sensor_status == HAL_OK) {
+        print_str("IR Temp: ");
+        sprintf(print_buf, "%.2f\n\r", temperature_sensor.getObjectF());
+        print_str(print_buf);
+      } else {
+        print_str("IR Temp read failed\n\r");
+      }
     }
   }
   /* USER CODE END 3 */

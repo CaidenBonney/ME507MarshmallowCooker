@@ -17,12 +17,23 @@ public:
     HAL_StatusTypeDef readObjectC(float& temperatureC);
     HAL_StatusTypeDef readObjectF(float& temperatureF);
 
+    HAL_StatusTypeDef update();
+    float getAmbientC() const;
+    float getAmbientF() const;
+    float getObjectC() const;
+    float getObjectF() const;
+    HAL_StatusTypeDef getLastStatus() const;
+
 private:
     static constexpr uint8_t REG_AMBIENT_TEMP = 0x06;
     static constexpr uint8_t REG_OBJECT_TEMP  = 0x07;
 
     I2C_HandleTypeDef* i2c_;
     uint16_t address_;
+
+    float ambient_temperature_c_ = 0.0f;
+    float object_temperature_c_ = 0.0f;
+    HAL_StatusTypeDef last_status_ = HAL_ERROR;
 
     HAL_StatusTypeDef readTemperatureRegister(uint8_t reg,
                                               float& temperatureC);
