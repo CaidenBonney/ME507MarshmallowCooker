@@ -1,6 +1,8 @@
-#pragma once
+#ifndef MLX90614_H
+#define MLX90614_H
 
 #include "stm32f4xx_hal.h"
+#include <stdint.h>
 
 class MLX90614 {
 public:
@@ -11,17 +13,20 @@ public:
 
     HAL_StatusTypeDef isConnected();
 
-    HAL_StatusTypeDef readAmbientC(float& temperatureC);
-    HAL_StatusTypeDef readAmbientF(float& temperatureF);
-
-    HAL_StatusTypeDef readObjectC(float& temperatureC);
-    HAL_StatusTypeDef readObjectF(float& temperatureF);
-
     HAL_StatusTypeDef update();
-    float getAmbientC() const;
-    float getAmbientF() const;
-    float getObjectC() const;
-    float getObjectF() const;
+
+    HAL_StatusTypeDef readAmbientCx100(int16_t& temperatureC_x100);
+    HAL_StatusTypeDef readAmbientFx100(int16_t& temperatureF_x100);
+
+    HAL_StatusTypeDef readObjectCx100(int16_t& temperatureC_x100);
+    HAL_StatusTypeDef readObjectFx100(int16_t& temperatureF_x100);
+
+    int16_t getAmbientCx100() const;
+    int16_t getAmbientFx100() const;
+
+    int16_t getObjectCx100() const;
+    int16_t getObjectFx100() const;
+
     HAL_StatusTypeDef getLastStatus() const;
 
 private:
@@ -31,12 +36,15 @@ private:
     I2C_HandleTypeDef* i2c_;
     uint16_t address_;
 
-    float ambient_temperature_c_ = 0.0f;
-    float object_temperature_c_ = 0.0f;
+    int16_t ambient_temperature_c_x100_ = 0;
+    int16_t object_temperature_c_x100_ = 0;
+
     HAL_StatusTypeDef last_status_ = HAL_ERROR;
 
     HAL_StatusTypeDef readTemperatureRegister(uint8_t reg,
-                                              float& temperatureC);
+                                              int16_t& temperatureC_x100);
 
-    float celsiusToFahrenheit(float celsius);
+    static int16_t celsiusToFahrenheitX100(int16_t celsius_x100);
 };
+
+#endif
