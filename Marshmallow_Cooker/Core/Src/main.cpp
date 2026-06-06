@@ -123,6 +123,12 @@ int main(void) {
   temperature_sensor = &mlx90614_sensor;
 
   print_str("Software I2C MLX90614 initialized\r\n");
+  GPIO_PinState sda_state = HAL_GPIO_ReadPin(BAD_SDA_GPIO_Port, BAD_SDA_Pin);
+  GPIO_PinState scl_state = HAL_GPIO_ReadPin(BAD_SCL_GPIO_Port, BAD_SCL_Pin);
+
+  sprintf(print_buf, "I2C idle check: SDA=%d, SCL=%d\n\r", sda_state, scl_state);
+  print_str(print_buf);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -141,9 +147,15 @@ int main(void) {
       temperature_sensor_status = temperature_sensor->update();
 
       if (temperature_sensor_status == HAL_OK) {
+        int16_t ambientF_x100 = temperature_sensor->getAmbientFx100();
         int16_t objectF_x100 = temperature_sensor->getObjectFx100();
 
-        sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
+        sprintf(print_buf,
+                "Ambient: %d.%02d F, Object: %d.%02d F\n\r",
+                ambientF_x100 / 100,
+                abs(ambientF_x100 % 100),
+                objectF_x100 / 100,
+                abs(objectF_x100 % 100));
 
         print_str(print_buf);
       } else {

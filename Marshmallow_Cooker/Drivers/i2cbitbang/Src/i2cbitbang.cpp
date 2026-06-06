@@ -8,44 +8,42 @@
 
 #include "i2cbitbang.h"
 
-//extern const i2cbbConfig_t i2cbbConfigTable[NUMBER_OF_I2CBB_INSTANCES];
+// extern const i2cbbConfig_t i2cbbConfigTable[NUMBER_OF_I2CBB_INSTANCES];
 
 i2cbitbang::i2cbitbang(uint32_t i, uint8_t slAdd) {
 
-	slaveAddress = slAdd;
-	started = false;
-	instance = i;
-	error = I2CBB_ERROR_NONE;
-	i2cMode = MODE_I2C;			//default is I2c Mode. There is also SCCB mode (e.g. for cam OV7670)
-	speedSelect = SPEED_400k;	//default speed 100kHz
-	stretchTime_us = 1000;		//in microseconds
-	/*
-	 * ackMode parameter has two options:
-	 * 	ACK_CHECK: (default) ACK is check as normal i2c operation
-	 * 	ACK_IGNORE: to create SCCB communication (e.g. cam OV7670)
-	 */
-	ackMode = ACK_CHECK;
+  slaveAddress = slAdd;
+  started = false;
+  instance = i;
+  error = I2CBB_ERROR_NONE;
+  i2cMode = MODE_I2C; // default is I2c Mode. There is also SCCB mode (e.g. for cam OV7670)
+  speedSelect = SPEED_400k; // default speed 100kHz
+  stretchTime_us = 1000; // in microseconds
+  /*
+   * ackMode parameter has two options:
+   * 	ACK_CHECK: (default) ACK is check as normal i2c operation
+   * 	ACK_IGNORE: to create SCCB communication (e.g. cam OV7670)
+   */
+  ackMode = ACK_CHECK;
 
-	/*initalizing timing according to i2c standards
-	 * https://www.analog.com/en/technical-articles/i2c-timing-definition-and-specification-guide-part-2.html#
-	 */
-	init_timings();
+  /*initalizing timing according to i2c standards
+   * https://www.analog.com/en/technical-articles/i2c-timing-definition-and-specification-guide-part-2.html#
+   */
+  init_timings();
 
-	if (i >= NUMBER_OF_I2CBB_INSTANCES)
-		while(1);	//trap in case of bad instance
-		// TODO find non-blocking way
+  if (i >= NUMBER_OF_I2CBB_INSTANCES)
+    while (1)
+      ; // trap in case of bad instance
+  // TODO find non-blocking way
 
-	conf_hardware();
+  conf_hardware();
 }
 
-i2cbitbang::~i2cbitbang()
-{
+i2cbitbang::~i2cbitbang() {
 }
 
-void i2cbitbang::i2c_start_cond(void)
-{
-  if (started)
-  {
+void i2cbitbang::i2c_start_cond(void) {
+  if (started) {
     // if started, do a restart condition
     // set SDA to 1
     set_SDA();
@@ -57,15 +55,15 @@ void i2cbitbang::i2c_start_cond(void)
     I2C_Delay.hns(t.susta);
   }
 
-  //TODO implement arbitration
- /*
-  conf_SDA(I2CBB_INPUT);
-  if (read_SDA() == 0)
-  {
-    arbitration_lost();
-  }
-  conf_SDA(I2CBB_OUTPUT);
-*/
+  // TODO implement arbitration
+  /*
+   conf_SDA(I2CBB_INPUT);
+   if (read_SDA() == 0)
+   {
+     arbitration_lost();
+   }
+   conf_SDA(I2CBB_OUTPUT);
+ */
 
   // SCL is high, set SDA from 1 to 0.
   clear_SDA();
@@ -75,11 +73,10 @@ void i2cbitbang::i2c_start_cond(void)
   started = true;
 }
 
-void i2cbitbang::i2c_stop_cond(void)
-{
+void i2cbitbang::i2c_stop_cond(void) {
   // set SDA to 0
   clear_SDA();
-//  I2C_delay();
+  //  I2C_delay();
   I2C_Delay.hns(t.susto);
 
   set_SCL();
@@ -93,18 +90,17 @@ void i2cbitbang::i2c_stop_cond(void)
   set_SDA();
   I2C_Delay.hns(t.buff);
 
-  //TODO implement arbitration
-/*  if (read_SDA() == 0) {
-    arbitration_lost();
-  }
-*/
+  // TODO implement arbitration
+  /*  if (read_SDA() == 0) {
+      arbitration_lost();
+    }
+  */
 
   started = false;
 }
 
 // Write a bit to I2C bus
-void i2cbitbang::i2c_write_bit(bool bit)
-{
+void i2cbitbang::i2c_write_bit(bool bit) {
 
   if (bit) {
     set_SDA();
@@ -123,15 +119,15 @@ void i2cbitbang::i2c_write_bit(bool bit)
 
   clock_stretching(stretchTime_us);
 
-  //TODO implement arbitration
-  // SCL is high, now data is valid
-  // If SDA is high, check that nobody else is driving SDA
-/*  conf_SDA(I2CBB_INPUT);
-  if (bit && (read_SDA() == 0)) {
-    arbitration_lost();
-  }
-  conf_SDA(I2CBB_OUTPUT);
-*/
+  // TODO implement arbitration
+  //  SCL is high, now data is valid
+  //  If SDA is high, check that nobody else is driving SDA
+  /*  conf_SDA(I2CBB_INPUT);
+    if (bit && (read_SDA() == 0)) {
+      arbitration_lost();
+    }
+    conf_SDA(I2CBB_OUTPUT);
+  */
   // Clear the SCL to low in preparation for next change
   clear_SCL();
   I2C_Delay.hns(t.low);
@@ -166,13 +162,11 @@ bool i2cbitbang::i2c_read_bit(void) {
 }
 
 // Write a byte to I2C bus. Return 0 if ack by the slave.
-bool i2cbitbang::i2c_write_byte(unsigned char byte)
-{
+bool i2cbitbang::i2c_write_byte(unsigned char byte) {
   unsigned bit;
-  bool     nack;
+  bool nack;
 
-  for (bit = 0; bit < 8; ++bit)
-  {
+  for (bit = 0; bit < 8; ++bit) {
     i2c_write_bit((byte & 0x80) != 0);
     byte <<= 1;
   }
@@ -185,8 +179,7 @@ bool i2cbitbang::i2c_write_byte(unsigned char byte)
 }
 
 // Read a byte from I2C bus
-unsigned char i2cbitbang::i2c_read_byte(bool nack)
-{
+unsigned char i2cbitbang::i2c_read_byte(bool nack) {
   unsigned char byte = 0;
   unsigned char bit;
 
@@ -204,10 +197,10 @@ unsigned char i2cbitbang::i2c_read_byte(bool nack)
  * timings are in hns units (0.1 um units)
  * e.g. 47 means 4.7 us
  */
-#define MARGIN_100	-10
-#define MARGIN_400  -6
-#define MARGIN_50    10
-#define MARGIN_10    0
+#define MARGIN_100 -10
+#define MARGIN_400 -6
+#define MARGIN_50 10
+#define MARGIN_10 0
 
 #if (MARGIN_400 < -6)
 #error "In I2Cbitbang class: MARGIN_100 need to be larger than -6"
@@ -216,200 +209,187 @@ unsigned char i2cbitbang::i2c_read_byte(bool nack)
 #error "In I2Cbitbang class: MARGIN_100 need to be larger than 36"
 #endif
 
-
-void i2cbitbang::init_timings(void)
-{
-	switch (speedSelect )
-	{
-		case SPEED_400k:
-			t.hdsta = 6 + MARGIN_400;
-			t.susto = 6 + MARGIN_400;
-			t.susta = 6 + MARGIN_400;
-			t.sudat = 1;
-			t.dvdat = 9 + MARGIN_400;
-			t.dvack = 9 + MARGIN_400;
-			t.high = 6 + MARGIN_400;
-			t.low = 13 + MARGIN_400;
-			t.buff = 13 + MARGIN_400;
-			break;
-		case SPEED_10k:
-			t.hdsta = 400 + MARGIN_10;
-			t.susto = 400 + MARGIN_10;
-			t.susta = 470 + MARGIN_10;
-			t.sudat = 30;
-			t.dvdat = 360 + MARGIN_10;
-			t.dvack = 360 + MARGIN_10;
-			t.high = 400 + MARGIN_10;
-			t.low = 470 + MARGIN_10;
-			t.buff = 470 + MARGIN_10;
-			break;
-		case SPEED_50k:
-			t.hdsta = 80 + MARGIN_50;
-			t.susto = 80 + MARGIN_50;
-			t.susta = 94 + MARGIN_50;
-			t.sudat = 6;
-			t.dvdat = 72 + MARGIN_50;
-			t.dvack = 72 + MARGIN_50;
-			t.high = 80 + MARGIN_50;
-			t.low = 94 + MARGIN_50;
-			t.buff = 94 + MARGIN_50;
-			break;
-		case SPEED_100k:
-		default:
-			t.hdsta = 40 + MARGIN_100;
-			t.susto = 40 + MARGIN_100;
-			t.susta = 47 + MARGIN_100;
-			t.sudat = 3;
-			t.dvdat = 36 + MARGIN_100;
-			t.dvack = 36 + MARGIN_100;
-			t.high = 40 + MARGIN_100;
-			t.low = 47 + MARGIN_100;
-			t.buff = 47 + MARGIN_100;
-			break;
-	}
+void i2cbitbang::init_timings(void) {
+  switch (speedSelect) {
+    case SPEED_400k:
+      t.hdsta = 6 + MARGIN_400;
+      t.susto = 6 + MARGIN_400;
+      t.susta = 6 + MARGIN_400;
+      t.sudat = 1;
+      t.dvdat = 9 + MARGIN_400;
+      t.dvack = 9 + MARGIN_400;
+      t.high = 6 + MARGIN_400;
+      t.low = 13 + MARGIN_400;
+      t.buff = 13 + MARGIN_400;
+      break;
+    case SPEED_10k:
+      t.hdsta = 400 + MARGIN_10;
+      t.susto = 400 + MARGIN_10;
+      t.susta = 470 + MARGIN_10;
+      t.sudat = 30;
+      t.dvdat = 360 + MARGIN_10;
+      t.dvack = 360 + MARGIN_10;
+      t.high = 400 + MARGIN_10;
+      t.low = 470 + MARGIN_10;
+      t.buff = 470 + MARGIN_10;
+      break;
+    case SPEED_50k:
+      t.hdsta = 80 + MARGIN_50;
+      t.susto = 80 + MARGIN_50;
+      t.susta = 94 + MARGIN_50;
+      t.sudat = 6;
+      t.dvdat = 72 + MARGIN_50;
+      t.dvack = 72 + MARGIN_50;
+      t.high = 80 + MARGIN_50;
+      t.low = 94 + MARGIN_50;
+      t.buff = 94 + MARGIN_50;
+      break;
+    case SPEED_100k:
+    default:
+      t.hdsta = 40 + MARGIN_100;
+      t.susto = 40 + MARGIN_100;
+      t.susta = 47 + MARGIN_100;
+      t.sudat = 3;
+      t.dvdat = 36 + MARGIN_100;
+      t.dvack = 36 + MARGIN_100;
+      t.high = 40 + MARGIN_100;
+      t.low = 47 + MARGIN_100;
+      t.buff = 47 + MARGIN_100;
+      break;
+  }
 }
 
-uint32_t i2cbitbang::getInstance(void)
-{
-	return instance;
+uint32_t i2cbitbang::getInstance(void) {
+  return instance;
 }
-ackMode_t i2cbitbang::getAckMode(void)
-{
-	return ackMode;
+ackMode_t i2cbitbang::getAckMode(void) {
+  return ackMode;
 }
 
-void i2cbitbang::setAckMode(ackMode_t ack)
-{
-	ackMode = ack;
+void i2cbitbang::setAckMode(ackMode_t ack) {
+  ackMode = ack;
 }
 
-void i2cbitbang::writeData(uint8_t reg, uint8_t *pData, uint16_t size)
-{
-	bool nack;
-	uint8_t *ptr = pData;
+void i2cbitbang::writeData(uint8_t reg, uint8_t* pData, uint16_t size) {
+  bool nack;
+  uint8_t* ptr = pData;
 
-	i2c_bus_init();
+  i2c_bus_init();
 
-	i2c_start_cond();
+  i2c_start_cond();
 
-	/*send slave addres*/
-	nack = i2c_write_byte(slaveAddress & 0xFE);
+  /*send slave addres*/
+  nack = i2c_write_byte(slaveAddress & 0xFE);
 
-	if ( (ackMode == ACK_CHECK) && nack)	error |= I2CBB_ERROR_NACK;
+  if ((ackMode == ACK_CHECK) && nack)
+    error |= I2CBB_ERROR_NACK;
 
+  /*send register addres*/
+  nack = i2c_write_byte(reg);
 
-	/*send register addres*/
-	nack = i2c_write_byte(reg);
+  if ((ackMode == ACK_CHECK) && nack)
+    error |= I2CBB_ERROR_NACK;
 
-	if ( (ackMode == ACK_CHECK) && nack)	error |= I2CBB_ERROR_NACK;
+  /*send data addres*/
+  while (size) {
+    nack = i2c_write_byte(*ptr++);
+    if (nack)
+      break;
+    size--;
+  }
 
-	/*send data addres*/
-	while(size)
-	{
-		nack = i2c_write_byte(*ptr++);
-		if (nack) break;
-		size--;
-	}
+  i2c_stop_cond();
 
-	i2c_stop_cond();
-
-	if ( (ackMode == ACK_CHECK) && nack)	error |= I2CBB_ERROR_NACK;
-
-
+  if ((ackMode == ACK_CHECK) && nack)
+    error |= I2CBB_ERROR_NACK;
 }
 
-void i2cbitbang::writeReg(uint8_t reg, uint8_t val)
-{
-	writeData(reg, &val, 1);
+void i2cbitbang::writeReg(uint8_t reg, uint8_t val) {
+  writeData(reg, &val, 1);
 }
 
-void i2cbitbang::readData(uint8_t reg, uint8_t *pData, uint16_t size)
-{
-	bool nack;
-	uint8_t *ptr;
+void i2cbitbang::readData(uint8_t reg, uint8_t* pData, uint16_t size) {
+  bool nack;
+  uint8_t* ptr;
+  ptr = pData;
 
-	ptr = pData;
+  error = I2CBB_ERROR_NONE;
 
-	i2c_bus_init();
+  i2c_bus_init();
 
-	i2c_start_cond();
-	nack = i2c_write_byte(slaveAddress & 0xFE);
-	if ( (ackMode == ACK_CHECK) && nack)
-	{
-		error |= I2CBB_ERROR_NACK;
-	}
+  i2c_start_cond();
+  nack = i2c_write_byte(slaveAddress & 0xFE);
+  if ((ackMode == ACK_CHECK) && nack) {
+    error |= I2CBB_ERROR_NACK;
+    error |= I2CBB_ERROR_NACK_WRITE_ADDR;
+  }
 
-	nack = i2c_write_byte(reg);
-	if ( (ackMode == ACK_CHECK) && nack)
-	{
-		error |= I2CBB_ERROR_NACK;
-	}
+  nack = i2c_write_byte(reg);
+  if ((ackMode == ACK_CHECK) && nack) {
+    error |= I2CBB_ERROR_NACK;
+    error |= I2CBB_ERROR_NACK_REG_ADDR;
+  }
 
-	if (i2cMode == MODE_SCCB)
-	{
-		i2c_stop_cond();
-	}
+  if (i2cMode == MODE_SCCB) {
+    i2c_stop_cond();
+  } else {
+    // Give the MLX90614 extra time between command byte ACK
+    // and the repeated START read phase.
+    I2C_Delay.hns(t.susta);
+    I2C_Delay.hns(t.susta);
+  }
 
-	i2c_start_cond();
+  i2c_start_cond();
 
-	nack = i2c_write_byte(slaveAddress | 0x01);
-	if ( (ackMode == ACK_CHECK) && nack)
-	{
-		error |= I2CBB_ERROR_NACK;
-	}
-	while(size)
-	{
-		*ptr++ = i2c_read_byte( (size>1) ? ACK : NACK );
-		size--;
-	}
+  I2C_Delay.hns(t.susta);
 
-	i2c_stop_cond();
+  nack = i2c_write_byte(slaveAddress | 0x01);
+  if ((ackMode == ACK_CHECK) && nack) {
+    error |= I2CBB_ERROR_NACK;
+    error |= I2CBB_ERROR_NACK_READ_ADDR;
+  }
+  while (size) {
+    *ptr++ = i2c_read_byte((size > 1) ? ACK : NACK);
+    size--;
+  }
 
+  i2c_stop_cond();
 }
 
-void i2cbitbang::readReg(uint8_t reg, uint8_t *pVal)
-{
-	readData(reg, pVal, 1);
+void i2cbitbang::readReg(uint8_t reg, uint8_t* pVal) {
+  readData(reg, pVal, 1);
 }
 
-uint8_t i2cbitbang::readReg(uint8_t reg)
-{
-	uint8_t val;
+uint8_t i2cbitbang::readReg(uint8_t reg) {
+  uint8_t val;
 
-	readData(reg, &val, 1);
+  readData(reg, &val, 1);
 
-	return val;
+  return val;
 }
 
-i2cMode_t i2cbitbang::getI2CMode(void)
-{
-	return i2cMode;
+i2cMode_t i2cbitbang::getI2CMode(void) {
+  return i2cMode;
 }
 
-void i2cbitbang::setI2CMode(i2cMode_t i2cm)
-{
-	i2cMode = i2cm;
+void i2cbitbang::setI2CMode(i2cMode_t i2cm) {
+  i2cMode = i2cm;
 }
 
-
-uint32_t i2cbitbang::getError(void)
-{
-	return error;
+uint32_t i2cbitbang::getError(void) {
+  return error;
 }
 
-void i2cbitbang::setSpeed(i2cbbSpeed_t fHz)
-{
-	speedSelect = fHz;
-	init_timings();
+void i2cbitbang::setSpeed(i2cbbSpeed_t fHz) {
+  speedSelect = fHz;
+  init_timings();
 }
 
-void i2cbitbang::clock_stretching(uint32_t t_us)
-{
-	  while ( (read_SCL() == 0) && (t_us > 0) )
-	  {
-		I2C_Delay.us(1);
-		t_us--;
-		if (t_us == 0)
-			error |= I2CBB_ERROR_STRETCH_TOUT;
-	  }
+void i2cbitbang::clock_stretching(uint32_t t_us) {
+  while ((read_SCL() == 0) && (t_us > 0)) {
+    I2C_Delay.us(1);
+    t_us--;
+    if (t_us == 0)
+      error |= I2CBB_ERROR_STRETCH_TOUT;
+  }
 }

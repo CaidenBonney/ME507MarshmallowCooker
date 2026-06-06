@@ -1,4 +1,8 @@
 #include "MLX90614.h"
+#include <stdio.h>
+
+extern char print_buf[100];
+extern void print_str(const char* str);
 
 MLX90614::MLX90614(i2cbitbang* i2c) : i2c_(i2c) {
 }
@@ -87,10 +91,11 @@ uint32_t MLX90614::getLastI2CError() const {
 HAL_StatusTypeDef MLX90614::readTemperatureRegister(uint8_t reg, int16_t& temperatureC_x100) {
   if (i2c_ == nullptr) {
     last_status_ = HAL_ERROR;
+    last_i2c_error_ = I2CBB_ERROR_I2CBB;
     return HAL_ERROR;
   }
 
-  uint8_t data[3] = {0}; // LSB, MSB, PEC
+  uint8_t data[3] = {0}; // data[0] = LSB, data[1] = MSB, data[2] = PEC
 
   i2c_->readData(reg, data, 3);
 
@@ -102,15 +107,18 @@ HAL_StatusTypeDef MLX90614::readTemperatureRegister(uint8_t reg, int16_t& temper
   }
 
   uint16_t raw = static_cast<uint16_t>(data[0]) | (static_cast<uint16_t>(data[1]) << 8);
+  sprintf(print_buf, "reg=0x%02X bytes=%02X %02X %02X raw=%u\n\r", reg, data[0], data[1], data[2], raw);
+  print_str(print_buf);
 
-  // MLX90614 format: temperature in Kelvin = raw * 0.02.
-  // C x 100 = raw * 2 - 27315.
-  temperatureC_x100 = static_cast<int16_t>((raw * 2) - 27315);
+  int32_t temperature_x100 = static_cast<int32_t>(raw) * 2 - 27315;
+
+  temperatureC_x100 = static_cast<int16_t>(temperature_x100);
 
   last_status_ = HAL_OK;
   return HAL_OK;
 }
 
 int16_t MLX90614::celsiusToFahrenheitX100(int16_t celsius_x100) {
-  return static_cast<int16_t>(((int32_t)celsius_x100 * 9) / 5 + 3200);
+  int32_t fahrenheit_x100 = ((static_cast<int32_t>(celsius_x100) * 9) / 5) + 3200;
+  return static_cast<int16_t>(fahrenheit_x100);
 }
