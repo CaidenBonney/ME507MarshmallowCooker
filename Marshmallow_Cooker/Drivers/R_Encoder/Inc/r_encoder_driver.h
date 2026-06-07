@@ -1,10 +1,12 @@
 #ifndef R_ENCODER_DRIVER_H
 #define R_ENCODER_DRIVER_H
+
 #include "stm32f4xx_hal.h"
 
 class REncoder {
 public:
   REncoder(TIM_HandleTypeDef* htim);
+
   void update();
   void reset();
 

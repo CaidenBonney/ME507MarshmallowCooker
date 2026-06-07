@@ -1,12 +1,18 @@
 #include "r_encoder_driver.h"
 
 REncoder::REncoder(TIM_HandleTypeDef* htim)
-    : htim_(htim), velocity_(0), position_(0), last_counter_value_(__HAL_TIM_GET_COUNTER(htim_)) {
+    : htim_(htim),
+      velocity_(0),
+      position_(0),
+      last_counter_value_(__HAL_TIM_GET_COUNTER(htim_)) {
 }
 
 void REncoder::update() {
   const uint32_t counter_value = __HAL_TIM_GET_COUNTER(htim_);
-  int32_t delta = static_cast<int32_t>(counter_value) - static_cast<int32_t>(last_counter_value_);
+
+  int32_t delta =
+      static_cast<int32_t>(counter_value) -
+      static_cast<int32_t>(last_counter_value_);
 
   if (delta > kHalfCounterRange) {
     delta -= kCounterRange;

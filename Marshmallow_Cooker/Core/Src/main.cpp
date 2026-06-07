@@ -26,7 +26,10 @@
 
 #include "MLX90614.h"
 #include "i2cbitbang.h"
+
 #include "r_encoder_driver.h"
+#include "DRV8833.h"
+#include "r_motor_driver.h"
 
 /* USER CODE END Includes */
 
@@ -55,6 +58,16 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 REncoder r_encoder(&htim3);
+
+DRV8833 drv8833(
+    &htim1,
+    TIM_CHANNEL_2,
+    TIM_CHANNEL_3);
+
+RMotorDriver r_motor_driver(
+    &drv8833,
+    &r_encoder);
+
 MLX90614* temperature_sensor = nullptr;
 
 volatile HAL_StatusTypeDef temperature_sensor_status = HAL_ERROR;
@@ -78,7 +91,7 @@ void print_str(const char* str);
 /* USER CODE BEGIN 0 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
   if (htim == &htim3) {
-    r_encoder.update();
+    //r_motor_driver.update();
   }
 }
 
@@ -133,6 +146,29 @@ int main(void)
   sprintf(print_buf, "I2C idle check: SDA=%d, SCL=%d\n\r", sda_state, scl_state);
   print_str(print_buf);
 
+  print_str("Starting raw TIM1 PWM test\r\n");
+
+  if (HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2) != HAL_OK) {
+    Error_Handler();
+  }
+
+  if (HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3) != HAL_OK) {
+    Error_Handler();
+  }
+
+  // PA9 / R_AIN1 = 25% PWM
+  // PA10 / R_AIN2 = 0%
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0); // 1200 / 4799 ~= 25%
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
+
+  print_str("TIM1 PWM test running: PA9=25%, PA10=0%\r\n");
+  
+  // if (r_motor_driver.begin() != HAL_OK) {
+  //   Error_Handler();
+  // }
+
+  // print_str("R motor driver initialized\r\n");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -141,32 +177,63 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // print_str("TEST\n\r");
-    static uint32_t last_temperature_read_ms = 0;
-    const uint32_t now_ms = HAL_GetTick();
+    
+    HAL_Delay(1000);
+    print_str("PWM still running\r\n");
+    
+    // print_str("Forward 25%\r\n");
+    // r_motor_driver.setPower(0.25f);
+    // HAL_Delay(2000);
 
-    if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
-      last_temperature_read_ms = now_ms;
+    // sprintf(print_buf,
+    //         "Position: %ld, Velocity: %d\r\n",
+    //         r_motor_driver.getPosition(),
+    //         r_motor_driver.getVelocity());
+    // print_str(print_buf);
 
-      temperature_sensor_status = temperature_sensor->update();
+    // print_str("Brake\r\n");
+    // r_motor_driver.brake();
+    // HAL_Delay(1000);
 
-      if (temperature_sensor_status == HAL_OK) {
-        int16_t ambientF_x100 = temperature_sensor->getAmbientFx100();
-        int16_t objectF_x100 = temperature_sensor->getObjectFx100();
+    // print_str("Reverse 25%\r\n");
+    // r_motor_driver.setPower(-0.25f);
+    // HAL_Delay(2000);
 
-        sprintf(print_buf,
-                "Ambient: %d.%02d F, Object: %d.%02d F\n\r",
-                ambientF_x100 / 100,
-                abs(ambientF_x100 % 100),
-                objectF_x100 / 100,
-                abs(objectF_x100 % 100));
+    // sprintf(print_buf,
+    //         "Position: %ld, Velocity: %d\r\n",
+    //         r_motor_driver.getPosition(),
+    //         r_motor_driver.getVelocity());
+    // print_str(print_buf);
 
-        print_str(print_buf);
-      } else {
-        sprintf(print_buf, "IR Temp read failed, i2c err=0x%lX\n\r", temperature_sensor->getLastI2CError());
-        print_str(print_buf);
-      }
-    }
+    // print_str("Coast\r\n");
+    // r_motor_driver.coast();
+    // HAL_Delay(1000);
+
+    // static uint32_t last_temperature_read_ms = 0;
+    // const uint32_t now_ms = HAL_GetTick();
+
+    // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
+    //   last_temperature_read_ms = now_ms;
+
+    //   temperature_sensor_status = temperature_sensor->update();
+
+    //   if (temperature_sensor_status == HAL_OK) {
+    //     int16_t ambientF_x100 = temperature_sensor->getAmbientFx100();
+    //     int16_t objectF_x100 = temperature_sensor->getObjectFx100();
+
+    //     sprintf(print_buf,
+    //             "Ambient: %d.%02d F, Object: %d.%02d F\n\r",
+    //             ambientF_x100 / 100,
+    //             abs(ambientF_x100 % 100),
+    //             objectF_x100 / 100,
+    //             abs(objectF_x100 % 100));
+
+    //     print_str(print_buf);
+    //   } else {
+    //     sprintf(print_buf, "IR Temp read failed, i2c err=0x%lX\n\r", temperature_sensor->getLastI2CError());
+    //     print_str(print_buf);
+    //   }
+    // }
 
     // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
     //   last_temperature_read_ms = now_ms;

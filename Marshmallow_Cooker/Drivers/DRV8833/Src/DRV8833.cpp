@@ -44,20 +44,20 @@ void DRV8833::setDuty(int16_t duty) {
       (static_cast<int32_t>(maxDuty()) * std::abs(duty)) / 1000);
 
   if (duty > 0) {
-    write(pwm, 0);
+    write(pwm, 0);      // Forward: AIN1 = PWM, AIN2 = 0
   } else if (duty < 0) {
-    write(0, pwm);
+    write(0, pwm);      // Reverse: AIN1 = 0, AIN2 = PWM
   } else {
-    coast();
+    coast();            // AIN1 = 0, AIN2 = 0
   }
 }
 
 void DRV8833::brake() {
-  write(maxDuty(), maxDuty());
+  write(maxDuty(), maxDuty());  // AIN1 = 1, AIN2 = 1
 }
 
 void DRV8833::coast() {
-  write(0, 0);
+  write(0, 0);                  // AIN1 = 0, AIN2 = 0
 }
 
 uint16_t DRV8833::maxDuty() const {
