@@ -58,11 +58,11 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-REncoderDriver r_encoder(&htim3);
+REncoderDriver r_encoder_driver(&htim3);
 
 DRV8833 drv8833(&htim1, TIM_CHANNEL_2, TIM_CHANNEL_3);
 
-RMotorDriver r_motor_driver(&drv8833, &r_encoder);
+RMotorDriver r_motor_driver(&drv8833, &r_encoder_driver);
 
 ZMotorDriver z_motor_driver;
 
