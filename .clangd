@@ -10,18 +10,6 @@ CompileFlags:
     - -DSTM32F411xE
     - -DUSE_HAL_DRIVER
 
-    - -ICore/Inc
-    - -IDrivers/STM32F4xx_HAL_Driver/Inc
-    - -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy
-    - -IDrivers/CMSIS/Device/ST/STM32F4xx/Include
-    - -IDrivers/CMSIS/Include
-    - -IDrivers/R_Encoder/Inc
-    - -IDrivers/MLX90614/Inc
-    - -IDrivers/i2cbitbang/Inc
-    - -IDrivers/DRV8833/Inc
-    - -IDrivers/R_Motor/Inc
-
-
     - -isystem/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.macosaarch64_1.0.0.202602081740/tools/arm-none-eabi/include/c++/14.3.1
     - -isystem/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.macosaarch64_1.0.0.202602081740/tools/arm-none-eabi/include/c++/14.3.1/arm-none-eabi/thumb/v7e-m+fp/hard
     - -isystem/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.macosaarch64_1.0.0.202602081740/tools/arm-none-eabi/include/c++/14.3.1/backward

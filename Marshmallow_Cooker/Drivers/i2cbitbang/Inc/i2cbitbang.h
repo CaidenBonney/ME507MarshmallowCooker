@@ -10,6 +10,7 @@
 
 #include "Delay.h"
 #include "i2cbitbang_board.h"
+#include <stdint.h>
 
 
 #define i2cbbconfigASSERT(x)                                                                                           \

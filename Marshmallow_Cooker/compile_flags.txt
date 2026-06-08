@@ -1,0 +1,10 @@
+-ICore/Inc
+-IDrivers/STM32F4xx_HAL_Driver/Inc
+-IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy
+-IDrivers/CMSIS/Device/ST/STM32F4xx/Include
+-IDrivers/CMSIS/Include
+-IDrivers/R_Encoder/Inc
+-IDrivers/MLX90614/Inc
+-IDrivers/i2cbitbang/Inc
+-IDrivers/DRV8833/Inc
+-IDrivers/R_Motor/Inc

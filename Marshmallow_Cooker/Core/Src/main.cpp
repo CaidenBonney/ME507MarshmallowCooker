@@ -160,8 +160,8 @@ int main(void) {
 
     sprintf(print_buf,
             "Done +360: counts=%ld deg=%ld\r\n",
-            r_motor_driver.getPosition(),
-            r_motor_driver.getPositionDegrees());
+            static_cast<long>(r_motor_driver.getPosition()),
+            static_cast<long>(r_motor_driver.getPositionDegrees()));
     print_str(print_buf);
 
     HAL_Delay(2000);
@@ -172,8 +172,8 @@ int main(void) {
 
     sprintf(print_buf,
             "Done -360: counts=%ld deg=%ld\r\n",
-            r_motor_driver.getPosition(),
-            r_motor_driver.getPositionDegrees());
+            static_cast<long>(r_motor_driver.getPosition()),
+            static_cast<long>(r_motor_driver.getPositionDegrees()));
     print_str(print_buf);
 
     HAL_Delay(2000);
