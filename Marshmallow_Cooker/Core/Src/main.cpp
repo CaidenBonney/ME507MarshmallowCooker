@@ -152,9 +152,8 @@ int main(void) {
   z_motor_driver.setMicrosteps(16);
   z_motor_driver.setSpeed(400);
 
-  // Optional first move test:
-  // z_motor.enable();
-  // z_motor.moveSteps(200 * 16);  // one motor rev at 1/16 microstepping
+  z_motor_driver.enable();
+  z_motor_driver.moveSteps(200 * 16);  // one motor rev at 1/16 microstepping
 
   /* USER CODE END 2 */
 
