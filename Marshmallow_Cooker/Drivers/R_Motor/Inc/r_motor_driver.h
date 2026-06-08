@@ -6,7 +6,7 @@
 
 class RMotorDriver {
 public:
-  RMotorDriver(DRV8833* driver, REncoder* encoder);
+  RMotorDriver(DRV8833* driver, REncoderDriver* encoder);
 
   HAL_StatusTypeDef begin();
 
@@ -46,7 +46,7 @@ private:
   int16_t clampPower(int32_t power) const;
 
   DRV8833* driver_;
-  REncoder* encoder_;
+  REncoderDriver* encoder_;
 };
 
 #endif /* R_MOTOR_DRIVER_H */

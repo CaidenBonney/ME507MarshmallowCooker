@@ -9,6 +9,7 @@ IndentCaseLabels: true
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortBlocksOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: None
+AllowShortEnumsOnASingleLine: false
 
 ColumnLimit: 120
 BinPackArguments: false
@@ -22,3 +23,6 @@ SpacesBeforeTrailingComments: 1
 BreakAfterReturnType: None
 IndentWrappedFunctionNames: false
 SpaceBeforeParens: ControlStatements
+
+PackConstructorInitializers: Never
+ConstructorInitializerAllOnOneLineOrOnePerLine: true

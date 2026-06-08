@@ -3,9 +3,9 @@
 
 #include "stm32f4xx_hal.h"
 
-class REncoder {
+class REncoderDriver {
 public:
-  REncoder(TIM_HandleTypeDef* htim);
+  REncoderDriver(TIM_HandleTypeDef* htim);
 
   void update();
   void reset();

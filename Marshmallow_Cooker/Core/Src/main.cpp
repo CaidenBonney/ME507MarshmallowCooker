@@ -30,6 +30,7 @@
 #include "DRV8833.h"
 #include "r_encoder_driver.h"
 #include "r_motor_driver.h"
+#include "z_motor_driver.h"
 
 /* USER CODE END Includes */
 
@@ -57,11 +58,13 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-REncoder r_encoder(&htim3);
+REncoderDriver r_encoder(&htim3);
 
 DRV8833 drv8833(&htim1, TIM_CHANNEL_2, TIM_CHANNEL_3);
 
 RMotorDriver r_motor_driver(&drv8833, &r_encoder);
+
+ZMotorDriver z_motor_driver;
 
 MLX90614* temperature_sensor = nullptr;
 
@@ -145,6 +148,14 @@ int main(void) {
 
   print_str("R motor driver initialized\r\n");
 
+  z_motor_driver.begin();
+  z_motor_driver.setMicrosteps(16);
+  z_motor_driver.setSpeed(400);
+
+  // Optional first move test:
+  // z_motor.enable();
+  // z_motor.moveSteps(200 * 16);  // one motor rev at 1/16 microstepping
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -178,44 +189,7 @@ int main(void) {
 
     HAL_Delay(2000);
 
-    // static uint32_t last_temperature_read_ms = 0;
-    // const uint32_t now_ms = HAL_GetTick();
-
-    // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
-    //   last_temperature_read_ms = now_ms;
-
-    //   temperature_sensor_status = temperature_sensor->update();
-
-    //   if (temperature_sensor_status == HAL_OK) {
-    //     int16_t ambientF_x100 = temperature_sensor->getAmbientFx100();
-    //     int16_t objectF_x100 = temperature_sensor->getObjectFx100();
-
-    //     sprintf(print_buf,
-    //             "Ambient: %d.%02d F, Object: %d.%02d F\n\r",
-    //             ambientF_x100 / 100,
-    //             abs(ambientF_x100 % 100),
-    //             objectF_x100 / 100,
-    //             abs(objectF_x100 % 100));
-
-    //     print_str(print_buf);
-    //   } else {
-    //     sprintf(print_buf, "IR Temp read failed, i2c err=0x%lX\n\r", temperature_sensor->getLastI2CError());
-    //     print_str(print_buf);
-    //   }
-    // }
-
-    // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
-    //   last_temperature_read_ms = now_ms;
-    //   temperature_sensor_status = temperature_sensor.update();
-    //   if (temperature_sensor_status == HAL_OK) {
-    //     int16_t objectF_x100 = temperature_sensor.getObjectFx100();
-    //     sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
-
-    //     print_str(print_buf);
-    //   } else {
-    //     print_str("IR Temp read failed\n\r");
-    //   }
-    // }
+    z_motor_driver.update();
   }
   /* USER CODE END 3 */
 }
