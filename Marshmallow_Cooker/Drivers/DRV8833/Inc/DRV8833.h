@@ -2,7 +2,6 @@
 #define DRV8833_H
 
 #include "stm32f4xx_hal.h"
-#include <cstdlib>
 
 class DRV8833 {
 public:
@@ -12,15 +11,16 @@ public:
 
   HAL_StatusTypeDef begin();
 
-  void setPower(float power);   // -1.0 to +1.0
-  void setDuty(int16_t duty);   // -1000 to +1000
+  static constexpr int16_t kMaxDuty = 1000; // 100%
+
+  void setDuty(int16_t duty); // -1000 to +1000
 
   void brake();
   void coast();
 
 private:
   void write(uint16_t in1, uint16_t in2);
-  uint16_t maxDuty() const;
+  uint16_t getTimerPeriod() const;
 
   TIM_HandleTypeDef* htim_;
   uint32_t in1_channel_;

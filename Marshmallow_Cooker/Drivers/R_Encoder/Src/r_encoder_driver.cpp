@@ -21,8 +21,8 @@ void REncoder::update() {
   }
 
   last_counter_value_ = counter_value;
-  velocity_ = static_cast<int16_t>(delta);
-  position_ += delta;
+  velocity_ = static_cast<int16_t>(-delta);
+  position_ -= delta;
 }
 
 void REncoder::reset() {

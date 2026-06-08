@@ -23,25 +23,17 @@ HAL_StatusTypeDef DRV8833::begin() {
   return HAL_OK;
 }
 
-void DRV8833::setPower(float power) {
-  if (power > 1.0f) {
-    power = 1.0f;
-  } else if (power < -1.0f) {
-    power = -1.0f;
-  }
-
-  setDuty(static_cast<int16_t>(power * 1000.0f));
-}
-
 void DRV8833::setDuty(int16_t duty) {
-  if (duty > 1000) {
-    duty = 1000;
-  } else if (duty < -1000) {
-    duty = -1000;
+  if (duty > kMaxDuty) {
+    duty = kMaxDuty;
+  } else if (duty < -kMaxDuty) {
+    duty = -kMaxDuty;
   }
+
+  int16_t abs_duty = duty >= 0 ? duty : -duty;
 
   uint16_t pwm = static_cast<uint16_t>(
-      (static_cast<int32_t>(maxDuty()) * std::abs(duty)) / 1000);
+      (static_cast<int32_t>(getTimerPeriod()) * abs_duty) / kMaxDuty);
 
   if (duty > 0) {
     write(pwm, 0);      // Forward: AIN1 = PWM, AIN2 = 0
@@ -53,14 +45,14 @@ void DRV8833::setDuty(int16_t duty) {
 }
 
 void DRV8833::brake() {
-  write(maxDuty(), maxDuty());  // AIN1 = 1, AIN2 = 1
+  write(getTimerPeriod(), getTimerPeriod());  // AIN1 = 1, AIN2 = 1
 }
 
 void DRV8833::coast() {
   write(0, 0);                  // AIN1 = 0, AIN2 = 0
 }
 
-uint16_t DRV8833::maxDuty() const {
+uint16_t DRV8833::getTimerPeriod() const {
   return static_cast<uint16_t>(__HAL_TIM_GET_AUTORELOAD(htim_));
 }
 
