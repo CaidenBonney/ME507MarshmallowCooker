@@ -11,6 +11,3 @@
 -IDrivers/R_Motor/Inc
 
 -IDrivers/Z_Motor/Inc
-
-
--IDrivers/i2cbitbang/Inc

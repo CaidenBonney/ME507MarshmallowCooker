@@ -25,7 +25,6 @@
 #include <cstdlib>
 
 #include "MLX90614.h"
-#include "i2cbitbang.h"
 
 #include "DRV8833.h"
 #include "r_encoder_driver.h"
@@ -66,9 +65,8 @@ RMotorDriver r_motor_driver(&drv8833, &r_encoder_driver);
 
 ZMotorDriver z_motor_driver;
 
-MLX90614* temperature_sensor = nullptr;
-
 volatile HAL_StatusTypeDef temperature_sensor_status = HAL_ERROR;
+MLX90614 temperature_sensor(&hi2c3);
 
 char print_buf[100];
 uint8_t print_buf_len;
@@ -127,20 +125,7 @@ int main(void) {
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  static i2cbitbang ir_i2c(I2CBB_IR_SENSOR, MLX90614::DEFAULT_ADDRESS);
-  ir_i2c.setSpeed(SPEED_10k);
-  ir_i2c.setAckMode(ACK_CHECK);
-  ir_i2c.setI2CMode(MODE_I2C);
-
-  static MLX90614 mlx90614_sensor(&ir_i2c);
-  temperature_sensor = &mlx90614_sensor;
-
   print_str("Software I2C MLX90614 initialized\r\n");
-  GPIO_PinState sda_state = HAL_GPIO_ReadPin(BAD_SDA_GPIO_Port, BAD_SDA_Pin);
-  GPIO_PinState scl_state = HAL_GPIO_ReadPin(BAD_SCL_GPIO_Port, BAD_SCL_Pin);
-
-  sprintf(print_buf, "I2C idle check: SDA=%d, SCL=%d\n\r", sda_state, scl_state);
-  print_str(print_buf);
 
   if (r_motor_driver.begin() != HAL_OK) {
     Error_Handler();
@@ -153,7 +138,7 @@ int main(void) {
   z_motor_driver.setSpeed(400);
 
   z_motor_driver.enable();
-  z_motor_driver.moveSteps(200 * 16);  // one motor rev at 1/16 microstepping
+  z_motor_driver.moveSteps(200 * 16); // one motor rev at 1/16 microstepping
 
   /* USER CODE END 2 */
 
@@ -163,6 +148,22 @@ int main(void) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    static uint32_t last_temperature_read_ms = 0;
+    const uint32_t now_ms = HAL_GetTick();
+
+    if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
+      last_temperature_read_ms = now_ms;
+      temperature_sensor_status = temperature_sensor.update();
+      if (temperature_sensor_status == HAL_OK) {
+        int16_t objectF_x100 = temperature_sensor.getObjectFx100();
+        sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
+
+        print_str(print_buf);
+      } else {
+        print_str("IR Temp read failed\n\r");
+      }
+    }
 
     print_str("Move +360 degrees\r\n");
 
