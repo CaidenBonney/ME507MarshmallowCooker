@@ -8,3 +8,4 @@
 -IDrivers/i2cbitbang/Inc
 -IDrivers/DRV8833/Inc
 -IDrivers/R_Motor/Inc
+-IDrivers/Z_Motor/Inc
