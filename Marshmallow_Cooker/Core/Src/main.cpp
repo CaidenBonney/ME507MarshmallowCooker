@@ -31,7 +31,7 @@
 #include "r_encoder_driver.h" // Encoder driver for rotating motor
 #include "r_motor_driver.h" // Motor driver for rotating motor
 
-// #include "TMC2209.h" // PWM driver for Z motor
+#include "TMC2209.h" // PWM driver for Z motor
 #include "z_motor_driver.h" // Motor driver for veritcal stepper motor (z-axis)
 
 /* USER CODE END Includes */
@@ -147,12 +147,25 @@ int main(void) {
   // print_str("R motor driver initialized\r\n");
 
   // // Z MOTOR
-  // z_motor_driver.begin();
-  // z_motor_driver.setMicrosteps(16);
-  // z_motor_driver.setSpeed(400);
+  z_motor_driver.begin();
+  z_motor_driver.enable();
 
-  // z_motor_driver.enable();
-  // z_motor_driver.moveSteps(200 * 16); // one motor rev at 1/16 microstepping
+  z_motor_driver.setSpeedStepsPerSecond(250);
+  z_motor_driver.moveSteps(800);
+
+  while (z_motor_driver.isBusy()) {
+    z_motor_driver.update();
+  }
+
+  HAL_Delay(1000);
+
+  z_motor_driver.moveSteps(-800);
+
+  while (z_motor_driver.isBusy()) {
+    z_motor_driver.update();
+  }
+
+  z_motor_driver.disable();
 
   /* USER CODE END 2 */
 
@@ -192,13 +205,12 @@ int main(void) {
                 abs(hot_fx100 % 100),
                 cold_fx100 / 100,
                 abs(cold_fx100 % 100));
-                print_str(print_buf);
+        print_str(print_buf);
       } else {
         sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
         print_str(print_buf);
       }
     }
-
 
     // // Test R motor by moving +360 degrees, then -360 degrees
     // print_str("Move +360 degrees\r\n");
@@ -224,7 +236,6 @@ int main(void) {
     // print_str(print_buf);
 
     // HAL_Delay(2000);
-
 
     // z_motor_driver.update();
   }

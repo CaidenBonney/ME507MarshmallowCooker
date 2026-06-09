@@ -1,13 +1,20 @@
 #include "z_motor_driver.h"
 
+#include <climits>
+
 ZMotorDriver::ZMotorDriver()
-    : position_steps_(0),
+    : tmc_(Z_STEP_GPIO_Port,
+           Z_STEP_Pin,
+           Z_DIR_GPIO_Port,
+           Z_DIR_Pin,
+           Z_ENN_GPIO_Port,
+           Z_ENN_Pin,
+           Z_DIAG_GPIO_Port,
+           Z_DIAG_Pin),
+      position_steps_(0),
       target_steps_(0),
       speed_steps_per_second_(kDefaultSpeedStepsPerSecond),
-      step_interval_us_(1000000UL / kDefaultSpeedStepsPerSecond),
-      last_step_time_us_(0),
       microsteps_(kDefaultMicrosteps),
-      enabled_(false),
       homing_down_(false),
       limits_active_low_(true),
       current_direction_(Direction::Up),
@@ -15,59 +22,32 @@ ZMotorDriver::ZMotorDriver()
 }
 
 void ZMotorDriver::begin() {
-  configureGpioPins();
-
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  DWT->CYCCNT = 0;
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-
-  HAL_GPIO_WritePin(Z_STEP_GPIO_Port, Z_STEP_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(Z_DIR_GPIO_Port, Z_DIR_Pin, GPIO_PIN_RESET);
-
-  disable();
+  tmc_.begin();
+  tmc_.setStepRate(speed_steps_per_second_);
   zeroPosition();
-}
-
-void ZMotorDriver::configureGpioPins() {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  GPIO_InitStruct.Pin = Z_STEP_Pin | Z_DIR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  GPIO_InitStruct.Pin = Z_ENN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Z_ENN_GPIO_Port, &GPIO_InitStruct);
+  state_ = State::Disabled;
 }
 
 void ZMotorDriver::enable() {
-  HAL_GPIO_WritePin(Z_ENN_GPIO_Port, Z_ENN_Pin, GPIO_PIN_RESET);
-  enabled_ = true;
+  tmc_.enable();
   state_ = State::Idle;
 }
 
 void ZMotorDriver::disable() {
-  HAL_GPIO_WritePin(Z_ENN_GPIO_Port, Z_ENN_Pin, GPIO_PIN_SET);
-  enabled_ = false;
+  tmc_.disable();
   homing_down_ = false;
   state_ = State::Disabled;
 }
 
 void ZMotorDriver::update() {
-  if (!enabled_) {
+  if (!tmc_.isEnabled()) {
     state_ = State::Disabled;
     return;
   }
 
-  if (driverFaultActive()) {
-    stop();
-    state_ = State::Fault;
-    return;
-  }
+  // DIAG is currently informational only. It is logged by the TMC2209 driver,
+  // but it does not stop Z motion until testing proves it is reliable.
+  tmc_.updateDiagLog();
 
   if (homing_down_) {
     if (bottomLimitPressed()) {
@@ -77,14 +57,10 @@ void ZMotorDriver::update() {
       return;
     }
 
-    const uint32_t now_us = micros();
-    if ((uint32_t)(now_us - last_step_time_us_) >= step_interval_us_) {
-      last_step_time_us_ = now_us;
-      setDirection(Direction::Down);
-      stepOnce();
+    if (tryStep(Direction::Down)) {
+      state_ = State::Moving;
     }
 
-    state_ = State::Moving;
     return;
   }
 
@@ -101,17 +77,11 @@ void ZMotorDriver::update() {
     return;
   }
 
-  const uint32_t now_us = micros();
-  if ((uint32_t)(now_us - last_step_time_us_) < step_interval_us_) {
+  if (tryStep(desired_direction)) {
     state_ = State::Moving;
-    return;
+  } else {
+    state_ = State::Moving;
   }
-
-  last_step_time_us_ = now_us;
-  setDirection(desired_direction);
-  stepOnce();
-
-  state_ = State::Moving;
 }
 
 void ZMotorDriver::moveSteps(int32_t steps) {
@@ -122,17 +92,23 @@ void ZMotorDriver::moveSteps(int32_t steps) {
   homing_down_ = false;
   target_steps_ = position_steps_ + steps;
 
-  if (!enabled_) {
+  if (!tmc_.isEnabled()) {
     enable();
   }
+
+  state_ = State::Moving;
 }
 
 void ZMotorDriver::moveTo(int32_t target_position_steps) {
   homing_down_ = false;
   target_steps_ = target_position_steps;
 
-  if (!enabled_) {
+  if (!tmc_.isEnabled()) {
     enable();
+  }
+
+  if (position_steps_ != target_steps_) {
+    state_ = State::Moving;
   }
 }
 
@@ -150,7 +126,7 @@ void ZMotorDriver::stop() {
   target_steps_ = position_steps_;
   homing_down_ = false;
 
-  if (enabled_) {
+  if (tmc_.isEnabled()) {
     state_ = State::Idle;
   }
 }
@@ -160,9 +136,11 @@ void ZMotorDriver::homeDown(uint32_t speed_steps_per_second) {
   homing_down_ = true;
   target_steps_ = position_steps_;
 
-  if (!enabled_) {
+  if (!tmc_.isEnabled()) {
     enable();
   }
+
+  state_ = State::Moving;
 }
 
 void ZMotorDriver::zeroPosition() {
@@ -176,11 +154,11 @@ void ZMotorDriver::setSpeed(uint32_t steps_per_second) {
   }
 
   speed_steps_per_second_ = steps_per_second;
-  step_interval_us_ = 1000000UL / speed_steps_per_second_;
+  tmc_.setStepRate(speed_steps_per_second_);
+}
 
-  if (step_interval_us_ < 2 * kMinStepPulseUs) {
-    step_interval_us_ = 2 * kMinStepPulseUs;
-  }
+void ZMotorDriver::setSpeedStepsPerSecond(uint32_t steps_per_second) {
+  setSpeed(steps_per_second);
 }
 
 void ZMotorDriver::setMicrosteps(uint16_t microsteps) {
@@ -188,11 +166,19 @@ void ZMotorDriver::setMicrosteps(uint16_t microsteps) {
     microsteps = 1;
   }
 
+  // With the present PCB wiring, microstepping is controlled by MS1/MS2 pins.
+  // This value is stored for calculations/reporting, but it cannot change the
+  // TMC2209 setting.
   microsteps_ = microsteps;
 }
 
 void ZMotorDriver::setLimitsActiveLow(bool active_low) {
   limits_active_low_ = active_low;
+}
+
+void ZMotorDriver::setDirectionInverted(bool inverted) {
+  tmc_.setDirectionInverted(inverted);
+  setDirection(current_direction_);
 }
 
 int32_t ZMotorDriver::getPositionSteps() const {
@@ -207,6 +193,10 @@ ZMotorDriver::State ZMotorDriver::getState() const {
   return state_;
 }
 
+bool ZMotorDriver::isBusy() const {
+  return state_ == State::Moving;
+}
+
 bool ZMotorDriver::topLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_TOP_GPIO_Port, Z_TOP_Pin);
   return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
@@ -218,33 +208,33 @@ bool ZMotorDriver::bottomLimitPressed() const {
 }
 
 bool ZMotorDriver::driverFaultActive() const {
-  return HAL_GPIO_ReadPin(Z_DIAG_GPIO_Port, Z_DIAG_Pin) == GPIO_PIN_SET;
+  return tmc_.diagActive();
 }
 
 void ZMotorDriver::setDirection(Direction direction) {
   current_direction_ = direction;
 
   if (direction == Direction::Up) {
-    HAL_GPIO_WritePin(Z_DIR_GPIO_Port, Z_DIR_Pin, GPIO_PIN_SET);
+    tmc_.setDirection(TMC2209::Direction::Forward);
   } else {
-    HAL_GPIO_WritePin(Z_DIR_GPIO_Port, Z_DIR_Pin, GPIO_PIN_RESET);
+    tmc_.setDirection(TMC2209::Direction::Reverse);
   }
 }
 
-void ZMotorDriver::stepOnce() {
-  HAL_GPIO_WritePin(Z_STEP_GPIO_Port, Z_STEP_Pin, GPIO_PIN_SET);
+bool ZMotorDriver::tryStep(Direction direction) {
+  setDirection(direction);
 
-  const uint32_t start_us = micros();
-  while ((uint32_t)(micros() - start_us) < kMinStepPulseUs) {
+  if (!tmc_.stepIfDue()) {
+    return false;
   }
 
-  HAL_GPIO_WritePin(Z_STEP_GPIO_Port, Z_STEP_Pin, GPIO_PIN_RESET);
-
-  if (current_direction_ == Direction::Up) {
+  if (direction == Direction::Up) {
     position_steps_++;
   } else {
     position_steps_--;
   }
+
+  return true;
 }
 
 bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
@@ -257,8 +247,4 @@ bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
   }
 
   return false;
-}
-
-uint32_t ZMotorDriver::micros() const {
-  return DWT->CYCCNT / (HAL_RCC_GetHCLKFreq() / 1000000UL);
 }
