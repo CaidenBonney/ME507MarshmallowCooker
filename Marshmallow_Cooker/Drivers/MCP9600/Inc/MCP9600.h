@@ -50,6 +50,10 @@ public:
   HAL_StatusTypeDef setFilterCoefficient(uint8_t coefficient);
   HAL_StatusTypeDef setNormalMode();
   HAL_StatusTypeDef setShutdownMode();
+  HAL_StatusTypeDef readRawHot(int16_t* raw);
+  HAL_StatusTypeDef readRawCold(int16_t* raw);
+  HAL_StatusTypeDef getSensorConfig(uint8_t* config);
+  HAL_StatusTypeDef readRawAdc(int32_t* raw_adc);
 
 private:
   static constexpr uint8_t kRegHotJunction = 0x00;

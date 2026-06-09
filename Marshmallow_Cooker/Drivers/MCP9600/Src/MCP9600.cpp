@@ -205,6 +205,47 @@ HAL_StatusTypeDef MCP9600::setShutdownMode() {
   return last_status_;
 }
 
+HAL_StatusTypeDef MCP9600::readRawHot(int16_t* raw) {
+  return read16(kRegHotJunction, raw);
+}
+
+HAL_StatusTypeDef MCP9600::readRawCold(int16_t* raw) {
+  return read16(kRegColdJunction, raw);
+}
+
+HAL_StatusTypeDef MCP9600::getSensorConfig(uint8_t* config) {
+  return read8(kRegSensorConfig, config);
+}
+
+HAL_StatusTypeDef MCP9600::readRawAdc(int32_t* raw_adc) {
+  uint8_t buffer[3] = {0, 0, 0};
+
+  HAL_StatusTypeDef status =
+      HAL_I2C_Mem_Read(hi2c_,
+                       static_cast<uint16_t>(address_ << 1),
+                       kRegRawAdc,
+                       I2C_MEMADD_SIZE_8BIT,
+                       buffer,
+                       3,
+                       kI2cTimeoutMs);
+
+  if (status != HAL_OK) {
+    return status;
+  }
+
+  int32_t value =
+      (static_cast<int32_t>(buffer[0]) << 16) |
+      (static_cast<int32_t>(buffer[1]) << 8) |
+      static_cast<int32_t>(buffer[2]);
+
+  if (value & 0x800000) {
+    value |= 0xFF000000;
+  }
+
+  *raw_adc = value;
+  return HAL_OK;
+}
+
 HAL_StatusTypeDef MCP9600::read8(uint8_t reg, uint8_t* value) {
   return HAL_I2C_Mem_Read(hi2c_,
                           static_cast<uint16_t>(address_ << 1),
