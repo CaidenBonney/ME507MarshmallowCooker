@@ -27,8 +27,8 @@ public:
   static constexpr uint8_t DEFAULT_ADDRESS = 0x60;
 
   MCP9600(I2C_HandleTypeDef* hi2c,
-          uint8_t address = DEFAULT_ADDRESS,
-          ThermocoupleType type = ThermocoupleType::TYPE_T);
+          ThermocoupleType type = ThermocoupleType::TYPE_T,
+          uint8_t address = DEFAULT_ADDRESS);
 
   HAL_StatusTypeDef begin();
 

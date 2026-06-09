@@ -1,8 +1,8 @@
 #include "MCP9600.h"
 
 MCP9600::MCP9600(I2C_HandleTypeDef* hi2c,
-                 uint8_t address,
-                 ThermocoupleType type)
+                 ThermocoupleType type,
+                uint8_t address)
     : hi2c_(hi2c),
       address_(address),
       type_(type),
