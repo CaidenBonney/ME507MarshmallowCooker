@@ -150,8 +150,8 @@ int main(void) {
   z_motor_driver.begin();
   z_motor_driver.enable();
 
-  z_motor_driver.setSpeedStepsPerSecond(250);
-  z_motor_driver.moveSteps(800);
+  z_motor_driver.setSpeedStepsPerSecond(500);
+  z_motor_driver.moveSteps(1600);
 
   while (z_motor_driver.isBusy()) {
     z_motor_driver.update();
@@ -159,7 +159,7 @@ int main(void) {
 
   HAL_Delay(1000);
 
-  z_motor_driver.moveSteps(-800);
+  z_motor_driver.moveSteps(-1600);
 
   while (z_motor_driver.isBusy()) {
     z_motor_driver.update();
