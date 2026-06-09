@@ -5,6 +5,7 @@
 -IDrivers/CMSIS/Include
 
 -IDrivers/MLX90614/Inc
+-IDrivers/MCP9600/Inc
 
 -IDrivers/DRV8833/Inc
 -IDrivers/R_Encoder/Inc
