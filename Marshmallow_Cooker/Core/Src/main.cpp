@@ -24,12 +24,14 @@
 #include "stdio.h"
 #include <cstdlib>
 
-#include "MLX90614.h"
+#include "MLX90614.h" // Infrared temperature sensor
 
-#include "DRV8833.h"
-#include "r_encoder_driver.h"
-#include "r_motor_driver.h"
-#include "z_motor_driver.h"
+#include "DRV8833.h" // PWM driver for motors
+#include "r_encoder_driver.h" // Encoder driver for rotating motor
+#include "r_motor_driver.h" // Motor driver for rotating motor
+
+// #include "TMC2209.h" // PWM driver for Z motor
+#include "z_motor_driver.h" // Motor driver for veritcal stepper motor (z-axis)
 
 /* USER CODE END Includes */
 
