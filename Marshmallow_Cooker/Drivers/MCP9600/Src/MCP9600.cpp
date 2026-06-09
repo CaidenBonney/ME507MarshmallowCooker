@@ -1,9 +1,11 @@
 #include "MCP9600.h"
 
 MCP9600::MCP9600(I2C_HandleTypeDef* hi2c,
-                 uint8_t address)
+                 uint8_t address,
+                 ThermocoupleType type)
     : hi2c_(hi2c),
       address_(address),
+      type_(type),
       last_status_(HAL_ERROR),
       status_(0),
       device_id_(0),
@@ -33,7 +35,7 @@ HAL_StatusTypeDef MCP9600::begin() {
     return last_status_;
   }
 
-  last_status_ = setThermocoupleType(ThermocoupleType::TYPE_T);
+  last_status_ = setThermocoupleType(type_);
 
   if (last_status_ != HAL_OK) {
     return last_status_;

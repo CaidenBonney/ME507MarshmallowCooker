@@ -24,6 +24,7 @@
 #include "stdio.h"
 #include <cstdlib>
 
+#include "MCP9600.h" // Thermocouple temperature sensor
 #include "MLX90614.h" // Infrared temperature sensor
 
 #include "DRV8833.h" // PWM driver for motors
@@ -68,7 +69,8 @@ RMotorDriver r_motor_driver(&drv8833, &r_encoder_driver);
 ZMotorDriver z_motor_driver;
 
 volatile HAL_StatusTypeDef temperature_sensor_status = HAL_ERROR;
-MLX90614 temperature_sensor(&hi2c3);
+MLX90614 ir_temp_sensor(&hi2c3);
+MCP9600 tc_temp_sensor(&hi2c3);
 
 char print_buf[100];
 uint8_t print_buf_len;
@@ -127,20 +129,30 @@ int main(void) {
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  print_str("Software I2C MLX90614 initialized\r\n");
+  print_str("I2C3 sensors initialized\r\n");
 
-  if (r_motor_driver.begin() != HAL_OK) {
-    Error_Handler();
+  if (tc_temp_sensor.begin() != HAL_OK) {
+    sprintf(print_buf, "MCP9600 init failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
+    print_str(print_buf);
+  } else {
+    sprintf(print_buf, "MCP9600 initialized, device_id=0x%04X\r\n", tc_temp_sensor.getDeviceId());
+    print_str(print_buf);
   }
 
-  print_str("R motor driver initialized\r\n");
+  // // R MOTOR
+  // if (r_motor_driver.begin() != HAL_OK) {
+  //   Error_Handler();
+  // }
 
-  z_motor_driver.begin();
-  z_motor_driver.setMicrosteps(16);
-  z_motor_driver.setSpeed(400);
+  // print_str("R motor driver initialized\r\n");
 
-  z_motor_driver.enable();
-  z_motor_driver.moveSteps(200 * 16); // one motor rev at 1/16 microstepping
+  // // Z MOTOR
+  // z_motor_driver.begin();
+  // z_motor_driver.setMicrosteps(16);
+  // z_motor_driver.setSpeed(400);
+
+  // z_motor_driver.enable();
+  // z_motor_driver.moveSteps(200 * 16); // one motor rev at 1/16 microstepping
 
   /* USER CODE END 2 */
 
@@ -156,42 +168,65 @@ int main(void) {
 
     if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
       last_temperature_read_ms = now_ms;
-      temperature_sensor_status = temperature_sensor.update();
-      if (temperature_sensor_status == HAL_OK) {
-        int16_t objectF_x100 = temperature_sensor.getObjectFx100();
-        sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
 
-        print_str(print_buf);
+      // // IR Temperature Sensor
+      // temperature_sensor_status = ir_temp_sensor.update();
+      // if (temperature_sensor_status == HAL_OK) {
+      //   int16_t objectF_x100 = ir_temp_sensor.getObjectFx100();
+      //   sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
+
+      //   print_str(print_buf);
+      // } else {
+      //   print_str("IR Temp read failed\n\r");
+      // }
+
+      // Thermocouple Temperature Sensor
+      temperature_sensor_status = tc_temp_sensor.update();
+      if (temperature_sensor_status == HAL_OK) {
+        int16_t hot_fx100 = tc_temp_sensor.getHotFx100();
+        int16_t cold_fx100 = tc_temp_sensor.getColdFx100();
+
+        sprintf(print_buf,
+                "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
+                hot_fx100 / 100,
+                abs(hot_fx100 % 100),
+                cold_fx100 / 100,
+                abs(cold_fx100 % 100));
+                print_str(print_buf);
       } else {
-        print_str("IR Temp read failed\n\r");
+        sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
+        print_str(print_buf);
       }
     }
 
-    print_str("Move +360 degrees\r\n");
 
-    r_motor_driver.moveDegreesBlocking(360, 1000, 8000);
+    // // Test R motor by moving +360 degrees, then -360 degrees
+    // print_str("Move +360 degrees\r\n");
 
-    sprintf(print_buf,
-            "Done +360: counts=%ld deg=%ld\r\n",
-            static_cast<long>(r_motor_driver.getPosition()),
-            static_cast<long>(r_motor_driver.getPositionDegrees()));
-    print_str(print_buf);
+    // r_motor_driver.moveDegreesBlocking(360, 1000, 8000);
 
-    HAL_Delay(2000);
+    // sprintf(print_buf,
+    //         "Done +360: counts=%ld deg=%ld\r\n",
+    //         static_cast<long>(r_motor_driver.getPosition()),
+    //         static_cast<long>(r_motor_driver.getPositionDegrees()));
+    // print_str(print_buf);
 
-    print_str("Move -360 degrees\r\n");
+    // HAL_Delay(2000);
 
-    r_motor_driver.moveDegreesBlocking(-360, 1000, 8000);
+    // print_str("Move -360 degrees\r\n");
 
-    sprintf(print_buf,
-            "Done -360: counts=%ld deg=%ld\r\n",
-            static_cast<long>(r_motor_driver.getPosition()),
-            static_cast<long>(r_motor_driver.getPositionDegrees()));
-    print_str(print_buf);
+    // r_motor_driver.moveDegreesBlocking(-360, 1000, 8000);
 
-    HAL_Delay(2000);
+    // sprintf(print_buf,
+    //         "Done -360: counts=%ld deg=%ld\r\n",
+    //         static_cast<long>(r_motor_driver.getPosition()),
+    //         static_cast<long>(r_motor_driver.getPositionDegrees()));
+    // print_str(print_buf);
 
-    z_motor_driver.update();
+    // HAL_Delay(2000);
+
+
+    // z_motor_driver.update();
   }
   /* USER CODE END 3 */
 }
