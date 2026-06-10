@@ -132,11 +132,26 @@ int main(void) {
   print_str("I2C3 sensors initialized\r\n");
 
   if (tc_temp_sensor.begin() != HAL_OK) {
-    sprintf(print_buf, "MCP9600 init failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
+    sprintf(print_buf,
+            "MCP9600 init failed, status=%d\r\n",
+            tc_temp_sensor.getLastStatus());
     print_str(print_buf);
   } else {
-    sprintf(print_buf, "MCP9600 initialized, device_id=0x%04X\r\n", tc_temp_sensor.getDeviceId());
+    sprintf(print_buf,
+            "MCP9600 initialized, device_id=0x%04X\r\n",
+            tc_temp_sensor.getDeviceId());
     print_str(print_buf);
+
+    uint8_t sensor_config = 0;
+
+    if (tc_temp_sensor.getSensorConfig(&sensor_config) == HAL_OK) {
+      sprintf(print_buf,
+              "MCP9600 sensor_config=0x%02X\r\n",
+              sensor_config);
+      print_str(print_buf);
+    } else {
+      print_str("MCP9600 sensor config read failed\r\n");
+    }
   }
 
   // // R MOTOR
@@ -147,25 +162,25 @@ int main(void) {
   // print_str("R motor driver initialized\r\n");
 
   // // Z MOTOR
-  z_motor_driver.begin();
-  z_motor_driver.enable();
+  // z_motor_driver.begin();
+  // z_motor_driver.enable();
 
   z_motor_driver.setSpeedStepsPerSecond(500);
   z_motor_driver.moveSteps(1600);
 
-  while (z_motor_driver.isBusy()) {
-    z_motor_driver.update();
-  }
+  // while (z_motor_driver.isBusy()) {
+  //   z_motor_driver.update();
+  // }
 
-  HAL_Delay(1000);
+  // HAL_Delay(1000);
 
   z_motor_driver.moveSteps(-1600);
 
-  while (z_motor_driver.isBusy()) {
-    z_motor_driver.update();
-  }
+  // while (z_motor_driver.isBusy()) {
+  //   z_motor_driver.update();
+  // }
 
-  z_motor_driver.disable();
+  // z_motor_driver.disable();
 
   /* USER CODE END 2 */
 
@@ -196,16 +211,45 @@ int main(void) {
       // Thermocouple Temperature Sensor
       temperature_sensor_status = tc_temp_sensor.update();
       if (temperature_sensor_status == HAL_OK) {
-        int16_t hot_fx100 = tc_temp_sensor.getHotFx100();
-        int16_t cold_fx100 = tc_temp_sensor.getColdFx100();
+        // int16_t hot_fx100 = tc_temp_sensor.getHotFx100();
+        // int16_t cold_fx100 = tc_temp_sensor.getColdFx100();
+
+        // sprintf(print_buf,
+        //         "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
+        //         hot_fx100 / 100,
+        //         abs(hot_fx100 % 100),
+        //         cold_fx100 / 100,
+        //         abs(cold_fx100 % 100));
+        // print_str(print_buf);
+
+        // int16_t raw_hot = 0;
+        // int16_t raw_cold = 0;
+
+        // tc_temp_sensor.readRawHot(&raw_hot);
+        // tc_temp_sensor.readRawCold(&raw_cold);
+
+        // sprintf(print_buf,
+        //         "RAW hot=%d cold=%d\r\n",
+        //         raw_hot,
+        //         raw_cold);
+        // print_str(print_buf);
+
+        int16_t hot_cx100 = tc_temp_sensor.getHotCx100();
+        int16_t cold_cx100 = tc_temp_sensor.getColdCx100();
+
+        int32_t raw_adc = 0;
+        tc_temp_sensor.readRawAdc(&raw_adc);
 
         sprintf(print_buf,
-                "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
-                hot_fx100 / 100,
-                abs(hot_fx100 % 100),
-                cold_fx100 / 100,
-                abs(cold_fx100 % 100));
+                "Hot=%d.%02dC Cold=%d.%02dC RawADC=%ld\r\n",
+                hot_cx100 / 100,
+                abs(hot_cx100 % 100),
+                cold_cx100 / 100,
+                abs(cold_cx100 % 100),
+                static_cast<long>(raw_adc));
+
         print_str(print_buf);
+        
       } else {
         sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
         print_str(print_buf);
