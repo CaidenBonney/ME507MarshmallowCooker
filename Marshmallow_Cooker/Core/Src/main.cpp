@@ -33,6 +33,7 @@
 
 #include "TMC2209.h" // PWM driver for Z motor
 #include "z_motor_driver.h" // Motor driver for veritcal stepper motor (z-axis)
+#include "Z_Limit_Switches.h" // Limit switch driver for z-axis
 
 /* USER CODE END Includes */
 
@@ -67,6 +68,11 @@ DRV8833 drv8833(&htim1, TIM_CHANNEL_2, TIM_CHANNEL_3);
 RMotorDriver r_motor_driver(&drv8833, &r_encoder_driver);
 
 ZMotorDriver z_motor_driver;
+ZLimitSwitches z_limit_switches(
+    Z_TOP_GPIO_Port,
+    Z_TOP_Pin,
+    Z_BOT_GPIO_Port,
+    Z_BOT_Pin);
 
 volatile HAL_StatusTypeDef temperature_sensor_status = HAL_ERROR;
 MLX90614 ir_temp_sensor(&hi2c3);
@@ -129,30 +135,31 @@ int main(void) {
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  print_str("I2C3 sensors initialized\r\n");
+  // // I2C3 Sensors: Thermocouple and IR temperature sensors
+  // print_str("I2C3 sensors initialized\r\n");
 
-  if (tc_temp_sensor.begin() != HAL_OK) {
-    sprintf(print_buf,
-            "MCP9600 init failed, status=%d\r\n",
-            tc_temp_sensor.getLastStatus());
-    print_str(print_buf);
-  } else {
-    sprintf(print_buf,
-            "MCP9600 initialized, device_id=0x%04X\r\n",
-            tc_temp_sensor.getDeviceId());
-    print_str(print_buf);
+  // if (tc_temp_sensor.begin() != HAL_OK) {
+  //   sprintf(print_buf,
+  //           "MCP9600 init failed, status=%d\r\n",
+  //           tc_temp_sensor.getLastStatus());
+  //   print_str(print_buf);
+  // } else {
+  //   sprintf(print_buf,
+  //           "MCP9600 initialized, device_id=0x%04X\r\n",
+  //           tc_temp_sensor.getDeviceId());
+  //   print_str(print_buf);
 
-    uint8_t sensor_config = 0;
+  //   uint8_t sensor_config = 0;
 
-    if (tc_temp_sensor.getSensorConfig(&sensor_config) == HAL_OK) {
-      sprintf(print_buf,
-              "MCP9600 sensor_config=0x%02X\r\n",
-              sensor_config);
-      print_str(print_buf);
-    } else {
-      print_str("MCP9600 sensor config read failed\r\n");
-    }
-  }
+  //   if (tc_temp_sensor.getSensorConfig(&sensor_config) == HAL_OK) {
+  //     sprintf(print_buf,
+  //             "MCP9600 sensor_config=0x%02X\r\n",
+  //             sensor_config);
+  //     print_str(print_buf);
+  //   } else {
+  //     print_str("MCP9600 sensor config read failed\r\n");
+  //   }
+  // }
 
   // // R MOTOR
   // if (r_motor_driver.begin() != HAL_OK) {
@@ -165,8 +172,8 @@ int main(void) {
   // z_motor_driver.begin();
   // z_motor_driver.enable();
 
-  z_motor_driver.setSpeedStepsPerSecond(500);
-  z_motor_driver.moveSteps(1600);
+  // z_motor_driver.setSpeedStepsPerSecond(500);
+  // z_motor_driver.moveSteps(1600);
 
   // while (z_motor_driver.isBusy()) {
   //   z_motor_driver.update();
@@ -174,7 +181,7 @@ int main(void) {
 
   // HAL_Delay(1000);
 
-  z_motor_driver.moveSteps(-1600);
+  // z_motor_driver.moveSteps(-1600);
 
   // while (z_motor_driver.isBusy()) {
   //   z_motor_driver.update();
@@ -191,70 +198,81 @@ int main(void) {
 
     /* USER CODE BEGIN 3 */
 
-    static uint32_t last_temperature_read_ms = 0;
-    const uint32_t now_ms = HAL_GetTick();
-
-    if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
-      last_temperature_read_ms = now_ms;
-
-      // // IR Temperature Sensor
-      temperature_sensor_status = ir_temp_sensor.update();
-      if (temperature_sensor_status == HAL_OK) {
-        int16_t objectF_x100 = ir_temp_sensor.getObjectFx100();
-        sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
-
-        print_str(print_buf);
-      } else {
-        print_str("IR Temp read failed\n\r");
-      }
-
-      // Thermocouple Temperature Sensor
-      temperature_sensor_status = tc_temp_sensor.update();
-      if (temperature_sensor_status == HAL_OK) {
-        // int16_t hot_fx100 = tc_temp_sensor.getHotFx100();
-        // int16_t cold_fx100 = tc_temp_sensor.getColdFx100();
-
-        // sprintf(print_buf,
-        //         "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
-        //         hot_fx100 / 100,
-        //         abs(hot_fx100 % 100),
-        //         cold_fx100 / 100,
-        //         abs(cold_fx100 % 100));
-        // print_str(print_buf);
-
-        // int16_t raw_hot = 0;
-        // int16_t raw_cold = 0;
-
-        // tc_temp_sensor.readRawHot(&raw_hot);
-        // tc_temp_sensor.readRawCold(&raw_cold);
-
-        // sprintf(print_buf,
-        //         "RAW hot=%d cold=%d\r\n",
-        //         raw_hot,
-        //         raw_cold);
-        // print_str(print_buf);
-
-        int16_t hot_cx100 = tc_temp_sensor.getHotCx100();
-        int16_t cold_cx100 = tc_temp_sensor.getColdCx100();
-
-        int32_t raw_adc = 0;
-        tc_temp_sensor.readRawAdc(&raw_adc);
-
-        sprintf(print_buf,
-                "Hot=%d.%02dC Cold=%d.%02dC RawADC=%ld\r\n",
-                hot_cx100 / 100,
-                abs(hot_cx100 % 100),
-                cold_cx100 / 100,
-                abs(cold_cx100 % 100),
-                static_cast<long>(raw_adc));
-
-        print_str(print_buf);
-        
-      } else {
-        sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
-        print_str(print_buf);
-      }
+    if (z_limit_switches.isTopTriggered()) {
+      print_str("TOP LIMIT\r\n");
     }
+
+    if (z_limit_switches.isBottomTriggered()) {
+      print_str("BOTTOM LIMIT\r\n");
+    }
+
+    HAL_Delay(100);
+
+    // // Temperature sensor reading every kTemperatureReadPeriodMs milliseconds
+    // static uint32_t last_temperature_read_ms = 0;
+    // const uint32_t now_ms = HAL_GetTick();
+
+    // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
+    //   last_temperature_read_ms = now_ms;
+
+    //   // // IR Temperature Sensor
+    //   temperature_sensor_status = ir_temp_sensor.update();
+    //   if (temperature_sensor_status == HAL_OK) {
+    //     int16_t objectF_x100 = ir_temp_sensor.getObjectFx100();
+    //     sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
+
+    //     print_str(print_buf);
+    //   } else {
+    //     print_str("IR Temp read failed\n\r");
+    //   }
+
+    //   // Thermocouple Temperature Sensor
+    //   temperature_sensor_status = tc_temp_sensor.update();
+    //   if (temperature_sensor_status == HAL_OK) {
+    //     // int16_t hot_fx100 = tc_temp_sensor.getHotFx100();
+    //     // int16_t cold_fx100 = tc_temp_sensor.getColdFx100();
+
+    //     // sprintf(print_buf,
+    //     //         "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
+    //     //         hot_fx100 / 100,
+    //     //         abs(hot_fx100 % 100),
+    //     //         cold_fx100 / 100,
+    //     //         abs(cold_fx100 % 100));
+    //     // print_str(print_buf);
+
+    //     // int16_t raw_hot = 0;
+    //     // int16_t raw_cold = 0;
+
+    //     // tc_temp_sensor.readRawHot(&raw_hot);
+    //     // tc_temp_sensor.readRawCold(&raw_cold);
+
+    //     // sprintf(print_buf,
+    //     //         "RAW hot=%d cold=%d\r\n",
+    //     //         raw_hot,
+    //     //         raw_cold);
+    //     // print_str(print_buf);
+
+    //     int16_t hot_cx100 = tc_temp_sensor.getHotCx100();
+    //     int16_t cold_cx100 = tc_temp_sensor.getColdCx100();
+
+    //     int32_t raw_adc = 0;
+    //     tc_temp_sensor.readRawAdc(&raw_adc);
+
+    //     sprintf(print_buf,
+    //             "Hot=%d.%02dC Cold=%d.%02dC RawADC=%ld\r\n",
+    //             hot_cx100 / 100,
+    //             abs(hot_cx100 % 100),
+    //             cold_cx100 / 100,
+    //             abs(cold_cx100 % 100),
+    //             static_cast<long>(raw_adc));
+
+    //     print_str(print_buf);
+        
+    //   } else {
+    //     sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_temp_sensor.getLastStatus());
+    //     print_str(print_buf);
+    //   }
+    // }
 
     // // Test R motor by moving +360 degrees, then -360 degrees
     // print_str("Move +360 degrees\r\n");
