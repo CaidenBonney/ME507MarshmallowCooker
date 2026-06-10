@@ -135,8 +135,8 @@ int main(void) {
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  // // I2C3 Sensors: Thermocouple and IR temperature sensors
-  // print_str("I2C3 sensors initialized\r\n");
+  // I2C3 Sensors: Thermocouple and IR temperature sensors
+  print_str("I2C3 sensors initialized\r\n");
 
   // if (tc_temp_sensor.begin() != HAL_OK) {
   //   sprintf(print_buf,
@@ -208,23 +208,24 @@ int main(void) {
 
     HAL_Delay(100);
 
-    // // Temperature sensor reading every kTemperatureReadPeriodMs milliseconds
-    // static uint32_t last_temperature_read_ms = 0;
-    // const uint32_t now_ms = HAL_GetTick();
+    // Temperature sensor reading every kTemperatureReadPeriodMs milliseconds
+    static uint32_t last_temperature_read_ms = 0;
+    const uint32_t now_ms = HAL_GetTick();
 
-    // if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
-    //   last_temperature_read_ms = now_ms;
+    if ((now_ms - last_temperature_read_ms) >= kTemperatureReadPeriodMs) {
+      last_temperature_read_ms = now_ms;
 
-    //   // // IR Temperature Sensor
-    //   temperature_sensor_status = ir_temp_sensor.update();
-    //   if (temperature_sensor_status == HAL_OK) {
-    //     int16_t objectF_x100 = ir_temp_sensor.getObjectFx100();
-    //     sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
+      // // IR Temperature Sensor
+      temperature_sensor_status = ir_temp_sensor.update();
+      if (temperature_sensor_status == HAL_OK) {
+        int16_t objectF_x100 = ir_temp_sensor.getObjectFx100();
+        sprintf(print_buf, "IR Temp: %d.%02d F\n\r", objectF_x100 / 100, abs(objectF_x100 % 100));
 
-    //     print_str(print_buf);
-    //   } else {
-    //     print_str("IR Temp read failed\n\r");
-    //   }
+        print_str(print_buf);
+      } else {
+        print_str("IR Temp read failed\n\r");
+      }
+    }
 
     //   // Thermocouple Temperature Sensor
     //   temperature_sensor_status = tc_temp_sensor.update();
