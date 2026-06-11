@@ -120,28 +120,47 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_m_l_x906
 </div><!--header-->
 <div class="contents">
 
+<p>I2C driver for the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> non-contact infrared temperature sensor.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_m_l_x90614_8h_source.html">MLX90614.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a512717ed053aa46e0554eebb37c507f3" id="r_a512717ed053aa46e0554eebb37c507f3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a512717ed053aa46e0554eebb37c507f3">MLX90614</a> (I2C_HandleTypeDef *hi2c, uint8_t address=<a class="el" href="#ac2f252367f6cb40f26691e3cd6ae42a2">DEFAULT_ADDRESS</a>)</td></tr>
+<tr class="memdesc:a512717ed053aa46e0554eebb37c507f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> driver instance.  <br /></td></tr>
 <tr class="memitem:aca62035b0ae0a16d616fc7410a80f70f" id="r_aca62035b0ae0a16d616fc7410a80f70f"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aca62035b0ae0a16d616fc7410a80f70f">isConnected</a> ()</td></tr>
+<tr class="memdesc:aca62035b0ae0a16d616fc7410a80f70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> responds on the I2C bus.  <br /></td></tr>
 <tr class="memitem:a5d33536e0c528ab1a12d970c489acc73" id="r_a5d33536e0c528ab1a12d970c489acc73"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a5d33536e0c528ab1a12d970c489acc73">update</a> ()</td></tr>
+<tr class="memdesc:a5d33536e0c528ab1a12d970c489acc73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read and cache the ambient and object temperatures.  <br /></td></tr>
 <tr class="memitem:af76ff8e09a5fbf70280ef493a3a8cb1a" id="r_af76ff8e09a5fbf70280ef493a3a8cb1a"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#af76ff8e09a5fbf70280ef493a3a8cb1a">readAmbientCx100</a> (int16_t &amp;temperatureC_x100)</td></tr>
+<tr class="memdesc:af76ff8e09a5fbf70280ef493a3a8cb1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the ambient temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:ae05c7f23a7f957901c2798296f081cad" id="r_ae05c7f23a7f957901c2798296f081cad"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ae05c7f23a7f957901c2798296f081cad">readAmbientFx100</a> (int16_t &amp;temperatureF_x100)</td></tr>
+<tr class="memdesc:ae05c7f23a7f957901c2798296f081cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the ambient temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:a39f0e14436a5f51b7f2df913223f3e4b" id="r_a39f0e14436a5f51b7f2df913223f3e4b"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a39f0e14436a5f51b7f2df913223f3e4b">readObjectCx100</a> (int16_t &amp;temperatureC_x100)</td></tr>
+<tr class="memdesc:a39f0e14436a5f51b7f2df913223f3e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the object temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a00ee9a6e90c5d9fe3485d45cfa3e6a6c" id="r_a00ee9a6e90c5d9fe3485d45cfa3e6a6c"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a00ee9a6e90c5d9fe3485d45cfa3e6a6c">readObjectFx100</a> (int16_t &amp;temperatureF_x100)</td></tr>
+<tr class="memdesc:a00ee9a6e90c5d9fe3485d45cfa3e6a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the object temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:aa38e9eca7d4b907e47f329723719ad35" id="r_aa38e9eca7d4b907e47f329723719ad35"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#aa38e9eca7d4b907e47f329723719ad35">getAmbientCx100</a> () const</td></tr>
+<tr class="memdesc:aa38e9eca7d4b907e47f329723719ad35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently cached ambient temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a65c94110b8ae4aad9c69a103a9189ad2" id="r_a65c94110b8ae4aad9c69a103a9189ad2"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a65c94110b8ae4aad9c69a103a9189ad2">getAmbientFx100</a> () const</td></tr>
+<tr class="memdesc:a65c94110b8ae4aad9c69a103a9189ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently cached ambient temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:a81f5b24e326e34223d62b4afa6de1b18" id="r_a81f5b24e326e34223d62b4afa6de1b18"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a81f5b24e326e34223d62b4afa6de1b18">getObjectCx100</a> () const</td></tr>
+<tr class="memdesc:a81f5b24e326e34223d62b4afa6de1b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently cached object temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a74b6f7f3aa6e6c57861d4a5185282742" id="r_a74b6f7f3aa6e6c57861d4a5185282742"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a74b6f7f3aa6e6c57861d4a5185282742">getObjectFx100</a> () const</td></tr>
+<tr class="memdesc:a74b6f7f3aa6e6c57861d4a5185282742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently cached object temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:a9514dd00eb32b05737298b00d3946343" id="r_a9514dd00eb32b05737298b00d3946343"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a9514dd00eb32b05737298b00d3946343">getLastStatus</a> () const</td></tr>
+<tr class="memdesc:a9514dd00eb32b05737298b00d3946343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the status from the most recent update operation.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ac2f252367f6cb40f26691e3cd6ae42a2" id="r_ac2f252367f6cb40f26691e3cd6ae42a2"><td class="memItemLeft">static constexpr uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ac2f252367f6cb40f26691e3cd6ae42a2">DEFAULT_ADDRESS</a> = 0x5A</td></tr>
+<tr class="memdesc:ac2f252367f6cb40f26691e3cd6ae42a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default 7-bit I2C address for the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a>.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>I2C driver for the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> non-contact infrared temperature sensor. </p>
+<p>The class supports connection checks, one-shot temperature reads, periodic updates, cached ambient/object readings, and fixed-point Fahrenheit conversion. Temperatures are represented as degrees C or F multiplied by 100. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a512717ed053aa46e0554eebb37c507f3" name="a512717ed053aa46e0554eebb37c507f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a512717ed053aa46e0554eebb37c507f3">&#9670;&#160;</a></span>MLX90614()</h2>
 
@@ -169,6 +188,15 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Construct an <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> driver instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointer to the STM32 HAL I2C handle used for communication. </td></tr>
+    <tr><td class="paramname">address</td><td>7-bit I2C address of the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -187,6 +215,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the most recently cached ambient temperature in degrees C x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached ambient temperature in degrees C x100. </dd></dl>
+
 </div>
 </div>
 <a id="a65c94110b8ae4aad9c69a103a9189ad2" name="a65c94110b8ae4aad9c69a103a9189ad2"></a>
@@ -203,6 +234,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the most recently cached ambient temperature in degrees F x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached ambient temperature in degrees F x100. </dd></dl>
 
 </div>
 </div>
@@ -221,6 +255,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the status from the most recent update operation. </p>
+<dl class="section return"><dt>Returns</dt><dd>Last cached HAL status. </dd></dl>
+
 </div>
 </div>
 <a id="a81f5b24e326e34223d62b4afa6de1b18" name="a81f5b24e326e34223d62b4afa6de1b18"></a>
@@ -237,6 +274,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the most recently cached object temperature in degrees C x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached object temperature in degrees C x100. </dd></dl>
 
 </div>
 </div>
@@ -255,6 +295,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the most recently cached object temperature in degrees F x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached object temperature in degrees F x100. </dd></dl>
+
 </div>
 </div>
 <a id="aca62035b0ae0a16d616fc7410a80f70f" name="aca62035b0ae0a16d616fc7410a80f70f"></a>
@@ -271,6 +314,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Check whether the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> responds on the I2C bus. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK if the device acknowledges, otherwise the HAL error status. </dd></dl>
 
 </div>
 </div>
@@ -289,6 +335,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the ambient temperature in degrees C x100. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">temperatureC_x100</td><td>Reference that receives the ambient temperature. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="ae05c7f23a7f957901c2798296f081cad" name="ae05c7f23a7f957901c2798296f081cad"></a>
@@ -305,6 +360,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read the ambient temperature in degrees F x100. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">temperatureF_x100</td><td>Reference that receives the ambient temperature. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
 
 </div>
 </div>
@@ -323,6 +387,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the object temperature in degrees C x100. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">temperatureC_x100</td><td>Reference that receives the object temperature. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="a00ee9a6e90c5d9fe3485d45cfa3e6a6c" name="a00ee9a6e90c5d9fe3485d45cfa3e6a6c"></a>
@@ -340,6 +413,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the object temperature in degrees F x100. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">temperatureF_x100</td><td>Reference that receives the object temperature. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="a5d33536e0c528ab1a12d970c489acc73" name="a5d33536e0c528ab1a12d970c489acc73"></a>
@@ -356,6 +438,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read and cache the ambient and object temperatures. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK if both reads succeed, otherwise HAL_ERROR. </dd></dl>
 
 </div>
 </div>
@@ -379,6 +464,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default 7-bit I2C address for the <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a>. </p>
 
 </div>
 </div>

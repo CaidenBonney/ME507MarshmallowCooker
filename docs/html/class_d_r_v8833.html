@@ -120,21 +120,33 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_d_r_v883
 </div><!--header-->
 <div class="contents">
 
+<p>Controls a <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> H-bridge using two timer PWM channels.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_d_r_v8833_8h_source.html">DRV8833.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4ef0be927fa763f67057ca1d2f6d2a50" id="r_a4ef0be927fa763f67057ca1d2f6d2a50"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833</a> (TIM_HandleTypeDef *htim, uint32_t in1_channel, uint32_t in2_channel)</td></tr>
+<tr class="memdesc:a4ef0be927fa763f67057ca1d2f6d2a50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> PWM driver.  <br /></td></tr>
 <tr class="memitem:a82f2dbbb6e390dc552d97f741f2f7e84" id="r_a82f2dbbb6e390dc552d97f741f2f7e84"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a82f2dbbb6e390dc552d97f741f2f7e84">begin</a> ()</td></tr>
+<tr class="memdesc:a82f2dbbb6e390dc552d97f741f2f7e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start PWM outputs and place the bridge in coast mode.  <br /></td></tr>
 <tr class="memitem:a70e54b165bee102e152b3a597360b484" id="r_a70e54b165bee102e152b3a597360b484"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a70e54b165bee102e152b3a597360b484">setDuty</a> (int16_t duty)</td></tr>
+<tr class="memdesc:a70e54b165bee102e152b3a597360b484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command signed motor duty.  <br /></td></tr>
 <tr class="memitem:ae355507ec1778a8cc9fe45eb5c9bfc01" id="r_ae355507ec1778a8cc9fe45eb5c9bfc01"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae355507ec1778a8cc9fe45eb5c9bfc01">brake</a> ()</td></tr>
+<tr class="memdesc:ae355507ec1778a8cc9fe45eb5c9bfc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actively brake the motor by driving both bridge inputs high.  <br /></td></tr>
 <tr class="memitem:a03dff59e79629ce02c06728d13abea2d" id="r_a03dff59e79629ce02c06728d13abea2d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a03dff59e79629ce02c06728d13abea2d">coast</a> ()</td></tr>
+<tr class="memdesc:a03dff59e79629ce02c06728d13abea2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coast the motor by driving both bridge inputs low.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:afc1cc14cd47b080cbaccf72200c38c36" id="r_afc1cc14cd47b080cbaccf72200c38c36"><td class="memItemLeft">static constexpr int16_t&#160;</td><td class="memItemRight"><a class="el" href="#afc1cc14cd47b080cbaccf72200c38c36">kMaxDuty</a> = 1000</td></tr>
+<tr class="memdesc:afc1cc14cd47b080cbaccf72200c38c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum signed duty command. A value of 1000 represents 100 percent duty.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Controls a <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> H-bridge using two timer PWM channels. </p>
+<p>Duty commands use a signed fixed range where +1000 is full forward, -1000 is full reverse, and 0 coasts the motor. The driver also supports active braking. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4ef0be927fa763f67057ca1d2f6d2a50" name="a4ef0be927fa763f67057ca1d2f6d2a50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4ef0be927fa763f67057ca1d2f6d2a50">&#9670;&#160;</a></span>DRV8833()</h2>
 
@@ -159,6 +171,16 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> PWM driver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htim</td><td>Timer handle that owns the two PWM output channels. </td></tr>
+    <tr><td class="paramname">in1_channel</td><td>Timer channel connected to <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> IN1. </td></tr>
+    <tr><td class="paramname">in2_channel</td><td>Timer channel connected to <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> IN2. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -177,6 +199,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Start PWM outputs and place the bridge in coast mode. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK if both PWM channels start successfully, otherwise HAL_ERROR. </dd></dl>
+
 </div>
 </div>
 <a id="ae355507ec1778a8cc9fe45eb5c9bfc01" name="ae355507ec1778a8cc9fe45eb5c9bfc01"></a>
@@ -193,6 +218,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Actively brake the motor by driving both bridge inputs high. </p>
 
 </div>
 </div>
@@ -211,6 +238,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Coast the motor by driving both bridge inputs low. </p>
+
 </div>
 </div>
 <a id="a70e54b165bee102e152b3a597360b484" name="a70e54b165bee102e152b3a597360b484"></a>
@@ -227,6 +256,14 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Command signed motor duty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duty</td><td>Signed duty command from -1000 to +1000. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -250,6 +287,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Maximum signed duty command. A value of 1000 represents 100 percent duty. </p>
 
 </div>
 </div>

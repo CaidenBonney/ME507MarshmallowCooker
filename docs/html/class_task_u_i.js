@@ -8,6 +8,10 @@ var class_task_u_i =
       [ "EmergencyStop", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4ac2e719ff1493c7c49d2e5a780450b501", null ],
       [ "Reset", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a526d688f37a86d3c3f27d0c5016eb71d", null ],
       [ "Status", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4aec53a8c4f07baed5d8825072c89799be", null ],
+      [ "PidDebugOn", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a21beb341bbfa1020383e63d8b5a61627", null ],
+      [ "PidDebugOff", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4ac9683ad685b368c14da7bacbd2073073", null ],
+      [ "ZJogDown", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4aa362d77f2806789ae6d0fc3df6273454", null ],
+      [ "ZJogUp", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a0edf905f4852a8ddbf6abf5492b7e710", null ],
       [ "Unknown", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a88183b946cc5f0e8c96b2e66e1c74a7e", null ]
     ] ],
     [ "State", "class_task_u_i.html#a032eff94777a73f3212a33ba5aaec992", [
@@ -18,6 +22,7 @@ var class_task_u_i =
     ] ],
     [ "TaskUI", "class_task_u_i.html#ab3a57c9b2b1e3afa5eea3ee4fe2b96ae", null ],
     [ "consumeCommand", "class_task_u_i.html#a76b9b0b02de30244d8d1f5a1667fde89", null ],
+    [ "consumeJogSteps", "class_task_u_i.html#a2989b638509dba9a6703f3af8d95a050", null ],
     [ "consumeStatusDurationMs", "class_task_u_i.html#af55e9766d241764eb7f6754e0ad6b1a7", null ],
     [ "getState", "class_task_u_i.html#a716a6e6cac2504b288a448f9e9375724", null ],
     [ "getStatus", "class_task_u_i.html#a02c9bee0a5f7cd954f68bc86e29b670a", null ],

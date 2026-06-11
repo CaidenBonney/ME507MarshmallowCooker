@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_t_m_c220
 </div><!--header-->
 <div class="contents">
 
+<p>Minimal <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> step/dir interface.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_t_m_c2209_8h_source.html">TMC2209.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -127,29 +130,51 @@ Public Types</h2></td></tr>
 <tr class="memitem:ad17f90ce02f1601f38e98085519e1aaa" id="r_ad17f90ce02f1601f38e98085519e1aaa"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ad17f90ce02f1601f38e98085519e1aaa">Direction</a> { <a class="el" href="#ad17f90ce02f1601f38e98085519e1aaaa67d2f6740a8eaebf4d5c6f79be8da481">Forward</a>
 , <a class="el" href="#ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc">Reverse</a>
  }</td></tr>
+<tr class="memdesc:ad17f90ce02f1601f38e98085519e1aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physical driver direction before optional inversion.  <a href="#ad17f90ce02f1601f38e98085519e1aaa">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a29267655a6fc539d847ab274f2f8db44" id="r_a29267655a6fc539d847ab274f2f8db44"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a29267655a6fc539d847ab274f2f8db44">TMC2209</a> (GPIO_TypeDef *step_port, uint16_t step_pin, GPIO_TypeDef *dir_port, uint16_t dir_pin, GPIO_TypeDef *enn_port, uint16_t enn_pin, GPIO_TypeDef *diag_port, uint16_t diag_pin)</td></tr>
+<tr class="memdesc:a29267655a6fc539d847ab274f2f8db44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> GPIO interface.  <br /></td></tr>
 <tr class="memitem:af9203181778a343b17cb1a5ef5829f08" id="r_af9203181778a343b17cb1a5ef5829f08"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af9203181778a343b17cb1a5ef5829f08">begin</a> ()</td></tr>
+<tr class="memdesc:af9203181778a343b17cb1a5ef5829f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize pins and timing defaults.  <br /></td></tr>
 <tr class="memitem:acfedf0dc7e37214e297194ed86c487af" id="r_acfedf0dc7e37214e297194ed86c487af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acfedf0dc7e37214e297194ed86c487af">enable</a> ()</td></tr>
+<tr class="memdesc:acfedf0dc7e37214e297194ed86c487af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable motor outputs.  <br /></td></tr>
 <tr class="memitem:a74b84df2d0fba5f98ec86c0c4bde4ddc" id="r_a74b84df2d0fba5f98ec86c0c4bde4ddc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a74b84df2d0fba5f98ec86c0c4bde4ddc">disable</a> ()</td></tr>
+<tr class="memdesc:a74b84df2d0fba5f98ec86c0c4bde4ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable motor outputs.  <br /></td></tr>
 <tr class="memitem:ad391c58bead837ff92b9aa6ba45060ec" id="r_ad391c58bead837ff92b9aa6ba45060ec"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad391c58bead837ff92b9aa6ba45060ec">isEnabled</a> () const</td></tr>
+<tr class="memdesc:ad391c58bead837ff92b9aa6ba45060ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when outputs are enabled.  <br /></td></tr>
 <tr class="memitem:a50d06e1edebb655cb82e7d6d0ef5fe02" id="r_a50d06e1edebb655cb82e7d6d0ef5fe02"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a50d06e1edebb655cb82e7d6d0ef5fe02">setDirection</a> (<a class="el" href="#ad17f90ce02f1601f38e98085519e1aaa">Direction</a> direction)</td></tr>
+<tr class="memdesc:a50d06e1edebb655cb82e7d6d0ef5fe02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the logical motor direction.  <br /></td></tr>
 <tr class="memitem:abac871d0a47cceb5f7eaaf81bf491cfc" id="r_abac871d0a47cceb5f7eaaf81bf491cfc"><td class="memItemLeft"><a class="el" href="#ad17f90ce02f1601f38e98085519e1aaa">Direction</a>&#160;</td><td class="memItemRight"><a class="el" href="#abac871d0a47cceb5f7eaaf81bf491cfc">getDirection</a> () const</td></tr>
+<tr class="memdesc:abac871d0a47cceb5f7eaaf81bf491cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current logical motor direction.  <br /></td></tr>
 <tr class="memitem:ae98f415b13c40a53fb920583ceb67a74" id="r_ae98f415b13c40a53fb920583ceb67a74"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae98f415b13c40a53fb920583ceb67a74">setDirectionInverted</a> (bool inverted)</td></tr>
+<tr class="memdesc:ae98f415b13c40a53fb920583ceb67a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set whether logical direction is inverted at the DIR pin.  <br /></td></tr>
 <tr class="memitem:a6a11f579a6036c9bfec0506f7da1b35f" id="r_a6a11f579a6036c9bfec0506f7da1b35f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6a11f579a6036c9bfec0506f7da1b35f">directionInverted</a> () const</td></tr>
+<tr class="memdesc:a6a11f579a6036c9bfec0506f7da1b35f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when direction inversion is enabled.  <br /></td></tr>
 <tr class="memitem:a9aa530caefd5c72a3c8c9346f1e577f7" id="r_a9aa530caefd5c72a3c8c9346f1e577f7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9aa530caefd5c72a3c8c9346f1e577f7">setStepRate</a> (uint32_t steps_per_second)</td></tr>
+<tr class="memdesc:a9aa530caefd5c72a3c8c9346f1e577f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the target step rate in steps per second.  <br /></td></tr>
 <tr class="memitem:ab279307526b8a80602c622895d0448a3" id="r_ab279307526b8a80602c622895d0448a3"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#ab279307526b8a80602c622895d0448a3">getStepRate</a> () const</td></tr>
+<tr class="memdesc:ab279307526b8a80602c622895d0448a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the target step rate in steps per second.  <br /></td></tr>
 <tr class="memitem:a3aa4006015a2941cd24b1a6b9f68e667" id="r_a3aa4006015a2941cd24b1a6b9f68e667"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a3aa4006015a2941cd24b1a6b9f68e667">getStepIntervalUs</a> () const</td></tr>
+<tr class="memdesc:a3aa4006015a2941cd24b1a6b9f68e667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the computed interval between step pulses in microseconds.  <br /></td></tr>
 <tr class="memitem:ab35a0f8077a70f7e5d878f6741e8bcb3" id="r_ab35a0f8077a70f7e5d878f6741e8bcb3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab35a0f8077a70f7e5d878f6741e8bcb3">stepNow</a> ()</td></tr>
+<tr class="memdesc:ab35a0f8077a70f7e5d878f6741e8bcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit one STEP pulse immediately.  <br /></td></tr>
 <tr class="memitem:a57489de9d00260c85143377507dd52e0" id="r_a57489de9d00260c85143377507dd52e0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a57489de9d00260c85143377507dd52e0">stepIfDue</a> ()</td></tr>
+<tr class="memdesc:a57489de9d00260c85143377507dd52e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emit one STEP pulse if the configured interval has elapsed.  <br /></td></tr>
 <tr class="memitem:a81819f180385b0bff86fdc5dd6b7b34c" id="r_a81819f180385b0bff86fdc5dd6b7b34c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a81819f180385b0bff86fdc5dd6b7b34c">diagActive</a> () const</td></tr>
+<tr class="memdesc:a81819f180385b0bff86fdc5dd6b7b34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when the DIAG input is active.  <br /></td></tr>
 <tr class="memitem:a420b01bf2eb78c56adb5bda8a8051c82" id="r_a420b01bf2eb78c56adb5bda8a8051c82"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a420b01bf2eb78c56adb5bda8a8051c82">updateDiagLog</a> ()</td></tr>
+<tr class="memdesc:a420b01bf2eb78c56adb5bda8a8051c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update and return the latched diagnostic state.  <br /></td></tr>
 <tr class="memitem:ab0572e6ee10a99984294703ad72cad79" id="r_ab0572e6ee10a99984294703ad72cad79"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab0572e6ee10a99984294703ad72cad79">resetDiagLatch</a> ()</td></tr>
+<tr class="memdesc:ab0572e6ee10a99984294703ad72cad79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the latched diagnostic state.  <br /></td></tr>
 <tr class="memitem:af79534452c8119d0cac42816e7b2e3e2" id="r_af79534452c8119d0cac42816e7b2e3e2"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#af79534452c8119d0cac42816e7b2e3e2">micros</a> () const</td></tr>
+<tr class="memdesc:af79534452c8119d0cac42816e7b2e3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a microsecond timestamp from the DWT cycle counter.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Minimal <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> step/dir interface. </p>
+<p>This class controls STEP, DIR, ENN, and DIAG pins directly. It does not use UART configuration of the <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a>. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="ad17f90ce02f1601f38e98085519e1aaa" name="ad17f90ce02f1601f38e98085519e1aaa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad17f90ce02f1601f38e98085519e1aaa">&#9670;&#160;</a></span>Direction</h2>
 
@@ -169,9 +194,13 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Physical driver direction before optional inversion. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad17f90ce02f1601f38e98085519e1aaaa67d2f6740a8eaebf4d5c6f79be8da481" name="ad17f90ce02f1601f38e98085519e1aaaa67d2f6740a8eaebf4d5c6f79be8da481"></a>Forward&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc" name="ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc"></a>Reverse&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad17f90ce02f1601f38e98085519e1aaaa67d2f6740a8eaebf4d5c6f79be8da481" name="ad17f90ce02f1601f38e98085519e1aaaa67d2f6740a8eaebf4d5c6f79be8da481"></a>Forward&#160;</td><td class="fielddoc"><p>Forward DIR pin state. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc" name="ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc"></a>Reverse&#160;</td><td class="fielddoc"><p>Reverse DIR pin state. </p>
+</td></tr>
 </table>
 
 </div>
@@ -226,6 +255,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> GPIO interface. </p>
+<p>Construct a <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> GPIO interface.   </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -244,6 +276,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize pins and timing defaults. </p>
+<p>Initialize pins and timing defaults.   </p>
+
 </div>
 </div>
 <a id="a81819f180385b0bff86fdc5dd6b7b34c" name="a81819f180385b0bff86fdc5dd6b7b34c"></a>
@@ -260,6 +295,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return true when the DIAG input is active. </p>
+<p>Return true when the DIAG input is active.   </p>
 
 </div>
 </div>
@@ -278,6 +316,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true when direction inversion is enabled. </p>
+<p>Return true when direction inversion is enabled.   </p>
+
 </div>
 </div>
 <a id="a74b84df2d0fba5f98ec86c0c4bde4ddc" name="a74b84df2d0fba5f98ec86c0c4bde4ddc"></a>
@@ -294,6 +335,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Disable motor outputs. </p>
+<p>Disable motor outputs.   </p>
 
 </div>
 </div>
@@ -312,6 +356,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Enable motor outputs. </p>
+<p>Enable motor outputs.   </p>
+
 </div>
 </div>
 <a id="abac871d0a47cceb5f7eaaf81bf491cfc" name="abac871d0a47cceb5f7eaaf81bf491cfc"></a>
@@ -328,6 +375,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the current logical motor direction. </p>
+<p>Get the current logical motor direction.   </p>
 
 </div>
 </div>
@@ -346,6 +396,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the computed interval between step pulses in microseconds. </p>
+<p>Get the computed interval between step pulses in microseconds.   </p>
+
 </div>
 </div>
 <a id="ab279307526b8a80602c622895d0448a3" name="ab279307526b8a80602c622895d0448a3"></a>
@@ -362,6 +415,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the target step rate in steps per second. </p>
+<p>Get the target step rate in steps per second.   </p>
 
 </div>
 </div>
@@ -380,6 +436,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true when outputs are enabled. </p>
+<p>Return true when outputs are enabled.   </p>
+
 </div>
 </div>
 <a id="af79534452c8119d0cac42816e7b2e3e2" name="af79534452c8119d0cac42816e7b2e3e2"></a>
@@ -396,6 +455,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return a microsecond timestamp from the DWT cycle counter. </p>
+<p>Return a microsecond timestamp from the DWT cycle counter.   </p>
 
 </div>
 </div>
@@ -414,6 +476,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Clear the latched diagnostic state. </p>
+<p>Clear the latched diagnostic state.   </p>
+
 </div>
 </div>
 <a id="a50d06e1edebb655cb82e7d6d0ef5fe02" name="a50d06e1edebb655cb82e7d6d0ef5fe02"></a>
@@ -430,6 +495,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the logical motor direction. </p>
+<p>Set the logical motor direction.   </p>
 
 </div>
 </div>
@@ -448,6 +516,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set whether logical direction is inverted at the DIR pin. </p>
+<p>Set whether logical direction is inverted at the DIR pin.   </p>
+
 </div>
 </div>
 <a id="a9aa530caefd5c72a3c8c9346f1e577f7" name="a9aa530caefd5c72a3c8c9346f1e577f7"></a>
@@ -464,6 +535,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the target step rate in steps per second. </p>
+<p>Set the target step rate in steps per second.   </p>
 
 </div>
 </div>
@@ -482,6 +556,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Emit one STEP pulse if the configured interval has elapsed. </p>
+<p>Emit one STEP pulse if the configured interval has elapsed.   </p>
+
 </div>
 </div>
 <a id="ab35a0f8077a70f7e5d878f6741e8bcb3" name="ab35a0f8077a70f7e5d878f6741e8bcb3"></a>
@@ -499,6 +576,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Emit one STEP pulse immediately. </p>
+<p>Emit one STEP pulse immediately.   </p>
+
 </div>
 </div>
 <a id="a420b01bf2eb78c56adb5bda8a8051c82" name="a420b01bf2eb78c56adb5bda8a8051c82"></a>
@@ -515,6 +595,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Update and return the latched diagnostic state. </p>
+<p>Update and return the latched diagnostic state.   </p>
 
 </div>
 </div>

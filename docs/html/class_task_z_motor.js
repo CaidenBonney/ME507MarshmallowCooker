@@ -10,6 +10,7 @@ var class_task_z_motor =
       [ "Fault", "class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48a3731a4591778546a7d1e1c9c06d4e2ee", null ]
     ] ],
     [ "TaskZMotor", "class_task_z_motor.html#a3067a0402b337b3b512bae714c47ccb9", null ],
+    [ "bottomLimitPressed", "class_task_z_motor.html#a24483fef19baf99366b4450d81b9375c", null ],
     [ "emergencyStop", "class_task_z_motor.html#a9de51744e688bcc095cdb8e6a0d9001d", null ],
     [ "getPositionSteps", "class_task_z_motor.html#a81711e166c9a4333ad4e11d594afc165", null ],
     [ "getState", "class_task_z_motor.html#a4f59106228214fb82f890bbc78967ec7", null ],
@@ -18,15 +19,18 @@ var class_task_z_motor =
     [ "isBusy", "class_task_z_motor.html#adc53cb336e2628989e11905439866901", null ],
     [ "isFaulted", "class_task_z_motor.html#a603b5be7eab9908d9853691b92388d84", null ],
     [ "isHomed", "class_task_z_motor.html#ad42ca782a50844ef27b004d6af8c007f", null ],
+    [ "jogRelativeSteps", "class_task_z_motor.html#a00cded065aa1d5c1158a006c82251e5e", null ],
     [ "moveToRemovalHeight", "class_task_z_motor.html#a7ca949b5f0e9d797e5d4c103691f14b3", null ],
     [ "moveToStartPosition", "class_task_z_motor.html#a858bb3fd35c851c6fec44be20d7e08fe", null ],
     [ "resetFault", "class_task_z_motor.html#aa26d550a221389011915a0a228a3add7", null ],
     [ "resetPid", "class_task_z_motor.html#a030551395b65f39f3bf9960573e6bd05", null ],
     [ "run", "class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293", null ],
-    [ "setMeasuredFlameTempFx100", "class_task_z_motor.html#ac0776c138ba32ba561f84ff504b4ee09", null ],
+    [ "setMeasuredFlameTempFx100", "class_task_z_motor.html#a4b4467ea5536458bb83a4ba0baedb202", null ],
+    [ "setPidDebugEnabled", "class_task_z_motor.html#a3800dbc19ece1cdaf371ea140cd0be42", null ],
     [ "setPidGains", "class_task_z_motor.html#a68d18d0d43ac413198883cf5a983bc31", null ],
     [ "startHoming", "class_task_z_motor.html#a04a9e399abc46b7e4a98db9d87476a7e", null ],
-    [ "startTemperatureControl", "class_task_z_motor.html#a8d6b8f32622b62ca539702c67e3fea55", null ],
+    [ "startTemperatureControl", "class_task_z_motor.html#a9297159fae5c65de16d9822e8c7e6163", null ],
     [ "stopMotion", "class_task_z_motor.html#a8d2711c9d958ad8db5200f990ce50570", null ],
+    [ "topLimitPressed", "class_task_z_motor.html#af3e50fadf6ae6e3e63267d128b9022bf", null ],
     [ "update", "class_task_z_motor.html#a67788bc6739b97fbc2e1779bdd83cc50", null ]
 ];

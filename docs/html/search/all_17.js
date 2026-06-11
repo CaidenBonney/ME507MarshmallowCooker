@@ -17,6 +17,8 @@ var searchData=
   ['z_5ftop_5fgpio_5fport_14',['Z_TOP_GPIO_Port',['../main_8h.html#a18a5a6855f4425a499054cd022d16b90',1,'main.h']]],
   ['z_5ftop_5fpin_15',['Z_TOP_Pin',['../main_8h.html#a79718f305f81178d18af8dda75d667d5',1,'main.h']]],
   ['zeroposition_16',['zeroPosition',['../class_z_motor_driver.html#a29efe25165b4dbb0b982fd93d147368f',1,'ZMotorDriver']]],
-  ['zlimitswitches_17',['ZLimitSwitches',['../class_z_limit_switches.html',1,'ZLimitSwitches'],['../class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099',1,'ZLimitSwitches::ZLimitSwitches()']]],
-  ['zmotordriver_18',['ZMotorDriver',['../class_z_motor_driver.html',1,'ZMotorDriver'],['../class_z_motor_driver.html#a6ccd1b2234d2072854ca3b2b8d0fef0b',1,'ZMotorDriver::ZMotorDriver()']]]
+  ['zjogdown_17',['ZJogDown',['../class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4aa362d77f2806789ae6d0fc3df6273454',1,'TaskUI']]],
+  ['zjogup_18',['ZJogUp',['../class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a0edf905f4852a8ddbf6abf5492b7e710',1,'TaskUI']]],
+  ['zlimitswitches_19',['ZLimitSwitches',['../class_z_limit_switches.html',1,'ZLimitSwitches'],['../class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099',1,'ZLimitSwitches::ZLimitSwitches()']]],
+  ['zmotordriver_20',['ZMotorDriver',['../class_z_motor_driver.html',1,'ZMotorDriver'],['../class_z_motor_driver.html#a6ccd1b2234d2072854ca3b2b8d0fef0b',1,'ZMotorDriver::ZMotorDriver()']]]
 ];

@@ -5,6 +5,7 @@ var class_task_r_motor =
       [ "Idle", "class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6cae599161956d626eda4cb0a5ffb85271c", null ],
       [ "RotatingForward", "class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e", null ],
       [ "RotatingBackward", "class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32", null ],
+      [ "ReturningToInitialRotation", "class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca6c627e03b69524ba1a74a7a1fdbe8b60", null ],
       [ "Fault", "class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee", null ]
     ] ],
     [ "TaskRMotor", "class_task_r_motor.html#a6fcf2b5a38c6718764c1c24b8797584d", null ],
@@ -14,6 +15,7 @@ var class_task_r_motor =
     [ "isBusy", "class_task_r_motor.html#a79781b80b07acea1a92f39b2bcb5831a", null ],
     [ "isFaulted", "class_task_r_motor.html#a8c068b95c29ebe7eb1c60d952f7c06d0", null ],
     [ "resetFault", "class_task_r_motor.html#a4f96e191a8c834649f15fd03422f9103", null ],
+    [ "returnToInitialRotation", "class_task_r_motor.html#a116d6a50b3a338981196160a503aee6f", null ],
     [ "run", "class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135", null ],
     [ "setCookingDuty", "class_task_r_motor.html#a12e10e0052db379dd4d2576f34807d68", null ],
     [ "startCookingRotation", "class_task_r_motor.html#a7a779f0de54e728c0533f8ba15f58f27", null ],

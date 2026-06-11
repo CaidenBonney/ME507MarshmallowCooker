@@ -119,6 +119,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___z___mo
   <div class="headertitle"><div class="title">Task_Z_Motor.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Z-axis stepper task for homing, jogging, and flame-height PID control.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_task_8h_source.html">Task.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_z___limit___switches_8h_source.html">Z_Limit_Switches.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="z__motor__driver_8h_source.html">z_motor_driver.h</a>&quot;</code><br />
@@ -129,7 +132,84 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___z___mo
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:TaskZMotor" id="r_TaskZMotor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_task_z_motor.html">TaskZMotor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cooperative task that controls the Z lift mechanism.  <a href="class_task_z_motor.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:adb0aa71349ab66b0edb3106fb2abb5c3" id="r_adb0aa71349ab66b0edb3106fb2abb5c3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adb0aa71349ab66b0edb3106fb2abb5c3">print_str</a> (const char *str)</td></tr>
+<tr class="memdesc:adb0aa71349ab66b0edb3106fb2abb5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART print helper provided by <a class="el" href="main_8cpp.html">main.cpp</a>.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a93f4e9d1c8aa5b365a11a87606f09143" id="r_a93f4e9d1c8aa5b365a11a87606f09143"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a> [100]</td></tr>
+<tr class="memdesc:a93f4e9d1c8aa5b365a11a87606f09143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared formatted-print buffer provided by <a class="el" href="main_8cpp.html">main.cpp</a>.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Z-axis stepper task for homing, jogging, and flame-height PID control. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="adb0aa71349ab66b0edb3106fb2abb5c3" name="adb0aa71349ab66b0edb3106fb2abb5c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb0aa71349ab66b0edb3106fb2abb5c3">&#9670;&#160;</a></span>print_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_str </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>UART print helper provided by <a class="el" href="main_8cpp.html">main.cpp</a>. </p>
+<p>Transmit a null-terminated string over UART2.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Null-terminated string to transmit. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a93f4e9d1c8aa5b365a11a87606f09143" name="a93f4e9d1c8aa5b365a11a87606f09143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f4e9d1c8aa5b365a11a87606f09143">&#9670;&#160;</a></span>print_buf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char print_buf[100]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shared formatted-print buffer provided by <a class="el" href="main_8cpp.html">main.cpp</a>. </p>
+<p>Shared formatted-print buffer used before calling <a class="el" href="main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.</p>
+<p>Shared printf-style buffer used by task status messages.</p>
+<p>Shared formatted-print buffer used before calling <a class="el" href="main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.</p>
+<p>&lt; Project-wide declarations, including print_str and Error_Handler. HAL timing and peripheral definitions. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_task.htm
 </div><!--header-->
 <div class="contents">
 
+<p>Common interface for all cooperative firmware tasks.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_task_8h_source.html">Task.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Task:</div>
@@ -127,11 +130,11 @@ Inheritance diagram for Task:</div>
  <div class="center">
   <img src="class_task.png" usemap="#Task_map" alt=""/>
   <map id="Task_map" name="Task_map">
-<area href="class_task_cooker.html" alt="TaskCooker" shape="rect" coords="0,56,80,80"/>
-<area href="class_task_r_motor.html" alt="TaskRMotor" shape="rect" coords="90,56,170,80"/>
-<area href="class_task_temps.html" alt="TaskTemps" shape="rect" coords="180,56,260,80"/>
-<area href="class_task_u_i.html" alt="TaskUI" shape="rect" coords="270,56,350,80"/>
-<area href="class_task_z_motor.html" alt="TaskZMotor" shape="rect" coords="360,56,440,80"/>
+<area href="class_task_cooker.html" title="Coordinates UI commands, temperature sensing, and both motor tasks." alt="TaskCooker" shape="rect" coords="0,56,80,80"/>
+<area href="class_task_r_motor.html" title="Cooperative task that controls the R-axis rotisserie motor." alt="TaskRMotor" shape="rect" coords="90,56,170,80"/>
+<area href="class_task_temps.html" title="Periodically reads temperature sensors and stores the latest values." alt="TaskTemps" shape="rect" coords="180,56,260,80"/>
+<area href="class_task_u_i.html" title="Parses UART commands and exposes them to the cooker task." alt="TaskUI" shape="rect" coords="270,56,350,80"/>
+<area href="class_task_z_motor.html" title="Cooperative task that controls the Z lift mechanism." alt="TaskZMotor" shape="rect" coords="360,56,440,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -141,14 +144,21 @@ Public Types</h2></td></tr>
 , <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09">Running</a>
 , <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
  }</td></tr>
+<tr class="memdesc:a4397689d62196d2cfecf970fcbed6cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic task health state used by the task supervisor.  <a href="#a4397689d62196d2cfecf970fcbed6cb5">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad820b9c0e8b6eeca2af6f483fc8465bc" id="r_ad820b9c0e8b6eeca2af6f483fc8465bc"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ad820b9c0e8b6eeca2af6f483fc8465bc">run</a> ()=0</td></tr>
+<tr class="memdesc:ad820b9c0e8b6eeca2af6f483fc8465bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run one non-blocking iteration of the task state machine.  <br /></td></tr>
 <tr class="memitem:a4e60f3f81b59174e5833fff03514d924" id="r_a4e60f3f81b59174e5833fff03514d924"><td class="memItemLeft">virtual <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5">Status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4e60f3f81b59174e5833fff03514d924">getStatus</a> () const =0</td></tr>
+<tr class="memdesc:a4e60f3f81b59174e5833fff03514d924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the task-level health status.  <br /></td></tr>
 <tr class="memitem:a9e03df2df618f84f63b8ab5185a1c067" id="r_a9e03df2df618f84f63b8ab5185a1c067"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a9e03df2df618f84f63b8ab5185a1c067">~Task</a> ()=default</td></tr>
+<tr class="memdesc:a9e03df2df618f84f63b8ab5185a1c067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for safe base-class destruction.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Common interface for all cooperative firmware tasks. </p>
+<p>Each task owns a small state machine and is called repeatedly from the main loop. The interface keeps high-level task scheduling uniform without forcing unrelated tasks to share implementation details. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a4397689d62196d2cfecf970fcbed6cb5" name="a4397689d62196d2cfecf970fcbed6cb5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4397689d62196d2cfecf970fcbed6cb5">&#9670;&#160;</a></span>Status</h2>
 
@@ -168,10 +178,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Generic task health state used by the task supervisor. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96" name="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09" name="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee" name="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96" name="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"><p><a class="el" href="class_task.html" title="Common interface for all cooperative firmware tasks.">Task</a> has not completed startup initialization. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09" name="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"><p><a class="el" href="class_task.html" title="Common interface for all cooperative firmware tasks.">Task</a> is initialized and not faulted. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee" name="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"><p><a class="el" href="class_task.html" title="Common interface for all cooperative firmware tasks.">Task</a> has detected a fault condition. </p>
+</td></tr>
 </table>
 
 </div>
@@ -200,6 +215,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Virtual destructor for safe base-class destruction. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -225,6 +242,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the task-level health status. </p>
+<dl class="section return"><dt>Returns</dt><dd>Generic task status. </dd></dl>
 
 <p>Implemented in <a class="el" href="class_task_cooker.html#a9e38ee47506c4d1fef745592d56bacd7">TaskCooker</a>, <a class="el" href="class_task_r_motor.html#ac9bb47cf7602d1141730101ff42bb014">TaskRMotor</a>, <a class="el" href="class_task_temps.html#a3fbb0b0e4650933b07f5e1f10485b50f">TaskTemps</a>, <a class="el" href="class_task_u_i.html#a02c9bee0a5f7cd954f68bc86e29b670a">TaskUI</a>, and <a class="el" href="class_task_z_motor.html#a9eac6d2b11d0ba53c272eed278789c66">TaskZMotor</a>.</p>
 
@@ -252,6 +272,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Run one non-blocking iteration of the task state machine. </p>
 
 <p>Implemented in <a class="el" href="class_task_cooker.html#a6a0e3eb685e662009f62b83b571e6628">TaskCooker</a>, <a class="el" href="class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135">TaskRMotor</a>, <a class="el" href="class_task_temps.html#af49bb7c432a41fe2a331f52560de475c">TaskTemps</a>, <a class="el" href="class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a">TaskUI</a>, and <a class="el" href="class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293">TaskZMotor</a>.</p>
 

@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_task_r_m
 </div><!--header-->
 <div class="contents">
 
+<p>Cooperative task that controls the R-axis rotisserie motor.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_task___r___motor_8h_source.html">Task_R_Motor.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TaskRMotor:</div>
@@ -127,7 +130,7 @@ Inheritance diagram for TaskRMotor:</div>
  <div class="center">
   <img src="class_task_r_motor.png" usemap="#TaskRMotor_map" alt=""/>
   <map id="TaskRMotor_map" name="TaskRMotor_map">
-<area href="class_task.html" alt="Task" shape="rect" coords="0,0,79,24"/>
+<area href="class_task.html" title="Common interface for all cooperative firmware tasks." alt="Task" shape="rect" coords="0,0,79,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -139,33 +142,54 @@ Public Types</h2></td></tr>
 , <a class="el" href="#a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e">RotatingForward</a>
 , <a class="el" href="#a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32">RotatingBackward</a>
 , <br />
-&#160;&#160;<a class="el" href="#a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
+&#160;&#160;<a class="el" href="#a29fdd19646fedf07daac0672429a8b6ca6c627e03b69524ba1a74a7a1fdbe8b60">ReturningToInitialRotation</a>
+, <a class="el" href="#a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a29fdd19646fedf07daac0672429a8b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">R motor task state.  <a href="#a29fdd19646fedf07daac0672429a8b6c">More...</a><br /></td></tr>
 <tr class="inherit_header pub_types_class_task"><td colspan="2">Public Types inherited from <a class="el" href="class_task.html">Task</a></td></tr>
 <tr class="memitem:a4397689d62196d2cfecf970fcbed6cb5 pub_types_class_task" id="r_a4397689d62196d2cfecf970fcbed6cb5"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Status</a> { <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96">Uninitialized</a>
 , <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09">Running</a>
 , <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
  }</td></tr>
+<tr class="memdesc:a4397689d62196d2cfecf970fcbed6cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic task health state used by the task supervisor.  <a href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6fcf2b5a38c6718764c1c24b8797584d" id="r_a6fcf2b5a38c6718764c1c24b8797584d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6fcf2b5a38c6718764c1c24b8797584d">TaskRMotor</a> ()</td></tr>
+<tr class="memdesc:a6fcf2b5a38c6718764c1c24b8797584d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the R motor task.  <br /></td></tr>
 <tr class="memitem:ab24b24894b23fca98845ba8d34d33135" id="r_ab24b24894b23fca98845ba8d34d33135"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab24b24894b23fca98845ba8d34d33135">run</a> () override</td></tr>
+<tr class="memdesc:ab24b24894b23fca98845ba8d34d33135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run one non-blocking iteration of the task state machine.     <br /></td></tr>
 <tr class="memitem:ad03b194c30f93c07459543e7055b0505" id="r_ad03b194c30f93c07459543e7055b0505"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad03b194c30f93c07459543e7055b0505">update</a> ()</td></tr>
+<tr class="memdesc:ad03b194c30f93c07459543e7055b0505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility wrapper for <a class="el" href="#ab24b24894b23fca98845ba8d34d33135" title="Run one non-blocking iteration of the task state machine.">run()</a>.  <br /></td></tr>
 <tr class="memitem:ac9bb47cf7602d1141730101ff42bb014" id="r_ac9bb47cf7602d1141730101ff42bb014"><td class="memItemLeft"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Status</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac9bb47cf7602d1141730101ff42bb014">getStatus</a> () const override</td></tr>
+<tr class="memdesc:ac9bb47cf7602d1141730101ff42bb014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the task-level health status.     <br /></td></tr>
 <tr class="memitem:a3fe52b09117c4e0801c6daa5321d6324" id="r_a3fe52b09117c4e0801c6daa5321d6324"><td class="memItemLeft"><a class="el" href="#a29fdd19646fedf07daac0672429a8b6c">State</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3fe52b09117c4e0801c6daa5321d6324">getState</a> () const</td></tr>
+<tr class="memdesc:a3fe52b09117c4e0801c6daa5321d6324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current R motor task state.  <br /></td></tr>
 <tr class="memitem:a7a779f0de54e728c0533f8ba15f58f27" id="r_a7a779f0de54e728c0533f8ba15f58f27"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7a779f0de54e728c0533f8ba15f58f27">startCookingRotation</a> ()</td></tr>
+<tr class="memdesc:a7a779f0de54e728c0533f8ba15f58f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start alternating forward/backward cooking rotation.  <br /></td></tr>
 <tr class="memitem:af8daed93188e6bcdaf9503ce746ce854" id="r_af8daed93188e6bcdaf9503ce746ce854"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af8daed93188e6bcdaf9503ce746ce854">stopCookingRotation</a> ()</td></tr>
+<tr class="memdesc:af8daed93188e6bcdaf9503ce746ce854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop cooking rotation and leave the task idle.  <br /></td></tr>
+<tr class="memitem:a116d6a50b3a338981196160a503aee6f" id="r_a116d6a50b3a338981196160a503aee6f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a116d6a50b3a338981196160a503aee6f">returnToInitialRotation</a> ()</td></tr>
+<tr class="memdesc:a116d6a50b3a338981196160a503aee6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command the R motor back to encoder position zero.  <br /></td></tr>
 <tr class="memitem:a94430a7e8081c10f3cb2828514695d28" id="r_a94430a7e8081c10f3cb2828514695d28"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a94430a7e8081c10f3cb2828514695d28">emergencyStop</a> ()</td></tr>
+<tr class="memdesc:a94430a7e8081c10f3cb2828514695d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediately stop the R motor and place the task in Fault.  <br /></td></tr>
 <tr class="memitem:a4f96e191a8c834649f15fd03422f9103" id="r_a4f96e191a8c834649f15fd03422f9103"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4f96e191a8c834649f15fd03422f9103">resetFault</a> ()</td></tr>
+<tr class="memdesc:a4f96e191a8c834649f15fd03422f9103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a recoverable R motor task fault without reinitializing the driver.  <br /></td></tr>
 <tr class="memitem:a12e10e0052db379dd4d2576f34807d68" id="r_a12e10e0052db379dd4d2576f34807d68"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a12e10e0052db379dd4d2576f34807d68">setCookingDuty</a> (int16_t duty)</td></tr>
+<tr class="memdesc:a12e10e0052db379dd4d2576f34807d68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the duty command used for cooking rotation moves.  <br /></td></tr>
 <tr class="memitem:a79781b80b07acea1a92f39b2bcb5831a" id="r_a79781b80b07acea1a92f39b2bcb5831a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a79781b80b07acea1a92f39b2bcb5831a">isBusy</a> () const</td></tr>
+<tr class="memdesc:a79781b80b07acea1a92f39b2bcb5831a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true while the task or driver is actively moving.  <br /></td></tr>
 <tr class="memitem:a8c068b95c29ebe7eb1c60d952f7c06d0" id="r_a8c068b95c29ebe7eb1c60d952f7c06d0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8c068b95c29ebe7eb1c60d952f7c06d0">isFaulted</a> () const</td></tr>
+<tr class="memdesc:a8c068b95c29ebe7eb1c60d952f7c06d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the task or driver is faulted.  <br /></td></tr>
 <tr class="inherit_header pub_methods_class_task"><td colspan="2">Public Member Functions inherited from <a class="el" href="class_task.html">Task</a></td></tr>
 <tr class="memitem:a9e03df2df618f84f63b8ab5185a1c067 pub_methods_class_task" id="r_a9e03df2df618f84f63b8ab5185a1c067"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a9e03df2df618f84f63b8ab5185a1c067">~Task</a> ()=default</td></tr>
+<tr class="memdesc:a9e03df2df618f84f63b8ab5185a1c067 pub_methods_class_task"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for safe base-class destruction.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Cooperative task that controls the R-axis rotisserie motor. </p>
+<p>The task commands alternating +360/-360 degree moves during cooking and can return the motor to encoder zero to prevent thermocouple wire wind-up. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a29fdd19646fedf07daac0672429a8b6c" name="a29fdd19646fedf07daac0672429a8b6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29fdd19646fedf07daac0672429a8b6c">&#9670;&#160;</a></span>State</h2>
 
@@ -185,12 +209,21 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>R motor task state. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6caf704f57ea420275ad51bf55b7dec2c96" name="a29fdd19646fedf07daac0672429a8b6caf704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6cae599161956d626eda4cb0a5ffb85271c" name="a29fdd19646fedf07daac0672429a8b6cae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e" name="a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e"></a>RotatingForward&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32" name="a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32"></a>RotatingBackward&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee" name="a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6caf704f57ea420275ad51bf55b7dec2c96" name="a29fdd19646fedf07daac0672429a8b6caf704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"><p>Driver has not been initialized. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6cae599161956d626eda4cb0a5ffb85271c" name="a29fdd19646fedf07daac0672429a8b6cae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"><p>Motor is stopped and ready. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e" name="a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e"></a>RotatingForward&#160;</td><td class="fielddoc"><p>Current cooking move is in the positive direction. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32" name="a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32"></a>RotatingBackward&#160;</td><td class="fielddoc"><p>Current cooking move is in the negative direction. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6ca6c627e03b69524ba1a74a7a1fdbe8b60" name="a29fdd19646fedf07daac0672429a8b6ca6c627e03b69524ba1a74a7a1fdbe8b60"></a>ReturningToInitialRotation&#160;</td><td class="fielddoc"><p>Motor is returning to encoder zero. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee" name="a29fdd19646fedf07daac0672429a8b6ca3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"><p><a class="el" href="class_task.html" title="Common interface for all cooperative firmware tasks.">Task</a> has faulted and requires reset. </p>
+</td></tr>
 </table>
 
 </div>
@@ -211,6 +244,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct the R motor task. </p>
+<p>Construct the R motor task.   </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -229,6 +265,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Immediately stop the R motor and place the task in Fault. </p>
+<p>Immediately stop the R motor and place the task in Fault.   </p>
+
 </div>
 </div>
 <a id="a3fe52b09117c4e0801c6daa5321d6324" name="a3fe52b09117c4e0801c6daa5321d6324"></a>
@@ -245,6 +284,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the current R motor task state. </p>
+<p>Get the current R motor task state.   </p>
 
 </div>
 </div>
@@ -271,6 +313,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the task-level health status.    </p>
+<p>Get the task-level health status.      </p>
+<dl class="section return"><dt>Returns</dt><dd>Generic task status.   </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Generic task status.   </dd></dl>
+
 <p>Implements <a class="el" href="class_task.html#a4e60f3f81b59174e5833fff03514d924">Task</a>.</p>
 
 </div>
@@ -290,6 +337,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true while the task or driver is actively moving. </p>
+<p>Return true while the task or driver is actively moving.   </p>
+
 </div>
 </div>
 <a id="a8c068b95c29ebe7eb1c60d952f7c06d0" name="a8c068b95c29ebe7eb1c60d952f7c06d0"></a>
@@ -307,6 +357,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true if the task or driver is faulted. </p>
+<p>Return true if the task or driver is faulted.   </p>
+
 </div>
 </div>
 <a id="a4f96e191a8c834649f15fd03422f9103" name="a4f96e191a8c834649f15fd03422f9103"></a>
@@ -323,6 +376,29 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Clear a recoverable R motor task fault without reinitializing the driver. </p>
+<p>Clear a recoverable R motor task fault without reinitializing the driver.   </p>
+
+</div>
+</div>
+<a id="a116d6a50b3a338981196160a503aee6f" name="a116d6a50b3a338981196160a503aee6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a116d6a50b3a338981196160a503aee6f">&#9670;&#160;</a></span>returnToInitialRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TaskRMotor::returnToInitialRotation </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Command the R motor back to encoder position zero. </p>
+<p>Command the R motor back to encoder position zero.   </p>
 
 </div>
 </div>
@@ -349,6 +425,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Run one non-blocking iteration of the task state machine.    </p>
+<p>Run one non-blocking iteration of the task state machine.      </p>
+
 <p>Implements <a class="el" href="class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc">Task</a>.</p>
 
 </div>
@@ -368,6 +447,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the duty command used for cooking rotation moves. </p>
+<p>Set the duty command used for cooking rotation moves.   </p>
+
 </div>
 </div>
 <a id="a7a779f0de54e728c0533f8ba15f58f27" name="a7a779f0de54e728c0533f8ba15f58f27"></a>
@@ -384,6 +466,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Start alternating forward/backward cooking rotation. </p>
+<p>Start alternating forward/backward cooking rotation.   </p>
 
 </div>
 </div>
@@ -402,6 +487,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Stop cooking rotation and leave the task idle. </p>
+<p>Stop cooking rotation and leave the task idle.   </p>
+
 </div>
 </div>
 <a id="ad03b194c30f93c07459543e7055b0505" name="ad03b194c30f93c07459543e7055b0505"></a>
@@ -418,6 +506,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compatibility wrapper for <a class="el" href="#ab24b24894b23fca98845ba8d34d33135" title="Run one non-blocking iteration of the task state machine.">run()</a>. </p>
+<p>Compatibility wrapper for <a class="el" href="#ab24b24894b23fca98845ba8d34d33135" title="Run one non-blocking iteration of the task state machine.">run()</a>.   </p>
 
 </div>
 </div>

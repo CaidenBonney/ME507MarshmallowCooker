@@ -119,19 +119,27 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___u_i_8c
   <div class="headertitle"><div class="title">Task_UI.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implementation of the UART command-line user interface task.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_task___u_i_8h_source.html">Task_UI.h</a>&quot;</code><br />
 <code>#include &lt;cstring&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae494a9643f29b87d6d81e5264e60e57b" id="r_ae494a9643f29b87d6d81e5264e60e57b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae494a9643f29b87d6d81e5264e60e57b">HAL_UART_RxCpltCallback</a> (UART_HandleTypeDef *huart)</td></tr>
+<tr class="memdesc:ae494a9643f29b87d6d81e5264e60e57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward the HAL UART receive-complete callback to the UI task.  <br /></td></tr>
 <tr class="memitem:a0e0456ea96d55db31de947fb3e954f18" id="r_a0e0456ea96d55db31de947fb3e954f18"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0e0456ea96d55db31de947fb3e954f18">HAL_UART_ErrorCallback</a> (UART_HandleTypeDef *huart)</td></tr>
+<tr class="memdesc:a0e0456ea96d55db31de947fb3e954f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward the HAL UART error callback to the UI task.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:acd7fbc12ca35f7895f1947fb3f43995f" id="r_acd7fbc12ca35f7895f1947fb3f43995f"><td class="memItemLeft"><a class="el" href="class_task_u_i.html">TaskUI</a>&#160;</td><td class="memItemRight"><a class="el" href="#acd7fbc12ca35f7895f1947fb3f43995f">task_ui</a></td></tr>
+<tr class="memdesc:acd7fbc12ca35f7895f1947fb3f43995f"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART command parser task instance.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the UART command-line user interface task. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a0e0456ea96d55db31de947fb3e954f18" name="a0e0456ea96d55db31de947fb3e954f18"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0e0456ea96d55db31de947fb3e954f18">&#9670;&#160;</a></span>HAL_UART_ErrorCallback()</h2>
 
@@ -146,6 +154,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Forward the HAL UART error callback to the UI task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">huart</td><td>UART handle that reported an error. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -163,6 +179,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Forward the HAL UART receive-complete callback to the UI task. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">huart</td><td>UART handle that completed reception. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -186,6 +210,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>UART command parser task instance. </p>
 
 </div>
 </div>

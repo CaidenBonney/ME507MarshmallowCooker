@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_m_c_p960
 </div><!--header-->
 <div class="contents">
 
+<p>I2C driver for the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple-to-digital converter.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_m_c_p9600_8h_source.html">MCP9600.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -136,40 +139,66 @@ Public Types</h2></td></tr>
 , <a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5ada6baa4f6e45b5292dee9241211e9d11">TYPE_R</a> = 7
 <br />
  }</td></tr>
+<tr class="memdesc:a7f98bb9f9106a4c155b4876d833a76e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supported <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple type selections.  <a href="#a7f98bb9f9106a4c155b4876d833a76e5">More...</a><br /></td></tr>
 <tr class="memitem:a1a3c27409311b07e97300aedf1a71232" id="r_a1a3c27409311b07e97300aedf1a71232"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a1a3c27409311b07e97300aedf1a71232">AdcResolution</a> : uint8_t { <a class="el" href="#a1a3c27409311b07e97300aedf1a71232a685c5be41d2ee5a9296448c6b99d9863">BITS_18</a> = 0
 , <a class="el" href="#a1a3c27409311b07e97300aedf1a71232abb5d31439f5385837df1e6e250880da0">BITS_16</a> = 1
 , <a class="el" href="#a1a3c27409311b07e97300aedf1a71232a11911c8afceccafda1b359cb0457d8dc">BITS_14</a> = 2
 , <a class="el" href="#a1a3c27409311b07e97300aedf1a71232a5cdb4593c18074255e55c311cd64bd83">BITS_12</a> = 3
  }</td></tr>
+<tr class="memdesc:a1a3c27409311b07e97300aedf1a71232"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> ADC resolution settings.  <a href="#a1a3c27409311b07e97300aedf1a71232">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a163ca130f2c657c9df96e0ae6a4264a6" id="r_a163ca130f2c657c9df96e0ae6a4264a6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a163ca130f2c657c9df96e0ae6a4264a6">MCP9600</a> (I2C_HandleTypeDef *hi2c, <a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type=<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9">ThermocoupleType::TYPE_T</a>, uint8_t address=<a class="el" href="#acb19d1f3d59231c6231d10d27ce18b1f">DEFAULT_ADDRESS</a>)</td></tr>
+<tr class="memdesc:a163ca130f2c657c9df96e0ae6a4264a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> driver instance.  <br /></td></tr>
 <tr class="memitem:ab49464bd194e6935bb9812cb4635cd75" id="r_ab49464bd194e6935bb9812cb4635cd75"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ab49464bd194e6935bb9812cb4635cd75">begin</a> ()</td></tr>
+<tr class="memdesc:ab49464bd194e6935bb9812cb4635cd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize and configure the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>.  <br /></td></tr>
 <tr class="memitem:abf572d20088f561230e699d2f57b9216" id="r_abf572d20088f561230e699d2f57b9216"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#abf572d20088f561230e699d2f57b9216">update</a> ()</td></tr>
+<tr class="memdesc:abf572d20088f561230e699d2f57b9216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read status and update cached hot, cold, and delta temperatures.  <br /></td></tr>
 <tr class="memitem:a832ba8ab4e23dbdca8c7604824f69287" id="r_a832ba8ab4e23dbdca8c7604824f69287"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a832ba8ab4e23dbdca8c7604824f69287">getHotCx100</a> () const</td></tr>
+<tr class="memdesc:a832ba8ab4e23dbdca8c7604824f69287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get cached hot junction temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a09c9ad62e9fe2c571423b061ace12e95" id="r_a09c9ad62e9fe2c571423b061ace12e95"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a09c9ad62e9fe2c571423b061ace12e95">getColdCx100</a> () const</td></tr>
+<tr class="memdesc:a09c9ad62e9fe2c571423b061ace12e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get cached cold junction temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a0d72948badb18f5f8f96bf42e5e9a16b" id="r_a0d72948badb18f5f8f96bf42e5e9a16b"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a0d72948badb18f5f8f96bf42e5e9a16b">getDeltaCx100</a> () const</td></tr>
+<tr class="memdesc:a0d72948badb18f5f8f96bf42e5e9a16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get cached delta junction temperature in degrees C x100.  <br /></td></tr>
 <tr class="memitem:a3a8736de7b4ec9469abe72fb895ed271" id="r_a3a8736de7b4ec9469abe72fb895ed271"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a3a8736de7b4ec9469abe72fb895ed271">getHotFx100</a> () const</td></tr>
+<tr class="memdesc:a3a8736de7b4ec9469abe72fb895ed271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get cached hot junction temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:a6d7b191818a8e6ffc6d7d1dcb384306f" id="r_a6d7b191818a8e6ffc6d7d1dcb384306f"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a6d7b191818a8e6ffc6d7d1dcb384306f">getColdFx100</a> () const</td></tr>
+<tr class="memdesc:a6d7b191818a8e6ffc6d7d1dcb384306f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get cached cold junction temperature in degrees F x100.  <br /></td></tr>
 <tr class="memitem:a264e6f1b0d8358541c71929b353ef5f5" id="r_a264e6f1b0d8358541c71929b353ef5f5"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a264e6f1b0d8358541c71929b353ef5f5">getStatus</a> () const</td></tr>
+<tr class="memdesc:a264e6f1b0d8358541c71929b353ef5f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently cached <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> status register value.  <br /></td></tr>
 <tr class="memitem:a7a475d22e6c37b0cc314ce940a34dc0b" id="r_a7a475d22e6c37b0cc314ce940a34dc0b"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7a475d22e6c37b0cc314ce940a34dc0b">getDeviceId</a> () const</td></tr>
+<tr class="memdesc:a7a475d22e6c37b0cc314ce940a34dc0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recently read <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> device ID.  <br /></td></tr>
 <tr class="memitem:a7153c895e84e38058d88c2b4ba7fd812" id="r_a7153c895e84e38058d88c2b4ba7fd812"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a7153c895e84e38058d88c2b4ba7fd812">getLastStatus</a> () const</td></tr>
+<tr class="memdesc:a7153c895e84e38058d88c2b4ba7fd812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recent HAL status returned by this driver.  <br /></td></tr>
 <tr class="memitem:a7e33a1da0a1ca6c02cf1dac410fb2220" id="r_a7e33a1da0a1ca6c02cf1dac410fb2220"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a7e33a1da0a1ca6c02cf1dac410fb2220">setThermocoupleType</a> (<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type)</td></tr>
+<tr class="memdesc:a7e33a1da0a1ca6c02cf1dac410fb2220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the thermocouple type in the sensor configuration register.  <br /></td></tr>
 <tr class="memitem:ab8e94d98526b9549f1edb5e3a4f3469a" id="r_ab8e94d98526b9549f1edb5e3a4f3469a"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ab8e94d98526b9549f1edb5e3a4f3469a">setAdcResolution</a> (<a class="el" href="#a1a3c27409311b07e97300aedf1a71232">AdcResolution</a> resolution)</td></tr>
+<tr class="memdesc:ab8e94d98526b9549f1edb5e3a4f3469a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the ADC resolution in the device configuration register.  <br /></td></tr>
 <tr class="memitem:a8c90e728a72dd55ff3fb2eeb1b7132c5" id="r_a8c90e728a72dd55ff3fb2eeb1b7132c5"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a8c90e728a72dd55ff3fb2eeb1b7132c5">setFilterCoefficient</a> (uint8_t coefficient)</td></tr>
+<tr class="memdesc:a8c90e728a72dd55ff3fb2eeb1b7132c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the digital filter coefficient.  <br /></td></tr>
 <tr class="memitem:ac8671a7c1a02dd776eaffc39e274b151" id="r_ac8671a7c1a02dd776eaffc39e274b151"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ac8671a7c1a02dd776eaffc39e274b151">setNormalMode</a> ()</td></tr>
+<tr class="memdesc:ac8671a7c1a02dd776eaffc39e274b151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> into normal conversion mode.  <br /></td></tr>
 <tr class="memitem:aafff05ba655f1f62231fe584cbf2a2fd" id="r_aafff05ba655f1f62231fe584cbf2a2fd"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aafff05ba655f1f62231fe584cbf2a2fd">setShutdownMode</a> ()</td></tr>
+<tr class="memdesc:aafff05ba655f1f62231fe584cbf2a2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> into shutdown mode.  <br /></td></tr>
 <tr class="memitem:a5f7001d4789173861211194299ef8424" id="r_a5f7001d4789173861211194299ef8424"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a5f7001d4789173861211194299ef8424">readRawHot</a> (int16_t *raw)</td></tr>
+<tr class="memdesc:a5f7001d4789173861211194299ef8424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the raw hot junction register.  <br /></td></tr>
 <tr class="memitem:a59d12480b11b108eb225e0cfcb88b3e3" id="r_a59d12480b11b108eb225e0cfcb88b3e3"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a59d12480b11b108eb225e0cfcb88b3e3">readRawCold</a> (int16_t *raw)</td></tr>
+<tr class="memdesc:a59d12480b11b108eb225e0cfcb88b3e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the raw cold junction register.  <br /></td></tr>
 <tr class="memitem:afe88198376a5dec724e93b3e250689f0" id="r_afe88198376a5dec724e93b3e250689f0"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#afe88198376a5dec724e93b3e250689f0">getSensorConfig</a> (uint8_t *config)</td></tr>
+<tr class="memdesc:afe88198376a5dec724e93b3e250689f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the sensor configuration register.  <br /></td></tr>
 <tr class="memitem:a045d7686ffd679e487bb217a690b5413" id="r_a045d7686ffd679e487bb217a690b5413"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a045d7686ffd679e487bb217a690b5413">readRawAdc</a> (int32_t *raw_adc)</td></tr>
+<tr class="memdesc:a045d7686ffd679e487bb217a690b5413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the signed 24-bit raw ADC value.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:acb19d1f3d59231c6231d10d27ce18b1f" id="r_acb19d1f3d59231c6231d10d27ce18b1f"><td class="memItemLeft">static constexpr uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#acb19d1f3d59231c6231d10d27ce18b1f">DEFAULT_ADDRESS</a> = 0x60</td></tr>
+<tr class="memdesc:acb19d1f3d59231c6231d10d27ce18b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default 7-bit I2C address for the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>I2C driver for the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple-to-digital converter. </p>
+<p>The class initializes the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>, configures thermocouple type, ADC resolution, filter coefficient, and caches hot/cold/delta junction readings. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a1a3c27409311b07e97300aedf1a71232" name="a1a3c27409311b07e97300aedf1a71232"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a3c27409311b07e97300aedf1a71232">&#9670;&#160;</a></span>AdcResolution</h2>
 
@@ -189,11 +218,17 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> ADC resolution settings. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a685c5be41d2ee5a9296448c6b99d9863" name="a1a3c27409311b07e97300aedf1a71232a685c5be41d2ee5a9296448c6b99d9863"></a>BITS_18&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232abb5d31439f5385837df1e6e250880da0" name="a1a3c27409311b07e97300aedf1a71232abb5d31439f5385837df1e6e250880da0"></a>BITS_16&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a11911c8afceccafda1b359cb0457d8dc" name="a1a3c27409311b07e97300aedf1a71232a11911c8afceccafda1b359cb0457d8dc"></a>BITS_14&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a5cdb4593c18074255e55c311cd64bd83" name="a1a3c27409311b07e97300aedf1a71232a5cdb4593c18074255e55c311cd64bd83"></a>BITS_12&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a685c5be41d2ee5a9296448c6b99d9863" name="a1a3c27409311b07e97300aedf1a71232a685c5be41d2ee5a9296448c6b99d9863"></a>BITS_18&#160;</td><td class="fielddoc"><p>18-bit ADC resolution. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232abb5d31439f5385837df1e6e250880da0" name="a1a3c27409311b07e97300aedf1a71232abb5d31439f5385837df1e6e250880da0"></a>BITS_16&#160;</td><td class="fielddoc"><p>16-bit ADC resolution. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a11911c8afceccafda1b359cb0457d8dc" name="a1a3c27409311b07e97300aedf1a71232a11911c8afceccafda1b359cb0457d8dc"></a>BITS_14&#160;</td><td class="fielddoc"><p>14-bit ADC resolution. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1a3c27409311b07e97300aedf1a71232a5cdb4593c18074255e55c311cd64bd83" name="a1a3c27409311b07e97300aedf1a71232a5cdb4593c18074255e55c311cd64bd83"></a>BITS_12&#160;</td><td class="fielddoc"><p>12-bit ADC resolution. </p>
+</td></tr>
 </table>
 
 </div>
@@ -217,15 +252,25 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Supported <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple type selections. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a370fac8be7029a453d3076146f1af65c" name="a7f98bb9f9106a4c155b4876d833a76e5a370fac8be7029a453d3076146f1af65c"></a>TYPE_K&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ae42cfb933127f74ea91f711cf3560d74" name="a7f98bb9f9106a4c155b4876d833a76e5ae42cfb933127f74ea91f711cf3560d74"></a>TYPE_J&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9" name="a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9"></a>TYPE_T&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ab4d225feee21656af2755d56ffba1358" name="a7f98bb9f9106a4c155b4876d833a76e5ab4d225feee21656af2755d56ffba1358"></a>TYPE_N&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a87a350d947f844829b568b7c4c77ef7f" name="a7f98bb9f9106a4c155b4876d833a76e5a87a350d947f844829b568b7c4c77ef7f"></a>TYPE_S&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ad9467e3c659a9c77251e1f2fdcb832b4" name="a7f98bb9f9106a4c155b4876d833a76e5ad9467e3c659a9c77251e1f2fdcb832b4"></a>TYPE_E&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a7d28c31fe6982434140a90974f3f5550" name="a7f98bb9f9106a4c155b4876d833a76e5a7d28c31fe6982434140a90974f3f5550"></a>TYPE_B&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ada6baa4f6e45b5292dee9241211e9d11" name="a7f98bb9f9106a4c155b4876d833a76e5ada6baa4f6e45b5292dee9241211e9d11"></a>TYPE_R&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a370fac8be7029a453d3076146f1af65c" name="a7f98bb9f9106a4c155b4876d833a76e5a370fac8be7029a453d3076146f1af65c"></a>TYPE_K&#160;</td><td class="fielddoc"><p>Type K thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ae42cfb933127f74ea91f711cf3560d74" name="a7f98bb9f9106a4c155b4876d833a76e5ae42cfb933127f74ea91f711cf3560d74"></a>TYPE_J&#160;</td><td class="fielddoc"><p>Type J thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9" name="a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9"></a>TYPE_T&#160;</td><td class="fielddoc"><p>Type T thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ab4d225feee21656af2755d56ffba1358" name="a7f98bb9f9106a4c155b4876d833a76e5ab4d225feee21656af2755d56ffba1358"></a>TYPE_N&#160;</td><td class="fielddoc"><p>Type N thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a87a350d947f844829b568b7c4c77ef7f" name="a7f98bb9f9106a4c155b4876d833a76e5a87a350d947f844829b568b7c4c77ef7f"></a>TYPE_S&#160;</td><td class="fielddoc"><p>Type S thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ad9467e3c659a9c77251e1f2fdcb832b4" name="a7f98bb9f9106a4c155b4876d833a76e5ad9467e3c659a9c77251e1f2fdcb832b4"></a>TYPE_E&#160;</td><td class="fielddoc"><p>Type E thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5a7d28c31fe6982434140a90974f3f5550" name="a7f98bb9f9106a4c155b4876d833a76e5a7d28c31fe6982434140a90974f3f5550"></a>TYPE_B&#160;</td><td class="fielddoc"><p>Type B thermocouple. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7f98bb9f9106a4c155b4876d833a76e5ada6baa4f6e45b5292dee9241211e9d11" name="a7f98bb9f9106a4c155b4876d833a76e5ada6baa4f6e45b5292dee9241211e9d11"></a>TYPE_R&#160;</td><td class="fielddoc"><p>Type R thermocouple. </p>
+</td></tr>
 </table>
 
 </div>
@@ -255,6 +300,16 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct an <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> driver instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointer to the STM32 HAL I2C handle used for communication. </td></tr>
+    <tr><td class="paramname">type</td><td>Thermocouple type used during initialization. </td></tr>
+    <tr><td class="paramname">address</td><td>7-bit I2C address of the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -273,6 +328,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize and configure the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK when the device ID and configuration steps succeed. </dd></dl>
+
 </div>
 </div>
 <a id="a09c9ad62e9fe2c571423b061ace12e95" name="a09c9ad62e9fe2c571423b061ace12e95"></a>
@@ -289,6 +347,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get cached cold junction temperature in degrees C x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cold junction temperature in degrees C x100. </dd></dl>
 
 </div>
 </div>
@@ -307,6 +368,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get cached cold junction temperature in degrees F x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cold junction temperature in degrees F x100. </dd></dl>
+
 </div>
 </div>
 <a id="a0d72948badb18f5f8f96bf42e5e9a16b" name="a0d72948badb18f5f8f96bf42e5e9a16b"></a>
@@ -323,6 +387,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get cached delta junction temperature in degrees C x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Delta junction temperature in degrees C x100. </dd></dl>
 
 </div>
 </div>
@@ -341,6 +408,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the most recently read <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> device ID. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached device ID register value. </dd></dl>
+
 </div>
 </div>
 <a id="a832ba8ab4e23dbdca8c7604824f69287" name="a832ba8ab4e23dbdca8c7604824f69287"></a>
@@ -357,6 +427,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get cached hot junction temperature in degrees C x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Hot junction temperature in degrees C x100. </dd></dl>
 
 </div>
 </div>
@@ -375,6 +448,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get cached hot junction temperature in degrees F x100. </p>
+<dl class="section return"><dt>Returns</dt><dd>Hot junction temperature in degrees F x100. </dd></dl>
+
 </div>
 </div>
 <a id="a7153c895e84e38058d88c2b4ba7fd812" name="a7153c895e84e38058d88c2b4ba7fd812"></a>
@@ -391,6 +467,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the most recent HAL status returned by this driver. </p>
+<dl class="section return"><dt>Returns</dt><dd>Last HAL status. </dd></dl>
 
 </div>
 </div>
@@ -409,6 +488,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the sensor configuration register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>Pointer that receives the register value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="a264e6f1b0d8358541c71929b353ef5f5" name="a264e6f1b0d8358541c71929b353ef5f5"></a>
@@ -425,6 +513,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the most recently cached <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> status register value. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cached status register value. </dd></dl>
 
 </div>
 </div>
@@ -443,6 +534,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the signed 24-bit raw ADC value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">raw_adc</td><td>Pointer that receives the sign-extended 32-bit raw ADC value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="a59d12480b11b108eb225e0cfcb88b3e3" name="a59d12480b11b108eb225e0cfcb88b3e3"></a>
@@ -459,6 +559,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read the raw cold junction register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">raw</td><td>Pointer that receives the raw signed register value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
 
 </div>
 </div>
@@ -477,6 +586,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read the raw hot junction register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">raw</td><td>Pointer that receives the raw signed register value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="ab8e94d98526b9549f1edb5e3a4f3469a" name="ab8e94d98526b9549f1edb5e3a4f3469a"></a>
@@ -493,6 +611,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the ADC resolution in the device configuration register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resolution</td><td>ADC resolution selection. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
 
 </div>
 </div>
@@ -511,6 +638,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the digital filter coefficient. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coefficient</td><td>Filter coefficient from 0 to 7. Values above 7 are clamped. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="ac8671a7c1a02dd776eaffc39e274b151" name="ac8671a7c1a02dd776eaffc39e274b151"></a>
@@ -527,6 +663,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Put the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> into normal conversion mode. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
 
 </div>
 </div>
@@ -545,6 +684,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Put the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> into shutdown mode. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="a7e33a1da0a1ca6c02cf1dac410fb2220" name="a7e33a1da0a1ca6c02cf1dac410fb2220"></a>
@@ -562,6 +704,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the thermocouple type in the sensor configuration register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Thermocouple type to configure. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
+
 </div>
 </div>
 <a id="abf572d20088f561230e699d2f57b9216" name="abf572d20088f561230e699d2f57b9216"></a>
@@ -578,6 +729,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read status and update cached hot, cold, and delta temperatures. </p>
+<dl class="section return"><dt>Returns</dt><dd>HAL_OK on success, otherwise the HAL I2C error status. </dd></dl>
 
 </div>
 </div>
@@ -601,6 +755,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default 7-bit I2C address for the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a>. </p>
 
 </div>
 </div>

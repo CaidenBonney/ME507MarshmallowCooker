@@ -41,7 +41,9 @@ var NAVTREE =
     [ "Main Control Structure", "index.html#autotoc_md13", null ],
     [ "User Interface", "index.html#autotoc_md15", null ],
     [ "Control Loop", "index.html#autotoc_md17", null ],
-    [ "Repository Structure", "index.html#autotoc_md19", null ],
+    [ "Repository Structure", "index.html#autotoc_md19", [
+      [ "Repository", "index.html#autotoc_md20", null ]
+    ] ],
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -69,8 +71,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_d_r_v8833_8cpp.html",
-"class_task_z_motor.html#a874f811061d53e2ea3b4c0ce13177e17",
-"stm32f4xx__hal__conf_8h.html#a7b38c01bd6621f3da5993d71eb5ff42e"
+"class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48ae599161956d626eda4cb0a5ffb85271c",
+"stm32f4xx__hal__conf_8h.html#a631dea7b230e600555f979c62af1de21"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

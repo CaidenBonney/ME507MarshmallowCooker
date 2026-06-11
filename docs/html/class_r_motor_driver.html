@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_r_motor_
 </div><!--header-->
 <div class="contents">
 
+<p>Non-blocking driver for the rotisserie DC gearmotor.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="r__motor__driver_8h_source.html">r_motor_driver.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -133,29 +136,51 @@ Public Types</h2></td></tr>
 &#160;&#160;<a class="el" href="#a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a2f0b85ea1415a501afe25448c475b547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-level R motor driver state.  <a href="#a2f0b85ea1415a501afe25448c475b547">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f1b82a1ac5dcda588ff97d6fa70dd02" id="r_a9f1b82a1ac5dcda588ff97d6fa70dd02"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9f1b82a1ac5dcda588ff97d6fa70dd02">RMotorDriver</a> ()</td></tr>
+<tr class="memdesc:a9f1b82a1ac5dcda588ff97d6fa70dd02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the R motor driver with project timer assignments.  <br /></td></tr>
 <tr class="memitem:a3c39d3cfb968c1a61754a4f451a0667b" id="r_a3c39d3cfb968c1a61754a4f451a0667b"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a3c39d3cfb968c1a61754a4f451a0667b">begin</a> ()</td></tr>
+<tr class="memdesc:a3c39d3cfb968c1a61754a4f451a0667b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the encoder and <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> driver.  <br /></td></tr>
 <tr class="memitem:a7c6ecd9da50e22282e44c2287715f491" id="r_a7c6ecd9da50e22282e44c2287715f491"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7c6ecd9da50e22282e44c2287715f491">update</a> ()</td></tr>
+<tr class="memdesc:a7c6ecd9da50e22282e44c2287715f491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run one non-blocking control update.  <br /></td></tr>
 <tr class="memitem:a829f4cde8b6338120e566a0417234734" id="r_a829f4cde8b6338120e566a0417234734"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a829f4cde8b6338120e566a0417234734">setDuty</a> (int16_t duty)</td></tr>
+<tr class="memdesc:a829f4cde8b6338120e566a0417234734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set signed <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> duty command.  <br /></td></tr>
 <tr class="memitem:a122fb22d003a5dd38326613c55b25b94" id="r_a122fb22d003a5dd38326613c55b25b94"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a122fb22d003a5dd38326613c55b25b94">brake</a> ()</td></tr>
+<tr class="memdesc:a122fb22d003a5dd38326613c55b25b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actively brake the motor.  <br /></td></tr>
 <tr class="memitem:a677d2773b7d2e91c71d221ec92da6832" id="r_a677d2773b7d2e91c71d221ec92da6832"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a677d2773b7d2e91c71d221ec92da6832">coast</a> ()</td></tr>
+<tr class="memdesc:a677d2773b7d2e91c71d221ec92da6832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coast the motor output.  <br /></td></tr>
 <tr class="memitem:a6cd5f455aa77a5c5f09bbd60e3ebf233" id="r_a6cd5f455aa77a5c5f09bbd60e3ebf233"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6cd5f455aa77a5c5f09bbd60e3ebf233">stop</a> ()</td></tr>
+<tr class="memdesc:a6cd5f455aa77a5c5f09bbd60e3ebf233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brake the motor and set the driver state to Idle.  <br /></td></tr>
 <tr class="memitem:a4dd2c415d54376c40f519fd1a62452c0" id="r_a4dd2c415d54376c40f519fd1a62452c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4dd2c415d54376c40f519fd1a62452c0">moveDegrees</a> (int32_t degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
+<tr class="memdesc:a4dd2c415d54376c40f519fd1a62452c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move by a relative number of output shaft degrees.  <br /></td></tr>
 <tr class="memitem:afa7e415f8dbfbaf775ccafc6878f51c6" id="r_afa7e415f8dbfbaf775ccafc6878f51c6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afa7e415f8dbfbaf775ccafc6878f51c6">moveToDegrees</a> (int32_t target_degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
+<tr class="memdesc:afa7e415f8dbfbaf775ccafc6878f51c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move to an absolute output shaft angle in degrees.  <br /></td></tr>
 <tr class="memitem:a7cd2e0d9a1ce79bbaea43616bba46c3c" id="r_a7cd2e0d9a1ce79bbaea43616bba46c3c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7cd2e0d9a1ce79bbaea43616bba46c3c">rotateContinuous</a> (int16_t duty)</td></tr>
+<tr class="memdesc:a7cd2e0d9a1ce79bbaea43616bba46c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start open-loop continuous rotation at a signed duty command.  <br /></td></tr>
 <tr class="memitem:a2121126cada95d15ec0f2e63efb8d003" id="r_a2121126cada95d15ec0f2e63efb8d003"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a2121126cada95d15ec0f2e63efb8d003">getVelocity</a> () const</td></tr>
+<tr class="memdesc:a2121126cada95d15ec0f2e63efb8d003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the latest encoder velocity estimate.  <br /></td></tr>
 <tr class="memitem:a0ed2223a5866aaaa3a36edc7a89f1a6e" id="r_a0ed2223a5866aaaa3a36edc7a89f1a6e"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0ed2223a5866aaaa3a36edc7a89f1a6e">getPosition</a> () const</td></tr>
+<tr class="memdesc:a0ed2223a5866aaaa3a36edc7a89f1a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the latest encoder position in counts.  <br /></td></tr>
 <tr class="memitem:aa1d364b5d9765e8610ab4b0572836d47" id="r_aa1d364b5d9765e8610ab4b0572836d47"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#aa1d364b5d9765e8610ab4b0572836d47">getPositionDegrees</a> () const</td></tr>
+<tr class="memdesc:aa1d364b5d9765e8610ab4b0572836d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the latest encoder position converted to degrees.  <br /></td></tr>
 <tr class="memitem:aaf1c2eafc6c73b6712f7680a311304c6" id="r_aaf1c2eafc6c73b6712f7680a311304c6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaf1c2eafc6c73b6712f7680a311304c6">resetEncoder</a> ()</td></tr>
+<tr class="memdesc:aaf1c2eafc6c73b6712f7680a311304c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset encoder position and velocity accumulation to zero.  <br /></td></tr>
 <tr class="memitem:a771191b37454d394a1c94c96e1cdc6d5" id="r_a771191b37454d394a1c94c96e1cdc6d5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a771191b37454d394a1c94c96e1cdc6d5">isBusy</a> () const</td></tr>
+<tr class="memdesc:a771191b37454d394a1c94c96e1cdc6d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true while a move or continuous rotation is active.  <br /></td></tr>
 <tr class="memitem:ad9b4bdc3c67d3f32c7230bcdfdff4053" id="r_ad9b4bdc3c67d3f32c7230bcdfdff4053"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad9b4bdc3c67d3f32c7230bcdfdff4053">isFaulted</a> () const</td></tr>
+<tr class="memdesc:ad9b4bdc3c67d3f32c7230bcdfdff4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the driver is faulted.  <br /></td></tr>
 <tr class="memitem:a5de9e91c75f0b6ec3df003cb389d337a" id="r_a5de9e91c75f0b6ec3df003cb389d337a"><td class="memItemLeft"><a class="el" href="#a2f0b85ea1415a501afe25448c475b547">State</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5de9e91c75f0b6ec3df003cb389d337a">getState</a> () const</td></tr>
+<tr class="memdesc:a5de9e91c75f0b6ec3df003cb389d337a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current low-level driver state.  <br /></td></tr>
 <tr class="memitem:a32a8372468b5d83ae8b3a8efd479cb39" id="r_a32a8372468b5d83ae8b3a8efd479cb39"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a32a8372468b5d83ae8b3a8efd479cb39">moveDegreesBlocking</a> (int32_t degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
+<tr class="memdesc:a32a8372468b5d83ae8b3a8efd479cb39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking relative move helper retained for bring-up tests.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Non-blocking driver for the rotisserie DC gearmotor. </p>
+<p>The driver combines a <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> motor driver with an encoder to support duty-control, relative degree moves, and absolute degree moves. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
 <a id="a2f0b85ea1415a501afe25448c475b547" name="a2f0b85ea1415a501afe25448c475b547"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f0b85ea1415a501afe25448c475b547">&#9670;&#160;</a></span>State</h2>
 
@@ -175,12 +200,19 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Low-level R motor driver state. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241" name="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241"></a>Disabled&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c" name="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742" name="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742"></a>MovingToPosition&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0" name="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0"></a>RotatingContinuous&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee" name="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241" name="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241"></a>Disabled&#160;</td><td class="fielddoc"><p>Driver has not been initialized. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c" name="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"><p>Motor is stopped and ready. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742" name="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742"></a>MovingToPosition&#160;</td><td class="fielddoc"><p>Position move is active. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0" name="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0"></a>RotatingContinuous&#160;</td><td class="fielddoc"><p>Open-loop continuous rotation is active. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee" name="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"><p>Driver fault or timeout occurred. </p>
+</td></tr>
 </table>
 
 </div>
@@ -201,6 +233,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct the R motor driver with project timer assignments. </p>
+<p>Construct the R motor driver with project timer assignments.   </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -219,6 +254,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initialize the encoder and <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> driver. </p>
+<p>Initialize the encoder and <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> driver.   </p>
+
 </div>
 </div>
 <a id="a122fb22d003a5dd38326613c55b25b94" name="a122fb22d003a5dd38326613c55b25b94"></a>
@@ -235,6 +273,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Actively brake the motor. </p>
+<p>Actively brake the motor.   </p>
 
 </div>
 </div>
@@ -253,6 +294,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Coast the motor output. </p>
+<p>Coast the motor output.   </p>
+
 </div>
 </div>
 <a id="a0ed2223a5866aaaa3a36edc7a89f1a6e" name="a0ed2223a5866aaaa3a36edc7a89f1a6e"></a>
@@ -269,6 +313,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the latest encoder position in counts. </p>
+<p>Get the latest encoder position in counts.   </p>
 
 </div>
 </div>
@@ -287,6 +334,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the latest encoder position converted to degrees. </p>
+<p>Get the latest encoder position converted to degrees.   </p>
+
 </div>
 </div>
 <a id="a5de9e91c75f0b6ec3df003cb389d337a" name="a5de9e91c75f0b6ec3df003cb389d337a"></a>
@@ -303,6 +353,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the current low-level driver state. </p>
+<p>Get the current low-level driver state.   </p>
 
 </div>
 </div>
@@ -321,6 +374,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the latest encoder velocity estimate. </p>
+<p>Get the latest encoder velocity estimate.   </p>
+
 </div>
 </div>
 <a id="a771191b37454d394a1c94c96e1cdc6d5" name="a771191b37454d394a1c94c96e1cdc6d5"></a>
@@ -338,6 +394,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true while a move or continuous rotation is active. </p>
+<p>Return true while a move or continuous rotation is active.   </p>
+
 </div>
 </div>
 <a id="ad9b4bdc3c67d3f32c7230bcdfdff4053" name="ad9b4bdc3c67d3f32c7230bcdfdff4053"></a>
@@ -354,6 +413,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return true if the driver is faulted. </p>
+<p>Return true if the driver is faulted.   </p>
 
 </div>
 </div>
@@ -381,6 +443,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Move by a relative number of output shaft degrees. </p>
+<p>Move by a relative number of output shaft degrees.   </p>
+
 </div>
 </div>
 <a id="a32a8372468b5d83ae8b3a8efd479cb39" name="a32a8372468b5d83ae8b3a8efd479cb39"></a>
@@ -406,6 +471,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Blocking relative move helper retained for bring-up tests. </p>
+<p>Blocking relative move helper retained for bring-up tests.   </p>
 
 </div>
 </div>
@@ -433,6 +501,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Move to an absolute output shaft angle in degrees. </p>
+<p>Move to an absolute output shaft angle in degrees.   </p>
+
 </div>
 </div>
 <a id="aaf1c2eafc6c73b6712f7680a311304c6" name="aaf1c2eafc6c73b6712f7680a311304c6"></a>
@@ -449,6 +520,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reset encoder position and velocity accumulation to zero. </p>
+<p>Reset encoder position and velocity accumulation to zero.   </p>
 
 </div>
 </div>
@@ -467,6 +541,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Start open-loop continuous rotation at a signed duty command. </p>
+<p>Start open-loop continuous rotation at a signed duty command.   </p>
+
 </div>
 </div>
 <a id="a829f4cde8b6338120e566a0417234734" name="a829f4cde8b6338120e566a0417234734"></a>
@@ -483,6 +560,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set signed <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> duty command. </p>
+<p>Set signed <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> duty command.   </p>
 
 </div>
 </div>
@@ -501,6 +581,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Brake the motor and set the driver state to Idle. </p>
+<p>Brake the motor and set the driver state to Idle.   </p>
+
 </div>
 </div>
 <a id="a7c6ecd9da50e22282e44c2287715f491" name="a7c6ecd9da50e22282e44c2287715f491"></a>
@@ -517,6 +600,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Run one non-blocking control update. </p>
+<p>Run one non-blocking control update.   </p>
 
 </div>
 </div>

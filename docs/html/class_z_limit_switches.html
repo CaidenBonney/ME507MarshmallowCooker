@@ -120,16 +120,25 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_z_limit_
 </div><!--header-->
 <div class="contents">
 
+<p>Reads the Z top and bottom limit switch GPIO pins.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_z___limit___switches_8h_source.html">Z_Limit_Switches.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afaf3a5c371d47aaae023a58a2b279099" id="r_afaf3a5c371d47aaae023a58a2b279099"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afaf3a5c371d47aaae023a58a2b279099">ZLimitSwitches</a> (GPIO_TypeDef *top_port, uint16_t top_pin, GPIO_TypeDef *bottom_port, uint16_t bottom_pin)</td></tr>
+<tr class="memdesc:afaf3a5c371d47aaae023a58a2b279099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Z limit switch reader.  <br /></td></tr>
 <tr class="memitem:abac8ad7bcc30ad7884dcedd5fa61e777" id="r_abac8ad7bcc30ad7884dcedd5fa61e777"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abac8ad7bcc30ad7884dcedd5fa61e777">isTopTriggered</a> () const</td></tr>
+<tr class="memdesc:abac8ad7bcc30ad7884dcedd5fa61e777"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when the top switch input is triggered.  <br /></td></tr>
 <tr class="memitem:a4c09ddbb7b2be8ed79a0d5936a91fbd2" id="r_a4c09ddbb7b2be8ed79a0d5936a91fbd2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4c09ddbb7b2be8ed79a0d5936a91fbd2">isBottomTriggered</a> () const</td></tr>
+<tr class="memdesc:a4c09ddbb7b2be8ed79a0d5936a91fbd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when the bottom switch input is triggered.  <br /></td></tr>
 <tr class="memitem:abec1d7c4165f58ecd8547b08c00e8420" id="r_abec1d7c4165f58ecd8547b08c00e8420"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abec1d7c4165f58ecd8547b08c00e8420">isAnyTriggered</a> () const</td></tr>
+<tr class="memdesc:abec1d7c4165f58ecd8547b08c00e8420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true when either switch input is triggered.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Reads the Z top and bottom limit switch GPIO pins. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afaf3a5c371d47aaae023a58a2b279099" name="afaf3a5c371d47aaae023a58a2b279099"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afaf3a5c371d47aaae023a58a2b279099">&#9670;&#160;</a></span>ZLimitSwitches()</h2>
 
@@ -159,6 +168,27 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a Z limit switch reader. </p>
+<p>Construct a Z limit switch reader.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">top_port</td><td>GPIO port for the top switch. </td></tr>
+    <tr><td class="paramname">top_pin</td><td>GPIO pin for the top switch. </td></tr>
+    <tr><td class="paramname">bottom_port</td><td>GPIO port for the bottom switch. </td></tr>
+    <tr><td class="paramname">bottom_pin</td><td>GPIO pin for the bottom switch.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">top_port</td><td>GPIO port for the top switch. </td></tr>
+    <tr><td class="paramname">top_pin</td><td>GPIO pin for the top switch. </td></tr>
+    <tr><td class="paramname">bottom_port</td><td>GPIO port for the bottom switch. </td></tr>
+    <tr><td class="paramname">bottom_pin</td><td>GPIO pin for the bottom switch.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -177,6 +207,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true when either switch input is triggered. </p>
+<p>Return true when either switch input is triggered.   </p>
+
 </div>
 </div>
 <a id="a4c09ddbb7b2be8ed79a0d5936a91fbd2" name="a4c09ddbb7b2be8ed79a0d5936a91fbd2"></a>
@@ -194,6 +227,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Return true when the bottom switch input is triggered. </p>
+<p>Return true when the bottom switch input is triggered.   </p>
+
 </div>
 </div>
 <a id="abac8ad7bcc30ad7884dcedd5fa61e777" name="abac8ad7bcc30ad7884dcedd5fa61e777"></a>
@@ -210,6 +246,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return true when the top switch input is triggered. </p>
+<p>Return true when the top switch input is triggered.   </p>
 
 </div>
 </div>

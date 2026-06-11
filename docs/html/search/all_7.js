@@ -9,7 +9,7 @@ var searchData=
   ['getdirection_6',['getDirection',['../class_t_m_c2209.html#abac871d0a47cceb5f7eaaf81bf491cfc',1,'TMC2209']]],
   ['gethotcx100_7',['getHotCx100',['../class_m_c_p9600.html#a832ba8ab4e23dbdca8c7604824f69287',1,'MCP9600']]],
   ['gethotfx100_8',['getHotFx100',['../class_m_c_p9600.html#a3a8736de7b4ec9469abe72fb895ed271',1,'MCP9600']]],
-  ['getirobjectfx100_9',['getIrObjectFx100',['../class_task_temps.html#afb51239b59acf6c4441bc9ca1558d8f4',1,'TaskTemps']]],
+  ['getirobjectfx100_9',['getIrObjectFx100',['../class_task_temps.html#ad11d88a4eff52f259f324361543b6831',1,'TaskTemps']]],
   ['getlaststatus_10',['getLastStatus',['../class_m_c_p9600.html#a7153c895e84e38058d88c2b4ba7fd812',1,'MCP9600::getLastStatus()'],['../class_m_l_x90614.html#a9514dd00eb32b05737298b00d3946343',1,'MLX90614::getLastStatus() const']]],
   ['getobjectcx100_11',['getObjectCx100',['../class_m_l_x90614.html#a81f5b24e326e34223d62b4afa6de1b18',1,'MLX90614']]],
   ['getobjectfx100_12',['getObjectFx100',['../class_m_l_x90614.html#a74b6f7f3aa6e6c57861d4a5185282742',1,'MLX90614']]],
@@ -22,7 +22,7 @@ var searchData=
   ['getstepintervalus_19',['getStepIntervalUs',['../class_t_m_c2209.html#a3aa4006015a2941cd24b1a6b9f68e667',1,'TMC2209']]],
   ['getsteprate_20',['getStepRate',['../class_t_m_c2209.html#ab279307526b8a80602c622895d0448a3',1,'TMC2209']]],
   ['gettargetsteps_21',['getTargetSteps',['../class_task_z_motor.html#a874f811061d53e2ea3b4c0ce13177e17',1,'TaskZMotor::getTargetSteps()'],['../class_z_motor_driver.html#a017706a7ea1dc4985e6885dfef471ed2',1,'ZMotorDriver::getTargetSteps()']]],
-  ['getthermocouplecoldfx100_22',['getThermocoupleColdFx100',['../class_task_temps.html#ab633555eb121addac17a3726c5c0532d',1,'TaskTemps']]],
-  ['getthermocouplehotfx100_23',['getThermocoupleHotFx100',['../class_task_temps.html#aa11b10044a190623c69c09cbd0db5b0f',1,'TaskTemps']]],
+  ['getthermocouplecoldfx100_22',['getThermocoupleColdFx100',['../class_task_temps.html#a0f070770cac48e1e66bb7238962e2142',1,'TaskTemps']]],
+  ['getthermocouplehotfx100_23',['getThermocoupleHotFx100',['../class_task_temps.html#a6a89e178f7205ec68f1f258f488e8699',1,'TaskTemps']]],
   ['getvelocity_24',['getVelocity',['../class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd',1,'REncoderDriver::getVelocity()'],['../class_r_motor_driver.html#a2121126cada95d15ec0f2e63efb8d003',1,'RMotorDriver::getVelocity()']]]
 ];

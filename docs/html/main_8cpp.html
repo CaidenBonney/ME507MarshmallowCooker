@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('main_8cpp.html
 <div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
 <code>#include &quot;stdio.h&quot;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 <code>#include &quot;<a class="el" href="_task___cooker_8h_source.html">Task_Cooker.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_task___r___motor_8h_source.html">Task_R_Motor.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_task___temps_8h_source.html">Task_Temps.h</a>&quot;</code><br />
@@ -133,9 +134,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a70af21c671abfcc773614a9a4f63d920" id="r_a70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a> (void)</td></tr>
 <tr class="memdesc:a70af21c671abfcc773614a9a4f63d920"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Clock Configuration.  <br /></td></tr>
 <tr class="memitem:a8a3b0ad512a6e6c6157440b68d395eac" id="r_a8a3b0ad512a6e6c6157440b68d395eac"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8a3b0ad512a6e6c6157440b68d395eac">HAL_TIM_PeriodElapsedCallback</a> (TIM_HandleTypeDef *htim)</td></tr>
+<tr class="memdesc:a8a3b0ad512a6e6c6157440b68d395eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL timer callback reserved for future timer-driven motor updates.  <br /></td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe" id="r_a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The application entry point.  <br /></td></tr>
 <tr class="memitem:adb0aa71349ab66b0edb3106fb2abb5c3" id="r_adb0aa71349ab66b0edb3106fb2abb5c3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adb0aa71349ab66b0edb3106fb2abb5c3">print_str</a> (const char *str)</td></tr>
+<tr class="memdesc:adb0aa71349ab66b0edb3106fb2abb5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmit a null-terminated string over UART2.  <br /></td></tr>
 <tr class="memitem:a1730ffe1e560465665eb47d9264826f9" id="r_a1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
 <tr class="memdesc:a1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -145,13 +148,21 @@ Variables</h2></td></tr>
 <tr class="memitem:a25fc663547539bc49fecc0011bd76ab5" id="r_a25fc663547539bc49fecc0011bd76ab5"><td class="memItemLeft">TIM_HandleTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a25fc663547539bc49fecc0011bd76ab5">htim1</a></td></tr>
 <tr class="memitem:aac3d2c59ee0e3bbae1b99529a154eb62" id="r_aac3d2c59ee0e3bbae1b99529a154eb62"><td class="memItemLeft">TIM_HandleTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aac3d2c59ee0e3bbae1b99529a154eb62">htim3</a></td></tr>
 <tr class="memitem:aa9479c261d65eecedd3d9582f7f0f89c" id="r_aa9479c261d65eecedd3d9582f7f0f89c"><td class="memItemLeft">UART_HandleTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aa9479c261d65eecedd3d9582f7f0f89c">huart2</a></td></tr>
+<tr class="memdesc:aa9479c261d65eecedd3d9582f7f0f89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART handle used by the command-line interface.  <br /></td></tr>
 <tr class="memitem:acd7fbc12ca35f7895f1947fb3f43995f" id="r_acd7fbc12ca35f7895f1947fb3f43995f"><td class="memItemLeft"><a class="el" href="class_task_u_i.html">TaskUI</a>&#160;</td><td class="memItemRight"><a class="el" href="#acd7fbc12ca35f7895f1947fb3f43995f">task_ui</a></td></tr>
+<tr class="memdesc:acd7fbc12ca35f7895f1947fb3f43995f"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART command parser task instance.  <br /></td></tr>
 <tr class="memitem:aa9bf30e0bf87c6e56d668df9c2d4161b" id="r_aa9bf30e0bf87c6e56d668df9c2d4161b"><td class="memItemLeft"><a class="el" href="class_task_temps.html">TaskTemps</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa9bf30e0bf87c6e56d668df9c2d4161b">task_temps</a></td></tr>
+<tr class="memdesc:aa9bf30e0bf87c6e56d668df9c2d4161b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temperature polling task instance.  <br /></td></tr>
 <tr class="memitem:ac72b3364c61a48bd3a3cee23ef3b7920" id="r_ac72b3364c61a48bd3a3cee23ef3b7920"><td class="memItemLeft"><a class="el" href="class_task_r_motor.html">TaskRMotor</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac72b3364c61a48bd3a3cee23ef3b7920">task_r_motor</a></td></tr>
+<tr class="memdesc:ac72b3364c61a48bd3a3cee23ef3b7920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotisserie motor task instance.  <br /></td></tr>
 <tr class="memitem:aba05e7acbb3da765ec9411b630ddea18" id="r_aba05e7acbb3da765ec9411b630ddea18"><td class="memItemLeft"><a class="el" href="class_task_z_motor.html">TaskZMotor</a>&#160;</td><td class="memItemRight"><a class="el" href="#aba05e7acbb3da765ec9411b630ddea18">task_z_motor</a></td></tr>
+<tr class="memdesc:aba05e7acbb3da765ec9411b630ddea18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z lift motor task instance.  <br /></td></tr>
 <tr class="memitem:a1cbe5b881f1e0e14f3e653f210479174" id="r_a1cbe5b881f1e0e14f3e653f210479174"><td class="memItemLeft"><a class="el" href="class_task_cooker.html">TaskCooker</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1cbe5b881f1e0e14f3e653f210479174">task_cooker</a> (<a class="el" href="#acd7fbc12ca35f7895f1947fb3f43995f">task_ui</a>, <a class="el" href="#aa9bf30e0bf87c6e56d668df9c2d4161b">task_temps</a>, <a class="el" href="#ac72b3364c61a48bd3a3cee23ef3b7920">task_r_motor</a>, <a class="el" href="#aba05e7acbb3da765ec9411b630ddea18">task_z_motor</a>)</td></tr>
+<tr class="memdesc:a1cbe5b881f1e0e14f3e653f210479174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top-level cooker task instance.  <br /></td></tr>
 <tr class="memitem:a93f4e9d1c8aa5b365a11a87606f09143" id="r_a93f4e9d1c8aa5b365a11a87606f09143"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a> [100]</td></tr>
+<tr class="memdesc:a93f4e9d1c8aa5b365a11a87606f09143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared formatted-print buffer used before calling <a class="el" href="#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.  <br /></td></tr>
 <tr class="memitem:a6f3d9d8a214752bc5d752a1dcea569de" id="r_a6f3d9d8a214752bc5d752a1dcea569de"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a6f3d9d8a214752bc5d752a1dcea569de">print_buf_len</a></td></tr>
+<tr class="memdesc:a6f3d9d8a214752bc5d752a1dcea569de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legacy print buffer length variable.  <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a1730ffe1e560465665eb47d9264826f9" name="a1730ffe1e560465665eb47d9264826f9"></a>
@@ -194,6 +205,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>HAL timer callback reserved for future timer-driven motor updates. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htim</td><td>Timer handle that elapsed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a840291bc02cba5474a4cb46a9b9566fe" name="a840291bc02cba5474a4cb46a9b9566fe"></a>
@@ -235,6 +254,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Transmit a null-terminated string over UART2. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Null-terminated string to transmit. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -321,6 +348,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>UART handle used by the command-line interface. </p>
+
 </div>
 </div>
 <a id="a93f4e9d1c8aa5b365a11a87606f09143" name="a93f4e9d1c8aa5b365a11a87606f09143"></a>
@@ -335,6 +364,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Shared formatted-print buffer used before calling <a class="el" href="#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>. </p>
+<p>Shared printf-style buffer used by task status messages.</p>
+<p>Shared formatted-print buffer used before calling <a class="el" href="#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.</p>
+<p>&lt; Project-wide declarations, including print_str and Error_Handler. HAL timing and peripheral definitions. </p>
+
 </div>
 </div>
 <a id="a6f3d9d8a214752bc5d752a1dcea569de" name="a6f3d9d8a214752bc5d752a1dcea569de"></a>
@@ -348,6 +382,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Legacy print buffer length variable. </p>
 
 </div>
 </div>
@@ -380,6 +416,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Top-level cooker task instance. </p>
+
 </div>
 </div>
 <a id="ac72b3364c61a48bd3a3cee23ef3b7920" name="ac72b3364c61a48bd3a3cee23ef3b7920"></a>
@@ -393,6 +431,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Rotisserie motor task instance. </p>
 
 </div>
 </div>
@@ -408,6 +448,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Temperature polling task instance. </p>
+
 </div>
 </div>
 <a id="acd7fbc12ca35f7895f1947fb3f43995f" name="acd7fbc12ca35f7895f1947fb3f43995f"></a>
@@ -422,6 +464,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>UART command parser task instance. </p>
+
 </div>
 </div>
 <a id="aba05e7acbb3da765ec9411b630ddea18" name="aba05e7acbb3da765ec9411b630ddea18"></a>
@@ -435,6 +479,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Z lift motor task instance. </p>
 
 </div>
 </div>

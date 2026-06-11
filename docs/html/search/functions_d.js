@@ -13,7 +13,8 @@ var searchData=
   ['resetencoder_10',['resetEncoder',['../class_r_motor_driver.html#aaf1c2eafc6c73b6712f7680a311304c6',1,'RMotorDriver']]],
   ['resetfault_11',['resetFault',['../class_task_r_motor.html#a4f96e191a8c834649f15fd03422f9103',1,'TaskRMotor::resetFault()'],['../class_task_z_motor.html#aa26d550a221389011915a0a228a3add7',1,'TaskZMotor::resetFault()']]],
   ['resetpid_12',['resetPid',['../class_task_z_motor.html#a030551395b65f39f3bf9960573e6bd05',1,'TaskZMotor']]],
-  ['rmotordriver_13',['RMotorDriver',['../class_r_motor_driver.html#a9f1b82a1ac5dcda588ff97d6fa70dd02',1,'RMotorDriver']]],
-  ['rotatecontinuous_14',['rotateContinuous',['../class_r_motor_driver.html#a7cd2e0d9a1ce79bbaea43616bba46c3c',1,'RMotorDriver']]],
-  ['run_15',['run',['../class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc',1,'Task::run()'],['../class_task_cooker.html#a6a0e3eb685e662009f62b83b571e6628',1,'TaskCooker::run()'],['../class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135',1,'TaskRMotor::run()'],['../class_task_temps.html#af49bb7c432a41fe2a331f52560de475c',1,'TaskTemps::run()'],['../class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a',1,'TaskUI::run()'],['../class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293',1,'TaskZMotor::run()']]]
+  ['returntoinitialrotation_13',['returnToInitialRotation',['../class_task_r_motor.html#a116d6a50b3a338981196160a503aee6f',1,'TaskRMotor']]],
+  ['rmotordriver_14',['RMotorDriver',['../class_r_motor_driver.html#a9f1b82a1ac5dcda588ff97d6fa70dd02',1,'RMotorDriver']]],
+  ['rotatecontinuous_15',['rotateContinuous',['../class_r_motor_driver.html#a7cd2e0d9a1ce79bbaea43616bba46c3c',1,'RMotorDriver']]],
+  ['run_16',['run',['../class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc',1,'Task::run()'],['../class_task_cooker.html#a6a0e3eb685e662009f62b83b571e6628',1,'TaskCooker::run()'],['../class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135',1,'TaskRMotor::run()'],['../class_task_temps.html#af49bb7c432a41fe2a331f52560de475c',1,'TaskTemps::run()'],['../class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a',1,'TaskUI::run()'],['../class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293',1,'TaskZMotor::run()']]]
 ];
