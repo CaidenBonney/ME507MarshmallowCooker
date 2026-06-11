@@ -231,11 +231,14 @@ Cooking completes when the IR object temperature reaches 250.00 F continuously f
 
 ```text
 ME507MarshmallowCooker
+├── CAD
+├── docs
+├── Fusion
 ├── Marshmallow_Cooker
 │   ├── Core
 │   └── Drivers
-├── docs
-└── Doxyfile
+├── Doxyfile
+└── README
 ```
 
 ## Repository

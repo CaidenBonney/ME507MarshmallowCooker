@@ -57,11 +57,15 @@ Project documentation:
 
 ```text
 ME507MarshmallowCooker
+├── CAD
+├── docs
+├── Fusion
 ├── Marshmallow_Cooker
 │   ├── Core
 │   └── Drivers
-├── docs
-└── Doxyfile
+├── Doxyfile
+└── README
+
 ```
 
 ## Building the Project
