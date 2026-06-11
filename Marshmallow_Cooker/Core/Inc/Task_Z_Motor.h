@@ -129,7 +129,7 @@ private:
   static constexpr uint32_t kMinimumAntiBindSpeedStepsPerSecond = 1600; ///< Minimum speed for anti-binding.
 
   static constexpr int32_t kRemovalHeightSteps = -500; ///< Z removal height.
-  static constexpr int32_t kStartCookingPositionSteps = -15000; ///< Initial cooking height.
+  static constexpr int32_t kStartCookingPositionSteps = -11000; ///< Initial cooking height.
   static constexpr int32_t kPidOutputLimitSteps = 750; ///< Maximum PID step correction per update.
   static constexpr int32_t kPidDeadbandSteps = 2; ///< PID command deadband in steps.
   static constexpr int32_t kMinCookPositionSteps = -24400; ///< Software lower travel limit.
