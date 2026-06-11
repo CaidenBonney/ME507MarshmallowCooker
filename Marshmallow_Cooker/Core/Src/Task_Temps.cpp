@@ -2,7 +2,8 @@
  * @file Task_Temps.cpp
  * @brief Implementation of the temperature acquisition task.
  * @details
- *   Initializes and periodically reads the MCP9600 thermocouple amplifier and MLX90614 IR thermometer, storing fixed-point Fahrenheit values for use by cooker control.
+ *   Initializes and periodically reads the MCP9600 thermocouple amplifier and MLX90614 IR thermometer, storing
+ * fixed-point Fahrenheit values for use by cooker control.
  */
 
 #include "Task_Temps.h"

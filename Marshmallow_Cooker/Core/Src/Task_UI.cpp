@@ -2,7 +2,8 @@
  * @file Task_UI.cpp
  * @brief Implementation of the UART command interface task.
  * @details
- *   Handles USART2 receive-complete callbacks, command-line editing, echoing, parsing, and pending-command handoff to the cooker task.
+ *   Handles USART2 receive-complete callbacks, command-line editing, echoing, parsing, and pending-command handoff to
+ * the cooker task.
  */
 
 #include "Task_UI.h"

@@ -2,7 +2,8 @@
  * @file Task_Z_Motor.cpp
  * @brief Implementation of the Z-axis stepper task.
  * @details
- *   Coordinates Z-axis homing, absolute moves, safe removal positioning, and thermocouple-based PID height control through the ZMotorDriver.
+ *   Coordinates Z-axis homing, absolute moves, safe removal positioning, and thermocouple-based PID height control
+ * through the ZMotorDriver.
  */
 
 #include "Task_Z_Motor.h"

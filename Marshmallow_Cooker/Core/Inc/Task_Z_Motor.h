@@ -34,13 +34,13 @@ public:
    * @brief Detailed Z-axis task state.
    */
   enum class State {
-    Uninitialized,        /**< Driver has not been initialized. */
-    Idle,                 /**< Axis is stopped and ready for a command. */
-    Homing,               /**< Axis is moving upward toward the top limit switch. */
-    MovingToStartPosition,/**< Axis is moving from home to the initial cook height. */
+    Uninitialized, /**< Driver has not been initialized. */
+    Idle, /**< Axis is stopped and ready for a command. */
+    Homing, /**< Axis is moving upward toward the top limit switch. */
+    MovingToStartPosition, /**< Axis is moving from home to the initial cook height. */
     ControllingFlameTemp, /**< PID height control is active. */
-    MovingToRemovalHeight,/**< Axis is moving to the removal height. */
-    Fault                 /**< A limit, driver, or command fault has stopped the axis. */
+    MovingToRemovalHeight, /**< Axis is moving to the removal height. */
+    Fault /**< A limit, driver, or command fault has stopped the axis. */
   };
 
   /** @brief Construct the Z motor task and embedded limit/driver objects. */

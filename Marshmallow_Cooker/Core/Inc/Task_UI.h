@@ -45,9 +45,9 @@ public:
    */
   enum class State {
     Uninitialized, /**< UART receive has not yet been armed. */
-    Idle,          /**< Waiting for user input. */
-    CommandReady,  /**< A complete parsed command is waiting to be consumed. */
-    Fault          /**< UART receive could not be armed or another UI fault occurred. */
+    Idle, /**< Waiting for user input. */
+    CommandReady, /**< A complete parsed command is waiting to be consumed. */
+    Fault /**< UART receive could not be armed or another UI fault occurred. */
   };
 
   /**
@@ -55,13 +55,13 @@ public:
    * @brief Parsed user commands understood by the cooker firmware.
    */
   enum class Command {
-    None,          /**< No command is pending or the command was empty. */
-    Home,          /**< Home the system before cooking. */
-    Start,         /**< Start a cook cycle. */
-    Stop,          /**< Request a normal stop and removal move. */
+    None, /**< No command is pending or the command was empty. */
+    Home, /**< Home the system before cooking. */
+    Start, /**< Start a cook cycle. */
+    Stop, /**< Request a normal stop and removal move. */
     EmergencyStop, /**< Immediately fault and stop all motion. */
-    Reset,         /**< Clear Done/Fault state for another cook cycle. */
-    Status         /**< Print a one-line status report. */
+    Reset, /**< Clear Done/Fault state for another cook cycle. */
+    Status /**< Print a one-line status report. */
   };
 
   /** @brief Construct the UI task. */

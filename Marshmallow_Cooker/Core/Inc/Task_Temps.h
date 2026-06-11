@@ -11,9 +11,9 @@
  *   the cooker control task.
  */
 
-#include "Task.h"
 #include "MCP9600.h" // Thermocouple temperature sensor
 #include "MLX90614.h" // Infrared temperature sensor
+#include "Task.h"
 
 #include "stdio.h" // For sprintf
 #include <cstdlib> // For abs
@@ -34,9 +34,9 @@ public:
    */
   enum class State {
     Uninitialized, /**< Sensors have not yet been initialized. */
-    Idle,          /**< Task is initialized and waiting for the next sample period. */
-    Reading,       /**< A sensor update is in progress. */
-    Fault          /**< Sensor initialization or read failure forced a task fault. */
+    Idle, /**< Task is initialized and waiting for the next sample period. */
+    Reading, /**< A sensor update is in progress. */
+    Fault /**< Sensor initialization or read failure forced a task fault. */
   };
 
   /** @brief Construct the temperature task and embedded sensor drivers. */

@@ -2,7 +2,8 @@
  * @file Task_Cooker.cpp
  * @brief Implementation of the top-level cooker state machine.
  * @details
- *   Contains the command dispatch and high-level sequencing that coordinate the UI, temperature sensors, rotisserie motor, and Z-axis motor during homing, cooking, stopping, reset, and fault handling.
+ *   Contains the command dispatch and high-level sequencing that coordinate the UI, temperature sensors, rotisserie
+ * motor, and Z-axis motor during homing, cooking, stopping, reset, and fault handling.
  */
 
 #include "Task_Cooker.h"

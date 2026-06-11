@@ -2,7 +2,8 @@
  * @file Task_R_Motor.cpp
  * @brief Implementation of the rotisserie motor cooperative task.
  * @details
- *   Services the R-axis DC motor driver, alternates cooking rotations, and handles normal stop, emergency stop, and fault recovery behavior.
+ *   Services the R-axis DC motor driver, alternates cooking rotations, and handles normal stop, emergency stop, and
+ * fault recovery behavior.
  */
 
 #include "Task_R_Motor.h"

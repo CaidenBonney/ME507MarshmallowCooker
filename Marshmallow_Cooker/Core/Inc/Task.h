@@ -40,8 +40,8 @@ public:
    */
   enum class Status {
     Uninitialized, /**< Task has not completed its initialization sequence. */
-    Running,       /**< Task is initialized and not faulted. */
-    Fault          /**< Task detected a condition that prevents normal operation. */
+    Running, /**< Task is initialized and not faulted. */
+    Fault /**< Task detected a condition that prevents normal operation. */
   };
 
   /**

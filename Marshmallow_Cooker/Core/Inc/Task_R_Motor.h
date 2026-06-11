@@ -33,11 +33,11 @@ public:
    * @brief Detailed rotisserie task state.
    */
   enum class State {
-    Uninitialized,  /**< Driver has not been initialized. */
-    Idle,           /**< Motor is stopped and ready for a command. */
-    RotatingForward,/**< A forward cooking rotation is in progress. */
-    RotatingBackward,/**< A reverse cooking rotation is in progress. */
-    Fault           /**< Driver or task fault has stopped operation. */
+    Uninitialized, /**< Driver has not been initialized. */
+    Idle, /**< Motor is stopped and ready for a command. */
+    RotatingForward, /**< A forward cooking rotation is in progress. */
+    RotatingBackward, /**< A reverse cooking rotation is in progress. */
+    Fault /**< Driver or task fault has stopped operation. */
   };
 
   /** @brief Construct an R motor task with its embedded driver. */

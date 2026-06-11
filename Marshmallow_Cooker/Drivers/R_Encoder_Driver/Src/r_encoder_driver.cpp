@@ -1,3 +1,13 @@
+/**
+ * @file r_encoder_driver.cpp
+ * @brief Implementation of the rotisserie quadrature encoder driver.
+ * @details
+ * This file implements the REncoderDriver class declared in
+ * r_encoder_driver.h. Detailed API documentation is kept in the header so the
+ * generated Doxygen website does not duplicate function descriptions between
+ * declarations and definitions.
+ */
+
 #include "r_encoder_driver.h"
 
 REncoderDriver::REncoderDriver(TIM_HandleTypeDef* htim)
