@@ -22,7 +22,6 @@ void TaskRMotor::run() {
       }
 
       print_str("R motor driver initialized\r\n");
-
       state_ = State::Idle;
       break;
 
@@ -30,56 +29,58 @@ void TaskRMotor::run() {
       if (!test_move_started_) {
         test_move_started_ = true;
 
-        print_str("Move +360 degrees\r\n");
+        print_str("R move +360 degrees\r\n");
+        r_motor_driver_.moveDegrees(360, 1000, 8000);
 
-        /*
-         * Your current driver has moveDegreesBlocking().
-         * This still blocks, but now it only happens once.
-         * Later, this should become a non-blocking move if your
-         * RMotorDriver supports update() and isBusy().
-         */
-        r_motor_driver_.moveDegreesBlocking(360, 1000, 8000);
+        state_ = State::MovingPositive;
+      }
+      break;
 
+    case State::MovingPositive:
+      r_motor_driver_.update();
+
+      if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault during +360\r\n");
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
         sprintf(print_buf,
                 "Done +360: counts=%ld deg=%ld\r\n",
                 static_cast<long>(r_motor_driver_.getPosition()),
                 static_cast<long>(r_motor_driver_.getPositionDegrees()));
         print_str(print_buf);
 
+        print_str("R move -360 degrees\r\n");
+        r_motor_driver_.moveDegrees(-360, 1000, 8000);
+
         state_ = State::MovingNegative;
       }
       break;
 
-    case State::MovingPositive:
-      /*
-       * Placeholder for future non-blocking R motor movement.
-       */
-      state_ = State::Idle;
-      break;
-
     case State::MovingNegative:
-      print_str("Move -360 degrees\r\n");
+      r_motor_driver_.update();
 
-      r_motor_driver_.moveDegreesBlocking(-360, 1000, 8000);
+      if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault during -360\r\n");
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
+        sprintf(print_buf,
+                "Done -360: counts=%ld deg=%ld\r\n",
+                static_cast<long>(r_motor_driver_.getPosition()),
+                static_cast<long>(r_motor_driver_.getPositionDegrees()));
+        print_str(print_buf);
 
-      sprintf(print_buf,
-              "Done -360: counts=%ld deg=%ld\r\n",
-              static_cast<long>(r_motor_driver_.getPosition()),
-              static_cast<long>(r_motor_driver_.getPositionDegrees()));
-      print_str(print_buf);
-
-      state_ = State::Idle;
+        state_ = State::Idle;
+      }
       break;
 
     case State::Fault:
+      r_motor_driver_.stop();
       break;
   }
 }
 
 void TaskRMotor::update() {
-  /*
-   * Add this later if RMotorDriver gets a non-blocking update function.
-   */
+  r_motor_driver_.update();
 }
 
 TaskRMotor::State TaskRMotor::getState() const {
