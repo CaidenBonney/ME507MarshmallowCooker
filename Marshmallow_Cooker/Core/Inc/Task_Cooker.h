@@ -67,8 +67,8 @@ public:
 
 private:
   static constexpr int32_t kTargetFlameTempFx100 = 24000; ///< Target flame temperature, 240.00 F.
-  static constexpr int32_t kDoneMarshmallowTempFx100 = 24000; ///< Done IR object temperature, 240.00 F.
-  static constexpr uint32_t kDoneTempHoldTimeMs = 1000; ///< Required continuous time above done IR temperature.
+  static constexpr int32_t kDoneMarshmallowTempFx100 = 25000; ///< Done IR object temperature, 240.00 F.
+  static constexpr uint32_t kDoneTempHoldTimeMs = 1500; ///< Required continuous time above done IR temperature.
   static constexpr uint32_t kStatusStreamPeriodMs = 250; ///< Status stream update period.
 
   State state_ = State::Uninitialized;
