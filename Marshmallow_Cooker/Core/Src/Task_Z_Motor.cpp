@@ -10,13 +10,6 @@ TaskZMotor::TaskZMotor()
 void TaskZMotor::run() {
   // TODO: use state enum type to track state
 
-  // Initialize Z Motor
-  if (z_motor_driver_.begin() != HAL_OK) {
-    Error_Handler();
-  }
-  print_str("Z motor driver initialized\r\n");
-
-
   // ===============================  Testing Z Motor ===============================
   if (z_limit_switches_.isTopTriggered()) {
     print_str("TOP LIMIT\r\n");

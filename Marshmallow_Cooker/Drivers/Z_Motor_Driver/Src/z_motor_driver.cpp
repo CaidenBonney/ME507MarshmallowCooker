@@ -1,5 +1,6 @@
 #include "z_motor_driver.h"
 
+#include "main.h"
 #include <climits>
 
 ZMotorDriver::ZMotorDriver()
