@@ -72,23 +72,16 @@ void RMotorDriver::moveDegreesBlocking(int32_t degrees, int16_t duty, uint32_t t
   resetEncoder();
 
   const int32_t target_counts = degreesToCounts(degrees);
-
   const int32_t direction = target_counts >= 0 ? 1 : -1;
-
   const int32_t abs_target_counts = target_counts >= 0 ? target_counts : -target_counts;
 
   duty = duty >= 0 ? duty : -duty;
-
   setDuty(duty * direction);
-
   const uint32_t start_ms = HAL_GetTick();
 
   while ((HAL_GetTick() - start_ms) < timeout_ms) {
-
     update();
-
     int32_t position = getPosition() * direction;
-
     if (position >= abs_target_counts) {
       break;
     }
