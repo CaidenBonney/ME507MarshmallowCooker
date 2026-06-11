@@ -41,6 +41,7 @@ public:
 
 private:
   static constexpr size_t kCommandBufferSize = 32;
+  static constexpr size_t kRxQueueSize = 64;
 
   State state_ = State::Uninitialized;
   Command pending_command_ = Command::None;
@@ -49,10 +50,19 @@ private:
   size_t command_length_ = 0;
 
   uint8_t rx_byte_ = 0;
-  bool rx_armed_ = false;
+  volatile bool rx_armed_ = false;
   bool overflowed_ = false;
 
+  uint8_t rx_queue_[kRxQueueSize] = {};
+  volatile size_t rx_queue_head_ = 0;
+  volatile size_t rx_queue_tail_ = 0;
+  volatile bool rx_queue_overflowed_ = false;
+
   void armReceive();
+  void processReceivedCharacters();
+  bool popReceivedChar(char& c);
+  void pushReceivedCharFromIsr(uint8_t c);
+
   void handleReceivedChar(char c);
   void handleCompletedLine();
   void clearCommandBuffer();

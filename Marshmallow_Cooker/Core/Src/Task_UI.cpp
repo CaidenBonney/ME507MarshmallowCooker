@@ -16,6 +16,14 @@ void TaskUI::run() {
   if (!rx_armed_) {
     armReceive();
   }
+
+  if (rx_queue_overflowed_) {
+    rx_queue_overflowed_ = false;
+    print_str("\r\nUART receive queue overflow. Command line cleared.\r\n> ");
+    clearCommandBuffer();
+  }
+
+  processReceivedCharacters();
 }
 
 Task::Status TaskUI::getStatus() const {
@@ -51,7 +59,7 @@ void TaskUI::onUartReceiveComplete(UART_HandleTypeDef* huart) {
   }
 
   rx_armed_ = false;
-  handleReceivedChar(static_cast<char>(rx_byte_));
+  pushReceivedCharFromIsr(rx_byte_);
   armReceive();
 }
 
@@ -65,6 +73,36 @@ void TaskUI::armReceive() {
   } else {
     state_ = State::Fault;
   }
+}
+
+void TaskUI::processReceivedCharacters() {
+  char c = '\0';
+
+  while (popReceivedChar(c)) {
+    handleReceivedChar(c);
+  }
+}
+
+bool TaskUI::popReceivedChar(char& c) {
+  if (rx_queue_tail_ == rx_queue_head_) {
+    return false;
+  }
+
+  c = static_cast<char>(rx_queue_[rx_queue_tail_]);
+  rx_queue_tail_ = (rx_queue_tail_ + 1U) % kRxQueueSize;
+  return true;
+}
+
+void TaskUI::pushReceivedCharFromIsr(uint8_t c) {
+  const size_t next_head = (rx_queue_head_ + 1U) % kRxQueueSize;
+
+  if (next_head == rx_queue_tail_) {
+    rx_queue_overflowed_ = true;
+    return;
+  }
+
+  rx_queue_[rx_queue_head_] = c;
+  rx_queue_head_ = next_head;
 }
 
 void TaskUI::handleReceivedChar(char c) {
@@ -88,7 +126,7 @@ void TaskUI::handleReceivedChar(char c) {
     return;
   }
 
-  if (command_length_ < (kCommandBufferSize - 1)) {
+  if (command_length_ < (kCommandBufferSize - 1U)) {
     command_buffer_[command_length_] = c;
     command_length_++;
     command_buffer_[command_length_] = '\0';
@@ -148,7 +186,7 @@ TaskUI::Command TaskUI::parseCommand(const char* command) const {
     command++;
   }
 
-  while (*command != '\0' && write_index < (kCommandBufferSize - 1)) {
+  while (*command != '\0' && write_index < (kCommandBufferSize - 1U)) {
     if (*command == ' ' || *command == '\t') {
       break;
     }

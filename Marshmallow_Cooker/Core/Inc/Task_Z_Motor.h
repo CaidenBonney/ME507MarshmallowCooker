@@ -70,6 +70,7 @@ private:
   static constexpr int32_t kStartCookingPositionSteps = -1000;
   static constexpr int32_t kPidOutputLimitSteps = 50;
   static constexpr int32_t kPidDeadbandSteps = 2;
+  static constexpr float kIntegralErrorLimit = 500.0f;
 
   // Initial PID values are intentionally conservative placeholders.
   // Units are steps per degree F for Kp, steps per degree F second for Ki,

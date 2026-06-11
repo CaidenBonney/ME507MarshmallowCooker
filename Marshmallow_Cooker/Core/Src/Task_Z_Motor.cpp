@@ -296,13 +296,18 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
 
   integral_error_ += error_f * dt_s;
 
+  if (integral_error_ > kIntegralErrorLimit) {
+    integral_error_ = kIntegralErrorLimit;
+  } else if (integral_error_ < -kIntegralErrorLimit) {
+    integral_error_ = -kIntegralErrorLimit;
+  }
+
   const float derivative_error = previous_error_valid_ ? ((error_f - previous_error_f_) / dt_s) : 0.0f;
 
   previous_error_f_ = error_f;
   previous_error_valid_ = true;
 
   const float output_steps_f = (kp_ * error_f) + (ki_ * integral_error_) + (kd_ * derivative_error);
-
   const int32_t output_steps = clampPidOutputSteps(output_steps_f);
 
   if (output_steps <= kPidDeadbandSteps && output_steps >= -kPidDeadbandSteps) {
@@ -310,16 +315,36 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
   }
 
   // Positive PID output means too cold, so move down toward the flame.
-  // Down is negative Z, so subtract the positive output from the current Z.
-  int32_t next_target_steps = z_motor_driver_.getPositionSteps() - output_steps;
+  // Down is negative Z, so subtract the positive output from the target position.
+  // Use the existing target while the motor is busy so repeated PID updates retarget
+  // smoothly instead of repeatedly restarting from the instantaneous current position.
+  int32_t base_steps = z_motor_driver_.isBusy() ? z_motor_driver_.getTargetSteps() : z_motor_driver_.getPositionSteps();
+  int32_t next_target_steps = base_steps - output_steps;
 
   // Top/home is Z = 0. Do not intentionally command above home.
   if (next_target_steps > 0) {
     next_target_steps = 0;
   }
 
+  // If the motor is already against a limit, do not command farther into that limit.
+  if (z_motor_driver_.topLimitPressed() && next_target_steps > z_motor_driver_.getPositionSteps()) {
+    next_target_steps = z_motor_driver_.getPositionSteps();
+  }
+
+  if (z_motor_driver_.bottomLimitPressed() && next_target_steps < z_motor_driver_.getPositionSteps()) {
+    enterFault("bottom limit reached during PID control");
+    return;
+  }
+
+  if (next_target_steps == z_motor_driver_.getTargetSteps()) {
+    return;
+  }
+
   z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
   z_motor_driver_.moveTo(next_target_steps);
+
+  const int32_t error_fx100 = static_cast<int32_t>(target_flame_temp_fx100_) -
+                              static_cast<int32_t>(measured_flame_temp_fx100_);
 
   sprintf(print_buf,
           "Z PID: target=%d.%02dF measured=%d.%02dF error=%ld.%02ldF cmd=%ld pos=%ld target_steps=%ld\r\n",
@@ -327,8 +352,8 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
           target_flame_temp_fx100_ >= 0 ? target_flame_temp_fx100_ % 100 : -(target_flame_temp_fx100_ % 100),
           measured_flame_temp_fx100_ / 100,
           measured_flame_temp_fx100_ >= 0 ? measured_flame_temp_fx100_ % 100 : -(measured_flame_temp_fx100_ % 100),
-          static_cast<long>(error_f),
-          static_cast<long>((error_f >= 0.0f ? error_f : -error_f) * 100.0f) % 100,
+          static_cast<long>(error_fx100 / 100),
+          static_cast<long>(error_fx100 >= 0 ? error_fx100 % 100 : -(error_fx100 % 100)),
           static_cast<long>(output_steps),
           static_cast<long>(z_motor_driver_.getPositionSteps()),
           static_cast<long>(next_target_steps));

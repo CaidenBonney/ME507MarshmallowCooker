@@ -114,18 +114,18 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       break;
 
     case TaskUI::Command::Stop:
-      if (state_ == State::Cooking) {
-        print_str("Cooking stopped. Moving to removal height.\r\n");
+      if (state_ == State::Cooking || state_ == State::ReadyToCook || state_ == State::Done) {
+        print_str("Normal stop. Moving to removal height.\r\n");
         task_r_motor_.stopCookingRotation();
         task_z_motor_.stopMotion();
         task_z_motor_.moveToRemovalHeight();
         state_ = State::MovingToRemovalHeight;
+      } else {
+        print_str("Stop command ignored in current state.\r\n");
       }
       break;
 
     case TaskUI::Command::EmergencyStop:
-      task_r_motor_.emergencyStop();
-      task_z_motor_.emergencyStop();
       enterFault("emergency stop");
       break;
 
@@ -135,6 +135,8 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
         task_r_motor_.resetFault();
         task_z_motor_.resetFault();
         state_ = State::WaitingForHomeCommand;
+      } else {
+        print_str("Reset ignored. Reset is only accepted from Fault or Done.\r\n");
       }
       break;
 
@@ -149,9 +151,11 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
 }
 
 void TaskCooker::enterFault(const char* reason) {
-  print_str("Cooker fault: ");
-  print_str(reason);
-  print_str("\r\n");
+  if (state_ != State::Fault) {
+    print_str("Cooker fault: ");
+    print_str(reason);
+    print_str("\r\n");
+  }
 
   task_r_motor_.emergencyStop();
   task_z_motor_.emergencyStop();
