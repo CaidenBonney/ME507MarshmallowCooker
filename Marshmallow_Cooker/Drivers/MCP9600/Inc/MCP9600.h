@@ -5,7 +5,6 @@
 
 class MCP9600 {
 public:
-
   enum class ThermocoupleType : uint8_t {
     TYPE_K = 0,
     TYPE_J = 1,
@@ -26,9 +25,7 @@ public:
 
   static constexpr uint8_t DEFAULT_ADDRESS = 0x60;
 
-  MCP9600(I2C_HandleTypeDef* hi2c,
-          ThermocoupleType type = ThermocoupleType::TYPE_T,
-          uint8_t address = DEFAULT_ADDRESS);
+  MCP9600(I2C_HandleTypeDef* hi2c, ThermocoupleType type = ThermocoupleType::TYPE_T, uint8_t address = DEFAULT_ADDRESS);
 
   HAL_StatusTypeDef begin();
 

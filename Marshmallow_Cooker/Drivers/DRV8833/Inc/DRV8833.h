@@ -5,9 +5,7 @@
 
 class DRV8833 {
 public:
-  DRV8833(TIM_HandleTypeDef* htim,
-          uint32_t in1_channel,
-          uint32_t in2_channel);
+  DRV8833(TIM_HandleTypeDef* htim, uint32_t in1_channel, uint32_t in2_channel);
 
   HAL_StatusTypeDef begin();
 

@@ -1,10 +1,6 @@
 #include "z_limit_switches.h"
 
-ZLimitSwitches::ZLimitSwitches(
-    GPIO_TypeDef* top_port,
-    uint16_t top_pin,
-    GPIO_TypeDef* bottom_port,
-    uint16_t bottom_pin)
+ZLimitSwitches::ZLimitSwitches(GPIO_TypeDef* top_port, uint16_t top_pin, GPIO_TypeDef* bottom_port, uint16_t bottom_pin)
     : top_port_(top_port),
       top_pin_(top_pin),
       bottom_port_(bottom_port),

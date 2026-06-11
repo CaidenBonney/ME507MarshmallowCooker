@@ -1,8 +1,6 @@
 #include "DRV8833.h"
 
-DRV8833::DRV8833(TIM_HandleTypeDef* htim,
-                 uint32_t in1_channel,
-                 uint32_t in2_channel)
+DRV8833::DRV8833(TIM_HandleTypeDef* htim, uint32_t in1_channel, uint32_t in2_channel)
     : htim_(htim),
       in1_channel_(in1_channel),
       in2_channel_(in2_channel) {
@@ -32,24 +30,23 @@ void DRV8833::setDuty(int16_t duty) {
 
   int16_t abs_duty = duty >= 0 ? duty : -duty;
 
-  uint16_t pwm = static_cast<uint16_t>(
-      (static_cast<int32_t>(getTimerPeriod()) * abs_duty) / kMaxDuty);
+  uint16_t pwm = static_cast<uint16_t>((static_cast<int32_t>(getTimerPeriod()) * abs_duty) / kMaxDuty);
 
   if (duty > 0) {
-    write(pwm, 0);      // Forward: AIN1 = PWM, AIN2 = 0
+    write(pwm, 0); // Forward: AIN1 = PWM, AIN2 = 0
   } else if (duty < 0) {
-    write(0, pwm);      // Reverse: AIN1 = 0, AIN2 = PWM
+    write(0, pwm); // Reverse: AIN1 = 0, AIN2 = PWM
   } else {
-    coast();            // AIN1 = 0, AIN2 = 0
+    coast(); // AIN1 = 0, AIN2 = 0
   }
 }
 
 void DRV8833::brake() {
-  write(getTimerPeriod(), getTimerPeriod());  // AIN1 = 1, AIN2 = 1
+  write(getTimerPeriod(), getTimerPeriod()); // AIN1 = 1, AIN2 = 1
 }
 
 void DRV8833::coast() {
-  write(0, 0);                  // AIN1 = 0, AIN2 = 0
+  write(0, 0); // AIN1 = 0, AIN2 = 0
 }
 
 uint16_t DRV8833::getTimerPeriod() const {

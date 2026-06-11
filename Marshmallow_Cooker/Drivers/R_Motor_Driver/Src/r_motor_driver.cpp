@@ -44,8 +44,7 @@ void RMotorDriver::update() {
       const int32_t current_counts = getPosition();
       const int32_t error_counts = target_counts_ - current_counts;
 
-      if (error_counts <= kPositionToleranceCounts &&
-          error_counts >= -kPositionToleranceCounts) {
+      if (error_counts <= kPositionToleranceCounts && error_counts >= -kPositionToleranceCounts) {
         brake();
         state_ = State::Idle;
         return;
@@ -151,9 +150,7 @@ void RMotorDriver::stop() {
   state_ = State::Idle;
 }
 
-void RMotorDriver::moveDegrees(int32_t degrees,
-                               int16_t duty,
-                               uint32_t timeout_ms) {
+void RMotorDriver::moveDegrees(int32_t degrees, int16_t duty, uint32_t timeout_ms) {
   if (degrees == 0 || duty == 0) {
     stop();
     return;
@@ -173,9 +170,7 @@ void RMotorDriver::moveDegrees(int32_t degrees,
   state_ = State::MovingToPosition;
 }
 
-void RMotorDriver::moveToDegrees(int32_t target_degrees,
-                                 int16_t duty,
-                                 uint32_t timeout_ms) {
+void RMotorDriver::moveToDegrees(int32_t target_degrees, int16_t duty, uint32_t timeout_ms) {
   target_counts_ = degreesToCounts(target_degrees);
 
   commanded_duty_ = duty >= 0 ? duty : -duty;
@@ -201,8 +196,7 @@ void RMotorDriver::rotateContinuous(int16_t duty) {
 }
 
 bool RMotorDriver::isBusy() const {
-  return state_ == State::MovingToPosition ||
-         state_ == State::RotatingContinuous;
+  return state_ == State::MovingToPosition || state_ == State::RotatingContinuous;
 }
 
 bool RMotorDriver::isFaulted() const {

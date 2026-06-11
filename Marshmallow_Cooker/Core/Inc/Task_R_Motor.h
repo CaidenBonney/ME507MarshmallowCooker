@@ -5,13 +5,13 @@
 #include "Task.h"
 
 // User created includes
-#include "r_motor_driver.h"
+#include "r_motor_driver.h" // Motor driver for rotating motor
 
-// additional includes
-#include "stdio.h"
-#include "stm32f4xx_hal.h"
+// Additional includes
+#include "stdio.h" // For sprintf
+#include "stm32f4xx_hal.h" // For HAL_GetTick
 
-// externs
+// Externs
 extern void Error_Handler();
 extern void print_str(const char* str);
 extern char print_buf[100];
@@ -23,21 +23,25 @@ public:
     Idle,
     RotatingForward,
     RotatingBackward,
-    Stopping,
     Fault
   };
 
   TaskRMotor();
 
-  void run();
+  void run() override;
   void update();
+
+  Status getStatus() const override;
+  State getState() const;
 
   void startCookingRotation();
   void stopCookingRotation();
   void emergencyStop();
+  void resetFault();
+  void setCookingDuty(int16_t duty);
 
   bool isBusy() const;
-  State getState() const;
+  bool isFaulted() const;
 
 private:
   static constexpr uint32_t kUpdatePeriodMs = 10;
@@ -53,7 +57,6 @@ private:
 
   bool cooking_rotation_requested_ = false;
   bool stop_requested_ = false;
-  bool emergency_stop_requested_ = false;
 
   int16_t cook_duty_ = kDefaultCookDuty;
 };

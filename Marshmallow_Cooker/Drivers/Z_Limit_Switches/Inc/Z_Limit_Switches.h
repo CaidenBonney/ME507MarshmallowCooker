@@ -5,10 +5,7 @@
 
 class ZLimitSwitches {
 public:
-  ZLimitSwitches(GPIO_TypeDef* top_port,
-                 uint16_t top_pin,
-                 GPIO_TypeDef* bottom_port,
-                 uint16_t bottom_pin);
+  ZLimitSwitches(GPIO_TypeDef* top_port, uint16_t top_pin, GPIO_TypeDef* bottom_port, uint16_t bottom_pin);
 
   bool isTopTriggered() const;
   bool isBottomTriggered() const;

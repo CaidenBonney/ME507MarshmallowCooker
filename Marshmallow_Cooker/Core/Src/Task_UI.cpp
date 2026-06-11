@@ -11,18 +11,13 @@ void TaskUI::run() {
       break;
 
     case State::Idle:
-      /*
-       * Later, read buttons or user input here.
-       */
+      // TODO: Add UART command parsing here.
+      // Expected commands: home, start, stop, estop, reset, status.
       break;
 
     case State::Fault:
       break;
   }
-}
-
-TaskUI::State TaskUI::getState() const {
-  return state_;
 }
 
 Task::Status TaskUI::getStatus() const {
@@ -35,4 +30,18 @@ Task::Status TaskUI::getStatus() const {
   }
 
   return Task::Status::Running;
+}
+
+TaskUI::State TaskUI::getState() const {
+  return state_;
+}
+
+TaskUI::Command TaskUI::consumeCommand() {
+  const Command command = pending_command_;
+  pending_command_ = Command::None;
+  return command;
+}
+
+void TaskUI::injectCommand(Command command) {
+  pending_command_ = command;
 }

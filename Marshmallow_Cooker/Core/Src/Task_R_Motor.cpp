@@ -1,7 +1,7 @@
 #include "Task_R_Motor.h"
 
 TaskRMotor::TaskRMotor()
-  : r_motor_driver_() {
+    : r_motor_driver_() {
 }
 
 void TaskRMotor::run() {
@@ -13,29 +13,24 @@ void TaskRMotor::run() {
 
   last_update_ms_ = now_ms;
 
-  if (emergency_stop_requested_) {
-    r_motor_driver_.stop();
-    state_ = State::Fault;
-    return;
-  }
-
   r_motor_driver_.update();
 
   switch (state_) {
     case State::Uninitialized:
       if (r_motor_driver_.begin() != HAL_OK) {
+        print_str("R motor driver init failed\r\n");
         state_ = State::Fault;
         return;
       }
 
+      print_str("R motor driver initialized\r\n");
       state_ = State::Idle;
       break;
 
     case State::Idle:
       if (cooking_rotation_requested_) {
-        r_motor_driver_.moveDegrees(kCookRotationDegrees,
-                                    cook_duty_,
-                                    kMoveTimeoutMs);
+        print_str("R cooking rotation +360\r\n");
+        r_motor_driver_.moveDegrees(kCookRotationDegrees, cook_duty_, kMoveTimeoutMs);
         state_ = State::RotatingForward;
       }
       break;
@@ -47,11 +42,11 @@ void TaskRMotor::run() {
         stop_requested_ = false;
         state_ = State::Idle;
       } else if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault during forward rotation\r\n");
         state_ = State::Fault;
       } else if (!r_motor_driver_.isBusy()) {
-        r_motor_driver_.moveDegrees(-kCookRotationDegrees,
-                                    cook_duty_,
-                                    kMoveTimeoutMs);
+        print_str("R cooking rotation -360\r\n");
+        r_motor_driver_.moveDegrees(-kCookRotationDegrees, cook_duty_, kMoveTimeoutMs);
         state_ = State::RotatingBackward;
       }
       break;
@@ -63,34 +58,25 @@ void TaskRMotor::run() {
         stop_requested_ = false;
         state_ = State::Idle;
       } else if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault during backward rotation\r\n");
         state_ = State::Fault;
       } else if (!r_motor_driver_.isBusy()) {
-        r_motor_driver_.moveDegrees(kCookRotationDegrees,
-                                    cook_duty_,
-                                    kMoveTimeoutMs);
+        print_str("R cooking rotation +360\r\n");
+        r_motor_driver_.moveDegrees(kCookRotationDegrees, cook_duty_, kMoveTimeoutMs);
         state_ = State::RotatingForward;
       }
       break;
 
-    case State::Stopping:
+    case State::Fault:
       r_motor_driver_.stop();
       cooking_rotation_requested_ = false;
       stop_requested_ = false;
-      state_ = State::Idle;
-      break;
-
-    case State::Fault:
-      r_motor_driver_.stop();
       break;
   }
 }
 
 void TaskRMotor::update() {
   r_motor_driver_.update();
-}
-
-TaskRMotor::State TaskRMotor::getState() const {
-  return state_;
 }
 
 Task::Status TaskRMotor::getStatus() const {
@@ -105,7 +91,15 @@ Task::Status TaskRMotor::getStatus() const {
   return Task::Status::Running;
 }
 
+TaskRMotor::State TaskRMotor::getState() const {
+  return state_;
+}
+
 void TaskRMotor::startCookingRotation() {
+  if (state_ == State::Fault) {
+    return;
+  }
+
   cooking_rotation_requested_ = true;
   stop_requested_ = false;
 }
@@ -115,14 +109,26 @@ void TaskRMotor::stopCookingRotation() {
 }
 
 void TaskRMotor::emergencyStop() {
-  emergency_stop_requested_ = true;
+  r_motor_driver_.stop();
+  cooking_rotation_requested_ = false;
+  stop_requested_ = false;
+  state_ = State::Fault;
+}
+
+void TaskRMotor::resetFault() {
+  if (state_ == State::Fault) {
+    state_ = State::Uninitialized;
+  }
+}
+
+void TaskRMotor::setCookingDuty(int16_t duty) {
+  cook_duty_ = duty;
 }
 
 bool TaskRMotor::isBusy() const {
-  return state_ == State::RotatingForward ||
-         state_ == State::RotatingBackward;
+  return state_ == State::RotatingForward || state_ == State::RotatingBackward;
 }
 
-TaskRMotor::State TaskRMotor::getState() const {
-  return state_;
+bool TaskRMotor::isFaulted() const {
+  return state_ == State::Fault || r_motor_driver_.isFaulted();
 }

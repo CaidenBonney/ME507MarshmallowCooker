@@ -24,9 +24,10 @@
 #include "stdio.h"
 #include <cstdlib>
 
-#include "Task_UI.h"
-#include "Task_Temps.h"
+#include "Task_Cooker.h"
 #include "Task_R_Motor.h"
+#include "Task_Temps.h"
+#include "Task_UI.h"
 #include "Task_Z_Motor.h"
 
 /* USER CODE END Includes */
@@ -59,6 +60,7 @@ TaskUI task_ui;
 TaskTemps task_temps;
 TaskRMotor task_r_motor;
 TaskZMotor task_z_motor;
+TaskCooker task_cooker(task_ui, task_temps, task_r_motor, task_z_motor);
 
 // buffer and length for printing
 char print_buf[100];
@@ -124,13 +126,12 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   while (1) {
     /* USER CODE END WHILE */
-
+    /* USER CODE BEGIN 3 */
     task_ui.run();
     task_temps.run();
     task_r_motor.run();
     task_z_motor.run();
-
-    /* USER CODE BEGIN 3 */
+    task_cooker.run();
   }
   /* USER CODE END 3 */
 }

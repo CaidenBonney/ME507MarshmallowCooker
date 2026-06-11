@@ -5,15 +5,15 @@
 #include "Task.h"
 
 // User created includes
-#include "MCP9600.h"
-#include "MLX90614.h"
+#include "MCP9600.h" // Thermocouple temperature sensor
+#include "MLX90614.h" // Infrared temperature sensor
 
-// additional includes
-#include "stdio.h"
-#include "stm32f4xx_hal.h"
-#include <cstdlib>
+// Additional includes
+#include "stdio.h" // For sprintf
+#include "stm32f4xx_hal.h" // For HAL_GetTick
+#include <cstdlib> // For abs
 
-// externs
+// Externs
 extern void print_str(const char* str);
 extern char print_buf[100];
 
@@ -36,6 +36,13 @@ public:
   Status getStatus() const override;
   State getState() const;
 
+  bool hasValidThermocoupleReading() const;
+  bool hasValidIrReading() const;
+
+  int16_t getThermocoupleHotFx100() const;
+  int16_t getThermocoupleColdFx100() const;
+  int16_t getIrObjectFx100() const;
+
 private:
   State state_ = State::Uninitialized;
 
@@ -44,6 +51,13 @@ private:
 
   static constexpr uint32_t kUpdatePeriodMs = 500;
   uint32_t last_update_ms_ = 0;
+
+  bool valid_tc_reading_ = false;
+  bool valid_ir_reading_ = false;
+
+  int16_t tc_hot_fx100_ = 0;
+  int16_t tc_cold_fx100_ = 0;
+  int16_t ir_object_fx100_ = 0;
 };
 
 #endif /* TASK_TEMPS_H */

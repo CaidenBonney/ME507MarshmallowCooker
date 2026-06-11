@@ -1,8 +1,6 @@
 #include "MCP9600.h"
 
-MCP9600::MCP9600(I2C_HandleTypeDef* hi2c,
-                 ThermocoupleType type,
-                uint8_t address)
+MCP9600::MCP9600(I2C_HandleTypeDef* hi2c, ThermocoupleType type, uint8_t address)
     : hi2c_(hi2c),
       address_(address),
       type_(type),
@@ -21,8 +19,7 @@ HAL_StatusTypeDef MCP9600::begin() {
     return last_status_;
   }
 
-  const uint8_t device_id_upper =
-      static_cast<uint8_t>((device_id_ >> 8) & 0xFF);
+  const uint8_t device_id_upper = static_cast<uint8_t>((device_id_ >> 8) & 0xFF);
 
   if (device_id_upper != kDeviceIdUpperExpected) {
     last_status_ = HAL_ERROR;
@@ -130,8 +127,7 @@ HAL_StatusTypeDef MCP9600::setThermocoupleType(ThermocoupleType type) {
   }
 
   config &= static_cast<uint8_t>(~0x70);
-  config |= static_cast<uint8_t>(
-      (static_cast<uint8_t>(type) & 0x07) << 4);
+  config |= static_cast<uint8_t>((static_cast<uint8_t>(type) & 0x07) << 4);
 
   last_status_ = write8(kRegSensorConfig, config);
   return last_status_;
@@ -147,8 +143,7 @@ HAL_StatusTypeDef MCP9600::setAdcResolution(AdcResolution resolution) {
   }
 
   config &= static_cast<uint8_t>(~0x60);
-  config |= static_cast<uint8_t>(
-      (static_cast<uint8_t>(resolution) & 0x03) << 5);
+  config |= static_cast<uint8_t>((static_cast<uint8_t>(resolution) & 0x03) << 5);
 
   last_status_ = write8(kRegDeviceConfig, config);
   return last_status_;
@@ -220,23 +215,20 @@ HAL_StatusTypeDef MCP9600::getSensorConfig(uint8_t* config) {
 HAL_StatusTypeDef MCP9600::readRawAdc(int32_t* raw_adc) {
   uint8_t buffer[3] = {0, 0, 0};
 
-  HAL_StatusTypeDef status =
-      HAL_I2C_Mem_Read(hi2c_,
-                       static_cast<uint16_t>(address_ << 1),
-                       kRegRawAdc,
-                       I2C_MEMADD_SIZE_8BIT,
-                       buffer,
-                       3,
-                       kI2cTimeoutMs);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Read(hi2c_,
+                                              static_cast<uint16_t>(address_ << 1),
+                                              kRegRawAdc,
+                                              I2C_MEMADD_SIZE_8BIT,
+                                              buffer,
+                                              3,
+                                              kI2cTimeoutMs);
 
   if (status != HAL_OK) {
     return status;
   }
 
-  int32_t value =
-      (static_cast<int32_t>(buffer[0]) << 16) |
-      (static_cast<int32_t>(buffer[1]) << 8) |
-      static_cast<int32_t>(buffer[2]);
+  int32_t value = (static_cast<int32_t>(buffer[0]) << 16) | (static_cast<int32_t>(buffer[1]) << 8) |
+                  static_cast<int32_t>(buffer[2]);
 
   if (value & 0x800000) {
     value |= 0xFF000000;
@@ -259,22 +251,19 @@ HAL_StatusTypeDef MCP9600::read8(uint8_t reg, uint8_t* value) {
 HAL_StatusTypeDef MCP9600::read16(uint8_t reg, int16_t* value) {
   uint8_t buffer[2] = {0, 0};
 
-  HAL_StatusTypeDef status =
-      HAL_I2C_Mem_Read(hi2c_,
-                       static_cast<uint16_t>(address_ << 1),
-                       reg,
-                       I2C_MEMADD_SIZE_8BIT,
-                       buffer,
-                       2,
-                       kI2cTimeoutMs);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Read(hi2c_,
+                                              static_cast<uint16_t>(address_ << 1),
+                                              reg,
+                                              I2C_MEMADD_SIZE_8BIT,
+                                              buffer,
+                                              2,
+                                              kI2cTimeoutMs);
 
   if (status != HAL_OK) {
     return status;
   }
 
-  *value = static_cast<int16_t>(
-      static_cast<uint16_t>(buffer[0] << 8) |
-      static_cast<uint16_t>(buffer[1]));
+  *value = static_cast<int16_t>(static_cast<uint16_t>(buffer[0] << 8) | static_cast<uint16_t>(buffer[1]));
 
   return HAL_OK;
 }
@@ -282,22 +271,19 @@ HAL_StatusTypeDef MCP9600::read16(uint8_t reg, int16_t* value) {
 HAL_StatusTypeDef MCP9600::readU16(uint8_t reg, uint16_t* value) {
   uint8_t buffer[2] = {0, 0};
 
-  HAL_StatusTypeDef status =
-      HAL_I2C_Mem_Read(hi2c_,
-                       static_cast<uint16_t>(address_ << 1),
-                       reg,
-                       I2C_MEMADD_SIZE_8BIT,
-                       buffer,
-                       2,
-                       kI2cTimeoutMs);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Read(hi2c_,
+                                              static_cast<uint16_t>(address_ << 1),
+                                              reg,
+                                              I2C_MEMADD_SIZE_8BIT,
+                                              buffer,
+                                              2,
+                                              kI2cTimeoutMs);
 
   if (status != HAL_OK) {
     return status;
   }
 
-  *value = static_cast<uint16_t>(
-      static_cast<uint16_t>(buffer[0] << 8) |
-      static_cast<uint16_t>(buffer[1]));
+  *value = static_cast<uint16_t>(static_cast<uint16_t>(buffer[0] << 8) | static_cast<uint16_t>(buffer[1]));
 
   return HAL_OK;
 }
@@ -316,12 +302,10 @@ int16_t MCP9600::rawTempToCx100(int16_t raw) const {
   // MCP9600 temperature registers are signed 16-bit values,
   // 0.0625 C per LSB.
   // C x100 = raw * 6.25 = raw * 625 / 100.
-  return static_cast<int16_t>(
-      (static_cast<int32_t>(raw) * 625) / 100);
+  return static_cast<int16_t>((static_cast<int32_t>(raw) * 625) / 100);
 }
 
 int16_t MCP9600::cToFx100(int16_t cx100) const {
   // F = C * 9/5 + 32
-  return static_cast<int16_t>(
-      ((static_cast<int32_t>(cx100) * 9) / 5) + 3200);
+  return static_cast<int16_t>(((static_cast<int32_t>(cx100) * 9) / 5) + 3200);
 }

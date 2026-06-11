@@ -1,5 +1,4 @@
 #include "z_motor_driver.h"
-
 #include "main.h"
 #include <climits>
 
@@ -16,7 +15,8 @@ ZMotorDriver::ZMotorDriver()
       target_steps_(0),
       speed_steps_per_second_(kDefaultSpeedStepsPerSecond),
       microsteps_(kDefaultMicrosteps),
-      homing_down_(false),
+      homing_(false),
+      homing_direction_(Direction::Up),
       limits_active_low_(true),
       current_direction_(Direction::Up),
       state_(State::Disabled) {
@@ -26,6 +26,7 @@ void ZMotorDriver::begin() {
   tmc_.begin();
   tmc_.setStepRate(speed_steps_per_second_);
   zeroPosition();
+  homing_ = false;
   state_ = State::Disabled;
 }
 
@@ -36,7 +37,7 @@ void ZMotorDriver::enable() {
 
 void ZMotorDriver::disable() {
   tmc_.disable();
-  homing_down_ = false;
+  homing_ = false;
   state_ = State::Disabled;
 }
 
@@ -50,15 +51,24 @@ void ZMotorDriver::update() {
   // but it does not stop Z motion until testing proves it is reliable.
   tmc_.updateDiagLog();
 
-  if (homing_down_) {
-    if (bottomLimitPressed()) {
+  if (homing_) {
+    if (homing_direction_ == Direction::Up && topLimitPressed()) {
+      stop();
+      zeroPosition();
+      state_ = State::HitTopLimit;
+      return;
+    }
+
+    if (homing_direction_ == Direction::Down && bottomLimitPressed()) {
       stop();
       zeroPosition();
       state_ = State::HitBottomLimit;
       return;
     }
 
-    if (tryStep(Direction::Down)) {
+    if (tryStep(homing_direction_)) {
+      state_ = State::Moving;
+    } else {
       state_ = State::Moving;
     }
 
@@ -90,7 +100,7 @@ void ZMotorDriver::moveSteps(int32_t steps) {
     return;
   }
 
-  homing_down_ = false;
+  homing_ = false;
   target_steps_ = position_steps_ + steps;
 
   if (!tmc_.isEnabled()) {
@@ -101,7 +111,7 @@ void ZMotorDriver::moveSteps(int32_t steps) {
 }
 
 void ZMotorDriver::moveTo(int32_t target_position_steps) {
-  homing_down_ = false;
+  homing_ = false;
   target_steps_ = target_position_steps;
 
   if (!tmc_.isEnabled()) {
@@ -125,16 +135,17 @@ void ZMotorDriver::jog(Direction direction, uint32_t speed_steps_per_second) {
 
 void ZMotorDriver::stop() {
   target_steps_ = position_steps_;
-  homing_down_ = false;
+  homing_ = false;
 
   if (tmc_.isEnabled()) {
     state_ = State::Idle;
   }
 }
 
-void ZMotorDriver::homeDown(uint32_t speed_steps_per_second) {
+void ZMotorDriver::home(Direction direction, uint32_t speed_steps_per_second) {
   setSpeed(speed_steps_per_second);
-  homing_down_ = true;
+  homing_ = true;
+  homing_direction_ = direction;
   target_steps_ = position_steps_;
 
   if (!tmc_.isEnabled()) {
@@ -142,6 +153,14 @@ void ZMotorDriver::homeDown(uint32_t speed_steps_per_second) {
   }
 
   state_ = State::Moving;
+}
+
+void ZMotorDriver::homeUp(uint32_t speed_steps_per_second) {
+  home(Direction::Up, speed_steps_per_second);
+}
+
+void ZMotorDriver::homeDown(uint32_t speed_steps_per_second) {
+  home(Direction::Down, speed_steps_per_second);
 }
 
 void ZMotorDriver::zeroPosition() {
@@ -196,6 +215,10 @@ ZMotorDriver::State ZMotorDriver::getState() const {
 
 bool ZMotorDriver::isBusy() const {
   return state_ == State::Moving;
+}
+
+bool ZMotorDriver::isFaulted() const {
+  return state_ == State::Fault;
 }
 
 bool ZMotorDriver::topLimitPressed() const {
