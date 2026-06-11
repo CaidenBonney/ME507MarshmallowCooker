@@ -26,7 +26,8 @@ public:
     Stop,
     EmergencyStop,
     Reset,
-    Status
+    Status,
+    Unknown
   };
 
   TaskUI();

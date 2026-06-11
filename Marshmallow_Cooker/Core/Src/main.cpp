@@ -24,11 +24,11 @@
 #include "stdio.h"
 #include <cstdlib>
 
-#include "Task_Cooker.h"
-#include "Task_R_Motor.h"
-#include "Task_Temps.h"
 #include "Task_UI.h"
+#include "Task_Temps.h"
+#include "Task_R_Motor.h"
 #include "Task_Z_Motor.h"
+#include "Task_Cooker.h"
 
 /* USER CODE END Includes */
 

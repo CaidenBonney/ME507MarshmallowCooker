@@ -112,9 +112,9 @@ void TaskUI::handleCompletedLine() {
 
   Command parsed_command = parseCommand(command_buffer_);
 
-  if (parsed_command == Command::None) {
+  if (parsed_command == Command::Unknown) {
     print_str("Unknown command. Use: home, start, stop, estop, reset, status\r\n");
-  } else {
+  } else if (parsed_command != Command::None) {
     pending_command_ = parsed_command;
     state_ = State::CommandReady;
   }
@@ -185,7 +185,7 @@ TaskUI::Command TaskUI::parseCommand(const char* command) const {
     return Command::Status;
   }
 
-  return Command::None;
+  return Command::Unknown;
 }
 
 char TaskUI::toLower(char c) {
