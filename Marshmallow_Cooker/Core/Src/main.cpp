@@ -25,6 +25,16 @@
 #include <cstdlib>
 #include <cstring>
 
+#if defined(__has_include)
+#if __has_include("usb_device.h")
+#include "usb_device.h"
+#define MARSHMALLOW_HAS_USB_DEVICE 1
+#endif
+#if __has_include("usbd_cdc_if.h")
+#include "usbd_cdc_if.h"
+#define MARSHMALLOW_HAS_USB_CDC 1
+#endif
+#endif
 #include "Task_Cooker.h"
 #include "Task_R_Motor.h"
 #include "Task_Temps.h"
@@ -84,6 +94,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
 
 /* USER CODE END 0 */
 
+/**
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void) {
 
   /* USER CODE BEGIN 1 */
@@ -112,6 +126,9 @@ int main(void) {
   MX_I2C3_Init();
   MX_TIM3_Init();
   MX_TIM1_Init();
+#if defined(MARSHMALLOW_HAS_USB_DEVICE)
+  MX_USB_DEVICE_Init();
+#endif
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -134,13 +151,22 @@ int main(void) {
   /* USER CODE END 3 */
 }
 
+/**
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
+  /** Configure the main internal regulator output voltage
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
+  /** Initializes the RCC Oscillators according to the specified parameters
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -153,6 +179,8 @@ void SystemClock_Config(void) {
     Error_Handler();
   }
 
+  /** Initializes the CPU, AHB and APB buses clocks
+   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
@@ -164,6 +192,11 @@ void SystemClock_Config(void) {
   }
 }
 
+/**
+ * @brief I2C3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C3_Init(void) {
 
   /* USER CODE BEGIN I2C3_Init 0 */
@@ -190,6 +223,11 @@ static void MX_I2C3_Init(void) {
   /* USER CODE END I2C3_Init 2 */
 }
 
+/**
+ * @brief TIM1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM1_Init(void) {
 
   /* USER CODE BEGIN TIM1_Init 0 */
@@ -255,6 +293,11 @@ static void MX_TIM1_Init(void) {
   HAL_TIM_MspPostInit(&htim1);
 }
 
+/**
+ * @brief TIM3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM3_Init(void) {
 
   /* USER CODE BEGIN TIM3_Init 0 */
@@ -295,6 +338,11 @@ static void MX_TIM3_Init(void) {
   /* USER CODE END TIM3_Init 2 */
 }
 
+/**
+ * @brief USART2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART2_UART_Init(void) {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -320,6 +368,11 @@ static void MX_USART2_UART_Init(void) {
   /* USER CODE END USART2_Init 2 */
 }
 
+/**
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void) {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
@@ -367,14 +420,6 @@ static void MX_GPIO_Init(void) {
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
   /* USER CODE END MX_GPIO_Init_2 */
@@ -387,20 +432,24 @@ void print_str(const char* str) {
     return;
   }
 
-  size_t len = std::strlen(str);
+  const size_t len = std::strlen(str);
 
-  if (len == 0U) {
+  if (len == 0U || len > UINT16_MAX) {
     return;
   }
 
-  if (len > UINT16_MAX) {
-    len = UINT16_MAX;
-  }
-
   HAL_UART_Transmit(&huart2, reinterpret_cast<uint8_t*>(const_cast<char*>(str)), static_cast<uint16_t>(len), 100);
+
+#if defined(MARSHMALLOW_HAS_USB_DEVICE)
+  CDC_Transmit_FS(reinterpret_cast<uint8_t*>(const_cast<char*>(str)), static_cast<uint16_t>(len));
+#endif
 }
 /* USER CODE END 4 */
 
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
@@ -410,6 +459,13 @@ void Error_Handler(void) {
   /* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT
+/**
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t* file, uint32_t line) {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,

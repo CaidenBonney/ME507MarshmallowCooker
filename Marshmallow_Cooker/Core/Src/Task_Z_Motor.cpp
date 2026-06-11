@@ -23,7 +23,7 @@ void TaskZMotor::run() {
     z_motor_driver_.begin();
     z_motor_driver_.setLimitsActiveLow(false);
     z_motor_driver_.enable();
-    z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
+    z_motor_driver_.setSpeedStepsPerSecond(clampZMoveSpeed(kMoveSpeedStepsPerSecond));
 
     state_ = State::Idle;
     print_str("Z motor task initialized. Send 'home' before cooking.\r\n");
@@ -171,7 +171,7 @@ void TaskZMotor::moveToRemovalHeight() {
   }
 
   resetPid();
-  z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
+  z_motor_driver_.setSpeedStepsPerSecond(clampZMoveSpeed(kMoveSpeedStepsPerSecond));
   z_motor_driver_.moveTo(kRemovalHeightSteps);
   state_ = State::MovingToRemovalHeight;
 }
@@ -187,9 +187,71 @@ void TaskZMotor::moveToStartPosition() {
     return;
   }
 
-  z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
+  z_motor_driver_.setSpeedStepsPerSecond(clampZMoveSpeed(kMoveSpeedStepsPerSecond));
   z_motor_driver_.moveTo(kStartCookingPositionSteps);
   state_ = State::MovingToStartPosition;
+}
+
+void TaskZMotor::jogRelativeSteps(int32_t relative_steps) {
+  if (state_ == State::Fault) {
+    print_str("Z jog rejected: task is faulted. Send reset first.\r\n");
+    return;
+  }
+
+  if (!homed_) {
+    print_str("Z jog rejected: home Z first.\r\n");
+    return;
+  }
+
+  if (state_ == State::Homing || state_ == State::MovingToStartPosition || state_ == State::ControllingFlameTemp ||
+      state_ == State::MovingToRemovalHeight || z_motor_driver_.isBusy()) {
+    print_str("Z jog rejected: Z is busy.\r\n");
+    return;
+  }
+
+  const int32_t current_steps = z_motor_driver_.getPositionSteps();
+  int32_t target_steps = current_steps + relative_steps;
+
+  // Do not intentionally command above home.
+  if (target_steps > 0) {
+    target_steps = 0;
+  }
+
+  // Do not intentionally command below the software lower travel limit.
+  if (target_steps < kMinCookPositionSteps) {
+    target_steps = kMinCookPositionSteps;
+  }
+
+  if (target_steps == current_steps) {
+    if (relative_steps < 0) {
+      print_str("Z jog down rejected: software lower limit reached.\r\n");
+    } else if (relative_steps > 0) {
+      print_str("Z jog up rejected: home/top limit reached.\r\n");
+    } else {
+      print_str("Z jog ignored: zero step request.\r\n");
+    }
+    return;
+  }
+
+  if (topLimitPressed() && target_steps > current_steps) {
+    print_str("Z jog up rejected: top limit is pressed.\r\n");
+    return;
+  }
+
+  if (bottomLimitPressed() && target_steps < current_steps) {
+    print_str("Z jog down rejected: bottom limit is pressed.\r\n");
+    return;
+  }
+
+  z_motor_driver_.setSpeedStepsPerSecond(clampZMoveSpeed(kMoveSpeedStepsPerSecond));
+  z_motor_driver_.moveTo(target_steps);
+
+  snprintf(print_buf,
+           sizeof(print_buf),
+           "Z jog: moving from %ld to %ld steps.\r\n",
+           static_cast<long>(current_steps),
+           static_cast<long>(target_steps));
+  print_str(print_buf);
 }
 
 void TaskZMotor::stopMotion() {
@@ -381,7 +443,7 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
     return;
   }
 
-  z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
+  z_motor_driver_.setSpeedStepsPerSecond(clampZMoveSpeed(kMoveSpeedStepsPerSecond));
   z_motor_driver_.moveTo(next_target_steps);
 
   const int32_t error_fx100 = target_flame_temp_fx100_ - measured_flame_temp_fx100_;
@@ -414,6 +476,14 @@ int32_t TaskZMotor::clampPidOutputSteps(float output_steps) const {
   }
 
   return static_cast<int32_t>(output_steps);
+}
+
+uint32_t TaskZMotor::clampZMoveSpeed(uint32_t requested_speed_steps_per_second) const {
+  if (requested_speed_steps_per_second < kMinimumAntiBindSpeedStepsPerSecond) {
+    return kMinimumAntiBindSpeedStepsPerSecond;
+  }
+
+  return requested_speed_steps_per_second;
 }
 
 bool TaskZMotor::topLimitPressed() const {

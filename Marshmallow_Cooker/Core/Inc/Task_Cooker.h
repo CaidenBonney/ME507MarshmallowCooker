@@ -40,6 +40,7 @@ public:
     WaitingForHomeCommand, ///< Waiting for the user to send home.
     HomingZ, ///< Returning R to zero and homing Z.
     ReadyToCook, ///< Setup complete and ready to start.
+    ManualRotating, ///< R motor is manually rotating without PID cooking control.
     Cooking, ///< Active cooking cycle.
     MovingToRemovalHeight, ///< Normal stop or done move is in progress.
     Done, ///< Marshmallow is ready to remove.
@@ -78,6 +79,7 @@ private:
   TaskZMotor& task_z_motor_;
 
   bool r_started_for_current_cook_ = false;
+  bool manual_rotation_returning_ = false;
   bool done_temp_timer_active_ = false;
   uint32_t done_temp_start_ms_ = 0;
 
