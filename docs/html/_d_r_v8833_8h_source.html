@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ME507 Marshmallow Cooker: Marshmallow_Cooker/Drivers/DRV8833/Inc/DRV8833.h Source File</title>
+<title>ME507 Marshmallow Cooker: Marshmallow_Cooker/Core/Inc/DRV8833.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -154,11 +154,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_d_r_v8833_8h_
 </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#endif </span><span class="comment">/* DRV8833_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a03dff59e79629ce02c06728d13abea2d"><div class="ttname"><a href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">DRV8833::coast</a></div><div class="ttdeci">void coast()</div><div class="ttdoc">Coast the motor by driving both bridge inputs low.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:73</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a4ef0be927fa763f67057ca1d2f6d2a50"><div class="ttname"><a href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833::DRV8833</a></div><div class="ttdeci">DRV8833(TIM_HandleTypeDef *htim, uint32_t in1_channel, uint32_t in2_channel)</div><div class="ttdoc">Construct a DRV8833 PWM driver.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:14</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a70e54b165bee102e152b3a597360b484"><div class="ttname"><a href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">DRV8833::setDuty</a></div><div class="ttdeci">void setDuty(int16_t duty)</div><div class="ttdoc">Command signed motor duty.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:43</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a82f2dbbb6e390dc552d97f741f2f7e84"><div class="ttname"><a href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">DRV8833::begin</a></div><div class="ttdeci">HAL_StatusTypeDef begin()</div><div class="ttdoc">Start PWM outputs and place the bridge in coast mode.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:24</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_ae355507ec1778a8cc9fe45eb5c9bfc01"><div class="ttname"><a href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">DRV8833::brake</a></div><div class="ttdeci">void brake()</div><div class="ttdoc">Actively brake the motor by driving both bridge inputs high.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:66</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a03dff59e79629ce02c06728d13abea2d"><div class="ttname"><a href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">DRV8833::coast</a></div><div class="ttdeci">void coast()</div><div class="ttdoc">Coast the motor by driving both bridge inputs low.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:53</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a4ef0be927fa763f67057ca1d2f6d2a50"><div class="ttname"><a href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833::DRV8833</a></div><div class="ttdeci">DRV8833(TIM_HandleTypeDef *htim, uint32_t in1_channel, uint32_t in2_channel)</div><div class="ttdoc">Construct a DRV8833 PWM driver.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:8</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a70e54b165bee102e152b3a597360b484"><div class="ttname"><a href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">DRV8833::setDuty</a></div><div class="ttdeci">void setDuty(int16_t duty)</div><div class="ttdoc">Command signed motor duty.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:29</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a82f2dbbb6e390dc552d97f741f2f7e84"><div class="ttname"><a href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">DRV8833::begin</a></div><div class="ttdeci">HAL_StatusTypeDef begin()</div><div class="ttdoc">Start PWM outputs and place the bridge in coast mode.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:14</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_ae355507ec1778a8cc9fe45eb5c9bfc01"><div class="ttname"><a href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">DRV8833::brake</a></div><div class="ttdeci">void brake()</div><div class="ttdoc">Actively brake the motor by driving both bridge inputs high.</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:49</div></div>
 <div class="ttc" id="aclass_d_r_v8833_html_afc1cc14cd47b080cbaccf72200c38c36"><div class="ttname"><a href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">DRV8833::kMaxDuty</a></div><div class="ttdeci">static constexpr int16_t kMaxDuty</div><div class="ttdoc">Maximum signed duty command. A value of 1000 represents 100 percent duty.</div><div class="ttdef"><b>Definition</b> DRV8833.h:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_d_r_v8833_8h_
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2b6685042ab777418974eff947147e4.html">Marshmallow_Cooker</a></li><li class="navelem"><a href="dir_6cc41e3dd72c374069fdeecb51b02cb3.html">Drivers</a></li><li class="navelem"><a href="dir_cfa6ef248f63862e6d3e26e1de29fa54.html">DRV8833</a></li><li class="navelem"><a href="dir_ab82cc68a01b9fa9524c3d9fc97a7589.html">Inc</a></li><li class="navelem"><a href="_d_r_v8833_8h.html">DRV8833.h</a></li>
+    <li class="navelem"><a href="dir_b2b6685042ab777418974eff947147e4.html">Marshmallow_Cooker</a></li><li class="navelem"><a href="dir_03bc1c768b7c7f2be992cdd7324d14df.html">Core</a></li><li class="navelem"><a href="dir_d2ab377acd3b106cc2f1dbd1fd4f4eb4.html">Inc</a></li><li class="navelem"><a href="_d_r_v8833_8h.html">DRV8833.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

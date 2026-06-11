@@ -44,7 +44,6 @@ var NAVTREE =
     [ "Repository Structure", "index.html#autotoc_md19", [
       [ "Repository", "index.html#autotoc_md20", null ]
     ] ],
-    [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -71,8 +70,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_d_r_v8833_8cpp.html",
-"class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48ae599161956d626eda4cb0a5ffb85271c",
-"stm32f4xx__hal__conf_8h.html#a631dea7b230e600555f979c62af1de21"
+"class_task_z_motor.html#a24483fef19baf99366b4450d81b9375c",
+"stm32f4xx__hal__conf_8h.html#abba7114255a2a41b81fdcb2a3702c270"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
