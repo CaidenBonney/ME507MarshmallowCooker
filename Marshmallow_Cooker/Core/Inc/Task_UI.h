@@ -38,7 +38,9 @@ public:
   State getState() const;
   Command consumeCommand();
   uint32_t consumeStatusDurationMs();
+
   void onUartReceiveComplete(UART_HandleTypeDef* huart);
+  void onUartError(UART_HandleTypeDef* huart);
 
 private:
   static constexpr size_t kCommandBufferSize = 32;
@@ -54,6 +56,7 @@ private:
   uint8_t rx_byte_ = 0;
   volatile bool rx_armed_ = false;
   bool overflowed_ = false;
+  bool last_was_cr_ = false;
 
   uint8_t rx_queue_[kRxQueueSize] = {};
   volatile size_t rx_queue_head_ = 0;

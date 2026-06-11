@@ -57,11 +57,12 @@
 
 /* USER CODE END 0 */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim);
-/**
- * Initializes the Global MSP.
- */
-void HAL_MspInit(void) {
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+                    /**
+  * Initializes the Global MSP.
+  */
+void HAL_MspInit(void)
+{
 
   /* USER CODE BEGIN MspInit 0 */
 
@@ -78,14 +79,16 @@ void HAL_MspInit(void) {
 }
 
 /**
- * @brief I2C MSP Initialization
- * This function configures the hardware resources used in this example
- * @param hi2c: I2C handle pointer
- * @retval None
- */
-void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c) {
+  * @brief I2C MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param hi2c: I2C handle pointer
+  * @retval None
+  */
+void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (hi2c->Instance == I2C3) {
+  if(hi2c->Instance==I2C3)
+  {
     /* USER CODE BEGIN I2C3_MspInit 0 */
 
     /* USER CODE END I2C3_MspInit 0 */
@@ -115,17 +118,21 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c) {
     /* USER CODE BEGIN I2C3_MspInit 1 */
 
     /* USER CODE END I2C3_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief I2C MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param hi2c: I2C handle pointer
- * @retval None
- */
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c) {
-  if (hi2c->Instance == I2C3) {
+  * @brief I2C MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param hi2c: I2C handle pointer
+  * @retval None
+  */
+void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
+{
+  if(hi2c->Instance==I2C3)
+  {
     /* USER CODE BEGIN I2C3_MspDeInit 0 */
 
     /* USER CODE END I2C3_MspDeInit 0 */
@@ -144,16 +151,19 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c) {
 
     /* USER CODE END I2C3_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief TIM_Base MSP Initialization
- * This function configures the hardware resources used in this example
- * @param htim_base: TIM_Base handle pointer
- * @retval None
- */
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base) {
-  if (htim_base->Instance == TIM1) {
+  * @brief TIM_Base MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param htim_base: TIM_Base handle pointer
+  * @retval None
+  */
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM1)
+  {
     /* USER CODE BEGIN TIM1_MspInit 0 */
 
     /* USER CODE END TIM1_MspInit 0 */
@@ -162,18 +172,22 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base) {
     /* USER CODE BEGIN TIM1_MspInit 1 */
 
     /* USER CODE END TIM1_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief TIM_Encoder MSP Initialization
- * This function configures the hardware resources used in this example
- * @param htim_encoder: TIM_Encoder handle pointer
- * @retval None
- */
-void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* htim_encoder) {
+  * @brief TIM_Encoder MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param htim_encoder: TIM_Encoder handle pointer
+  * @retval None
+  */
+void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* htim_encoder)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (htim_encoder->Instance == TIM3) {
+  if(htim_encoder->Instance==TIM3)
+  {
     /* USER CODE BEGIN TIM3_MspInit 0 */
 
     /* USER CODE END TIM3_MspInit 0 */
@@ -185,7 +199,7 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* htim_encoder) {
     PB4     ------> TIM3_CH1
     PB5     ------> TIM3_CH2
     */
-    GPIO_InitStruct.Pin = EN_CHA_Pin | EN_CHB_Pin;
+    GPIO_InitStruct.Pin = EN_CHA_Pin|EN_CHB_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -195,12 +209,16 @@ void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef* htim_encoder) {
     /* USER CODE BEGIN TIM3_MspInit 1 */
 
     /* USER CODE END TIM3_MspInit 1 */
+
   }
+
 }
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim) {
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (htim->Instance == TIM1) {
+  if(htim->Instance==TIM1)
+  {
     /* USER CODE BEGIN TIM1_MspPostInit 0 */
 
     /* USER CODE END TIM1_MspPostInit 0 */
@@ -210,7 +228,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim) {
     PA9     ------> TIM1_CH2
     PA10     ------> TIM1_CH3
     */
-    GPIO_InitStruct.Pin = R_AIN1_Pin | R_AIN2_Pin;
+    GPIO_InitStruct.Pin = R_AIN1_Pin|R_AIN2_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -221,15 +239,18 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim) {
 
     /* USER CODE END TIM1_MspPostInit 1 */
   }
+
 }
 /**
- * @brief TIM_Base MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param htim_base: TIM_Base handle pointer
- * @retval None
- */
-void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base) {
-  if (htim_base->Instance == TIM1) {
+  * @brief TIM_Base MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param htim_base: TIM_Base handle pointer
+  * @retval None
+  */
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM1)
+  {
     /* USER CODE BEGIN TIM1_MspDeInit 0 */
 
     /* USER CODE END TIM1_MspDeInit 0 */
@@ -239,16 +260,19 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base) {
 
     /* USER CODE END TIM1_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief TIM_Encoder MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param htim_encoder: TIM_Encoder handle pointer
- * @retval None
- */
-void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* htim_encoder) {
-  if (htim_encoder->Instance == TIM3) {
+  * @brief TIM_Encoder MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param htim_encoder: TIM_Encoder handle pointer
+  * @retval None
+  */
+void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* htim_encoder)
+{
+  if(htim_encoder->Instance==TIM3)
+  {
     /* USER CODE BEGIN TIM3_MspDeInit 0 */
 
     /* USER CODE END TIM3_MspDeInit 0 */
@@ -259,23 +283,26 @@ void HAL_TIM_Encoder_MspDeInit(TIM_HandleTypeDef* htim_encoder) {
     PB4     ------> TIM3_CH1
     PB5     ------> TIM3_CH2
     */
-    HAL_GPIO_DeInit(GPIOB, EN_CHA_Pin | EN_CHB_Pin);
+    HAL_GPIO_DeInit(GPIOB, EN_CHA_Pin|EN_CHB_Pin);
 
     /* USER CODE BEGIN TIM3_MspDeInit 1 */
 
     /* USER CODE END TIM3_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief UART MSP Initialization
- * This function configures the hardware resources used in this example
- * @param huart: UART handle pointer
- * @retval None
- */
-void HAL_UART_MspInit(UART_HandleTypeDef* huart) {
+  * @brief UART MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (huart->Instance == USART2) {
+  if(huart->Instance==USART2)
+  {
     /* USER CODE BEGIN USART2_MspInit 0 */
 
     /* USER CODE END USART2_MspInit 0 */
@@ -287,27 +314,34 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart) {
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
+    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* USART2 interrupt Init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspInit 1 */
 
     /* USER CODE END USART2_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief UART MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param huart: UART handle pointer
- * @retval None
- */
-void HAL_UART_MspDeInit(UART_HandleTypeDef* huart) {
-  if (huart->Instance == USART2) {
+  * @brief UART MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+{
+  if(huart->Instance==USART2)
+  {
     /* USER CODE BEGIN USART2_MspDeInit 0 */
 
     /* USER CODE END USART2_MspDeInit 0 */
@@ -318,12 +352,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart) {
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2 | GPIO_PIN_3);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
 
+    /* USART2 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspDeInit 1 */
 
     /* USER CODE END USART2_MspDeInit 1 */
   }
+
 }
 
 /* USER CODE BEGIN 1 */

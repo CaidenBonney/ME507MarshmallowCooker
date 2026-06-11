@@ -30,7 +30,6 @@
 #include "Task_UI.h"
 #include "Task_Z_Motor.h"
 
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,6 +125,7 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   while (1) {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
     task_ui.run();
     task_temps.run();

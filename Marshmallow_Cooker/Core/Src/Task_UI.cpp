@@ -78,10 +78,14 @@ void TaskUI::armReceive() {
     return;
   }
 
-  if (HAL_UART_Receive_IT(&huart2, &rx_byte_, 1) == HAL_OK) {
+  HAL_StatusTypeDef status = HAL_UART_Receive_IT(&huart2, &rx_byte_, 1);
+
+  if (status == HAL_OK) {
     rx_armed_ = true;
+  } else if (status == HAL_BUSY) {
+    print_str("UART RX arm failed: BUSY\r\n");
   } else {
-    state_ = State::Fault;
+    print_str("UART RX arm failed: ERROR\r\n");
   }
 }
 
@@ -116,12 +120,20 @@ void TaskUI::pushReceivedCharFromIsr(uint8_t c) {
 }
 
 void TaskUI::handleReceivedChar(char c) {
+  if (c == '\n' && last_was_cr_) {
+    last_was_cr_ = false;
+    return;
+  }
+
   if (c == '\r' || c == '\n') {
+    last_was_cr_ = (c == '\r');
     echoString("\r\n");
     handleCompletedLine();
     echoString("> ");
     return;
   }
+
+  last_was_cr_ = false;
 
   if (c == '\b' || c == 0x7F) {
     if (command_length_ > 0) {
@@ -296,10 +308,23 @@ extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
   task_ui.onUartReceiveComplete(huart);
 }
 
+extern "C" void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
+  task_ui.onUartError(huart);
+}
+
 bool TaskUI::isSpace(char c) {
   return c == ' ' || c == '\t';
 }
 
 bool TaskUI::isDigit(char c) {
   return c >= '0' && c <= '9';
+}
+
+void TaskUI::onUartError(UART_HandleTypeDef* huart) {
+  if (huart != &huart2) {
+    return;
+  }
+
+  rx_armed_ = false;
+  armReceive();
 }
