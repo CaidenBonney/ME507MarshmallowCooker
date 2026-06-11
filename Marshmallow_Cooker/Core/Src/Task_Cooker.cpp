@@ -141,6 +141,10 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
     case TaskUI::Command::Status:
       printStatus();
       break;
+
+    case TaskUI::Command::Unknown:
+      print_str("Unknown command. Use: home, start, stop, estop, reset, status\r\n");
+      break;
   }
 }
 
