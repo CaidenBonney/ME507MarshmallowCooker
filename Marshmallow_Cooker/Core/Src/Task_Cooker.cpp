@@ -75,7 +75,23 @@ void TaskCooker::run() {
       }
 
       if (task_temps_.hasValidIrReading() && task_temps_.getIrObjectFx100() >= kDoneMarshmallowTempFx100) {
-        beginNormalStop("Marshmallow done. Moving to removal height and returning R to initial rotation.\r\n");
+        if (!done_temp_timer_active_) {
+          done_temp_timer_active_ = true;
+          done_temp_start_ms_ = HAL_GetTick();
+          print_str("IR done temperature reached. Starting hold timer.\r\n");
+        }
+
+        const uint32_t done_temp_elapsed_ms = HAL_GetTick() - done_temp_start_ms_;
+
+        if (done_temp_elapsed_ms >= kDoneTempHoldTimeMs) {
+          beginNormalStop("Marshmallow done. Moving to removal height and returning R to initial rotation.\r\n");
+        }
+      } else {
+        if (done_temp_timer_active_) {
+          print_str("IR done temperature dropped. Hold timer reset.\r\n");
+        }
+
+        resetDoneTempHoldTimer();
       }
       break;
 
@@ -131,6 +147,7 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
     case TaskUI::Command::Start:
       if (state_ == State::ReadyToCook && task_z_motor_.isHomed()) {
         r_started_for_current_cook_ = false;
+        resetDoneTempHoldTimer();
         task_z_motor_.startTemperatureControl(kTargetFlameTempFx100);
         state_ = State::Cooking;
         print_str("Cooking started. Moving Z to initial cook position.\r\n");
@@ -156,6 +173,7 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
         print_str("Software reset. Send 'home' before cooking.\r\n");
         stopStatusStream();
         r_started_for_current_cook_ = false;
+        resetDoneTempHoldTimer();
         task_r_motor_.resetFault();
         task_z_motor_.resetFault();
         state_ = State::WaitingForHomeCommand;
@@ -216,11 +234,17 @@ void TaskCooker::beginNormalStop(const char* message) {
   print_str(message);
 
   r_started_for_current_cook_ = false;
+  resetDoneTempHoldTimer();
   task_r_motor_.returnToInitialRotation();
   task_z_motor_.stopMotion();
   task_z_motor_.moveToRemovalHeight();
 
   state_ = State::MovingToRemovalHeight;
+}
+
+void TaskCooker::resetDoneTempHoldTimer() {
+  done_temp_timer_active_ = false;
+  done_temp_start_ms_ = 0;
 }
 
 void TaskCooker::enterFault(const char* reason) {
@@ -232,6 +256,7 @@ void TaskCooker::enterFault(const char* reason) {
 
   stopStatusStream();
   r_started_for_current_cook_ = false;
+  resetDoneTempHoldTimer();
   task_r_motor_.emergencyStop();
   task_z_motor_.emergencyStop();
   state_ = State::Fault;
