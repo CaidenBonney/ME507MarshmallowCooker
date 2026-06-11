@@ -86,8 +86,8 @@ private:
   // Units are steps per degree F for Kp, steps per degree F second for Ki,
   // and steps per degree F per second for Kd.
   static constexpr float kDefaultKp = 0.25f;
-  static constexpr float kDefaultKi = 0.025f;
-  static constexpr float kDefaultKd = 0.01f;
+  static constexpr float kDefaultKi = 0.002f;
+  static constexpr float kDefaultKd = 0.03f;
 
   State state_ = State::Uninitialized;
 
