@@ -11,6 +11,7 @@ var main_8cpp =
     [ "huart2", "main_8cpp.html#aa9479c261d65eecedd3d9582f7f0f89c", null ],
     [ "print_buf", "main_8cpp.html#a93f4e9d1c8aa5b365a11a87606f09143", null ],
     [ "print_buf_len", "main_8cpp.html#a6f3d9d8a214752bc5d752a1dcea569de", null ],
+    [ "task_cooker", "main_8cpp.html#a1cbe5b881f1e0e14f3e653f210479174", null ],
     [ "task_r_motor", "main_8cpp.html#ac72b3364c61a48bd3a3cee23ef3b7920", null ],
     [ "task_temps", "main_8cpp.html#aa9bf30e0bf87c6e56d668df9c2d4161b", null ],
     [ "task_ui", "main_8cpp.html#acd7fbc12ca35f7895f1947fb3f43995f", null ],

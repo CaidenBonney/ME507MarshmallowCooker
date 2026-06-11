@@ -122,6 +122,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_r_motor_
 
 <p><code>#include &lt;<a class="el" href="r__motor__driver_8h_source.html">r_motor_driver.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a2f0b85ea1415a501afe25448c475b547" id="r_a2f0b85ea1415a501afe25448c475b547"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a2f0b85ea1415a501afe25448c475b547">State</a> { <br />
+&#160;&#160;<a class="el" href="#a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241">Disabled</a>
+, <a class="el" href="#a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c">Idle</a>
+, <a class="el" href="#a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742">MovingToPosition</a>
+, <a class="el" href="#a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0">RotatingContinuous</a>
+, <br />
+&#160;&#160;<a class="el" href="#a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
+<br />
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f1b82a1ac5dcda588ff97d6fa70dd02" id="r_a9f1b82a1ac5dcda588ff97d6fa70dd02"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9f1b82a1ac5dcda588ff97d6fa70dd02">RMotorDriver</a> ()</td></tr>
@@ -130,18 +142,49 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a829f4cde8b6338120e566a0417234734" id="r_a829f4cde8b6338120e566a0417234734"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a829f4cde8b6338120e566a0417234734">setDuty</a> (int16_t duty)</td></tr>
 <tr class="memitem:a122fb22d003a5dd38326613c55b25b94" id="r_a122fb22d003a5dd38326613c55b25b94"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a122fb22d003a5dd38326613c55b25b94">brake</a> ()</td></tr>
 <tr class="memitem:a677d2773b7d2e91c71d221ec92da6832" id="r_a677d2773b7d2e91c71d221ec92da6832"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a677d2773b7d2e91c71d221ec92da6832">coast</a> ()</td></tr>
+<tr class="memitem:a6cd5f455aa77a5c5f09bbd60e3ebf233" id="r_a6cd5f455aa77a5c5f09bbd60e3ebf233"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6cd5f455aa77a5c5f09bbd60e3ebf233">stop</a> ()</td></tr>
+<tr class="memitem:a4dd2c415d54376c40f519fd1a62452c0" id="r_a4dd2c415d54376c40f519fd1a62452c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4dd2c415d54376c40f519fd1a62452c0">moveDegrees</a> (int32_t degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
+<tr class="memitem:afa7e415f8dbfbaf775ccafc6878f51c6" id="r_afa7e415f8dbfbaf775ccafc6878f51c6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afa7e415f8dbfbaf775ccafc6878f51c6">moveToDegrees</a> (int32_t target_degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
+<tr class="memitem:a7cd2e0d9a1ce79bbaea43616bba46c3c" id="r_a7cd2e0d9a1ce79bbaea43616bba46c3c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7cd2e0d9a1ce79bbaea43616bba46c3c">rotateContinuous</a> (int16_t duty)</td></tr>
 <tr class="memitem:a2121126cada95d15ec0f2e63efb8d003" id="r_a2121126cada95d15ec0f2e63efb8d003"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a2121126cada95d15ec0f2e63efb8d003">getVelocity</a> () const</td></tr>
 <tr class="memitem:a0ed2223a5866aaaa3a36edc7a89f1a6e" id="r_a0ed2223a5866aaaa3a36edc7a89f1a6e"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0ed2223a5866aaaa3a36edc7a89f1a6e">getPosition</a> () const</td></tr>
 <tr class="memitem:aa1d364b5d9765e8610ab4b0572836d47" id="r_aa1d364b5d9765e8610ab4b0572836d47"><td class="memItemLeft">int32_t&#160;</td><td class="memItemRight"><a class="el" href="#aa1d364b5d9765e8610ab4b0572836d47">getPositionDegrees</a> () const</td></tr>
 <tr class="memitem:aaf1c2eafc6c73b6712f7680a311304c6" id="r_aaf1c2eafc6c73b6712f7680a311304c6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaf1c2eafc6c73b6712f7680a311304c6">resetEncoder</a> ()</td></tr>
+<tr class="memitem:a771191b37454d394a1c94c96e1cdc6d5" id="r_a771191b37454d394a1c94c96e1cdc6d5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a771191b37454d394a1c94c96e1cdc6d5">isBusy</a> () const</td></tr>
+<tr class="memitem:ad9b4bdc3c67d3f32c7230bcdfdff4053" id="r_ad9b4bdc3c67d3f32c7230bcdfdff4053"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad9b4bdc3c67d3f32c7230bcdfdff4053">isFaulted</a> () const</td></tr>
+<tr class="memitem:a5de9e91c75f0b6ec3df003cb389d337a" id="r_a5de9e91c75f0b6ec3df003cb389d337a"><td class="memItemLeft"><a class="el" href="#a2f0b85ea1415a501afe25448c475b547">State</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5de9e91c75f0b6ec3df003cb389d337a">getState</a> () const</td></tr>
 <tr class="memitem:a32a8372468b5d83ae8b3a8efd479cb39" id="r_a32a8372468b5d83ae8b3a8efd479cb39"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a32a8372468b5d83ae8b3a8efd479cb39">moveDegreesBlocking</a> (int32_t degrees, int16_t duty, uint32_t timeout_ms)</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:aff139b8246c951809b040d9389764c0c" id="r_aff139b8246c951809b040d9389764c0c"><td class="memItemLeft">static constexpr int16_t&#160;</td><td class="memItemRight"><a class="el" href="#aff139b8246c951809b040d9389764c0c">kMaxDuty</a> = 1000</td></tr>
-<tr class="memitem:a3acd5dd0e3a447e5104907c564160253" id="r_a3acd5dd0e3a447e5104907c564160253"><td class="memItemLeft">static constexpr int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a3acd5dd0e3a447e5104907c564160253">kMinMovingDuty</a> = 750</td></tr>
-<tr class="memitem:a102e28bf86a6842b238640c150dede92" id="r_a102e28bf86a6842b238640c150dede92"><td class="memItemLeft">static constexpr int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a102e28bf86a6842b238640c150dede92">kFullDuty</a> = 1000</td></tr>
 </table>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a id="a2f0b85ea1415a501afe25448c475b547" name="a2f0b85ea1415a501afe25448c475b547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0b85ea1415a501afe25448c475b547">&#9670;&#160;</a></span>State</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a2f0b85ea1415a501afe25448c475b547">RMotorDriver::State</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241" name="a2f0b85ea1415a501afe25448c475b547ab9f5c797ebbf55adccdd8539a65a0241"></a>Disabled&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c" name="a2f0b85ea1415a501afe25448c475b547ae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742" name="a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742"></a>MovingToPosition&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0" name="a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0"></a>RotatingContinuous&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee" name="a2f0b85ea1415a501afe25448c475b547a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9f1b82a1ac5dcda588ff97d6fa70dd02" name="a9f1b82a1ac5dcda588ff97d6fa70dd02"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f1b82a1ac5dcda588ff97d6fa70dd02">&#9670;&#160;</a></span>RMotorDriver()</h2>
@@ -246,6 +289,23 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5de9e91c75f0b6ec3df003cb389d337a" name="a5de9e91c75f0b6ec3df003cb389d337a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de9e91c75f0b6ec3df003cb389d337a">&#9670;&#160;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a2f0b85ea1415a501afe25448c475b547">RMotorDriver::State</a> RMotorDriver::getState </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2121126cada95d15ec0f2e63efb8d003" name="a2121126cada95d15ec0f2e63efb8d003"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2121126cada95d15ec0f2e63efb8d003">&#9670;&#160;</a></span>getVelocity()</h2>
 
@@ -263,6 +323,66 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a771191b37454d394a1c94c96e1cdc6d5" name="a771191b37454d394a1c94c96e1cdc6d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a771191b37454d394a1c94c96e1cdc6d5">&#9670;&#160;</a></span>isBusy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RMotorDriver::isBusy </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9b4bdc3c67d3f32c7230bcdfdff4053" name="ad9b4bdc3c67d3f32c7230bcdfdff4053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b4bdc3c67d3f32c7230bcdfdff4053">&#9670;&#160;</a></span>isFaulted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RMotorDriver::isFaulted </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4dd2c415d54376c40f519fd1a62452c0" name="a4dd2c415d54376c40f519fd1a62452c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd2c415d54376c40f519fd1a62452c0">&#9670;&#160;</a></span>moveDegrees()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RMotorDriver::moveDegrees </td>
+          <td>(</td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>degrees</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>duty</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a32a8372468b5d83ae8b3a8efd479cb39" name="a32a8372468b5d83ae8b3a8efd479cb39"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32a8372468b5d83ae8b3a8efd479cb39">&#9670;&#160;</a></span>moveDegreesBlocking()</h2>
 
@@ -273,6 +393,32 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">void RMotorDriver::moveDegreesBlocking </td>
           <td>(</td>
           <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>degrees</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>duty</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa7e415f8dbfbaf775ccafc6878f51c6" name="afa7e415f8dbfbaf775ccafc6878f51c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7e415f8dbfbaf775ccafc6878f51c6">&#9670;&#160;</a></span>moveToDegrees()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RMotorDriver::moveToDegrees </td>
+          <td>(</td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>target_degrees</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -306,6 +452,23 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a7cd2e0d9a1ce79bbaea43616bba46c3c" name="a7cd2e0d9a1ce79bbaea43616bba46c3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cd2e0d9a1ce79bbaea43616bba46c3c">&#9670;&#160;</a></span>rotateContinuous()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RMotorDriver::rotateContinuous </td>
+          <td>(</td>
+          <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>duty</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a829f4cde8b6338120e566a0417234734" name="a829f4cde8b6338120e566a0417234734"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a829f4cde8b6338120e566a0417234734">&#9670;&#160;</a></span>setDuty()</h2>
 
@@ -316,6 +479,23 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">void RMotorDriver::setDuty </td>
           <td>(</td>
           <td class="paramtype">int16_t</td>          <td class="paramname"><span class="paramname"><em>duty</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6cd5f455aa77a5c5f09bbd60e3ebf233" name="a6cd5f455aa77a5c5f09bbd60e3ebf233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cd5f455aa77a5c5f09bbd60e3ebf233">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RMotorDriver::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -336,73 +516,6 @@ Static Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a102e28bf86a6842b238640c150dede92" name="a102e28bf86a6842b238640c150dede92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a102e28bf86a6842b238640c150dede92">&#9670;&#160;</a></span>kFullDuty</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t RMotorDriver::kFullDuty = 1000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aff139b8246c951809b040d9389764c0c" name="aff139b8246c951809b040d9389764c0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff139b8246c951809b040d9389764c0c">&#9670;&#160;</a></span>kMaxDuty</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t RMotorDriver::kMaxDuty = 1000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3acd5dd0e3a447e5104907c564160253" name="a3acd5dd0e3a447e5104907c564160253"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3acd5dd0e3a447e5104907c564160253">&#9670;&#160;</a></span>kMinMovingDuty</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t RMotorDriver::kMinMovingDuty = 750</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>

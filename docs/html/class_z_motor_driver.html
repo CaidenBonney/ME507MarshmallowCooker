@@ -149,6 +149,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a97e9155f468ce06afe13414858567522" id="r_a97e9155f468ce06afe13414858567522"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a97e9155f468ce06afe13414858567522">moveTo</a> (int32_t target_position_steps)</td></tr>
 <tr class="memitem:a9bff1ccab749f12f81704dc040f84815" id="r_a9bff1ccab749f12f81704dc040f84815"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9bff1ccab749f12f81704dc040f84815">jog</a> (<a class="el" href="#adfd3e6ece27dd1c8261b6ba1af133a57">Direction</a> direction, uint32_t speed_steps_per_second)</td></tr>
 <tr class="memitem:a3941b6ade35a482080c3c98ee2b984b7" id="r_a3941b6ade35a482080c3c98ee2b984b7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3941b6ade35a482080c3c98ee2b984b7">stop</a> ()</td></tr>
+<tr class="memitem:aa0c5ab3b4f3f75b2f3db5acfd1838ce6" id="r_aa0c5ab3b4f3f75b2f3db5acfd1838ce6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa0c5ab3b4f3f75b2f3db5acfd1838ce6">home</a> (<a class="el" href="#adfd3e6ece27dd1c8261b6ba1af133a57">Direction</a> direction, uint32_t speed_steps_per_second)</td></tr>
+<tr class="memitem:ab45586bd078d42179f32bf65a9ca4529" id="r_ab45586bd078d42179f32bf65a9ca4529"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab45586bd078d42179f32bf65a9ca4529">homeUp</a> (uint32_t speed_steps_per_second)</td></tr>
 <tr class="memitem:a65175be37fd0d87301a8a0c1b02baca6" id="r_a65175be37fd0d87301a8a0c1b02baca6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a65175be37fd0d87301a8a0c1b02baca6">homeDown</a> (uint32_t speed_steps_per_second)</td></tr>
 <tr class="memitem:a29efe25165b4dbb0b982fd93d147368f" id="r_a29efe25165b4dbb0b982fd93d147368f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a29efe25165b4dbb0b982fd93d147368f">zeroPosition</a> ()</td></tr>
 <tr class="memitem:aac1766b1e0e707641598e2445602843b" id="r_aac1766b1e0e707641598e2445602843b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aac1766b1e0e707641598e2445602843b">setSpeed</a> (uint32_t steps_per_second)</td></tr>
@@ -376,6 +378,27 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aa0c5ab3b4f3f75b2f3db5acfd1838ce6" name="aa0c5ab3b4f3f75b2f3db5acfd1838ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c5ab3b4f3f75b2f3db5acfd1838ce6">&#9670;&#160;</a></span>home()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZMotorDriver::home </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#adfd3e6ece27dd1c8261b6ba1af133a57">Direction</a></td>          <td class="paramname"><span class="paramname"><em>direction</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>speed_steps_per_second</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a65175be37fd0d87301a8a0c1b02baca6" name="a65175be37fd0d87301a8a0c1b02baca6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65175be37fd0d87301a8a0c1b02baca6">&#9670;&#160;</a></span>homeDown()</h2>
 
@@ -384,6 +407,23 @@ Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void ZMotorDriver::homeDown </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>speed_steps_per_second</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab45586bd078d42179f32bf65a9ca4529" name="ab45586bd078d42179f32bf65a9ca4529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45586bd078d42179f32bf65a9ca4529">&#9670;&#160;</a></span>homeUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ZMotorDriver::homeUp </td>
           <td>(</td>
           <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>speed_steps_per_second</em></span></td><td>)</td>
           <td></td>

@@ -25,5 +25,6 @@ var main_8h =
     [ "Z_TOP_GPIO_Port", "main_8h.html#a18a5a6855f4425a499054cd022d16b90", null ],
     [ "Z_TOP_Pin", "main_8h.html#a79718f305f81178d18af8dda75d667d5", null ],
     [ "Error_Handler", "main_8h.html#a1730ffe1e560465665eb47d9264826f9", null ],
-    [ "HAL_TIM_MspPostInit", "main_8h.html#ae70bce6c39d0b570a7523b86738cec4b", null ]
+    [ "HAL_TIM_MspPostInit", "main_8h.html#ae70bce6c39d0b570a7523b86738cec4b", null ],
+    [ "print_str", "main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3", null ]
 ];

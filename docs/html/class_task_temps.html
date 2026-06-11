@@ -151,6 +151,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8bfc017947510b491474970df9c088ae" id="r_a8bfc017947510b491474970df9c088ae"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8bfc017947510b491474970df9c088ae">update</a> ()</td></tr>
 <tr class="memitem:a3fbb0b0e4650933b07f5e1f10485b50f" id="r_a3fbb0b0e4650933b07f5e1f10485b50f"><td class="memItemLeft"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3fbb0b0e4650933b07f5e1f10485b50f">getStatus</a> () const override</td></tr>
 <tr class="memitem:abacc3438cfa02594ce66e8e4f94abb17" id="r_abacc3438cfa02594ce66e8e4f94abb17"><td class="memItemLeft"><a class="el" href="#abe81053faafd453240070e5daf04e3e1">State</a>&#160;</td><td class="memItemRight"><a class="el" href="#abacc3438cfa02594ce66e8e4f94abb17">getState</a> () const</td></tr>
+<tr class="memitem:abe92652dd0fc5efaee0416074552c265" id="r_abe92652dd0fc5efaee0416074552c265"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abe92652dd0fc5efaee0416074552c265">hasValidThermocoupleReading</a> () const</td></tr>
+<tr class="memitem:ab3678d5bc6f453cb53c4958c5c88cfec" id="r_ab3678d5bc6f453cb53c4958c5c88cfec"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab3678d5bc6f453cb53c4958c5c88cfec">hasValidIrReading</a> () const</td></tr>
+<tr class="memitem:aa11b10044a190623c69c09cbd0db5b0f" id="r_aa11b10044a190623c69c09cbd0db5b0f"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#aa11b10044a190623c69c09cbd0db5b0f">getThermocoupleHotFx100</a> () const</td></tr>
+<tr class="memitem:ab633555eb121addac17a3726c5c0532d" id="r_ab633555eb121addac17a3726c5c0532d"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#ab633555eb121addac17a3726c5c0532d">getThermocoupleColdFx100</a> () const</td></tr>
+<tr class="memitem:afb51239b59acf6c4441bc9ca1558d8f4" id="r_afb51239b59acf6c4441bc9ca1558d8f4"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#afb51239b59acf6c4441bc9ca1558d8f4">getIrObjectFx100</a> () const</td></tr>
+<tr class="memitem:a8ee712777d6c67baca747c2d9b814ac3" id="r_a8ee712777d6c67baca747c2d9b814ac3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8ee712777d6c67baca747c2d9b814ac3">printTemperatures</a> () const</td></tr>
 <tr class="inherit_header pub_methods_class_task"><td colspan="2">Public Member Functions inherited from <a class="el" href="class_task.html">Task</a></td></tr>
 <tr class="memitem:a9e03df2df618f84f63b8ab5185a1c067 pub_methods_class_task" id="r_a9e03df2df618f84f63b8ab5185a1c067"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a9e03df2df618f84f63b8ab5185a1c067">~Task</a> ()=default</td></tr>
 </table><table class="memberdecls">
@@ -206,6 +212,23 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="afb51239b59acf6c4441bc9ca1558d8f4" name="afb51239b59acf6c4441bc9ca1558d8f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb51239b59acf6c4441bc9ca1558d8f4">&#9670;&#160;</a></span>getIrObjectFx100()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t TaskTemps::getIrObjectFx100 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abacc3438cfa02594ce66e8e4f94abb17" name="abacc3438cfa02594ce66e8e4f94abb17"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abacc3438cfa02594ce66e8e4f94abb17">&#9670;&#160;</a></span>getState()</h2>
 
@@ -247,6 +270,91 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="class_task.html#a4e60f3f81b59174e5833fff03514d924">Task</a>.</p>
+
+</div>
+</div>
+<a id="ab633555eb121addac17a3726c5c0532d" name="ab633555eb121addac17a3726c5c0532d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab633555eb121addac17a3726c5c0532d">&#9670;&#160;</a></span>getThermocoupleColdFx100()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t TaskTemps::getThermocoupleColdFx100 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa11b10044a190623c69c09cbd0db5b0f" name="aa11b10044a190623c69c09cbd0db5b0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11b10044a190623c69c09cbd0db5b0f">&#9670;&#160;</a></span>getThermocoupleHotFx100()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t TaskTemps::getThermocoupleHotFx100 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3678d5bc6f453cb53c4958c5c88cfec" name="ab3678d5bc6f453cb53c4958c5c88cfec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3678d5bc6f453cb53c4958c5c88cfec">&#9670;&#160;</a></span>hasValidIrReading()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TaskTemps::hasValidIrReading </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe92652dd0fc5efaee0416074552c265" name="abe92652dd0fc5efaee0416074552c265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe92652dd0fc5efaee0416074552c265">&#9670;&#160;</a></span>hasValidThermocoupleReading()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TaskTemps::hasValidThermocoupleReading </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ee712777d6c67baca747c2d9b814ac3" name="a8ee712777d6c67baca747c2d9b814ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee712777d6c67baca747c2d9b814ac3">&#9670;&#160;</a></span>printTemperatures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TaskTemps::printTemperatures </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

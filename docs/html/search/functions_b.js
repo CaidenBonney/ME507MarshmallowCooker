@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pendsv_5fhandler_0',['PendSV_Handler',['../stm32f4xx__it_8h.html#a6303e1f258cbdc1f970ce579cc015623',1,'PendSV_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a6303e1f258cbdc1f970ce579cc015623',1,'PendSV_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['print_5fstr_1',['print_str',['../_task___r___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___temps_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___u_i_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___z___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp']]]
+  ['onuarterror_0',['onUartError',['../class_task_u_i.html#a42db10851f777f4c15ddc339fb33cb27',1,'TaskUI']]],
+  ['onuartreceivecomplete_1',['onUartReceiveComplete',['../class_task_u_i.html#a3736b90ac091611cdc6a0378f7f49901',1,'TaskUI']]]
 ];

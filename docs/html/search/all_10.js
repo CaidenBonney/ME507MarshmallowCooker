@@ -25,9 +25,10 @@ var searchData=
   ['phy_5fsr_22',['PHY_SR',['../stm32f4xx__hal__conf_8h.html#a32b55e84d27cf298a77f54b133cd1acc',1,'stm32f4xx_hal_conf.h']]],
   ['phy_5fwrite_5fto_23',['PHY_WRITE_TO',['../stm32f4xx__hal__conf_8h.html#a474bf13e28d09b667e41b151140ee39d',1,'stm32f4xx_hal_conf.h']]],
   ['prefetch_5fenable_24',['PREFETCH_ENABLE',['../stm32f4xx__hal__conf_8h.html#a13fc0d5e7bb925385c0cc0772ba6a391',1,'stm32f4xx_hal_conf.h']]],
-  ['print_5fbuf_25',['print_buf',['../_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp'],['../_task___temps_8h.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp'],['../main_8cpp.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp']]],
+  ['print_5fbuf_25',['print_buf',['../_task_8h.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp'],['../_task___u_i_8h.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp'],['../main_8cpp.html#a93f4e9d1c8aa5b365a11a87606f09143',1,'print_buf:&#160;main.cpp']]],
   ['print_5fbuf_5flen_26',['print_buf_len',['../main_8cpp.html#a6f3d9d8a214752bc5d752a1dcea569de',1,'main.cpp']]],
-  ['print_5fstr_27',['print_str',['../_task___r___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___temps_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___u_i_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___z___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp']]],
-  ['processing_28',['Processing',['../index.html#autotoc_md16',1,'Encoder Processing'],['../index.html#autotoc_md15',1,'Mathematical Modeling and Data Processing'],['../index.html#autotoc_md17',1,'Temperature Processing']]],
-  ['project_20overview_29',['Project Overview',['../index.html#autotoc_md1',1,'']]]
+  ['print_5fstr_27',['print_str',['../main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___u_i_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp']]],
+  ['printtemperatures_28',['printTemperatures',['../class_task_temps.html#a8ee712777d6c67baca747c2d9b814ac3',1,'TaskTemps']]],
+  ['processing_29',['Processing',['../index.html#autotoc_md16',1,'Encoder Processing'],['../index.html#autotoc_md15',1,'Mathematical Modeling and Data Processing'],['../index.html#autotoc_md17',1,'Temperature Processing']]],
+  ['project_20overview_30',['Project Overview',['../index.html#autotoc_md1',1,'']]]
 ];

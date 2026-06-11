@@ -127,28 +127,25 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_z___limit___s
 <div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_z_limit_switches.html">    6</a></span><span class="keyword">class </span><a class="code hl_function" href="class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099">ZLimitSwitches</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099">ZLimitSwitches</a>(GPIO_TypeDef* top_port,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                 uint16_t top_pin,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>                 GPIO_TypeDef* bottom_port,</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>                 uint16_t bottom_pin);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#abac8ad7bcc30ad7884dcedd5fa61e777">isTopTriggered</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#a4c09ddbb7b2be8ed79a0d5936a91fbd2">isBottomTriggered</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#abec1d7c4165f58ecd8547b08c00e8420">isAnyTriggered</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  GPIO_TypeDef* top_port_;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  uint16_t top_pin_;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  GPIO_TypeDef* bottom_port_;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  uint16_t bottom_pin_;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099">ZLimitSwitches</a>(GPIO_TypeDef* top_port, uint16_t top_pin, GPIO_TypeDef* bottom_port, uint16_t bottom_pin);</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#abac8ad7bcc30ad7884dcedd5fa61e777">isTopTriggered</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#a4c09ddbb7b2be8ed79a0d5936a91fbd2">isBottomTriggered</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="class_z_limit_switches.html#abec1d7c4165f58ecd8547b08c00e8420">isAnyTriggered</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  GPIO_TypeDef* top_port_;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  uint16_t top_pin_;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  GPIO_TypeDef* bottom_port_;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  uint16_t bottom_pin_;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">/* Z_LIMIT_SWITCHES_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclass_z_limit_switches_html_a4c09ddbb7b2be8ed79a0d5936a91fbd2"><div class="ttname"><a href="class_z_limit_switches.html#a4c09ddbb7b2be8ed79a0d5936a91fbd2">ZLimitSwitches::isBottomTriggered</a></div><div class="ttdeci">bool isBottomTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:18</div></div>
-<div class="ttc" id="aclass_z_limit_switches_html_abac8ad7bcc30ad7884dcedd5fa61e777"><div class="ttname"><a href="class_z_limit_switches.html#abac8ad7bcc30ad7884dcedd5fa61e777">ZLimitSwitches::isTopTriggered</a></div><div class="ttdeci">bool isTopTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:14</div></div>
-<div class="ttc" id="aclass_z_limit_switches_html_abec1d7c4165f58ecd8547b08c00e8420"><div class="ttname"><a href="class_z_limit_switches.html#abec1d7c4165f58ecd8547b08c00e8420">ZLimitSwitches::isAnyTriggered</a></div><div class="ttdeci">bool isAnyTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:22</div></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif </span><span class="comment">/* Z_LIMIT_SWITCHES_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclass_z_limit_switches_html_a4c09ddbb7b2be8ed79a0d5936a91fbd2"><div class="ttname"><a href="class_z_limit_switches.html#a4c09ddbb7b2be8ed79a0d5936a91fbd2">ZLimitSwitches::isBottomTriggered</a></div><div class="ttdeci">bool isBottomTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:14</div></div>
+<div class="ttc" id="aclass_z_limit_switches_html_abac8ad7bcc30ad7884dcedd5fa61e777"><div class="ttname"><a href="class_z_limit_switches.html#abac8ad7bcc30ad7884dcedd5fa61e777">ZLimitSwitches::isTopTriggered</a></div><div class="ttdeci">bool isTopTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:10</div></div>
+<div class="ttc" id="aclass_z_limit_switches_html_abec1d7c4165f58ecd8547b08c00e8420"><div class="ttname"><a href="class_z_limit_switches.html#abec1d7c4165f58ecd8547b08c00e8420">ZLimitSwitches::isAnyTriggered</a></div><div class="ttdeci">bool isAnyTriggered() const</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:18</div></div>
 <div class="ttc" id="aclass_z_limit_switches_html_afaf3a5c371d47aaae023a58a2b279099"><div class="ttname"><a href="class_z_limit_switches.html#afaf3a5c371d47aaae023a58a2b279099">ZLimitSwitches::ZLimitSwitches</a></div><div class="ttdeci">ZLimitSwitches(GPIO_TypeDef *top_port, uint16_t top_pin, GPIO_TypeDef *bottom_port, uint16_t bottom_pin)</div><div class="ttdef"><b>Definition</b> Z_Limit_Switches.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
