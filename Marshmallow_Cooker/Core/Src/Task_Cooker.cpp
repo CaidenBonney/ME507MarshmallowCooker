@@ -52,6 +52,16 @@ void TaskCooker::run() {
     case State::ReadyToCook:
       break;
 
+    case State::ManualRotating:
+      if (task_r_motor_.isFaulted()) {
+        enterFault("R motor fault during manual rotation");
+      } else if (manual_rotation_returning_ && !task_r_motor_.isBusy()) {
+        manual_rotation_returning_ = false;
+        state_ = State::ReadyToCook;
+        print_str("Manual R rotation stopped. R is at initial rotation.\r\n");
+      }
+      break;
+
     case State::Cooking:
       if (task_r_motor_.isFaulted()) {
         enterFault("R motor fault during cooking");
@@ -137,6 +147,7 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       if (state_ == State::WaitingForHomeCommand || state_ == State::ReadyToCook || state_ == State::Done) {
         print_str("Starting Z home.\r\n");
         r_started_for_current_cook_ = false;
+        manual_rotation_returning_ = false;
         task_z_motor_.startHoming();
         state_ = State::HomingZ;
       } else {
@@ -147,6 +158,7 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
     case TaskUI::Command::Start:
       if (state_ == State::ReadyToCook && task_z_motor_.isHomed()) {
         r_started_for_current_cook_ = false;
+        manual_rotation_returning_ = false;
         resetDoneTempHoldTimer();
         task_z_motor_.startTemperatureControl(kTargetFlameTempFx100);
         state_ = State::Cooking;
@@ -157,7 +169,15 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       break;
 
     case TaskUI::Command::Stop:
-      if (state_ == State::Cooking || state_ == State::ReadyToCook || state_ == State::Done) {
+      if (state_ == State::ManualRotating) {
+        if (!manual_rotation_returning_) {
+          manual_rotation_returning_ = true;
+          task_r_motor_.returnToInitialRotation();
+          print_str("Manual R rotation stopping. Returning R to initial rotation.\r\n");
+        } else {
+          print_str("Manual R rotation is already returning to initial rotation.\r\n");
+        }
+      } else if (state_ == State::Cooking || state_ == State::ReadyToCook || state_ == State::Done) {
         beginNormalStop("Normal stop. Moving to removal height and returning R to initial rotation.\r\n");
       } else {
         print_str("Stop command ignored in current state.\r\n");
@@ -173,6 +193,7 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
         print_str("Software reset. Send 'home' before cooking.\r\n");
         stopStatusStream();
         r_started_for_current_cook_ = false;
+        manual_rotation_returning_ = false;
         resetDoneTempHoldTimer();
         task_r_motor_.resetFault();
         task_z_motor_.resetFault();
@@ -201,6 +222,25 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       task_z_motor_.setPidDebugEnabled(false);
       break;
 
+    case TaskUI::Command::Rotate:
+      if (state_ == State::ReadyToCook) {
+        manual_rotation_returning_ = false;
+        task_r_motor_.startCookingRotation();
+        state_ = State::ManualRotating;
+        print_str("Manual R rotation started. Send rotate or stop to return R to zero.\r\n");
+      } else if (state_ == State::ManualRotating) {
+        if (!manual_rotation_returning_) {
+          manual_rotation_returning_ = true;
+          task_r_motor_.returnToInitialRotation();
+          print_str("Manual R rotation stopping. Returning R to initial rotation.\r\n");
+        } else {
+          print_str("Manual R rotation is already returning to initial rotation.\r\n");
+        }
+      } else {
+        print_str("Rotate rejected. Home first and make sure cooker is not busy.\r\n");
+      }
+      break;
+
     case TaskUI::Command::ZJogDown: {
       if (state_ == State::HomingZ || state_ == State::Cooking || state_ == State::MovingToRemovalHeight) {
         print_str("Z jog rejected: cooker is busy.\r\n");
@@ -224,8 +264,9 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
     }
 
     case TaskUI::Command::Unknown:
-      print_str("Unknown command. Use: home, start, stop, estop, reset, status, status <ms>, piddebug on, "
-                "piddebug off, -, - <steps>, =, = <steps>\r\n");
+      print_str("Unknown command.\r\n");
+      print_str("Use: home start stop estop reset status rotate\r\n");
+      print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n");
       break;
   }
 }
@@ -234,6 +275,7 @@ void TaskCooker::beginNormalStop(const char* message) {
   print_str(message);
 
   r_started_for_current_cook_ = false;
+  manual_rotation_returning_ = false;
   resetDoneTempHoldTimer();
   task_r_motor_.returnToInitialRotation();
   task_z_motor_.stopMotion();
@@ -256,6 +298,7 @@ void TaskCooker::enterFault(const char* reason) {
 
   stopStatusStream();
   r_started_for_current_cook_ = false;
+  manual_rotation_returning_ = false;
   resetDoneTempHoldTimer();
   task_r_motor_.emergencyStop();
   task_z_motor_.emergencyStop();

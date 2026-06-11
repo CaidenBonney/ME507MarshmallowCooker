@@ -126,9 +126,10 @@ private:
   static constexpr uint32_t kHomeSpeedStepsPerSecond = 1600; ///< Homing speed in steps/s.
   static constexpr uint32_t kMoveSpeedStepsPerSecond = 2000; ///< Normal move speed in steps/s.
   static constexpr uint32_t kPidUpdatePeriodMs = 500; ///< PID update period.
+  static constexpr uint32_t kMinimumAntiBindSpeedStepsPerSecond = 1600; ///< Minimum speed for anti-binding.
 
   static constexpr int32_t kRemovalHeightSteps = -500; ///< Z removal height.
-  static constexpr int32_t kStartCookingPositionSteps = -15000; ///< Initial cooking height.
+  static constexpr int32_t kStartCookingPositionSteps = -11000; ///< Initial cooking height.
   static constexpr int32_t kPidOutputLimitSteps = 750; ///< Maximum PID step correction per update.
   static constexpr int32_t kPidDeadbandSteps = 2; ///< PID command deadband in steps.
   static constexpr int32_t kMinCookPositionSteps = -24400; ///< Software lower travel limit.
@@ -171,6 +172,13 @@ private:
 
   /** @brief Clamp a floating-point PID output to the configured step limit. */
   int32_t clampPidOutputSteps(float output_steps) const;
+
+  /**
+   * @brief Clamp a requested Z-axis speed to the minimum anti-bind speed.
+   * @param requested_speed_steps_per_second Requested motor speed in steps per second.
+   * @return Requested speed when it is above the minimum, otherwise the anti-bind minimum speed.
+   */
+  uint32_t clampZMoveSpeed(uint32_t requested_speed_steps_per_second) const;
 };
 
 #endif /* TASK_Z_MOTOR_H */

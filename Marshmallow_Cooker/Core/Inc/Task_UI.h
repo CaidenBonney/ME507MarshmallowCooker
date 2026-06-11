@@ -50,6 +50,7 @@ public:
     PidDebugOff, ///< Disable Z PID debug printing.
     ZJogDown, ///< Jog Z downward by a step amount.
     ZJogUp, ///< Jog Z upward by a step amount.
+    Rotate, ///< Toggle manual R-axis cooking rotation.
     Unknown ///< Command text did not match a supported command.
   };
 
@@ -97,6 +98,21 @@ public:
    * @param huart UART handle that reported an error.
    */
   void onUartError(UART_HandleTypeDef* huart);
+
+  /**
+   * @brief Queue bytes received from the USB CDC virtual COM port.
+   * @details This method allows USB CDC receive callbacks to feed the same
+   * command parser used by USART2. The bytes are pushed into the existing
+   * receive queue, so commands from USB and UART are handled identically by
+   * TaskUI::run().
+   * @param data Pointer to the received USB byte buffer.
+   * @param length Number of bytes in the received buffer.
+   *
+   * @note USB CDC C code should call the extern "C" bridge function
+   * TaskUI_PushUsbRx(uint8_t* data, uint32_t length), which is implemented
+   * in Task_UI.cpp.
+   */
+  void pushReceivedBytesFromUsb(const uint8_t* data, uint32_t length);
 
 private:
   static constexpr size_t kCommandBufferSize = 32; ///< Maximum command line length, including null terminator.

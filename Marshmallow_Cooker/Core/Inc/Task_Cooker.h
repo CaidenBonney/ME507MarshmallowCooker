@@ -40,6 +40,7 @@ public:
     WaitingForHomeCommand, ///< Waiting for the user to send home.
     HomingZ, ///< Returning R to zero and homing Z.
     ReadyToCook, ///< Setup complete and ready to start.
+    ManualRotating, ///< R motor is manually rotating without PID cooking control.
     Cooking, ///< Active cooking cycle.
     MovingToRemovalHeight, ///< Normal stop or done move is in progress.
     Done, ///< Marshmallow is ready to remove.
@@ -65,9 +66,9 @@ public:
   State getState() const;
 
 private:
-  static constexpr int32_t kTargetFlameTempFx100 = 21500; ///< Target flame temperature, 215.00 F.
-  static constexpr int32_t kDoneMarshmallowTempFx100 = 20000; ///< Done IR object temperature, 200.00 F.
-  static constexpr uint32_t kDoneTempHoldTimeMs = 3000; ///< Required continuous time above done IR temperature.
+  static constexpr int32_t kTargetFlameTempFx100 = 24000; ///< Target flame temperature, 215.00 F.
+  static constexpr int32_t kDoneMarshmallowTempFx100 = 25000; ///< Done IR object temperature, 200.00 F.
+  static constexpr uint32_t kDoneTempHoldTimeMs = 2000; ///< Required continuous time above done IR temperature.
   static constexpr uint32_t kStatusStreamPeriodMs = 500; ///< Status stream update period.
 
   State state_ = State::Uninitialized;
@@ -78,6 +79,7 @@ private:
   TaskZMotor& task_z_motor_;
 
   bool r_started_for_current_cook_ = false;
+  bool manual_rotation_returning_ = false;
   bool done_temp_timer_active_ = false;
   uint32_t done_temp_start_ms_ = 0;
 

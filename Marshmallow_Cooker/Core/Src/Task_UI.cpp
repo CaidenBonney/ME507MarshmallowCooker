@@ -17,8 +17,9 @@ TaskUI::TaskUI() {
 
 void TaskUI::run() {
   if (state_ == State::Uninitialized) {
-    print_str("UI initialized. Commands: home, start, stop, estop, reset, status, status <ms>, piddebug on, "
-              "piddebug off, -, - <steps>, =, = <steps>\r\n");
+    print_str("UI initialized.\r\n");
+    print_str("Commands: home start stop estop reset status rotate\r\n");
+    print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n");
     state_ = State::Idle;
     armReceive();
   }
@@ -139,6 +140,16 @@ void TaskUI::pushReceivedCharFromIsr(uint8_t c) {
   rx_queue_head_ = next_head;
 }
 
+void TaskUI::pushReceivedBytesFromUsb(const uint8_t* data, uint32_t length) {
+  if (data == nullptr) {
+    return;
+  }
+
+  for (uint32_t index = 0; index < length; index++) {
+    pushReceivedCharFromIsr(data[index]);
+  }
+}
+
 void TaskUI::handleReceivedChar(char c) {
   if (c == '\n' && last_was_cr_) {
     last_was_cr_ = false;
@@ -194,8 +205,9 @@ void TaskUI::handleCompletedLine() {
   Command parsed_command = parseCommandLine(command_buffer_, command_value);
 
   if (parsed_command == Command::Unknown) {
-    print_str("Unknown command. Use: home, start, stop, estop, reset, status, status <ms>, piddebug on, piddebug off, "
-              "-, - <steps>, =, = <steps>\r\n");
+    print_str("Unknown command.\r\n");
+    print_str("Use: home start stop estop reset status rotate\r\n");
+    print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n");
   } else if (parsed_command != Command::None) {
     pending_command_ = parsed_command;
 
@@ -223,10 +235,7 @@ void TaskUI::echoChar(char c) {
 }
 
 void TaskUI::echoString(const char* str) {
-  HAL_UART_Transmit(&huart2,
-                    reinterpret_cast<uint8_t*>(const_cast<char*>(str)),
-                    static_cast<uint16_t>(std::strlen(str)),
-                    100);
+  print_str(str);
 }
 
 TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& command_value) const {
@@ -272,6 +281,10 @@ TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& command_
 
   if (stringsEqual(normalized, "reset")) {
     return (*argument == '\0') ? Command::Reset : Command::Unknown;
+  }
+
+  if (stringsEqual(normalized, "rotate")) {
+    return (*argument == '\0') ? Command::Rotate : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "status")) {
@@ -429,6 +442,10 @@ bool TaskUI::stringsEqual(const char* a, const char* b) {
   }
 
   return *a == '\0' && *b == '\0';
+}
+
+extern "C" void TaskUI_PushUsbRx(uint8_t* data, uint32_t length) {
+  task_ui.pushReceivedBytesFromUsb(data, length);
 }
 
 extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
