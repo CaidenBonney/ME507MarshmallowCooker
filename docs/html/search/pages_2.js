@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deprecated_20list_0',['Deprecated List',['../deprecated.html',1,'']]]
+  ['data_20processing_0',['Mathematical Modeling and Data Processing',['../index.html#autotoc_md15',1,'']]]
 ];

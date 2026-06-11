@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['the_20marshmallow_20cooker_20project_0',['All Code for the Marshmallow Cooker Project',['../dir_b2b6685042ab777418974eff947147e4.html#autotoc_md0',1,'']]]
+  ['pcb_0',['Custom PCB',['../index.html#autotoc_md9',1,'']]],
+  ['processing_1',['Processing',['../index.html#autotoc_md16',1,'Encoder Processing'],['../index.html#autotoc_md15',1,'Mathematical Modeling and Data Processing'],['../index.html#autotoc_md17',1,'Temperature Processing']]],
+  ['project_20overview_2',['Project Overview',['../index.html#autotoc_md1',1,'']]]
 ];

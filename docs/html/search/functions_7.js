@@ -1,25 +1,10 @@
 var searchData=
 [
-  ['getambientcx100_0',['getAmbientCx100',['../class_m_l_x90614.html#aa38e9eca7d4b907e47f329723719ad35',1,'MLX90614']]],
-  ['getambientfx100_1',['getAmbientFx100',['../class_m_l_x90614.html#a65c94110b8ae4aad9c69a103a9189ad2',1,'MLX90614']]],
-  ['getcoldcx100_2',['getColdCx100',['../class_m_c_p9600.html#a09c9ad62e9fe2c571423b061ace12e95',1,'MCP9600']]],
-  ['getcoldfx100_3',['getColdFx100',['../class_m_c_p9600.html#a6d7b191818a8e6ffc6d7d1dcb384306f',1,'MCP9600']]],
-  ['getdeltacx100_4',['getDeltaCx100',['../class_m_c_p9600.html#a0d72948badb18f5f8f96bf42e5e9a16b',1,'MCP9600']]],
-  ['getdeviceid_5',['getDeviceId',['../class_m_c_p9600.html#a7a475d22e6c37b0cc314ce940a34dc0b',1,'MCP9600']]],
-  ['getdirection_6',['getDirection',['../class_t_m_c2209.html#abac871d0a47cceb5f7eaaf81bf491cfc',1,'TMC2209']]],
-  ['gethotcx100_7',['getHotCx100',['../class_m_c_p9600.html#a832ba8ab4e23dbdca8c7604824f69287',1,'MCP9600']]],
-  ['gethotfx100_8',['getHotFx100',['../class_m_c_p9600.html#a3a8736de7b4ec9469abe72fb895ed271',1,'MCP9600']]],
-  ['getlaststatus_9',['getLastStatus',['../class_m_c_p9600.html#a7153c895e84e38058d88c2b4ba7fd812',1,'MCP9600::getLastStatus()'],['../class_m_l_x90614.html#a9514dd00eb32b05737298b00d3946343',1,'MLX90614::getLastStatus() const']]],
-  ['getobjectcx100_10',['getObjectCx100',['../class_m_l_x90614.html#a81f5b24e326e34223d62b4afa6de1b18',1,'MLX90614']]],
-  ['getobjectfx100_11',['getObjectFx100',['../class_m_l_x90614.html#a74b6f7f3aa6e6c57861d4a5185282742',1,'MLX90614']]],
-  ['getposition_12',['getPosition',['../class_r_encoder_driver.html#a870faf9cd1b3c75c9e40099223a61580',1,'REncoderDriver::getPosition()'],['../class_r_motor_driver.html#a0ed2223a5866aaaa3a36edc7a89f1a6e',1,'RMotorDriver::getPosition() const']]],
-  ['getpositiondegrees_13',['getPositionDegrees',['../class_r_motor_driver.html#aa1d364b5d9765e8610ab4b0572836d47',1,'RMotorDriver']]],
-  ['getpositionsteps_14',['getPositionSteps',['../class_z_motor_driver.html#a022740604604f04cc5f818b790ddcb2e',1,'ZMotorDriver']]],
-  ['getsensorconfig_15',['getSensorConfig',['../class_m_c_p9600.html#afe88198376a5dec724e93b3e250689f0',1,'MCP9600']]],
-  ['getstate_16',['getState',['../class_z_motor_driver.html#a8789ca2673cce9c2363e65b74cf27ab3',1,'ZMotorDriver']]],
-  ['getstatus_17',['getStatus',['../class_m_c_p9600.html#a264e6f1b0d8358541c71929b353ef5f5',1,'MCP9600']]],
-  ['getstepintervalus_18',['getStepIntervalUs',['../class_t_m_c2209.html#a3aa4006015a2941cd24b1a6b9f68e667',1,'TMC2209']]],
-  ['getsteprate_19',['getStepRate',['../class_t_m_c2209.html#ab279307526b8a80602c622895d0448a3',1,'TMC2209']]],
-  ['gettargetsteps_20',['getTargetSteps',['../class_z_motor_driver.html#a017706a7ea1dc4985e6885dfef471ed2',1,'ZMotorDriver']]],
-  ['getvelocity_21',['getVelocity',['../class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd',1,'REncoderDriver::getVelocity()'],['../class_r_motor_driver.html#a2121126cada95d15ec0f2e63efb8d003',1,'RMotorDriver::getVelocity()']]]
+  ['initialise_5fmonitor_5fhandles_0',['initialise_monitor_handles',['../syscalls_8c.html#a25c7f100d498300fff65568c2fcfe639',1,'syscalls.c']]],
+  ['isanytriggered_1',['isAnyTriggered',['../class_z_limit_switches.html#abec1d7c4165f58ecd8547b08c00e8420',1,'ZLimitSwitches']]],
+  ['isbottomtriggered_2',['isBottomTriggered',['../class_z_limit_switches.html#a4c09ddbb7b2be8ed79a0d5936a91fbd2',1,'ZLimitSwitches']]],
+  ['isbusy_3',['isBusy',['../class_z_motor_driver.html#ab52c86bb5358118359a05d13c6f0a41f',1,'ZMotorDriver']]],
+  ['isconnected_4',['isConnected',['../class_m_l_x90614.html#aca62035b0ae0a16d616fc7410a80f70f',1,'MLX90614']]],
+  ['isenabled_5',['isEnabled',['../class_t_m_c2209.html#ad391c58bead837ff92b9aa6ba45060ec',1,'TMC2209']]],
+  ['istoptriggered_6',['isTopTriggered',['../class_z_limit_switches.html#abac8ad7bcc30ad7884dcedd5fa61e777',1,'ZLimitSwitches']]]
 ];

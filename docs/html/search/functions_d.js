@@ -1,6 +1,24 @@
 var searchData=
 [
-  ['nmi_5fhandler_0',['NMI_Handler',['../stm32f4xx__it_8h.html#a6ad7a5e3ee69cb6db6a6b9111ba898bc',1,'NMI_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a6ad7a5e3ee69cb6db6a6b9111ba898bc',1,'NMI_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['nvic_5fdecodepriority_1',['NVIC_DecodePriority',['../group___c_m_s_i_s___core___n_v_i_c_functions.html#ga3387607fd8a1a32cccd77d2ac672dd96',1,'core_armv81mml.h']]],
-  ['nvic_5fencodepriority_2',['NVIC_EncodePriority',['../group___c_m_s_i_s___core___n_v_i_c_functions.html#gadb94ac5d892b376e4f3555ae0418ebac',1,'core_armv81mml.h']]]
+  ['setadcresolution_0',['setAdcResolution',['../class_m_c_p9600.html#ab8e94d98526b9549f1edb5e3a4f3469a',1,'MCP9600']]],
+  ['setdirection_1',['setDirection',['../class_t_m_c2209.html#a50d06e1edebb655cb82e7d6d0ef5fe02',1,'TMC2209']]],
+  ['setdirectioninverted_2',['setDirectionInverted',['../class_t_m_c2209.html#ae98f415b13c40a53fb920583ceb67a74',1,'TMC2209::setDirectionInverted()'],['../class_z_motor_driver.html#a505f27648331adf8d8636df9a1114d77',1,'ZMotorDriver::setDirectionInverted()']]],
+  ['setduty_3',['setDuty',['../class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484',1,'DRV8833::setDuty()'],['../class_r_motor_driver.html#a829f4cde8b6338120e566a0417234734',1,'RMotorDriver::setDuty()']]],
+  ['setfiltercoefficient_4',['setFilterCoefficient',['../class_m_c_p9600.html#a8c90e728a72dd55ff3fb2eeb1b7132c5',1,'MCP9600']]],
+  ['setlimitsactivelow_5',['setLimitsActiveLow',['../class_z_motor_driver.html#a622a3471e0c4c440625f8a6c24db306e',1,'ZMotorDriver']]],
+  ['setmicrosteps_6',['setMicrosteps',['../class_z_motor_driver.html#aff63937065e71401275603eedea93446',1,'ZMotorDriver']]],
+  ['setnormalmode_7',['setNormalMode',['../class_m_c_p9600.html#ac8671a7c1a02dd776eaffc39e274b151',1,'MCP9600']]],
+  ['setshutdownmode_8',['setShutdownMode',['../class_m_c_p9600.html#aafff05ba655f1f62231fe584cbf2a2fd',1,'MCP9600']]],
+  ['setspeed_9',['setSpeed',['../class_z_motor_driver.html#aac1766b1e0e707641598e2445602843b',1,'ZMotorDriver']]],
+  ['setspeedstepspersecond_10',['setSpeedStepsPerSecond',['../class_z_motor_driver.html#a60ad0d9c35350c1689ff0953ce2b9e85',1,'ZMotorDriver']]],
+  ['setsteprate_11',['setStepRate',['../class_t_m_c2209.html#a9aa530caefd5c72a3c8c9346f1e577f7',1,'TMC2209']]],
+  ['setthermocoupletype_12',['setThermocoupleType',['../class_m_c_p9600.html#a7e33a1da0a1ca6c02cf1dac410fb2220',1,'MCP9600']]],
+  ['stepifdue_13',['stepIfDue',['../class_t_m_c2209.html#a57489de9d00260c85143377507dd52e0',1,'TMC2209']]],
+  ['stepnow_14',['stepNow',['../class_t_m_c2209.html#ab35a0f8077a70f7e5d878f6741e8bcb3',1,'TMC2209']]],
+  ['stop_15',['stop',['../class_z_motor_driver.html#a3941b6ade35a482080c3c98ee2b984b7',1,'ZMotorDriver']]],
+  ['svc_5fhandler_16',['SVC_Handler',['../stm32f4xx__it_8h.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c']]],
+  ['systemclock_5fconfig_17',['SystemClock_Config',['../main_8cpp.html#a70af21c671abfcc773614a9a4f63d920',1,'main.cpp']]],
+  ['systemcoreclockupdate_18',['SystemCoreClockUpdate',['../group___s_t_m32_f4xx___system___private___functions.html#gae0c36a9591fe6e9c45ecb21a794f0f0f',1,'system_stm32f4xx.c']]],
+  ['systeminit_19',['SystemInit',['../group___s_t_m32_f4xx___system___private___functions.html#ga93f514700ccf00d08dbdcff7f1224eb2',1,'system_stm32f4xx.c']]],
+  ['systick_5fhandler_20',['SysTick_Handler',['../stm32f4xx__it_8h.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#ab5e09814056d617c521549e542639b7e',1,'SysTick_Handler(void):&#160;stm32f4xx_it.c']]]
 ];

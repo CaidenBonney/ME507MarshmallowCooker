@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_t_m_c2209_8h_
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TMC2209_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="main_8h.html">main.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;stm32f4xx_hal.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
@@ -136,13 +136,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_t_m_c2209_8h_
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  };</div>
 </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <a class="code hl_function" href="class_t_m_c2209.html#a29267655a6fc539d847ab274f2f8db44">TMC2209</a>(<a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* step_port,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <a class="code hl_function" href="class_t_m_c2209.html#a29267655a6fc539d847ab274f2f8db44">TMC2209</a>(GPIO_TypeDef* step_port,</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>          uint16_t step_pin,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>          <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* dir_port,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>          GPIO_TypeDef* dir_port,</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>          uint16_t dir_pin,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>          <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* enn_port,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>          GPIO_TypeDef* enn_port,</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>          uint16_t enn_pin,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>          <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* diag_port,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>          GPIO_TypeDef* diag_port,</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>          uint16_t diag_pin);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_m_c2209.html#af9203181778a343b17cb1a5ef5829f08">begin</a>();</div>
@@ -178,13 +178,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_t_m_c2209_8h_
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">void</span> delayUs(uint32_t delay_us) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">void</span> writeDirectionPin(<a class="code hl_enumeration" href="class_t_m_c2209.html#ad17f90ce02f1601f38e98085519e1aaa">Direction</a> direction);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* step_port_;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  GPIO_TypeDef* step_port_;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  uint16_t step_pin_;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* dir_port_;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  GPIO_TypeDef* dir_port_;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  uint16_t dir_pin_;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* enn_port_;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  GPIO_TypeDef* enn_port_;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  uint16_t enn_pin_;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <a class="code hl_struct" href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a>* diag_port_;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  GPIO_TypeDef* diag_port_;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  uint16_t diag_pin_;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">bool</span> enabled_;</div>
@@ -221,8 +221,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_t_m_c2209_8h_
 <div class="ttc" id="aclass_t_m_c2209_html_af79534452c8119d0cac42816e7b2e3e2"><div class="ttname"><a href="class_t_m_c2209.html#af79534452c8119d0cac42816e7b2e3e2">TMC2209::micros</a></div><div class="ttdeci">uint32_t micros() const</div><div class="ttdef"><b>Definition</b> TMC2209.cpp:194</div></div>
 <div class="ttc" id="aclass_t_m_c2209_html_af9203181778a343b17cb1a5ef5829f08"><div class="ttname"><a href="class_t_m_c2209.html#af9203181778a343b17cb1a5ef5829f08">TMC2209::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdef"><b>Definition</b> TMC2209.cpp:34</div></div>
 <div class="ttc" id="amain_8h_html"><div class="ttname"><a href="main_8h.html">main.h</a></div><div class="ttdoc">: Header for main.c file. This file contains the common defines of the application.</div></div>
-<div class="ttc" id="astm32f4xx__hal_8h_html"><div class="ttname"><a href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a></div><div class="ttdoc">This file contains all the functions prototypes for the HAL module driver.</div></div>
-<div class="ttc" id="astruct_g_p_i_o___type_def_html"><div class="ttname"><a href="struct_g_p_i_o___type_def.html">GPIO_TypeDef</a></div><div class="ttdoc">General Purpose I/O.</div><div class="ttdef"><b>Definition</b> stm32f411xe.h:266</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

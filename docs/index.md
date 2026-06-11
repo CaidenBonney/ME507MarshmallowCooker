@@ -1,3 +1,5 @@
+@mainpage ME507 Marshmallow Cooker
+
 # ME507 Marshmallow Cooker
 
 ## Project Overview
