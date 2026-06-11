@@ -131,8 +131,8 @@ private:
   static constexpr int32_t kRemovalHeightSteps = -500; ///< Z removal height.
   static constexpr int32_t kStartCookingPositionSteps = -11000; ///< Initial cooking height.
   static constexpr int32_t kPidOutputLimitSteps = 750; ///< Maximum PID step correction per update.
-  static constexpr int32_t kPidDeadbandSteps = 2; ///< PID command deadband in steps.
-  static constexpr int32_t kMinCookPositionSteps = -24400; ///< Software lower travel limit.
+  static constexpr int32_t kPidDeadbandSteps = 100; ///< PID command deadband in steps.
+  static constexpr int32_t kMinCookPositionSteps = -16000; ///< Software lower travel limit.
   static constexpr float kIntegralErrorLimit = 500.0f; ///< Integral wind-up limit.
 
   static constexpr float kDefaultKp = 1.0f; ///< Default proportional gain, steps/F.
@@ -150,6 +150,7 @@ private:
   bool homed_ = false;
   bool valid_flame_temp_ = false;
   bool pid_debug_enabled_ = false;
+  bool pid_min_cook_height_reported_ = false; ///< True after the PID lower-height clamp message has been printed.
 
   int32_t target_flame_temp_fx100_ = 0;
   int32_t measured_flame_temp_fx100_ = 0;

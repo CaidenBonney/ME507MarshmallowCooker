@@ -300,6 +300,7 @@ void TaskZMotor::resetPid() {
   integral_error_ = 0.0f;
   previous_error_f_ = 0.0f;
   previous_error_valid_ = false;
+  pid_min_cook_height_reported_ = false;
   last_pid_update_ms_ = HAL_GetTick();
 }
 
@@ -420,13 +421,18 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
     next_target_steps = 0;
   }
 
-  // Software lower travel limit for early PID testing.
-  // If the thermocouple target is unreachable, do not keep driving downward forever.
+  // Software lower travel limit for cooking.
+  // If the thermocouple target is unreachable, clamp at the minimum cook height
+  // and continue running instead of faulting the cooker.
   if (next_target_steps < kMinCookPositionSteps) {
-    z_motor_driver_.stop();
-    state_ = State::Fault;
-    print_str("Z fault: PID reached minimum allowed cook height. Flame target unreachable.\r\n");
-    return;
+    next_target_steps = kMinCookPositionSteps;
+
+    if (!pid_min_cook_height_reported_) {
+      print_str("Z at minimum cook height. Holding at software lower limit.\r\n");
+      pid_min_cook_height_reported_ = true;
+    }
+  } else {
+    pid_min_cook_height_reported_ = false;
   }
 
   // If the motor is already against a limit, do not command farther into that limit.
