@@ -61,7 +61,8 @@ public:
     Stop, /**< Request a normal stop and removal move. */
     EmergencyStop, /**< Immediately fault and stop all motion. */
     Reset, /**< Clear Done/Fault state for another cook cycle. */
-    Status /**< Print a one-line status report. */
+    Status, /**< Print a one-line status report. */
+    Unknown /**< Command was not recognized. */
   };
 
   /** @brief Construct the UI task. */
