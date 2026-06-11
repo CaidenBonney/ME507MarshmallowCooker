@@ -1,8 +1,14 @@
+/**
+ * @file z_motor_driver.cpp
+ * @brief Implementation of the non-blocking Z-axis stepper driver.
+ */
+
 #include "z_motor_driver.h"
 
 #include "main.h"
 #include <climits>
 
+/** @copydoc ZMotorDriver::ZMotorDriver */
 ZMotorDriver::ZMotorDriver()
     : tmc_(Z_STEP_GPIO_Port,
            Z_STEP_Pin,
@@ -23,6 +29,7 @@ ZMotorDriver::ZMotorDriver()
       state_(State::Disabled) {
 }
 
+/** @copydoc ZMotorDriver::begin */
 void ZMotorDriver::begin() {
   tmc_.begin();
   tmc_.setStepRate(speed_steps_per_second_);
@@ -30,17 +37,20 @@ void ZMotorDriver::begin() {
   state_ = State::Disabled;
 }
 
+/** @copydoc ZMotorDriver::enable */
 void ZMotorDriver::enable() {
   tmc_.enable();
   state_ = State::Idle;
 }
 
+/** @copydoc ZMotorDriver::disable */
 void ZMotorDriver::disable() {
   tmc_.disable();
   homing_ = false;
   state_ = State::Disabled;
 }
 
+/** @copydoc ZMotorDriver::update */
 void ZMotorDriver::update() {
   if (!tmc_.isEnabled()) {
     state_ = State::Disabled;
@@ -119,6 +129,7 @@ void ZMotorDriver::update() {
   }
 }
 
+/** @copydoc ZMotorDriver::moveSteps */
 void ZMotorDriver::moveSteps(int32_t steps) {
   if (steps == 0) {
     return;
@@ -143,6 +154,7 @@ void ZMotorDriver::moveSteps(int32_t steps) {
   state_ = State::Moving;
 }
 
+/** @copydoc ZMotorDriver::moveTo */
 void ZMotorDriver::moveTo(int32_t target_position_steps) {
   homing_ = false;
   target_steps_ = target_position_steps;
@@ -168,6 +180,7 @@ void ZMotorDriver::moveTo(int32_t target_position_steps) {
   state_ = State::Moving;
 }
 
+/** @copydoc ZMotorDriver::jog */
 void ZMotorDriver::jog(Direction direction, uint32_t speed_steps_per_second) {
   setSpeed(speed_steps_per_second);
 
@@ -178,6 +191,7 @@ void ZMotorDriver::jog(Direction direction, uint32_t speed_steps_per_second) {
   }
 }
 
+/** @copydoc ZMotorDriver::stop */
 void ZMotorDriver::stop() {
   target_steps_ = position_steps_;
   homing_ = false;
@@ -187,6 +201,7 @@ void ZMotorDriver::stop() {
   }
 }
 
+/** @copydoc ZMotorDriver::home */
 void ZMotorDriver::home(Direction direction, uint32_t speed_steps_per_second) {
   setSpeed(speed_steps_per_second);
   homing_direction_ = direction;
@@ -209,19 +224,23 @@ void ZMotorDriver::home(Direction direction, uint32_t speed_steps_per_second) {
   state_ = State::Moving;
 }
 
+/** @copydoc ZMotorDriver::homeUp */
 void ZMotorDriver::homeUp(uint32_t speed_steps_per_second) {
   home(Direction::Up, speed_steps_per_second);
 }
 
+/** @copydoc ZMotorDriver::homeDown */
 void ZMotorDriver::homeDown(uint32_t speed_steps_per_second) {
   home(Direction::Down, speed_steps_per_second);
 }
 
+/** @copydoc ZMotorDriver::zeroPosition */
 void ZMotorDriver::zeroPosition() {
   position_steps_ = 0;
   target_steps_ = 0;
 }
 
+/** @copydoc ZMotorDriver::setSpeed */
 void ZMotorDriver::setSpeed(uint32_t steps_per_second) {
   if (steps_per_second == 0) {
     steps_per_second = 1;
@@ -231,10 +250,12 @@ void ZMotorDriver::setSpeed(uint32_t steps_per_second) {
   tmc_.setStepRate(speed_steps_per_second_);
 }
 
+/** @copydoc ZMotorDriver::setSpeedStepsPerSecond */
 void ZMotorDriver::setSpeedStepsPerSecond(uint32_t steps_per_second) {
   setSpeed(steps_per_second);
 }
 
+/** @copydoc ZMotorDriver::setMicrosteps */
 void ZMotorDriver::setMicrosteps(uint16_t microsteps) {
   if (microsteps == 0) {
     microsteps = 1;
@@ -246,55 +267,55 @@ void ZMotorDriver::setMicrosteps(uint16_t microsteps) {
   microsteps_ = microsteps;
 }
 
+/** @copydoc ZMotorDriver::setLimitsActiveLow */
 void ZMotorDriver::setLimitsActiveLow(bool active_low) {
   limits_active_low_ = active_low;
 }
 
+/** @copydoc ZMotorDriver::setDirectionInverted */
 void ZMotorDriver::setDirectionInverted(bool inverted) {
   tmc_.setDirectionInverted(inverted);
   setDirection(current_direction_);
 }
 
+/** @copydoc ZMotorDriver::getPositionSteps */
 int32_t ZMotorDriver::getPositionSteps() const {
   return position_steps_;
 }
 
+/** @copydoc ZMotorDriver::getTargetSteps */
 int32_t ZMotorDriver::getTargetSteps() const {
   return target_steps_;
 }
 
+/** @copydoc ZMotorDriver::getState */
 ZMotorDriver::State ZMotorDriver::getState() const {
   return state_;
 }
 
+/** @copydoc ZMotorDriver::isBusy */
 bool ZMotorDriver::isBusy() const {
   return state_ == State::Moving;
 }
 
+/** @copydoc ZMotorDriver::topLimitPressed */
 bool ZMotorDriver::topLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_TOP_GPIO_Port, Z_TOP_Pin);
-
-  if (limits_active_low_) {
-    return pin_state == GPIO_PIN_RESET;
-  }
-
-  return pin_state == GPIO_PIN_SET;
+  return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
 }
 
+/** @copydoc ZMotorDriver::bottomLimitPressed */
 bool ZMotorDriver::bottomLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_BOT_GPIO_Port, Z_BOT_Pin);
-
-  if (limits_active_low_) {
-    return pin_state == GPIO_PIN_RESET;
-  }
-
-  return pin_state == GPIO_PIN_SET;
+  return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
 }
 
+/** @copydoc ZMotorDriver::driverFaultActive */
 bool ZMotorDriver::driverFaultActive() const {
   return tmc_.diagActive();
 }
 
+/** @copydoc ZMotorDriver::setDirection */
 void ZMotorDriver::setDirection(Direction direction) {
   current_direction_ = direction;
 
@@ -305,6 +326,7 @@ void ZMotorDriver::setDirection(Direction direction) {
   }
 }
 
+/** @copydoc ZMotorDriver::tryStep */
 bool ZMotorDriver::tryStep(Direction direction) {
   setDirection(direction);
 
@@ -327,6 +349,7 @@ bool ZMotorDriver::tryStep(Direction direction) {
   return true;
 }
 
+/** @copydoc ZMotorDriver::limitBlocksDirection */
 bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
   if (direction == Direction::Up && topLimitPressed()) {
     return true;
@@ -339,6 +362,7 @@ bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
   return false;
 }
 
+/** @copydoc ZMotorDriver::motionCommandActive */
 bool ZMotorDriver::motionCommandActive() const {
   return homing_ || (state_ == State::Moving && position_steps_ != target_steps_);
 }

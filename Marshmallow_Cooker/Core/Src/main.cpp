@@ -56,15 +56,20 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-// Creating Tasks
+/** @brief UART command parser task instance. */
 TaskUI task_ui;
+/** @brief Temperature polling task instance. */
 TaskTemps task_temps;
+/** @brief Rotisserie motor task instance. */
 TaskRMotor task_r_motor;
+/** @brief Z lift motor task instance. */
 TaskZMotor task_z_motor;
+/** @brief Top-level cooker task instance. */
 TaskCooker task_cooker(task_ui, task_temps, task_r_motor, task_z_motor);
 
-// buffer and length for printing
+/** @brief Shared formatted-print buffer used before calling print_str(). */
 char print_buf[100];
+/** @brief Legacy print buffer length variable. */
 uint8_t print_buf_len;
 /* USER CODE END PV */
 
@@ -80,6 +85,10 @@ static void MX_TIM1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/**
+ * @brief HAL timer callback reserved for future timer-driven motor updates.
+ * @param htim Timer handle that elapsed.
+ */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
   (void)htim;
 }
@@ -424,6 +433,10 @@ static void MX_GPIO_Init(void) {
 
 /* USER CODE BEGIN 4 */
 // User created functions
+/**
+ * @brief Transmit a null-terminated string over UART2.
+ * @param str Null-terminated string to transmit.
+ */
 void print_str(const char* str) {
   if (str == nullptr) {
     return;

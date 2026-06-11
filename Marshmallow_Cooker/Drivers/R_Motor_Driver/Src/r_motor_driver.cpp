@@ -1,13 +1,20 @@
+/**
+ * @file r_motor_driver.cpp
+ * @brief Implementation of the R-axis gearmotor driver.
+ */
+
 #include "r_motor_driver.h"
 
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
 
+/** @copydoc RMotorDriver::RMotorDriver */
 RMotorDriver::RMotorDriver()
     : driver_(&htim1, TIM_CHANNEL_2, TIM_CHANNEL_3),
       encoder_(&htim3) {
 }
 
+/** @copydoc RMotorDriver::begin */
 HAL_StatusTypeDef RMotorDriver::begin() {
   encoder_.reset();
 
@@ -22,6 +29,7 @@ HAL_StatusTypeDef RMotorDriver::begin() {
   return status;
 }
 
+/** @copydoc RMotorDriver::update */
 void RMotorDriver::update() {
   encoder_.update();
 
@@ -67,42 +75,52 @@ void RMotorDriver::update() {
   }
 }
 
+/** @copydoc RMotorDriver::setDuty */
 void RMotorDriver::setDuty(int16_t duty) {
   driver_.setDuty(clampPower(duty));
 }
 
+/** @copydoc RMotorDriver::brake */
 void RMotorDriver::brake() {
   driver_.brake();
 }
 
+/** @copydoc RMotorDriver::coast */
 void RMotorDriver::coast() {
   driver_.coast();
 }
 
+/** @copydoc RMotorDriver::getVelocity */
 int16_t RMotorDriver::getVelocity() const {
   return encoder_.getVelocity();
 }
 
+/** @copydoc RMotorDriver::getPosition */
 int32_t RMotorDriver::getPosition() const {
   return encoder_.getPosition();
 }
 
+/** @copydoc RMotorDriver::getPositionDegrees */
 int32_t RMotorDriver::getPositionDegrees() const {
   return countsToDegrees(encoder_.getPosition());
 }
 
+/** @copydoc RMotorDriver::resetEncoder */
 void RMotorDriver::resetEncoder() {
   encoder_.reset();
 }
 
+/** @copydoc RMotorDriver::degreesToCounts */
 int32_t RMotorDriver::degreesToCounts(int32_t degrees) const {
   return (degrees * kCountsPerOutputRev) / 360;
 }
 
+/** @copydoc RMotorDriver::countsToDegrees */
 int32_t RMotorDriver::countsToDegrees(int32_t counts) const {
   return (counts * 360) / kCountsPerOutputRev;
 }
 
+/** @copydoc RMotorDriver::clampPower */
 int16_t RMotorDriver::clampPower(int32_t power) const {
   if (power > kMaxPower) {
     return kMaxPower;
@@ -115,6 +133,7 @@ int16_t RMotorDriver::clampPower(int32_t power) const {
   return static_cast<int16_t>(power);
 }
 
+/** @copydoc RMotorDriver::moveDegreesBlocking */
 void RMotorDriver::moveDegreesBlocking(int32_t degrees, int16_t duty, uint32_t timeout_ms) {
 
   if (degrees == 0 || duty == 0) {
@@ -145,11 +164,13 @@ void RMotorDriver::moveDegreesBlocking(int32_t degrees, int16_t duty, uint32_t t
   brake();
 }
 
+/** @copydoc RMotorDriver::stop */
 void RMotorDriver::stop() {
   brake();
   state_ = State::Idle;
 }
 
+/** @copydoc RMotorDriver::moveDegrees */
 void RMotorDriver::moveDegrees(int32_t degrees, int16_t duty, uint32_t timeout_ms) {
   if (degrees == 0 || duty == 0) {
     stop();
@@ -170,6 +191,7 @@ void RMotorDriver::moveDegrees(int32_t degrees, int16_t duty, uint32_t timeout_m
   state_ = State::MovingToPosition;
 }
 
+/** @copydoc RMotorDriver::moveToDegrees */
 void RMotorDriver::moveToDegrees(int32_t target_degrees, int16_t duty, uint32_t timeout_ms) {
   target_counts_ = degreesToCounts(target_degrees);
 
@@ -183,6 +205,7 @@ void RMotorDriver::moveToDegrees(int32_t target_degrees, int16_t duty, uint32_t 
   state_ = State::MovingToPosition;
 }
 
+/** @copydoc RMotorDriver::rotateContinuous */
 void RMotorDriver::rotateContinuous(int16_t duty) {
   if (duty == 0) {
     stop();
@@ -195,14 +218,17 @@ void RMotorDriver::rotateContinuous(int16_t duty) {
   state_ = State::RotatingContinuous;
 }
 
+/** @copydoc RMotorDriver::isBusy */
 bool RMotorDriver::isBusy() const {
   return state_ == State::MovingToPosition || state_ == State::RotatingContinuous;
 }
 
+/** @copydoc RMotorDriver::isFaulted */
 bool RMotorDriver::isFaulted() const {
   return state_ == State::Fault;
 }
 
+/** @copydoc RMotorDriver::getState */
 RMotorDriver::State RMotorDriver::getState() const {
   return state_;
 }

@@ -1,30 +1,33 @@
-#include "Task_Temps.h"
+/**
+ * @file Task_Temps.cpp
+ * @brief Implementation of the temperature sensor polling task.
+ */
 
-#include <cstdio>
+#include "Task_Temps.h"
+#include "stdio.h"
 
 extern I2C_HandleTypeDef hi2c3;
 
+/** @copydoc TaskTemps::TaskTemps */
 TaskTemps::TaskTemps()
     : tc_sensor_(&hi2c3),
       ir_sensor_(&hi2c3) {
 }
 
+/** @copydoc TaskTemps::run */
 void TaskTemps::run() {
   switch (state_) {
     case State::Uninitialized:
       print_str("I2C3 sensors initializing\r\n");
 
       if (tc_sensor_.begin() != HAL_OK) {
-        std::snprintf(print_buf, sizeof(print_buf), "MCP9600 init failed, status=%d\r\n", tc_sensor_.getLastStatus());
+        sprintf(print_buf, "MCP9600 init failed, status=%d\r\n", tc_sensor_.getLastStatus());
         print_str(print_buf);
         state_ = State::Fault;
         return;
       }
 
-      std::snprintf(print_buf,
-                    sizeof(print_buf),
-                    "MCP9600 initialized, device_id=0x%04X\r\n",
-                    tc_sensor_.getDeviceId());
+      sprintf(print_buf, "MCP9600 initialized, device_id=0x%04X\r\n", tc_sensor_.getDeviceId());
       print_str(print_buf);
 
       state_ = State::Idle;
@@ -50,6 +53,7 @@ void TaskTemps::run() {
   }
 }
 
+/** @copydoc TaskTemps::update */
 void TaskTemps::update() {
   status = ir_sensor_.update();
 
@@ -72,11 +76,12 @@ void TaskTemps::update() {
   } else {
     valid_tc_reading_ = false;
 
-    std::snprintf(print_buf, sizeof(print_buf), "TC Temp read failed, status=%d\r\n", tc_sensor_.getLastStatus());
+    sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_sensor_.getLastStatus());
     print_str(print_buf);
   }
 }
 
+/** @copydoc TaskTemps::getStatus */
 Task::Status TaskTemps::getStatus() const {
   if (state_ == State::Uninitialized) {
     return Task::Status::Uninitialized;
@@ -89,39 +94,45 @@ Task::Status TaskTemps::getStatus() const {
   return Task::Status::Running;
 }
 
+/** @copydoc TaskTemps::getState */
 TaskTemps::State TaskTemps::getState() const {
   return state_;
 }
 
+/** @copydoc TaskTemps::hasValidThermocoupleReading */
 bool TaskTemps::hasValidThermocoupleReading() const {
   return valid_tc_reading_;
 }
 
+/** @copydoc TaskTemps::hasValidIrReading */
 bool TaskTemps::hasValidIrReading() const {
   return valid_ir_reading_;
 }
 
+/** @copydoc TaskTemps::getThermocoupleHotFx100 */
 int32_t TaskTemps::getThermocoupleHotFx100() const {
   return tc_hot_fx100_;
 }
 
+/** @copydoc TaskTemps::getThermocoupleColdFx100 */
 int32_t TaskTemps::getThermocoupleColdFx100() const {
   return tc_cold_fx100_;
 }
 
+/** @copydoc TaskTemps::getIrObjectFx100 */
 int32_t TaskTemps::getIrObjectFx100() const {
   return ir_object_fx100_;
 }
 
+/** @copydoc TaskTemps::printTemperatures */
 void TaskTemps::printTemperatures() const {
-  std::snprintf(print_buf,
-                sizeof(print_buf),
-                "IR Temp: %ld.%02ld F, TC Hot: %ld.%02ld F, Cold: %ld.%02ld F\r\n",
-                static_cast<long>(ir_object_fx100_ / 100),
-                static_cast<long>(abs(ir_object_fx100_ % 100)),
-                static_cast<long>(tc_hot_fx100_ / 100),
-                static_cast<long>(abs(tc_hot_fx100_ % 100)),
-                static_cast<long>(tc_cold_fx100_ / 100),
-                static_cast<long>(abs(tc_cold_fx100_ % 100)));
+  sprintf(print_buf,
+          "IR Temp: %ld.%02ld F, TC Hot: %ld.%02ld F, Cold: %ld.%02ld F\r\n",
+          static_cast<long>(ir_object_fx100_ / 100),
+          static_cast<long>(abs(ir_object_fx100_ % 100)),
+          static_cast<long>(tc_hot_fx100_ / 100),
+          static_cast<long>(abs(tc_hot_fx100_ % 100)),
+          static_cast<long>(tc_cold_fx100_ / 100),
+          static_cast<long>(abs(tc_cold_fx100_ % 100)));
   print_str(print_buf);
 }

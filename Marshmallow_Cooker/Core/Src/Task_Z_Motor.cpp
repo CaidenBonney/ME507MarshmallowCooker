@@ -1,12 +1,19 @@
+/**
+ * @file Task_Z_Motor.cpp
+ * @brief Implementation of the Z-axis motor task and PID controller.
+ */
+
 #include "Task_Z_Motor.h"
 
 #include <cstdio>
 
+/** @copydoc TaskZMotor::TaskZMotor */
 TaskZMotor::TaskZMotor()
     : z_motor_driver_(),
       z_limit_switches_(Z_TOP_GPIO_Port, Z_TOP_Pin, Z_BOT_GPIO_Port, Z_BOT_Pin) {
 }
 
+/** @copydoc TaskZMotor::run */
 void TaskZMotor::run() {
   const uint32_t now_ms = HAL_GetTick();
 
@@ -21,10 +28,13 @@ void TaskZMotor::run() {
     return;
   }
 
-  // Keep the stepper driver updated as often as the main loop calls this task.
+  // Let the stepper driver update as often as the main loop can call this task.
+  // This is what allows the speed setting to actually matter.
   z_motor_driver_.update();
 
-  if ((now_ms - last_update_ms_) < kUpdatePeriodMs) {
+  const bool task_tick_due = (now_ms - last_update_ms_) >= kUpdatePeriodMs;
+
+  if (!task_tick_due) {
     return;
   }
 
@@ -90,10 +100,12 @@ void TaskZMotor::run() {
   }
 }
 
+/** @copydoc TaskZMotor::update */
 void TaskZMotor::update() {
   run();
 }
 
+/** @copydoc TaskZMotor::getStatus */
 Task::Status TaskZMotor::getStatus() const {
   if (state_ == State::Uninitialized) {
     return Task::Status::Uninitialized;
@@ -106,10 +118,12 @@ Task::Status TaskZMotor::getStatus() const {
   return Task::Status::Running;
 }
 
+/** @copydoc TaskZMotor::getState */
 TaskZMotor::State TaskZMotor::getState() const {
   return state_;
 }
 
+/** @copydoc TaskZMotor::startHoming */
 void TaskZMotor::startHoming() {
   if (state_ == State::Fault) {
     print_str("Z home rejected: task is faulted. Send reset first.\r\n");
@@ -126,6 +140,7 @@ void TaskZMotor::startHoming() {
   print_str("Z homing upward toward top limit.\r\n");
 }
 
+/** @copydoc TaskZMotor::startTemperatureControl */
 void TaskZMotor::startTemperatureControl(int32_t target_flame_temp_fx100) {
   if (state_ == State::Fault) {
     print_str("Z temperature control rejected: task is faulted.\r\n");
@@ -142,21 +157,13 @@ void TaskZMotor::startTemperatureControl(int32_t target_flame_temp_fx100) {
   moveToStartPosition();
 }
 
+/** @copydoc TaskZMotor::setMeasuredFlameTempFx100 */
 void TaskZMotor::setMeasuredFlameTempFx100(int32_t measured_flame_temp_fx100) {
   measured_flame_temp_fx100_ = measured_flame_temp_fx100;
   valid_flame_temp_ = true;
 }
 
-void TaskZMotor::setPidDebugEnabled(bool enabled) {
-  pid_debug_enabled_ = enabled;
-
-  if (pid_debug_enabled_) {
-    print_str("Z PID debug enabled\r\n");
-  } else {
-    print_str("Z PID debug disabled\r\n");
-  }
-}
-
+/** @copydoc TaskZMotor::moveToRemovalHeight */
 void TaskZMotor::moveToRemovalHeight() {
   if (state_ == State::Fault) {
     print_str("Z removal move rejected: task is faulted.\r\n");
@@ -174,6 +181,7 @@ void TaskZMotor::moveToRemovalHeight() {
   state_ = State::MovingToRemovalHeight;
 }
 
+/** @copydoc TaskZMotor::moveToStartPosition */
 void TaskZMotor::moveToStartPosition() {
   if (state_ == State::Fault) {
     print_str("Z start-position move rejected: task is faulted.\r\n");
@@ -190,54 +198,7 @@ void TaskZMotor::moveToStartPosition() {
   state_ = State::MovingToStartPosition;
 }
 
-void TaskZMotor::jogRelativeSteps(int32_t relative_steps) {
-  if (state_ == State::Fault) {
-    print_str("Z jog rejected: task is faulted. Send reset first.\r\n");
-    return;
-  }
-
-  if (!homed_) {
-    print_str("Z jog rejected: home Z first.\r\n");
-    return;
-  }
-
-  if (state_ == State::Homing || state_ == State::MovingToStartPosition || state_ == State::ControllingFlameTemp ||
-      state_ == State::MovingToRemovalHeight || z_motor_driver_.isBusy()) {
-    print_str("Z jog rejected: Z is busy.\r\n");
-    return;
-  }
-
-  int32_t target_steps = z_motor_driver_.getPositionSteps() + relative_steps;
-
-  if (target_steps > 0) {
-    target_steps = 0;
-  }
-
-  if (target_steps < kMinCookPositionSteps) {
-    target_steps = kMinCookPositionSteps;
-  }
-
-  if (topLimitPressed() && target_steps > z_motor_driver_.getPositionSteps()) {
-    print_str("Z jog up rejected: top limit is pressed.\r\n");
-    return;
-  }
-
-  if (bottomLimitPressed() && target_steps < z_motor_driver_.getPositionSteps()) {
-    print_str("Z jog down rejected: bottom limit is pressed.\r\n");
-    return;
-  }
-
-  z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
-  z_motor_driver_.moveTo(target_steps);
-
-  std::snprintf(print_buf,
-                100,
-                "Z jog: moving from %ld to %ld steps.\r\n",
-                static_cast<long>(z_motor_driver_.getPositionSteps()),
-                static_cast<long>(target_steps));
-  print_str(print_buf);
-}
-
+/** @copydoc TaskZMotor::stopMotion */
 void TaskZMotor::stopMotion() {
   z_motor_driver_.stop();
   resetPid();
@@ -247,6 +208,7 @@ void TaskZMotor::stopMotion() {
   }
 }
 
+/** @copydoc TaskZMotor::emergencyStop */
 void TaskZMotor::emergencyStop() {
   z_motor_driver_.stop();
   resetPid();
@@ -254,6 +216,7 @@ void TaskZMotor::emergencyStop() {
   print_str("Z emergency stop. Task entered fault state.\r\n");
 }
 
+/** @copydoc TaskZMotor::resetFault */
 void TaskZMotor::resetFault() {
   z_motor_driver_.stop();
   resetPid();
@@ -263,6 +226,7 @@ void TaskZMotor::resetFault() {
   print_str("Z fault reset. Re-home before cooking.\r\n");
 }
 
+/** @copydoc TaskZMotor::setPidGains */
 void TaskZMotor::setPidGains(float kp, float ki, float kd) {
   kp_ = kp;
   ki_ = ki;
@@ -270,6 +234,18 @@ void TaskZMotor::setPidGains(float kp, float ki, float kd) {
   resetPid();
 }
 
+/** @copydoc TaskZMotor::setPidDebugEnabled */
+void TaskZMotor::setPidDebugEnabled(bool enabled) {
+  pid_debug_enabled_ = enabled;
+
+  if (pid_debug_enabled_) {
+    print_str("Z PID debug enabled\r\n");
+  } else {
+    print_str("Z PID debug disabled\r\n");
+  }
+}
+
+/** @copydoc TaskZMotor::resetPid */
 void TaskZMotor::resetPid() {
   integral_error_ = 0.0f;
   previous_error_f_ = 0.0f;
@@ -277,27 +253,33 @@ void TaskZMotor::resetPid() {
   last_pid_update_ms_ = HAL_GetTick();
 }
 
+/** @copydoc TaskZMotor::isBusy */
 bool TaskZMotor::isBusy() const {
   return state_ == State::Homing || state_ == State::MovingToStartPosition || state_ == State::ControllingFlameTemp ||
          state_ == State::MovingToRemovalHeight || z_motor_driver_.isBusy();
 }
 
+/** @copydoc TaskZMotor::isFaulted */
 bool TaskZMotor::isFaulted() const {
   return state_ == State::Fault || z_motor_driver_.getState() == ZMotorDriver::State::Fault;
 }
 
+/** @copydoc TaskZMotor::isHomed */
 bool TaskZMotor::isHomed() const {
   return homed_;
 }
 
+/** @copydoc TaskZMotor::getPositionSteps */
 int32_t TaskZMotor::getPositionSteps() const {
   return z_motor_driver_.getPositionSteps();
 }
 
+/** @copydoc TaskZMotor::getTargetSteps */
 int32_t TaskZMotor::getTargetSteps() const {
   return z_motor_driver_.getTargetSteps();
 }
 
+/** @copydoc TaskZMotor::enterFault */
 void TaskZMotor::enterFault(const char* reason) {
   z_motor_driver_.stop();
   resetPid();
@@ -309,34 +291,32 @@ void TaskZMotor::enterFault(const char* reason) {
   state_ = State::Fault;
 }
 
+/** @copydoc TaskZMotor::handleDriverLimitState */
 void TaskZMotor::handleDriverLimitState() {
   const ZMotorDriver::State driver_state = z_motor_driver_.getState();
 
   if (driver_state == ZMotorDriver::State::HitBottomLimit) {
-    if (state_ == State::ControllingFlameTemp) {
-      z_motor_driver_.stop();
-      resetPid();
-      state_ = State::Idle;
-      print_str("Z bottom limit reached during flame control.\r\n");
-      return;
-    }
-
-    if (state_ == State::MovingToStartPosition || state_ == State::MovingToRemovalHeight) {
+    if (state_ == State::ControllingFlameTemp || state_ == State::MovingToStartPosition ||
+        state_ == State::MovingToRemovalHeight) {
       enterFault("bottom limit switch hit");
     }
   }
 
   if (driver_state == ZMotorDriver::State::HitTopLimit) {
     if (state_ == State::Homing) {
+      // Handled by the Homing state so it can set homed_ true.
       return;
     }
 
+    // Hitting the top while moving upward is mechanically safe because top is
+    // away from the flame. Stop and hold position rather than faulting.
     if (state_ == State::ControllingFlameTemp || state_ == State::MovingToRemovalHeight) {
       z_motor_driver_.stop();
     }
   }
 }
 
+/** @copydoc TaskZMotor::updatePidControl */
 void TaskZMotor::updatePidControl(uint32_t now_ms) {
   if (!valid_flame_temp_) {
     return;
@@ -356,6 +336,10 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
     return;
   }
 
+  // Standard PID error definition:
+  //   error = target - measured
+  // error > 0 means measured flame temperature is too cold, so move down.
+  // error < 0 means measured flame temperature is too hot, so move up.
   const float target_f = static_cast<float>(target_flame_temp_fx100_) / 100.0f;
   const float measured_f = static_cast<float>(measured_flame_temp_fx100_) / 100.0f;
   const float error_f = target_f - measured_f;
@@ -374,19 +358,28 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
   previous_error_valid_ = true;
 
   const float output_steps_f = (kp_ * error_f) + (ki_ * integral_error_) + (kd_ * derivative_error);
+
   const int32_t output_steps = clampPidOutputSteps(output_steps_f);
 
   if (output_steps <= kPidDeadbandSteps && output_steps >= -kPidDeadbandSteps) {
     return;
   }
 
+  // Positive PID output means too cold, so move down toward the flame.
+  // Down is negative Z, so subtract the positive output from the target position.
+  // Use the existing target while the motor is busy so repeated PID updates retarget
+  // smoothly instead of repeatedly restarting from the instantaneous current position.
   int32_t base_steps = z_motor_driver_.isBusy() ? z_motor_driver_.getTargetSteps() : z_motor_driver_.getPositionSteps();
+
   int32_t next_target_steps = base_steps - output_steps;
 
+  // Top/home is Z = 0. Do not intentionally command above home.
   if (next_target_steps > 0) {
     next_target_steps = 0;
   }
 
+  // Software lower travel limit for early PID testing.
+  // If the thermocouple target is unreachable, do not keep driving downward forever.
   if (next_target_steps < kMinCookPositionSteps) {
     z_motor_driver_.stop();
     state_ = State::Fault;
@@ -394,15 +387,13 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
     return;
   }
 
-  if (topLimitPressed() && next_target_steps > z_motor_driver_.getPositionSteps()) {
+  // If the motor is already against a limit, do not command farther into that limit.
+  if (z_motor_driver_.topLimitPressed() && next_target_steps > z_motor_driver_.getPositionSteps()) {
     next_target_steps = z_motor_driver_.getPositionSteps();
   }
 
-  if (bottomLimitPressed() && next_target_steps < z_motor_driver_.getPositionSteps()) {
-    z_motor_driver_.stop();
-    resetPid();
-    state_ = State::Idle;
-    print_str("Z bottom limit reached during PID control.\r\n");
+  if (z_motor_driver_.bottomLimitPressed() && next_target_steps < z_motor_driver_.getPositionSteps()) {
+    enterFault("bottom limit reached during PID control");
     return;
   }
 
@@ -416,24 +407,24 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
   const int32_t error_fx100 = target_flame_temp_fx100_ - measured_flame_temp_fx100_;
 
   if (pid_debug_enabled_) {
-    std::snprintf(print_buf,
-                  100,
-                  "Z PID: target=%ld.%02ldF measured=%ld.%02ldF error=%ld.%02ldF cmd=%ld pos=%ld target_steps=%ld\r\n",
-                  static_cast<long>(target_flame_temp_fx100_ / 100),
-                  static_cast<long>(target_flame_temp_fx100_ >= 0 ? target_flame_temp_fx100_ % 100
-                                                                  : -(target_flame_temp_fx100_ % 100)),
-                  static_cast<long>(measured_flame_temp_fx100_ / 100),
-                  static_cast<long>(measured_flame_temp_fx100_ >= 0 ? measured_flame_temp_fx100_ % 100
-                                                                    : -(measured_flame_temp_fx100_ % 100)),
-                  static_cast<long>(error_fx100 / 100),
-                  static_cast<long>(error_fx100 >= 0 ? error_fx100 % 100 : -(error_fx100 % 100)),
-                  static_cast<long>(output_steps),
-                  static_cast<long>(z_motor_driver_.getPositionSteps()),
-                  static_cast<long>(next_target_steps));
+    sprintf(print_buf,
+            "Z PID: target=%ld.%02ldF measured=%ld.%02ldF error=%ld.%02ldF cmd=%ld pos=%ld target_steps=%ld\r\n",
+            static_cast<long>(target_flame_temp_fx100_ / 100),
+            static_cast<long>(target_flame_temp_fx100_ >= 0 ? target_flame_temp_fx100_ % 100
+                                                            : -(target_flame_temp_fx100_ % 100)),
+            static_cast<long>(measured_flame_temp_fx100_ / 100),
+            static_cast<long>(measured_flame_temp_fx100_ >= 0 ? measured_flame_temp_fx100_ % 100
+                                                              : -(measured_flame_temp_fx100_ % 100)),
+            static_cast<long>(error_fx100 / 100),
+            static_cast<long>(error_fx100 >= 0 ? error_fx100 % 100 : -(error_fx100 % 100)),
+            static_cast<long>(output_steps),
+            static_cast<long>(z_motor_driver_.getPositionSteps()),
+            static_cast<long>(next_target_steps));
     print_str(print_buf);
   }
 }
 
+/** @copydoc TaskZMotor::clampPidOutputSteps */
 int32_t TaskZMotor::clampPidOutputSteps(float output_steps) const {
   if (output_steps > static_cast<float>(kPidOutputLimitSteps)) {
     return kPidOutputLimitSteps;
@@ -446,10 +437,12 @@ int32_t TaskZMotor::clampPidOutputSteps(float output_steps) const {
   return static_cast<int32_t>(output_steps);
 }
 
+/** @copydoc TaskZMotor::topLimitPressed */
 bool TaskZMotor::topLimitPressed() const {
   return HAL_GPIO_ReadPin(Z_TOP_GPIO_Port, Z_TOP_Pin) == GPIO_PIN_SET;
 }
 
+/** @copydoc TaskZMotor::bottomLimitPressed */
 bool TaskZMotor::bottomLimitPressed() const {
   return HAL_GPIO_ReadPin(Z_BOT_GPIO_Port, Z_BOT_Pin) == GPIO_PIN_SET;
 }
