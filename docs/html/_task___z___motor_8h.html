@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___z___mo
 <p>Z-axis stepper task for homing, jogging, and flame-height PID control.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_task_8h_source.html">Task.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_z___limit___switches_8h_source.html">Z_Limit_Switches.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="z__limit__switches_8h_source.html">Z_Limit_Switches.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="z__motor__driver_8h_source.html">z_motor_driver.h</a>&quot;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 </div>
@@ -171,13 +171,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>UART print helper provided by <a class="el" href="main_8cpp.html">main.cpp</a>. </p>
-<p>Transmit a null-terminated string over UART2.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">str</td><td>Null-terminated string to transmit. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -203,10 +196,9 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shared formatted-print buffer provided by <a class="el" href="main_8cpp.html">main.cpp</a>. </p>
-<p>Shared formatted-print buffer used before calling <a class="el" href="main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.</p>
-<p>Shared printf-style buffer used by task status messages.</p>
-<p>Shared formatted-print buffer used before calling <a class="el" href="main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3" title="Transmit a null-terminated string over UART2.">print_str()</a>.</p>
-<p>&lt; Project-wide declarations, including print_str and Error_Handler. HAL timing and peripheral definitions. </p>
+<p>&lt; Project-wide declarations, including print_str and Error_Handler.</p>
+<p>&lt; HAL timing and peripheral definitions.</p>
+<p>Shared printf-style buffer used by task status messages. </p>
 
 </div>
 </div>

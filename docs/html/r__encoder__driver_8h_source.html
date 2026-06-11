@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ME507 Marshmallow Cooker: Marshmallow_Cooker/Drivers/R_Encoder_Driver/Inc/r_encoder_driver.h Source File</title>
+<title>ME507 Marshmallow Cooker: Marshmallow_Cooker/Core/Inc/r_encoder_driver.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -121,44 +121,51 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('r__encoder__dr
 <div class="contents">
 <a href="r__encoder__driver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef R_ENCODER_DRIVER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define R_ENCODER_DRIVER_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;stm32f4xx_hal.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_r_encoder_driver.html">    6</a></span><span class="keyword">class </span><a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a>(TIM_HandleTypeDef* htim);</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#a7caeb2755963925cd559cc816f64f9f4">update</a>();</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">reset</a>();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  int16_t <a class="code hl_function" href="class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd">getVelocity</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  int32_t <a class="code hl_function" href="class_r_encoder_driver.html#a870faf9cd1b3c75c9e40099223a61580">getPosition</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kCounterRange = 65536;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kHalfCounterRange = kCounterRange / 2;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  TIM_HandleTypeDef* htim_;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  int16_t velocity_;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  int32_t position_;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  uint32_t last_counter_value_;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;stm32f4xx_hal.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_r_encoder_driver.html">   34</a></span><span class="keyword">class </span><a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a>(TIM_HandleTypeDef* htim);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#a7caeb2755963925cd559cc816f64f9f4">update</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">reset</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  int16_t <a class="code hl_function" href="class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd">getVelocity</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  int32_t <a class="code hl_function" href="class_r_encoder_driver.html#a870faf9cd1b3c75c9e40099223a61580">getPosition</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kCounterRange = 65536;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kHalfCounterRange = kCounterRange / 2;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  TIM_HandleTypeDef* htim_;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  int16_t velocity_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  int32_t position_;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  uint32_t last_counter_value_;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
 </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif </span><span class="comment">/* R_ENCODER_DRIVER_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclass_r_encoder_driver_html_a7caeb2755963925cd559cc816f64f9f4"><div class="ttname"><a href="class_r_encoder_driver.html#a7caeb2755963925cd559cc816f64f9f4">REncoderDriver::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:10</div></div>
-<div class="ttc" id="aclass_r_encoder_driver_html_a870faf9cd1b3c75c9e40099223a61580"><div class="ttname"><a href="class_r_encoder_driver.html#a870faf9cd1b3c75c9e40099223a61580">REncoderDriver::getPosition</a></div><div class="ttdeci">int32_t getPosition() const</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:36</div></div>
-<div class="ttc" id="aclass_r_encoder_driver_html_ac5061334b4049e634ae805d1b40faabd"><div class="ttname"><a href="class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd">REncoderDriver::getVelocity</a></div><div class="ttdeci">int16_t getVelocity() const</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:32</div></div>
-<div class="ttc" id="aclass_r_encoder_driver_html_aecb2c1494fda83eeab2029e4197f5c51"><div class="ttname"><a href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver::REncoderDriver</a></div><div class="ttdeci">REncoderDriver(TIM_HandleTypeDef *htim)</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:3</div></div>
-<div class="ttc" id="aclass_r_encoder_driver_html_afe639d6a30ad351db8095cd7f6df6e9b"><div class="ttname"><a href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">REncoderDriver::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:26</div></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif </span><span class="comment">/* R_ENCODER_DRIVER_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclass_r_encoder_driver_html_a7caeb2755963925cd559cc816f64f9f4"><div class="ttname"><a href="class_r_encoder_driver.html#a7caeb2755963925cd559cc816f64f9f4">REncoderDriver::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Sample the hardware encoder counter and update position state.</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:20</div></div>
+<div class="ttc" id="aclass_r_encoder_driver_html_a870faf9cd1b3c75c9e40099223a61580"><div class="ttname"><a href="class_r_encoder_driver.html#a870faf9cd1b3c75c9e40099223a61580">REncoderDriver::getPosition</a></div><div class="ttdeci">int32_t getPosition() const</div><div class="ttdoc">Get the accumulated encoder position.</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:46</div></div>
+<div class="ttc" id="aclass_r_encoder_driver_html_ac5061334b4049e634ae805d1b40faabd"><div class="ttname"><a href="class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd">REncoderDriver::getVelocity</a></div><div class="ttdeci">int16_t getVelocity() const</div><div class="ttdoc">Get the most recent incremental encoder velocity.</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:42</div></div>
+<div class="ttc" id="aclass_r_encoder_driver_html_aecb2c1494fda83eeab2029e4197f5c51"><div class="ttname"><a href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver::REncoderDriver</a></div><div class="ttdeci">REncoderDriver(TIM_HandleTypeDef *htim)</div><div class="ttdoc">Construct an encoder driver around an STM32 timer handle.</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:13</div></div>
+<div class="ttc" id="aclass_r_encoder_driver_html_afe639d6a30ad351db8095cd7f6df6e9b"><div class="ttname"><a href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">REncoderDriver::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Clear the accumulated encoder position and velocity.</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:36</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_b2b6685042ab777418974eff947147e4.html">Marshmallow_Cooker</a></li><li class="navelem"><a href="dir_6cc41e3dd72c374069fdeecb51b02cb3.html">Drivers</a></li><li class="navelem"><a href="dir_77981f03b1e7b4ceeed3f3e31f009eea.html">R_Encoder_Driver</a></li><li class="navelem"><a href="dir_356c301f0c055d62b022703c35a2a167.html">Inc</a></li><li class="navelem"><a href="r__encoder__driver_8h.html">r_encoder_driver.h</a></li>
+    <li class="navelem"><a href="dir_b2b6685042ab777418974eff947147e4.html">Marshmallow_Cooker</a></li><li class="navelem"><a href="dir_03bc1c768b7c7f2be992cdd7324d14df.html">Core</a></li><li class="navelem"><a href="dir_d2ab377acd3b106cc2f1dbd1fd4f4eb4.html">Inc</a></li><li class="navelem"><a href="r__encoder__driver_8h.html">r_encoder_driver.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
