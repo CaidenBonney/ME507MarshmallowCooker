@@ -1,9 +1,9 @@
 #ifndef Z_MOTOR_DRIVER_H
 #define Z_MOTOR_DRIVER_H
 
-#include "stm32f4xx_hal.h"
-
 #include "TMC2209.h" // PWM driver for Z motor
+
+#include "stm32f4xx_hal.h"
 #include <cstdint>
 
 class ZMotorDriver {

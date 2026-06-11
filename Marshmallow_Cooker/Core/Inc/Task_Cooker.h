@@ -11,7 +11,6 @@
 #include "Task_Z_Motor.h"
 
 // Additional includes
-#include "stm32f4xx_hal.h"
 #include <cstdlib>
 
 // Externs

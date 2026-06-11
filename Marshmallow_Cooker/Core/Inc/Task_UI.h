@@ -7,7 +7,6 @@
 // User created includes
 
 // Additional includes
-#include "stm32f4xx_hal.h"
 
 // Externs
 

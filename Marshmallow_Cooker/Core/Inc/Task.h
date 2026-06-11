@@ -2,6 +2,7 @@
 #define TASK_H
 
 #include "main.h" // For print_str, and Error_Handler
+#include "stm32f4xx_hal.h" // For HAL_GetTick
 
 // Externs
 extern char print_buf[100];

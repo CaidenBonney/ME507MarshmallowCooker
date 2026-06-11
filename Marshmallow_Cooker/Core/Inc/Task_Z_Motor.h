@@ -9,7 +9,6 @@
 #include "z_motor_driver.h"
 
 // Additional includes
-#include "stm32f4xx_hal.h"
 #include <cstdint>
 
 // Externs

@@ -9,7 +9,6 @@
 
 // Additional includes
 #include "stdio.h" // For sprintf
-#include "stm32f4xx_hal.h" // For HAL_GetTick
 
 // Externs
 
