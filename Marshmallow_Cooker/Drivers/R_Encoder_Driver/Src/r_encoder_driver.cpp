@@ -4,7 +4,7 @@ REncoderDriver::REncoderDriver(TIM_HandleTypeDef* htim)
     : htim_(htim),
       velocity_(0),
       position_(0),
-      last_counter_value_(__HAL_TIM_GET_COUNTER(htim_)) {
+      last_counter_value_(0) {
 }
 
 void REncoderDriver::update() {

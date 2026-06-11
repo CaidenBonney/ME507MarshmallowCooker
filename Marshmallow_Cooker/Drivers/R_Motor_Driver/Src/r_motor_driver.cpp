@@ -1,45 +1,48 @@
 #include "r_motor_driver.h"
 
-RMotorDriver::RMotorDriver(DRV8833* driver, REncoderDriver* encoder)
-    : driver_(driver),
-      encoder_(encoder) {
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim3;
+
+RMotorDriver::RMotorDriver()
+    : driver_(&htim1, TIM_CHANNEL_2, TIM_CHANNEL_3),
+      encoder_(&htim3) {
 }
 
 HAL_StatusTypeDef RMotorDriver::begin() {
-  encoder_->reset();
-  return driver_->begin();
+  encoder_.reset();
+  return driver_.begin();
 }
 
 void RMotorDriver::update() {
-  encoder_->update();
+  encoder_.update();
 }
 
 void RMotorDriver::setDuty(int16_t duty) {
-  driver_->setDuty(clampPower(duty));
+  driver_.setDuty(clampPower(duty));
 }
 
 void RMotorDriver::brake() {
-  driver_->brake();
+  driver_.brake();
 }
 
 void RMotorDriver::coast() {
-  driver_->coast();
+  driver_.coast();
 }
 
 int16_t RMotorDriver::getVelocity() const {
-  return encoder_->getVelocity();
+  return encoder_.getVelocity();
 }
 
 int32_t RMotorDriver::getPosition() const {
-  return encoder_->getPosition();
+  return encoder_.getPosition();
 }
 
 int32_t RMotorDriver::getPositionDegrees() const {
-  return countsToDegrees(encoder_->getPosition());
+  return countsToDegrees(encoder_.getPosition());
 }
 
 void RMotorDriver::resetEncoder() {
-  encoder_->reset();
+  encoder_.reset();
 }
 
 int32_t RMotorDriver::degreesToCounts(int32_t degrees) const {

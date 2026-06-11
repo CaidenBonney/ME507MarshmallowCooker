@@ -1,12 +1,12 @@
 #ifndef R_MOTOR_DRIVER_H
 #define R_MOTOR_DRIVER_H
 
-#include "DRV8833.h"
-#include "r_encoder_driver.h"
+#include "DRV8833.h" // PWM driver for motors
+#include "r_encoder_driver.h" // Encoder driver for rotating motor
 
 class RMotorDriver {
 public:
-  RMotorDriver(DRV8833* driver, REncoderDriver* encoder);
+  RMotorDriver();
 
   HAL_StatusTypeDef begin();
 
@@ -45,8 +45,8 @@ private:
 
   int16_t clampPower(int32_t power) const;
 
-  DRV8833* driver_;
-  REncoderDriver* encoder_;
+  DRV8833 driver_;
+  REncoderDriver encoder_;
 };
 
 #endif /* R_MOTOR_DRIVER_H */

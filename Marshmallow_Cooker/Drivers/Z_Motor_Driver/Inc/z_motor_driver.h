@@ -1,10 +1,10 @@
 #ifndef Z_MOTOR_DRIVER_H
 #define Z_MOTOR_DRIVER_H
 
-#include "TMC2209.h"
-#include "main.h"
 #include "stm32f4xx_hal.h"
 #include <cstdint>
+
+#include "TMC2209.h" // PWM driver for Z motor
 
 class ZMotorDriver {
 public:
@@ -72,4 +72,4 @@ private:
   State state_;
 };
 
-#endif
+#endif /* Z_MOTOR_DRIVER_H */

@@ -8,9 +8,9 @@
 -IDrivers/MCP9600/Inc
 
 -IDrivers/DRV8833/Inc
--IDrivers/R_Encoder/Inc
--IDrivers/R_Motor/Inc
+-IDrivers/R_Encoder_Driver/Inc
+-IDrivers/R_Motor_Driver/Inc
 
 -IDrivers/TMC2209/Inc
--IDrivers/Z_Motor/Inc
+-IDrivers/Z_Motor_Driver/Inc
 -IDrivers/Z_Limit_Switches/Inc
