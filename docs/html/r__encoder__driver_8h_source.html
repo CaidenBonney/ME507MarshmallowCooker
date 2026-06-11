@@ -122,12 +122,12 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('r__encoder__dr
 <a href="r__encoder__driver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef R_ENCODER_DRIVER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define R_ENCODER_DRIVER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;stm32f4xx_hal.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_r_encoder_driver.html">    6</a></span><span class="keyword">class </span><a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a>(<a class="code hl_struct" href="struct_t_i_m___handle_type_def.html">TIM_HandleTypeDef</a>* htim);</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver</a>(TIM_HandleTypeDef* htim);</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#a7caeb2755963925cd559cc816f64f9f4">update</a>();</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">reset</a>();</div>
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('r__encoder__dr
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kCounterRange = 65536;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int32_t kHalfCounterRange = kCounterRange / 2;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <a class="code hl_struct" href="struct_t_i_m___handle_type_def.html">TIM_HandleTypeDef</a>* htim_;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  TIM_HandleTypeDef* htim_;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  int16_t velocity_;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  int32_t position_;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  uint32_t last_counter_value_;</div>
@@ -152,8 +152,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('r__encoder__dr
 <div class="ttc" id="aclass_r_encoder_driver_html_ac5061334b4049e634ae805d1b40faabd"><div class="ttname"><a href="class_r_encoder_driver.html#ac5061334b4049e634ae805d1b40faabd">REncoderDriver::getVelocity</a></div><div class="ttdeci">int16_t getVelocity() const</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:32</div></div>
 <div class="ttc" id="aclass_r_encoder_driver_html_aecb2c1494fda83eeab2029e4197f5c51"><div class="ttname"><a href="class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51">REncoderDriver::REncoderDriver</a></div><div class="ttdeci">REncoderDriver(TIM_HandleTypeDef *htim)</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:3</div></div>
 <div class="ttc" id="aclass_r_encoder_driver_html_afe639d6a30ad351db8095cd7f6df6e9b"><div class="ttname"><a href="class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b">REncoderDriver::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> r_encoder_driver.cpp:26</div></div>
-<div class="ttc" id="astm32f4xx__hal_8h_html"><div class="ttname"><a href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a></div><div class="ttdoc">This file contains all the functions prototypes for the HAL module driver.</div></div>
-<div class="ttc" id="astruct_t_i_m___handle_type_def_html"><div class="ttname"><a href="struct_t_i_m___handle_type_def.html">TIM_HandleTypeDef</a></div><div class="ttdoc">TIM Time Base Handle Structure definition.</div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_tim.h:339</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_m_l_x90614_8h
 <a href="_m_l_x90614_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MLX90614_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MLX90614_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;stm32f4xx_hal.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="foldopen" id="foldopen00007" data-start="{" data-end="};">
@@ -130,18 +130,18 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_m_l_x90614_8h
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_m_l_x90614.html#ac2f252367f6cb40f26691e3cd6ae42a2">    9</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> uint8_t <a class="code hl_variable" href="class_m_l_x90614.html#ac2f252367f6cb40f26691e3cd6ae42a2">DEFAULT_ADDRESS</a> = 0x5A;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_m_l_x90614.html#a512717ed053aa46e0554eebb37c507f3">MLX90614</a>(<a class="code hl_struct" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a>* hi2c,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_m_l_x90614.html#a512717ed053aa46e0554eebb37c507f3">MLX90614</a>(I2C_HandleTypeDef* hi2c,</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>                      uint8_t address = <a class="code hl_variable" href="class_m_l_x90614.html#ac2f252367f6cb40f26691e3cd6ae42a2">DEFAULT_ADDRESS</a>);</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#aca62035b0ae0a16d616fc7410a80f70f">isConnected</a>();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#aca62035b0ae0a16d616fc7410a80f70f">isConnected</a>();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#a5d33536e0c528ab1a12d970c489acc73">update</a>();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#a5d33536e0c528ab1a12d970c489acc73">update</a>();</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#af76ff8e09a5fbf70280ef493a3a8cb1a">readAmbientCx100</a>(int16_t&amp; temperatureC_x100);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#ae05c7f23a7f957901c2798296f081cad">readAmbientFx100</a>(int16_t&amp; temperatureF_x100);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#af76ff8e09a5fbf70280ef493a3a8cb1a">readAmbientCx100</a>(int16_t&amp; temperatureC_x100);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#ae05c7f23a7f957901c2798296f081cad">readAmbientFx100</a>(int16_t&amp; temperatureF_x100);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#a39f0e14436a5f51b7f2df913223f3e4b">readObjectCx100</a>(int16_t&amp; temperatureC_x100);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#a00ee9a6e90c5d9fe3485d45cfa3e6a6c">readObjectFx100</a>(int16_t&amp; temperatureF_x100);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#a39f0e14436a5f51b7f2df913223f3e4b">readObjectCx100</a>(int16_t&amp; temperatureC_x100);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#a00ee9a6e90c5d9fe3485d45cfa3e6a6c">readObjectFx100</a>(int16_t&amp; temperatureF_x100);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    int16_t <a class="code hl_function" href="class_m_l_x90614.html#aa38e9eca7d4b907e47f329723719ad35">getAmbientCx100</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    int16_t <a class="code hl_function" href="class_m_l_x90614.html#a65c94110b8ae4aad9c69a103a9189ad2">getAmbientFx100</a>() <span class="keyword">const</span>;</div>
@@ -149,21 +149,21 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_m_l_x90614_8h
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    int16_t <a class="code hl_function" href="class_m_l_x90614.html#a81f5b24e326e34223d62b4afa6de1b18">getObjectCx100</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    int16_t <a class="code hl_function" href="class_m_l_x90614.html#a74b6f7f3aa6e6c57861d4a5185282742">getObjectFx100</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_function" href="class_m_l_x90614.html#a9514dd00eb32b05737298b00d3946343">getLastStatus</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    HAL_StatusTypeDef <a class="code hl_function" href="class_m_l_x90614.html#a9514dd00eb32b05737298b00d3946343">getLastStatus</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> uint8_t REG_AMBIENT_TEMP = 0x06;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> uint8_t REG_OBJECT_TEMP  = 0x07;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_struct" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a>* i2c_;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    I2C_HandleTypeDef* i2c_;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    uint16_t address_;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    int16_t ambient_temperature_c_x100_ = 0;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    int16_t object_temperature_c_x100_ = 0;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> last_status_ = <a class="code hl_enumvalue" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    HAL_StatusTypeDef last_status_ = HAL_ERROR;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> readTemperatureRegister(uint8_t reg,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    HAL_StatusTypeDef readTemperatureRegister(uint8_t reg,</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                                              int16_t&amp; temperatureC_x100);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">static</span> int16_t celsiusToFahrenheitX100(int16_t celsius_x100);</div>
@@ -184,10 +184,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_m_l_x90614_8h
 <div class="ttc" id="aclass_m_l_x90614_html_aca62035b0ae0a16d616fc7410a80f70f"><div class="ttname"><a href="class_m_l_x90614.html#aca62035b0ae0a16d616fc7410a80f70f">MLX90614::isConnected</a></div><div class="ttdeci">HAL_StatusTypeDef isConnected()</div><div class="ttdef"><b>Definition</b> MLX90614.cpp:9</div></div>
 <div class="ttc" id="aclass_m_l_x90614_html_ae05c7f23a7f957901c2798296f081cad"><div class="ttname"><a href="class_m_l_x90614.html#ae05c7f23a7f957901c2798296f081cad">MLX90614::readAmbientFx100</a></div><div class="ttdeci">HAL_StatusTypeDef readAmbientFx100(int16_t &amp;temperatureF_x100)</div><div class="ttdef"><b>Definition</b> MLX90614.cpp:42</div></div>
 <div class="ttc" id="aclass_m_l_x90614_html_af76ff8e09a5fbf70280ef493a3a8cb1a"><div class="ttname"><a href="class_m_l_x90614.html#af76ff8e09a5fbf70280ef493a3a8cb1a">MLX90614::readAmbientCx100</a></div><div class="ttdeci">HAL_StatusTypeDef readAmbientCx100(int16_t &amp;temperatureC_x100)</div><div class="ttdef"><b>Definition</b> MLX90614.cpp:37</div></div>
-<div class="ttc" id="astm32f4xx__hal_8h_html"><div class="ttname"><a href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a></div><div class="ttdoc">This file contains all the functions prototypes for the HAL module driver.</div></div>
-<div class="ttc" id="astm32f4xx__hal__def_8h_html_a63c0679d1cb8b8c684fbb0632743478f"><div class="ttname"><a href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a></div><div class="ttdeci">HAL_StatusTypeDef</div><div class="ttdoc">HAL Status structures definition.</div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_def.h:39</div></div>
-<div class="ttc" id="astm32f4xx__hal__def_8h_html_a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4"><div class="ttname"><a href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a></div><div class="ttdeci">@ HAL_ERROR</div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_def.h:41</div></div>
-<div class="ttc" id="astruct_i2_c___handle_type_def_html"><div class="ttname"><a href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a></div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_i2c.h:189</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

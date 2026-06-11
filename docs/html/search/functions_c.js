@@ -1,11 +1,16 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main.cpp']]],
-  ['mcp9600_1',['MCP9600',['../class_m_c_p9600.html#a163ca130f2c657c9df96e0ae6a4264a6',1,'MCP9600']]],
-  ['memmanage_5fhandler_2',['MemManage_Handler',['../stm32f4xx__it_8h.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3150f74512510287a942624aa9b44cc5',1,'MemManage_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['micros_3',['micros',['../class_t_m_c2209.html#af79534452c8119d0cac42816e7b2e3e2',1,'TMC2209']]],
-  ['mlx90614_4',['MLX90614',['../class_m_l_x90614.html#a512717ed053aa46e0554eebb37c507f3',1,'MLX90614']]],
-  ['movedegreesblocking_5',['moveDegreesBlocking',['../class_r_motor_driver.html#a32a8372468b5d83ae8b3a8efd479cb39',1,'RMotorDriver']]],
-  ['movesteps_6',['moveSteps',['../class_z_motor_driver.html#a408a5cd10742e24471789b603160b2f7',1,'ZMotorDriver']]],
-  ['moveto_7',['moveTo',['../class_z_motor_driver.html#a97e9155f468ce06afe13414858567522',1,'ZMotorDriver']]]
+  ['readambientcx100_0',['readAmbientCx100',['../class_m_l_x90614.html#af76ff8e09a5fbf70280ef493a3a8cb1a',1,'MLX90614']]],
+  ['readambientfx100_1',['readAmbientFx100',['../class_m_l_x90614.html#ae05c7f23a7f957901c2798296f081cad',1,'MLX90614']]],
+  ['readobjectcx100_2',['readObjectCx100',['../class_m_l_x90614.html#a39f0e14436a5f51b7f2df913223f3e4b',1,'MLX90614']]],
+  ['readobjectfx100_3',['readObjectFx100',['../class_m_l_x90614.html#a00ee9a6e90c5d9fe3485d45cfa3e6a6c',1,'MLX90614']]],
+  ['readrawadc_4',['readRawAdc',['../class_m_c_p9600.html#a045d7686ffd679e487bb217a690b5413',1,'MCP9600']]],
+  ['readrawcold_5',['readRawCold',['../class_m_c_p9600.html#a59d12480b11b108eb225e0cfcb88b3e3',1,'MCP9600']]],
+  ['readrawhot_6',['readRawHot',['../class_m_c_p9600.html#a5f7001d4789173861211194299ef8424',1,'MCP9600']]],
+  ['rencoderdriver_7',['REncoderDriver',['../class_r_encoder_driver.html#aecb2c1494fda83eeab2029e4197f5c51',1,'REncoderDriver']]],
+  ['reset_8',['reset',['../class_r_encoder_driver.html#afe639d6a30ad351db8095cd7f6df6e9b',1,'REncoderDriver']]],
+  ['resetdiaglatch_9',['resetDiagLatch',['../class_t_m_c2209.html#ab0572e6ee10a99984294703ad72cad79',1,'TMC2209']]],
+  ['resetencoder_10',['resetEncoder',['../class_r_motor_driver.html#aaf1c2eafc6c73b6712f7680a311304c6',1,'RMotorDriver']]],
+  ['rmotordriver_11',['RMotorDriver',['../class_r_motor_driver.html#a9f1b82a1ac5dcda588ff97d6fa70dd02',1,'RMotorDriver']]],
+  ['run_12',['run',['../class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc',1,'Task::run()'],['../class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135',1,'TaskRMotor::run()'],['../class_task_temps.html#af49bb7c432a41fe2a331f52560de475c',1,'TaskTemps::run()'],['../class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a',1,'TaskUI::run()'],['../class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293',1,'TaskZMotor::run()']]]
 ];

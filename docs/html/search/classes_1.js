@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['adc_5fcommon_5ftypedef_0',['ADC_Common_TypeDef',['../struct_a_d_c___common___type_def.html',1,'']]],
-  ['adc_5ftypedef_1',['ADC_TypeDef',['../struct_a_d_c___type_def.html',1,'']]],
-  ['apsr_5ftype_2',['APSR_Type',['../union_a_p_s_r___type.html',1,'']]],
-  ['arm_5fmpu_5fregion_5ft_3',['ARM_MPU_Region_t',['../struct_a_r_m___m_p_u___region__t.html',1,'']]]
+  ['mcp9600_0',['MCP9600',['../class_m_c_p9600.html',1,'']]],
+  ['mlx90614_1',['MLX90614',['../class_m_l_x90614.html',1,'']]]
 ];

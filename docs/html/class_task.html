@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('class_task.htm
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Task Class Reference</div></div>
+  <div class="headertitle"><div class="title">Task Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -134,25 +134,125 @@ Inheritance diagram for Task:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a4397689d62196d2cfecf970fcbed6cb5" id="r_a4397689d62196d2cfecf970fcbed6cb5"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5">Status</a> { <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96">Uninitialized</a>
+, <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09">Running</a>
+, <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a034b41e0d81a3dc01804bbc3f73a25f2" id="r_a034b41e0d81a3dc01804bbc3f73a25f2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a034b41e0d81a3dc01804bbc3f73a25f2">run</a> ()</td></tr>
+<tr class="memitem:ad820b9c0e8b6eeca2af6f483fc8465bc" id="r_ad820b9c0e8b6eeca2af6f483fc8465bc"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ad820b9c0e8b6eeca2af6f483fc8465bc">run</a> ()=0</td></tr>
+<tr class="memitem:a4e60f3f81b59174e5833fff03514d924" id="r_a4e60f3f81b59174e5833fff03514d924"><td class="memItemLeft">virtual <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5">Status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4e60f3f81b59174e5833fff03514d924">getStatus</a> () const =0</td></tr>
+<tr class="memitem:a9e03df2df618f84f63b8ab5185a1c067" id="r_a9e03df2df618f84f63b8ab5185a1c067"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#a9e03df2df618f84f63b8ab5185a1c067">~Task</a> ()=default</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a034b41e0d81a3dc01804bbc3f73a25f2" name="a034b41e0d81a3dc01804bbc3f73a25f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a034b41e0d81a3dc01804bbc3f73a25f2">&#9670;&#160;</a></span>run()</h2>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a id="a4397689d62196d2cfecf970fcbed6cb5" name="a4397689d62196d2cfecf970fcbed6cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4397689d62196d2cfecf970fcbed6cb5">&#9670;&#160;</a></span>Status</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Task::run </td>
+          <td class="memname">enum class <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5">Task::Status</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96" name="a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09" name="a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee" name="a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9e03df2df618f84f63b8ab5185a1c067" name="a9e03df2df618f84f63b8ab5185a1c067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e03df2df618f84f63b8ab5185a1c067">&#9670;&#160;</a></span>~Task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Task::~Task </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a4e60f3f81b59174e5833fff03514d924" name="a4e60f3f81b59174e5833fff03514d924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e60f3f81b59174e5833fff03514d924">&#9670;&#160;</a></span>getStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="#a4397689d62196d2cfecf970fcbed6cb5">Status</a> Task::getStatus </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_task_r_motor.html#ac9bb47cf7602d1141730101ff42bb014">TaskRMotor</a>, <a class="el" href="class_task_temps.html#a3fbb0b0e4650933b07f5e1f10485b50f">TaskTemps</a>, <a class="el" href="class_task_u_i.html#a02c9bee0a5f7cd954f68bc86e29b670a">TaskUI</a>, and <a class="el" href="class_task_z_motor.html#a9eac6d2b11d0ba53c272eed278789c66">TaskZMotor</a>.</p>
+
+</div>
+</div>
+<a id="ad820b9c0e8b6eeca2af6f483fc8465bc" name="ad820b9c0e8b6eeca2af6f483fc8465bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad820b9c0e8b6eeca2af6f483fc8465bc">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Task::run </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135">TaskRMotor</a>, <a class="el" href="class_task_temps.html#af49bb7c432a41fe2a331f52560de475c">TaskTemps</a>, <a class="el" href="class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a">TaskUI</a>, and <a class="el" href="class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293">TaskZMotor</a>.</p>
 
 </div>
 </div>

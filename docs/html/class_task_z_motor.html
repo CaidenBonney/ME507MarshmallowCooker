@@ -131,14 +131,69 @@ Inheritance diagram for TaskZMotor:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a064ecfb479f8491d4de45f46b6fcfe48" id="r_a064ecfb479f8491d4de45f46b6fcfe48"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48">State</a> { <br />
+&#160;&#160;<a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48af704f57ea420275ad51bf55b7dec2c96">Uninitialized</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48ae599161956d626eda4cb0a5ffb85271c">Idle</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48a2e7d2986477735ae5c23e812c1ccb85d">MovingUp</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48aa79782bf8835c8aa74a56fc91982c64d">MovingDown</a>
+, <br />
+&#160;&#160;<a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48a7b068feda0ebc586a1b21e3c716702e3">HomingDown</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48ab54f731f33babd51377f18ece50db3e4">HitTopLimit</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48a104fb6e8be99187947467957314c25d1">HitBottomLimit</a>
+, <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
+<br />
+ }</td></tr>
+<tr class="inherit_header pub_types_class_task"><td colspan="2">Public Types inherited from <a class="el" href="class_task.html">Task</a></td></tr>
+<tr class="memitem:a4397689d62196d2cfecf970fcbed6cb5 pub_types_class_task" id="r_a4397689d62196d2cfecf970fcbed6cb5"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Status</a> { <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5af704f57ea420275ad51bf55b7dec2c96">Uninitialized</a>
+, <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09">Running</a>
+, <a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5a3731a4591778546a7d1e1c9c06d4e2ee">Fault</a>
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3067a0402b337b3b512bae714c47ccb9" id="r_a3067a0402b337b3b512bae714c47ccb9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3067a0402b337b3b512bae714c47ccb9">TaskZMotor</a> ()</td></tr>
-<tr class="memitem:a37753d507457b5d301424d01d94ad8d1" id="r_a37753d507457b5d301424d01d94ad8d1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a37753d507457b5d301424d01d94ad8d1">run</a> ()</td></tr>
+<tr class="memitem:abc7d55ea5e92a221146c5a537f9ca293" id="r_abc7d55ea5e92a221146c5a537f9ca293"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abc7d55ea5e92a221146c5a537f9ca293">run</a> () override</td></tr>
 <tr class="memitem:a67788bc6739b97fbc2e1779bdd83cc50" id="r_a67788bc6739b97fbc2e1779bdd83cc50"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a67788bc6739b97fbc2e1779bdd83cc50">update</a> ()</td></tr>
+<tr class="memitem:a9eac6d2b11d0ba53c272eed278789c66" id="r_a9eac6d2b11d0ba53c272eed278789c66"><td class="memItemLeft"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9eac6d2b11d0ba53c272eed278789c66">getStatus</a> () const override</td></tr>
+<tr class="memitem:a4f59106228214fb82f890bbc78967ec7" id="r_a4f59106228214fb82f890bbc78967ec7"><td class="memItemLeft"><a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48">State</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4f59106228214fb82f890bbc78967ec7">getState</a> () const</td></tr>
 <tr class="inherit_header pub_methods_class_task"><td colspan="2">Public Member Functions inherited from <a class="el" href="class_task.html">Task</a></td></tr>
-<tr class="memitem:a034b41e0d81a3dc01804bbc3f73a25f2 pub_methods_class_task" id="r_a034b41e0d81a3dc01804bbc3f73a25f2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a034b41e0d81a3dc01804bbc3f73a25f2">run</a> ()</td></tr>
+<tr class="memitem:a9e03df2df618f84f63b8ab5185a1c067 pub_methods_class_task" id="r_a9e03df2df618f84f63b8ab5185a1c067"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="class_task.html#a9e03df2df618f84f63b8ab5185a1c067">~Task</a> ()=default</td></tr>
 </table>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a id="a064ecfb479f8491d4de45f46b6fcfe48" name="a064ecfb479f8491d4de45f46b6fcfe48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a064ecfb479f8491d4de45f46b6fcfe48">&#9670;&#160;</a></span>State</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48">TaskZMotor::State</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48af704f57ea420275ad51bf55b7dec2c96" name="a064ecfb479f8491d4de45f46b6fcfe48af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48ae599161956d626eda4cb0a5ffb85271c" name="a064ecfb479f8491d4de45f46b6fcfe48ae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48a2e7d2986477735ae5c23e812c1ccb85d" name="a064ecfb479f8491d4de45f46b6fcfe48a2e7d2986477735ae5c23e812c1ccb85d"></a>MovingUp&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48aa79782bf8835c8aa74a56fc91982c64d" name="a064ecfb479f8491d4de45f46b6fcfe48aa79782bf8835c8aa74a56fc91982c64d"></a>MovingDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48a7b068feda0ebc586a1b21e3c716702e3" name="a064ecfb479f8491d4de45f46b6fcfe48a7b068feda0ebc586a1b21e3c716702e3"></a>HomingDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48ab54f731f33babd51377f18ece50db3e4" name="a064ecfb479f8491d4de45f46b6fcfe48ab54f731f33babd51377f18ece50db3e4"></a>HitTopLimit&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48a104fb6e8be99187947467957314c25d1" name="a064ecfb479f8491d4de45f46b6fcfe48a104fb6e8be99187947467957314c25d1"></a>HitBottomLimit&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a064ecfb479f8491d4de45f46b6fcfe48a3731a4591778546a7d1e1c9c06d4e2ee" name="a064ecfb479f8491d4de45f46b6fcfe48a3731a4591778546a7d1e1c9c06d4e2ee"></a>Fault&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3067a0402b337b3b512bae714c47ccb9" name="a3067a0402b337b3b512bae714c47ccb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3067a0402b337b3b512bae714c47ccb9">&#9670;&#160;</a></span>TaskZMotor()</h2>
@@ -158,11 +213,58 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a37753d507457b5d301424d01d94ad8d1" name="a37753d507457b5d301424d01d94ad8d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37753d507457b5d301424d01d94ad8d1">&#9670;&#160;</a></span>run()</h2>
+<a id="a4f59106228214fb82f890bbc78967ec7" name="a4f59106228214fb82f890bbc78967ec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f59106228214fb82f890bbc78967ec7">&#9670;&#160;</a></span>getState()</h2>
 
 <div class="memitem">
 <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a064ecfb479f8491d4de45f46b6fcfe48">TaskZMotor::State</a> TaskZMotor::getState </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9eac6d2b11d0ba53c272eed278789c66" name="a9eac6d2b11d0ba53c272eed278789c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eac6d2b11d0ba53c272eed278789c66">&#9670;&#160;</a></span>getStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_task.html#a4397689d62196d2cfecf970fcbed6cb5">Task::Status</a> TaskZMotor::getStatus </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_task.html#a4e60f3f81b59174e5833fff03514d924">Task</a>.</p>
+
+</div>
+</div>
+<a id="abc7d55ea5e92a221146c5a537f9ca293" name="abc7d55ea5e92a221146c5a537f9ca293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc7d55ea5e92a221146c5a537f9ca293">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void TaskZMotor::run </td>
@@ -171,7 +273,14 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc">Task</a>.</p>
 
 </div>
 </div>

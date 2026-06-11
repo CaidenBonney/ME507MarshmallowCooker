@@ -144,9 +144,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a163ca130f2c657c9df96e0ae6a4264a6" id="r_a163ca130f2c657c9df96e0ae6a4264a6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a163ca130f2c657c9df96e0ae6a4264a6">MCP9600</a> (<a class="el" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a> *hi2c, <a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type=<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9">ThermocoupleType::TYPE_T</a>, uint8_t address=<a class="el" href="#acb19d1f3d59231c6231d10d27ce18b1f">DEFAULT_ADDRESS</a>)</td></tr>
-<tr class="memitem:ab49464bd194e6935bb9812cb4635cd75" id="r_ab49464bd194e6935bb9812cb4635cd75"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab49464bd194e6935bb9812cb4635cd75">begin</a> ()</td></tr>
-<tr class="memitem:abf572d20088f561230e699d2f57b9216" id="r_abf572d20088f561230e699d2f57b9216"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#abf572d20088f561230e699d2f57b9216">update</a> ()</td></tr>
+<tr class="memitem:a163ca130f2c657c9df96e0ae6a4264a6" id="r_a163ca130f2c657c9df96e0ae6a4264a6"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a163ca130f2c657c9df96e0ae6a4264a6">MCP9600</a> (I2C_HandleTypeDef *hi2c, <a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type=<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5a49fb43eeb1eabef282432f0778e651a9">ThermocoupleType::TYPE_T</a>, uint8_t address=<a class="el" href="#acb19d1f3d59231c6231d10d27ce18b1f">DEFAULT_ADDRESS</a>)</td></tr>
+<tr class="memitem:ab49464bd194e6935bb9812cb4635cd75" id="r_ab49464bd194e6935bb9812cb4635cd75"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ab49464bd194e6935bb9812cb4635cd75">begin</a> ()</td></tr>
+<tr class="memitem:abf572d20088f561230e699d2f57b9216" id="r_abf572d20088f561230e699d2f57b9216"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#abf572d20088f561230e699d2f57b9216">update</a> ()</td></tr>
 <tr class="memitem:a832ba8ab4e23dbdca8c7604824f69287" id="r_a832ba8ab4e23dbdca8c7604824f69287"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a832ba8ab4e23dbdca8c7604824f69287">getHotCx100</a> () const</td></tr>
 <tr class="memitem:a09c9ad62e9fe2c571423b061ace12e95" id="r_a09c9ad62e9fe2c571423b061ace12e95"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a09c9ad62e9fe2c571423b061ace12e95">getColdCx100</a> () const</td></tr>
 <tr class="memitem:a0d72948badb18f5f8f96bf42e5e9a16b" id="r_a0d72948badb18f5f8f96bf42e5e9a16b"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a0d72948badb18f5f8f96bf42e5e9a16b">getDeltaCx100</a> () const</td></tr>
@@ -154,16 +154,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6d7b191818a8e6ffc6d7d1dcb384306f" id="r_a6d7b191818a8e6ffc6d7d1dcb384306f"><td class="memItemLeft">int16_t&#160;</td><td class="memItemRight"><a class="el" href="#a6d7b191818a8e6ffc6d7d1dcb384306f">getColdFx100</a> () const</td></tr>
 <tr class="memitem:a264e6f1b0d8358541c71929b353ef5f5" id="r_a264e6f1b0d8358541c71929b353ef5f5"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a264e6f1b0d8358541c71929b353ef5f5">getStatus</a> () const</td></tr>
 <tr class="memitem:a7a475d22e6c37b0cc314ce940a34dc0b" id="r_a7a475d22e6c37b0cc314ce940a34dc0b"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7a475d22e6c37b0cc314ce940a34dc0b">getDeviceId</a> () const</td></tr>
-<tr class="memitem:a7153c895e84e38058d88c2b4ba7fd812" id="r_a7153c895e84e38058d88c2b4ba7fd812"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7153c895e84e38058d88c2b4ba7fd812">getLastStatus</a> () const</td></tr>
-<tr class="memitem:a7e33a1da0a1ca6c02cf1dac410fb2220" id="r_a7e33a1da0a1ca6c02cf1dac410fb2220"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e33a1da0a1ca6c02cf1dac410fb2220">setThermocoupleType</a> (<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type)</td></tr>
-<tr class="memitem:ab8e94d98526b9549f1edb5e3a4f3469a" id="r_ab8e94d98526b9549f1edb5e3a4f3469a"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab8e94d98526b9549f1edb5e3a4f3469a">setAdcResolution</a> (<a class="el" href="#a1a3c27409311b07e97300aedf1a71232">AdcResolution</a> resolution)</td></tr>
-<tr class="memitem:a8c90e728a72dd55ff3fb2eeb1b7132c5" id="r_a8c90e728a72dd55ff3fb2eeb1b7132c5"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8c90e728a72dd55ff3fb2eeb1b7132c5">setFilterCoefficient</a> (uint8_t coefficient)</td></tr>
-<tr class="memitem:ac8671a7c1a02dd776eaffc39e274b151" id="r_ac8671a7c1a02dd776eaffc39e274b151"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac8671a7c1a02dd776eaffc39e274b151">setNormalMode</a> ()</td></tr>
-<tr class="memitem:aafff05ba655f1f62231fe584cbf2a2fd" id="r_aafff05ba655f1f62231fe584cbf2a2fd"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#aafff05ba655f1f62231fe584cbf2a2fd">setShutdownMode</a> ()</td></tr>
-<tr class="memitem:a5f7001d4789173861211194299ef8424" id="r_a5f7001d4789173861211194299ef8424"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5f7001d4789173861211194299ef8424">readRawHot</a> (int16_t *raw)</td></tr>
-<tr class="memitem:a59d12480b11b108eb225e0cfcb88b3e3" id="r_a59d12480b11b108eb225e0cfcb88b3e3"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a59d12480b11b108eb225e0cfcb88b3e3">readRawCold</a> (int16_t *raw)</td></tr>
-<tr class="memitem:afe88198376a5dec724e93b3e250689f0" id="r_afe88198376a5dec724e93b3e250689f0"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#afe88198376a5dec724e93b3e250689f0">getSensorConfig</a> (uint8_t *config)</td></tr>
-<tr class="memitem:a045d7686ffd679e487bb217a690b5413" id="r_a045d7686ffd679e487bb217a690b5413"><td class="memItemLeft"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a045d7686ffd679e487bb217a690b5413">readRawAdc</a> (int32_t *raw_adc)</td></tr>
+<tr class="memitem:a7153c895e84e38058d88c2b4ba7fd812" id="r_a7153c895e84e38058d88c2b4ba7fd812"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a7153c895e84e38058d88c2b4ba7fd812">getLastStatus</a> () const</td></tr>
+<tr class="memitem:a7e33a1da0a1ca6c02cf1dac410fb2220" id="r_a7e33a1da0a1ca6c02cf1dac410fb2220"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a7e33a1da0a1ca6c02cf1dac410fb2220">setThermocoupleType</a> (<a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a> type)</td></tr>
+<tr class="memitem:ab8e94d98526b9549f1edb5e3a4f3469a" id="r_ab8e94d98526b9549f1edb5e3a4f3469a"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ab8e94d98526b9549f1edb5e3a4f3469a">setAdcResolution</a> (<a class="el" href="#a1a3c27409311b07e97300aedf1a71232">AdcResolution</a> resolution)</td></tr>
+<tr class="memitem:a8c90e728a72dd55ff3fb2eeb1b7132c5" id="r_a8c90e728a72dd55ff3fb2eeb1b7132c5"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a8c90e728a72dd55ff3fb2eeb1b7132c5">setFilterCoefficient</a> (uint8_t coefficient)</td></tr>
+<tr class="memitem:ac8671a7c1a02dd776eaffc39e274b151" id="r_ac8671a7c1a02dd776eaffc39e274b151"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ac8671a7c1a02dd776eaffc39e274b151">setNormalMode</a> ()</td></tr>
+<tr class="memitem:aafff05ba655f1f62231fe584cbf2a2fd" id="r_aafff05ba655f1f62231fe584cbf2a2fd"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aafff05ba655f1f62231fe584cbf2a2fd">setShutdownMode</a> ()</td></tr>
+<tr class="memitem:a5f7001d4789173861211194299ef8424" id="r_a5f7001d4789173861211194299ef8424"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a5f7001d4789173861211194299ef8424">readRawHot</a> (int16_t *raw)</td></tr>
+<tr class="memitem:a59d12480b11b108eb225e0cfcb88b3e3" id="r_a59d12480b11b108eb225e0cfcb88b3e3"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a59d12480b11b108eb225e0cfcb88b3e3">readRawCold</a> (int16_t *raw)</td></tr>
+<tr class="memitem:afe88198376a5dec724e93b3e250689f0" id="r_afe88198376a5dec724e93b3e250689f0"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#afe88198376a5dec724e93b3e250689f0">getSensorConfig</a> (uint8_t *config)</td></tr>
+<tr class="memitem:a045d7686ffd679e487bb217a690b5413" id="r_a045d7686ffd679e487bb217a690b5413"><td class="memItemLeft">HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a045d7686ffd679e487bb217a690b5413">readRawAdc</a> (int32_t *raw_adc)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -240,7 +240,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">MCP9600::MCP9600 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a> *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -265,7 +265,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::begin </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::begin </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -384,7 +384,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::getLastStatus </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::getLastStatus </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -401,7 +401,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::getSensorConfig </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::getSensorConfig </td>
           <td>(</td>
           <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
           <td></td>
@@ -435,7 +435,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::readRawAdc </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::readRawAdc </td>
           <td>(</td>
           <td class="paramtype">int32_t *</td>          <td class="paramname"><span class="paramname"><em>raw_adc</em></span></td><td>)</td>
           <td></td>
@@ -452,7 +452,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::readRawCold </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::readRawCold </td>
           <td>(</td>
           <td class="paramtype">int16_t *</td>          <td class="paramname"><span class="paramname"><em>raw</em></span></td><td>)</td>
           <td></td>
@@ -469,7 +469,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::readRawHot </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::readRawHot </td>
           <td>(</td>
           <td class="paramtype">int16_t *</td>          <td class="paramname"><span class="paramname"><em>raw</em></span></td><td>)</td>
           <td></td>
@@ -486,7 +486,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::setAdcResolution </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::setAdcResolution </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a1a3c27409311b07e97300aedf1a71232">AdcResolution</a></td>          <td class="paramname"><span class="paramname"><em>resolution</em></span></td><td>)</td>
           <td></td>
@@ -503,7 +503,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::setFilterCoefficient </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::setFilterCoefficient </td>
           <td>(</td>
           <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>coefficient</em></span></td><td>)</td>
           <td></td>
@@ -520,7 +520,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::setNormalMode </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::setNormalMode </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -537,7 +537,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::setShutdownMode </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::setShutdownMode </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -554,7 +554,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::setThermocoupleType </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::setThermocoupleType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a7f98bb9f9106a4c155b4876d833a76e5">ThermocoupleType</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
           <td></td>
@@ -571,7 +571,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> MCP9600::update </td>
+          <td class="memname">HAL_StatusTypeDef MCP9600::update </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
