@@ -1,10 +1,5 @@
 var NAVTREEINDEX158 =
 {
-"group___peripheral___registers___bits___definition.html#ga3019ff197b4fd698e9625c9abb67f4be":[2,91,0,5,1,1424],
-"group___peripheral___registers___bits___definition.html#ga303898c1943aede8d1ed6b9f259b9d0c":[2,91,0,5,1,6227],
-"group___peripheral___registers___bits___definition.html#ga303cb170236d7f710cc125fb1af37179":[2,91,0,5,1,5440],
-"group___peripheral___registers___bits___definition.html#ga303e9dea0617bb3f03a8cc825005d6ce":[2,91,0,5,1,512],
-"group___peripheral___registers___bits___definition.html#ga30516f483e85323f76dab980af3be393":[2,91,0,5,1,3476],
 "group___peripheral___registers___bits___definition.html#ga30556fea7362882afb160a1108ef0539":[2,91,0,5,1,4045],
 "group___peripheral___registers___bits___definition.html#ga305c0da4633020b9696d64a1785fa29c":[2,91,0,5,1,6537],
 "group___peripheral___registers___bits___definition.html#ga305cad42f0aae469c0f63a79de6bbf2a":[2,91,0,5,1,310],
@@ -249,5 +244,10 @@ var NAVTREEINDEX158 =
 "group___peripheral___registers___bits___definition.html#ga3a42ee6ec5115244aef8f60d35abcc47":[2,91,0,5,1,16],
 "group___peripheral___registers___bits___definition.html#ga3a48d2dd6535975e9d584964067f41a6":[2,91,0,5,1,4369],
 "group___peripheral___registers___bits___definition.html#ga3a4ae35ae856330bc937251fd9ccf01c":[2,91,0,5,1,2225],
-"group___peripheral___registers___bits___definition.html#ga3a57c032717ceeeef110b7fd33cddd79":[2,91,0,5,1,6196]
+"group___peripheral___registers___bits___definition.html#ga3a57c032717ceeeef110b7fd33cddd79":[2,91,0,5,1,6196],
+"group___peripheral___registers___bits___definition.html#ga3a6949e61c5845a7ff2331b64cb579bc":[2,91,0,5,1,344],
+"group___peripheral___registers___bits___definition.html#ga3a6c924c6c54448656df6acfa66b9aae":[2,91,0,5,1,1592],
+"group___peripheral___registers___bits___definition.html#ga3a6d0efe73a56eb7e63594717cd3784e":[2,91,0,5,1,5427],
+"group___peripheral___registers___bits___definition.html#ga3a7d6076724526beda6cb481eb3ea5e7":[2,91,0,5,1,299],
+"group___peripheral___registers___bits___definition.html#ga3a87fe55ac0f85e207a58fcd73610f46":[2,91,0,5,1,4434]
 };

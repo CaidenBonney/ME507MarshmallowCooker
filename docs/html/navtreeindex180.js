@@ -1,10 +1,5 @@
 var NAVTREEINDEX180 =
 {
-"group___peripheral__registers__structures.html":[2,91,0,2],
-"group___prc_cfg_inf___type.html":[2,2,0,0,0,0,0,0,0,1,0,0,0,0],
-"group___prc_cfg_inf___type.html":[2,2,0,0,0,1,0,0,0,1,0,0,0,0],
-"group___pwr_mod_ctl___type.html":[2,2,0,0,0,0,0,0,0,1,0],
-"group___pwr_mod_ctl___type.html":[2,2,0,0,0,1,0,0,0,1,0],
 "group___r_c_c.html":[2,92,14],
 "group___r_c_c___a_h_b1___clock___enable___disable.html":[2,92,14,2,0],
 "group___r_c_c___a_h_b1___clock___enable___disable.html#ga041e72359b94f19569e774030fc6ebff":[2,92,14,2,0,11],
@@ -249,5 +244,10 @@ var NAVTREEINDEX180 =
 "group___r_c_c___exported___functions___group2.html#gabbd5f8933a5ee05e4b3384e33026aca1":[2,92,14,5,1,7],
 "group___r_c_c___exported___functions___group2.html#gabc95375dfca279d88b9ded9d063d2323":[2,92,14,5,1,3],
 "group___r_c_c___exported___functions___group2.html#gac2f9cf8f56fd7b22c62ddf32aa5ee3fb":[2,92,14,5,1,1],
-"group___r_c_c___exported___functions___group2.html#gae2f9413fc447c2d7d6af3a8669c77b36":[2,92,14,5,1,5]
+"group___r_c_c___exported___functions___group2.html#gae2f9413fc447c2d7d6af3a8669c77b36":[2,92,14,5,1,5],
+"group___r_c_c___exported___macros.html":[2,92,14,2],
+"group___r_c_c___exported___types.html":[2,92,14,0],
+"group___r_c_c___flag.html":[2,92,14,1,18],
+"group___r_c_c___flag.html#ga173edf47bec93cf269a0e8d0fec9997c":[2,92,14,1,18,1],
+"group___r_c_c___flag.html#ga23d5211abcdf0e397442ca534ca04bb4":[2,92,14,1,18,0]
 };

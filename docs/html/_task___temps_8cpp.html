@@ -120,146 +120,31 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___temps_
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_task___temps_8h_source.html">Task_Temps.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_task_8h_source.html">Task.h</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a0d39dda01589ae7f861167cb7302cff9" id="r_a0d39dda01589ae7f861167cb7302cff9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d39dda01589ae7f861167cb7302cff9">init_I2C3_sensors</a> (void)</td></tr>
-<tr class="memitem:a17d8c02518a34393b304bf200b211188" id="r_a17d8c02518a34393b304bf200b211188"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a17d8c02518a34393b304bf200b211188">if</a> ((<a class="el" href="#a3dc1818102a96402fef0825469534207">now_ms</a> - last_temperature_read_ms) &gt;=kTemperatureReadPeriodMs)</td></tr>
-<tr class="memitem:a5d7c40801fa37778b5145a9240bbf485" id="r_a5d7c40801fa37778b5145a9240bbf485"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5d7c40801fa37778b5145a9240bbf485">if</a> (<a class="el" href="#a9680dcc764fed498638a20ca8a042768">temperature_sensor_status</a>==<a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa6eb724a07061d89a4a2052744e5a3632">HAL_OK</a>)</td></tr>
-<tr class="memitem:aecf6748ed0f45ca42083759227b4e3a5" id="r_aecf6748ed0f45ca42083759227b4e3a5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aecf6748ed0f45ca42083759227b4e3a5">print_str</a> (<a class="el" href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a>)</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a046e90e7c1635923c84dcd94773feedf" id="r_a046e90e7c1635923c84dcd94773feedf"><td class="memItemLeft"><a class="el" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a046e90e7c1635923c84dcd94773feedf">hi2c3</a></td></tr>
-<tr class="memitem:a9680dcc764fed498638a20ca8a042768" id="r_a9680dcc764fed498638a20ca8a042768"><td class="memItemLeft">volatile <a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9680dcc764fed498638a20ca8a042768">temperature_sensor_status</a> = <a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a></td></tr>
-<tr class="memitem:a3dc1818102a96402fef0825469534207" id="r_a3dc1818102a96402fef0825469534207"><td class="memItemLeft">const uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a3dc1818102a96402fef0825469534207">now_ms</a> = <a class="el" href="group___h_a_l___exported___functions___group2.html#gac9b3a85a73735ac840d0dcb59bc0fdd6">HAL_GetTick</a>()</td></tr>
-<tr class="memitem:a0544c3fe466e421738dae463968b70ba" id="r_a0544c3fe466e421738dae463968b70ba"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0544c3fe466e421738dae463968b70ba">else</a></td></tr>
+<tr class="memitem:a5ccf4a01a8d7f08d3190181f843f7515" id="r_a5ccf4a01a8d7f08d3190181f843f7515"><td class="memItemLeft"><a class="el" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5ccf4a01a8d7f08d3190181f843f7515">hi2c3</a></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a17d8c02518a34393b304bf200b211188" name="a17d8c02518a34393b304bf200b211188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17d8c02518a34393b304bf200b211188">&#9670;&#160;</a></span>if() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">if </td>
-          <td>(</td>
-          <td class="paramtype">(<a class="el" href="#a3dc1818102a96402fef0825469534207">now_ms</a> - last_temperature_read_ms) &gt;=</td>          <td class="paramname"><span class="paramname"><em>kTemperatureReadPeriodMs</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5d7c40801fa37778b5145a9240bbf485" name="a5d7c40801fa37778b5145a9240bbf485"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d7c40801fa37778b5145a9240bbf485">&#9670;&#160;</a></span>if() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">if </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a9680dcc764fed498638a20ca8a042768">temperature_sensor_status</a></td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">=&#160;<a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa6eb724a07061d89a4a2052744e5a3632">HAL_OK</a></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0d39dda01589ae7f861167cb7302cff9" name="a0d39dda01589ae7f861167cb7302cff9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d39dda01589ae7f861167cb7302cff9">&#9670;&#160;</a></span>init_I2C3_sensors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void init_I2C3_sensors </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aecf6748ed0f45ca42083759227b4e3a5" name="aecf6748ed0f45ca42083759227b4e3a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecf6748ed0f45ca42083759227b4e3a5">&#9670;&#160;</a></span>print_str()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">print_str </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a></td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a0544c3fe466e421738dae463968b70ba" name="a0544c3fe466e421738dae463968b70ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0544c3fe466e421738dae463968b70ba">&#9670;&#160;</a></span>else</h2>
+<a id="a5ccf4a01a8d7f08d3190181f843f7515" name="a5ccf4a01a8d7f08d3190181f843f7515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ccf4a01a8d7f08d3190181f843f7515">&#9670;&#160;</a></span>hi2c3</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">else</td>
+          <td class="memname"><a class="el" href="struct_i2_c___handle_type_def.html">I2C_HandleTypeDef</a> hi2c3</td>
         </tr>
       </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">      sprintf(<a class="code hl_variable" href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a>, <span class="stringliteral">&quot;TC Temp read failed, status=%d\r\n&quot;</span>, tc_temp_sensor.getLastStatus())</div>
-<div class="ttc" id="a_task___r___motor_8h_html_a93f4e9d1c8aa5b365a11a87606f09143"><div class="ttname"><a href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a></div><div class="ttdeci">char print_buf[100]</div><div class="ttdef"><b>Definition</b> main.cpp:64</div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a046e90e7c1635923c84dcd94773feedf" name="a046e90e7c1635923c84dcd94773feedf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a046e90e7c1635923c84dcd94773feedf">&#9670;&#160;</a></span>hi2c3</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_m_c_p9600.html">MCP9600</a> tc_temp_sensor&amp; hi2c3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3dc1818102a96402fef0825469534207" name="a3dc1818102a96402fef0825469534207"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dc1818102a96402fef0825469534207">&#9670;&#160;</a></span>now_ms</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t now_ms = <a class="el" href="group___h_a_l___exported___functions___group2.html#gac9b3a85a73735ac840d0dcb59bc0fdd6">HAL_GetTick</a>()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9680dcc764fed498638a20ca8a042768" name="a9680dcc764fed498638a20ca8a042768"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9680dcc764fed498638a20ca8a042768">&#9670;&#160;</a></span>temperature_sensor_status</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">temperature_sensor_status = <a class="el" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a></td>
-        </tr>
-      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

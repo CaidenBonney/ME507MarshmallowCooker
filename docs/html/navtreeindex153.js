@@ -1,10 +1,5 @@
 var NAVTREEINDEX153 =
 {
-"group___peripheral___registers___bits___definition.html#ga00dbb77370754ad461600ed3cf418dba":[2,91,0,5,1,1943],
-"group___peripheral___registers___bits___definition.html#ga00e257135823303b40c2dfe2054c72e6":[2,91,0,5,1,2303],
-"group___peripheral___registers___bits___definition.html#ga00ec56fbf232492ec12c954e27d03c6c":[2,91,0,5,1,349],
-"group___peripheral___registers___bits___definition.html#ga00f1bded4d121e21116627b8e80784fc":[2,91,0,5,1,1091],
-"group___peripheral___registers___bits___definition.html#ga00f72d8c0899d67b6a428e4ed6167630":[2,91,0,5,1,3026],
 "group___peripheral___registers___bits___definition.html#ga01090491a062f3b8b4a80b0b66690ce8":[2,91,0,5,1,1062],
 "group___peripheral___registers___bits___definition.html#ga01116e33cb68129902284211af9f0e2e":[2,91,0,5,1,4174],
 "group___peripheral___registers___bits___definition.html#ga0114d8249d989c5ab3feac252e30509e":[2,91,0,5,1,2875],
@@ -249,5 +244,10 @@ var NAVTREEINDEX153 =
 "group___peripheral___registers___bits___definition.html#ga0a1318609761df5de5213e9e75b5aa6a":[2,91,0,5,1,5071],
 "group___peripheral___registers___bits___definition.html#ga0a19dd3039888ebdc40b2406be400749":[2,91,0,5,1,4245],
 "group___peripheral___registers___bits___definition.html#ga0a1c1f07b2b2cc274c0b297d779b936f":[2,91,0,5,1,3044],
-"group___peripheral___registers___bits___definition.html#ga0a1c615024c02d5ea5bcb3717ff6863d":[2,91,0,5,1,2719]
+"group___peripheral___registers___bits___definition.html#ga0a1c615024c02d5ea5bcb3717ff6863d":[2,91,0,5,1,2719],
+"group___peripheral___registers___bits___definition.html#ga0a3b3c81018daa0d5b80480a86bc7a17":[2,91,0,5,1,3185],
+"group___peripheral___registers___bits___definition.html#ga0a3eca32e4b8eca5b984c371fc118c44":[2,91,0,5,1,2208],
+"group___peripheral___registers___bits___definition.html#ga0a43b1d5d7f5dabbc44b03bdab7a6c3e":[2,91,0,5,1,1120],
+"group___peripheral___registers___bits___definition.html#ga0a51c601387d1ae49333d5ace8ae86ee":[2,91,0,5,1,753],
+"group___peripheral___registers___bits___definition.html#ga0a590a016f50e757d6eb58248f9af026":[2,91,0,5,1,4380]
 };

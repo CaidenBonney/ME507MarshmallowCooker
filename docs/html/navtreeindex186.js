@@ -1,10 +1,5 @@
 var NAVTREEINDEX186 =
 {
-"pmu__armv8_8h.html#a45d5ea86fdc015f4fc100462150c92da":[4,0,0,2,0,1,28,131],
-"pmu__armv8_8h.html#a4687d5d7efc6f49db2db9acc25b590f6":[4,0,0,2,0,1,28,30],
-"pmu__armv8_8h.html#a47fe03fe6fe9bfebd98283cb57d94560":[4,0,0,2,0,1,28,128],
-"pmu__armv8_8h.html#a4e96b5a6fb13c657e78da342a02db200":[4,0,0,2,0,1,28,42],
-"pmu__armv8_8h.html#a50fb13c874b3f5e2b9ed9c320a36452c":[4,0,0,2,0,1,28,70],
 "pmu__armv8_8h.html#a54fd2c392399221077c67866a395e587":[4,0,0,2,0,1,28,116],
 "pmu__armv8_8h.html#a550d524d435a653b2f46acc1380a5ace":[4,0,0,2,0,1,28,13],
 "pmu__armv8_8h.html#a58a4815dba8886088b9cac7b934a332d":[4,0,0,2,0,1,28,21],
@@ -249,5 +244,10 @@ var NAVTREEINDEX186 =
 "stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa00c89549bc881c35e8e4cd9e718337e5":[4,0,0,2,6,0,3,10,3],
 "stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4":[4,0,0,2,6,0,3,10,1],
 "stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa6eb724a07061d89a4a2052744e5a3632":[4,0,0,2,6,0,3,10,0],
-"stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa8532fa3641ae7c14cb1b0554e2d9cbc7":[4,0,0,2,6,0,3,10,2]
+"stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa8532fa3641ae7c14cb1b0554e2d9cbc7":[4,0,0,2,6,0,3,10,2],
+"stm32f4xx__hal__def_8h.html#a6bc306171da085f4c7df2c66d2ff8e47":[4,0,0,2,6,0,3,8],
+"stm32f4xx__hal__def_8h.html#a7c2c23627aed2bb71d8c1ad071cda004":[4,0,0,2,6,0,3,4],
+"stm32f4xx__hal__def_8h.html#a82637a84fbdca0e2a25496089b549924":[4,0,0,2,6,0,3,5],
+"stm32f4xx__hal__def_8h.html#aaa12b03c58e2eb296bd7aa915ee540f3":[4,0,0,2,6,0,3,0],
+"stm32f4xx__hal__def_8h.html#aad28bc64749c50dcedd6bf819fdc6974":[4,0,0,2,6,0,3,7]
 };

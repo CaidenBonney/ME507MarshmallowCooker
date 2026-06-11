@@ -131,31 +131,34 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___temps_
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// additional includes</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;stdio.h&quot;</span> <span class="comment">// For sprintf</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a>&quot;</span>  <span class="comment">// For HAL_GetTick</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// externs</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code hl_function" href="_task___temps_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3">print_str</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">extern</span> <span class="keywordtype">char</span> <a class="code hl_variable" href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a>[100];</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_task_temps.html">   19</a></span><span class="keyword">class </span><a class="code hl_function" href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_task.html">Task</a> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <a class="code hl_function" href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps</a>();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_task_temps.html#a6f82783fe3175e8b3bbb36041c4839aa">   23</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_task_temps.html#a6f82783fe3175e8b3bbb36041c4839aa">run</a>();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_task_temps.html#a8bfc017947510b491474970df9c088ae">   24</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_task_temps.html#a8bfc017947510b491474970df9c088ae">update</a>();</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a>&quot;</span> <span class="comment">// For HAL_GetTick</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;cstdlib&gt;</span> <span class="comment">// for abs</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// externs</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code hl_function" href="_task___temps_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3">print_str</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">extern</span> <span class="keywordtype">char</span> <a class="code hl_variable" href="_task___r___motor_8h.html#a93f4e9d1c8aa5b365a11a87606f09143">print_buf</a>[100];</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_task_temps.html">   20</a></span><span class="keyword">class </span><a class="code hl_function" href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_task.html">Task</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <a class="code hl_function" href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_task_temps.html#aeddcab145db8bf2674c455f3aeb51224">   24</a></span>  <span class="keyword">volatile</span> <a class="code hl_enumeration" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a> <a class="code hl_variable" href="class_task_temps.html#aeddcab145db8bf2674c455f3aeb51224">status</a> = <a class="code hl_enumvalue" href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="comment">// TODO: add enum for init then run state</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> uint32_t kUpdatePeriodMs = 500;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_class" href="class_m_c_p9600.html">MCP9600</a> tc_sensor_;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_class" href="class_m_l_x90614.html">MLX90614</a> ir_sensor_;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  uint32_t last_update_ms_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_task_temps.html#a6f82783fe3175e8b3bbb36041c4839aa">run</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_task_temps.html#a8bfc017947510b491474970df9c088ae">   27</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_task_temps.html#a8bfc017947510b491474970df9c088ae">update</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">// TODO: add enum for init then run state</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <a class="code hl_class" href="class_m_c_p9600.html">MCP9600</a> tc_sensor_;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_class" href="class_m_l_x90614.html">MLX90614</a> ir_sensor_;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> uint32_t kUpdatePeriodMs = 500;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">static</span> uint32_t last_update_ms_;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif </span><span class="comment">/* TASK_TEMPS_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">/* TASK_TEMPS_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="a_m_c_p9600_8h_html"><div class="ttname"><a href="_m_c_p9600_8h.html">MCP9600.h</a></div></div>
 <div class="ttc" id="a_m_l_x90614_8h_html"><div class="ttname"><a href="_m_l_x90614_8h.html">MLX90614.h</a></div></div>
 <div class="ttc" id="a_task_8h_html"><div class="ttname"><a href="_task_8h.html">Task.h</a></div></div>
@@ -164,10 +167,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_task___temps_
 <div class="ttc" id="aclass_m_c_p9600_html"><div class="ttname"><a href="class_m_c_p9600.html">MCP9600</a></div><div class="ttdef"><b>Definition</b> MCP9600.h:6</div></div>
 <div class="ttc" id="aclass_m_l_x90614_html"><div class="ttname"><a href="class_m_l_x90614.html">MLX90614</a></div><div class="ttdef"><b>Definition</b> MLX90614.h:7</div></div>
 <div class="ttc" id="aclass_task_html"><div class="ttname"><a href="class_task.html">Task</a></div><div class="ttdef"><b>Definition</b> Task.h:4</div></div>
-<div class="ttc" id="aclass_task_temps_html_a1069195e7be8a3a04974e2f77825682f"><div class="ttname"><a href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps::TaskTemps</a></div><div class="ttdeci">TaskTemps()</div><div class="ttdef"><b>Definition</b> Task_Temps.cpp:5</div></div>
-<div class="ttc" id="aclass_task_temps_html_a6f82783fe3175e8b3bbb36041c4839aa"><div class="ttname"><a href="class_task_temps.html#a6f82783fe3175e8b3bbb36041c4839aa">TaskTemps::run</a></div><div class="ttdeci">void run()</div></div>
+<div class="ttc" id="aclass_task_temps_html_a1069195e7be8a3a04974e2f77825682f"><div class="ttname"><a href="class_task_temps.html#a1069195e7be8a3a04974e2f77825682f">TaskTemps::TaskTemps</a></div><div class="ttdeci">TaskTemps()</div><div class="ttdef"><b>Definition</b> Task_Temps.cpp:6</div></div>
+<div class="ttc" id="aclass_task_temps_html_a6f82783fe3175e8b3bbb36041c4839aa"><div class="ttname"><a href="class_task_temps.html#a6f82783fe3175e8b3bbb36041c4839aa">TaskTemps::run</a></div><div class="ttdeci">void run()</div><div class="ttdef"><b>Definition</b> Task_Temps.cpp:11</div></div>
 <div class="ttc" id="aclass_task_temps_html_a8bfc017947510b491474970df9c088ae"><div class="ttname"><a href="class_task_temps.html#a8bfc017947510b491474970df9c088ae">TaskTemps::update</a></div><div class="ttdeci">void update()</div></div>
+<div class="ttc" id="aclass_task_temps_html_aeddcab145db8bf2674c455f3aeb51224"><div class="ttname"><a href="class_task_temps.html#aeddcab145db8bf2674c455f3aeb51224">TaskTemps::status</a></div><div class="ttdeci">volatile HAL_StatusTypeDef status</div><div class="ttdef"><b>Definition</b> Task_Temps.h:24</div></div>
 <div class="ttc" id="astm32f4xx__hal_8h_html"><div class="ttname"><a href="stm32f4xx__hal_8h.html">stm32f4xx_hal.h</a></div><div class="ttdoc">This file contains all the functions prototypes for the HAL module driver.</div></div>
+<div class="ttc" id="astm32f4xx__hal__def_8h_html_a63c0679d1cb8b8c684fbb0632743478f"><div class="ttname"><a href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478f">HAL_StatusTypeDef</a></div><div class="ttdeci">HAL_StatusTypeDef</div><div class="ttdoc">HAL Status structures definition.</div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_def.h:39</div></div>
+<div class="ttc" id="astm32f4xx__hal__def_8h_html_a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4"><div class="ttname"><a href="stm32f4xx__hal__def_8h.html#a63c0679d1cb8b8c684fbb0632743478fa5a04e395e501e4e400172c610478c4a4">HAL_ERROR</a></div><div class="ttdeci">@ HAL_ERROR</div><div class="ttdef"><b>Definition</b> stm32f4xx_hal_def.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

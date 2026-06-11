@@ -1,10 +1,5 @@
 var NAVTREEINDEX164 =
 {
-"group___peripheral___registers___bits___definition.html#ga69e2071d77bd39d1d206ad785ea4b1f7":[2,91,0,5,1,4169],
-"group___peripheral___registers___bits___definition.html#ga69e543fa9584fd636032a3ee735f750b":[2,91,0,5,1,4530],
-"group___peripheral___registers___bits___definition.html#ga69ec4d183286e02653876ead0a835a09":[2,91,0,5,1,4912],
-"group___peripheral___registers___bits___definition.html#ga69f0639cf752be23c3d72c7218a1e179":[2,91,0,5,1,1587],
-"group___peripheral___registers___bits___definition.html#ga6a0955008cbabbb6b726ba0b4f8da609":[2,91,0,5,1,2652],
 "group___peripheral___registers___bits___definition.html#ga6a0ad2672c9ba1b26012cbc6d423dff8":[2,91,0,5,1,3324],
 "group___peripheral___registers___bits___definition.html#ga6a155fcc736492a694dac6b25c803f85":[2,91,0,5,1,1740],
 "group___peripheral___registers___bits___definition.html#ga6a185f9bf1e72599fc7d2e02716ee40b":[2,91,0,5,1,3106],
@@ -249,5 +244,10 @@ var NAVTREEINDEX164 =
 "group___peripheral___registers___bits___definition.html#ga734972442e2704a86bfb69c5707b33a1":[2,91,0,5,1,1459],
 "group___peripheral___registers___bits___definition.html#ga7354703f289244a71753debf3ae26e46":[2,91,0,5,1,3394],
 "group___peripheral___registers___bits___definition.html#ga73603dbe0418523c2c83957265e7e65d":[2,91,0,5,1,1345],
-"group___peripheral___registers___bits___definition.html#ga73944983ce5a6bde9dc172b4f483898c":[2,91,0,5,1,1007]
+"group___peripheral___registers___bits___definition.html#ga73944983ce5a6bde9dc172b4f483898c":[2,91,0,5,1,1007],
+"group___peripheral___registers___bits___definition.html#ga73a879622564efeb3244262bf9419818":[2,91,0,5,1,5652],
+"group___peripheral___registers___bits___definition.html#ga73bffe5ebb8d12020ebf3f2875f4a709":[2,91,0,5,1,1517],
+"group___peripheral___registers___bits___definition.html#ga73c7205ba8d0f5e12584ccf932efbc74":[2,91,0,5,1,3031],
+"group___peripheral___registers___bits___definition.html#ga73d1e5bcfadadcb890897b907225cd73":[2,91,0,5,1,912],
+"group___peripheral___registers___bits___definition.html#ga73d9343c5adc189599178877e0a5b64c":[2,91,0,5,1,3481]
 };

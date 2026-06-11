@@ -1,10 +1,5 @@
 var NAVTREEINDEX178 =
 {
-"group___peripheral___registers___bits___definition.html#gaf42b75da9b2f127dca98b6ca616f7add":[2,91,0,5,1,4813],
-"group___peripheral___registers___bits___definition.html#gaf43c9ef6b61e39655cbe969967c79a69":[2,91,0,5,1,4563],
-"group___peripheral___registers___bits___definition.html#gaf44071a1145774e7c5a5ea41cc709c42":[2,91,0,5,1,3230],
-"group___peripheral___registers___bits___definition.html#gaf45a746e5bb2a1c132093a2844d22683":[2,91,0,5,1,1789],
-"group___peripheral___registers___bits___definition.html#gaf45ea3ec6ba328fe2eb3d57cc061fcf6":[2,91,0,5,1,491],
 "group___peripheral___registers___bits___definition.html#gaf45f41af21a000ab66da5b99b998deb3":[2,91,0,5,1,2177],
 "group___peripheral___registers___bits___definition.html#gaf47f3ef6dad5ad4ab6a70f7256cce7bf":[2,91,0,5,1,304],
 "group___peripheral___registers___bits___definition.html#gaf486d8ce50abc465f372b6fcc7a0704d":[2,91,0,5,1,4511],
@@ -249,5 +244,10 @@ var NAVTREEINDEX178 =
 "group___peripheral___registers___bits___definition.html#gafecb33099669a080cede6ce0236389e7":[2,91,0,5,1,379],
 "group___peripheral___registers___bits___definition.html#gafece48b6f595ef9717d523fa23cea1e8":[2,91,0,5,1,4820],
 "group___peripheral___registers___bits___definition.html#gafee1c266c0c7d8ae75506988c24f197a":[2,91,0,5,1,734],
-"group___peripheral___registers___bits___definition.html#gafee42b4ef0f4cb5b0ab45fc78f3e27f9":[2,91,0,5,1,66]
+"group___peripheral___registers___bits___definition.html#gafee42b4ef0f4cb5b0ab45fc78f3e27f9":[2,91,0,5,1,66],
+"group___peripheral___registers___bits___definition.html#gafeea28ea8c54145ee049e740da932291":[2,91,0,5,1,6226],
+"group___peripheral___registers___bits___definition.html#gafefdd032e0fcf3d4d73f5bf167f74c6b":[2,91,0,5,1,4499],
+"group___peripheral___registers___bits___definition.html#gafeffba32b6b0854a232493dc2e2634d4":[2,91,0,5,1,1083],
+"group___peripheral___registers___bits___definition.html#gaff08fac3bb90bd73b0bdadddb6a1411a":[2,91,0,5,1,4507],
+"group___peripheral___registers___bits___definition.html#gaff130f15493c765353ec2fd605667c5a":[2,91,0,5,1,5268]
 };

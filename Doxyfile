@@ -1026,7 +1026,18 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = "C:/Users/Toby/Documents/Cal Poly/2025-2026/2026 Spring/ME 507/Term Project/ME507MarshmallowCooker/Marshmallow_Cooker"
+INPUT = \
+Marshmallow_Cooker/Core/Inc \
+Marshmallow_Cooker/Core/Src \
+Marshmallow_Cooker/Drivers/DRV8833 \
+Marshmallow_Cooker/Drivers/MCP9600 \
+Marshmallow_Cooker/Drivers/MLX90614 \
+Marshmallow_Cooker/Drivers/R_Encoder_Driver \
+Marshmallow_Cooker/Drivers/R_Motor_Driver \
+Marshmallow_Cooker/Drivers/TMC2209 \
+Marshmallow_Cooker/Drivers/Z_Limit_Switches \
+Marshmallow_Cooker/Drivers/Z_Motor_Driver \
+docs/index.md
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1241,7 +1252,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the Doxygen output.
 
-USE_MDFILE_AS_MAINPAGE =
+USE_MDFILE_AS_MAINPAGE = docs\index.md
 
 # If the IMPLICIT_DIR_DOCS tag is set to YES, any README.md file found in sub-
 # directories of the project's root, is used as the documentation for that sub-

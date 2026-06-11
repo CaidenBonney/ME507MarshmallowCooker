@@ -1,10 +1,5 @@
 var NAVTREEINDEX187 =
 {
-"stm32f4xx__hal__def_8h.html#a6bc306171da085f4c7df2c66d2ff8e47":[4,0,0,2,6,0,3,8],
-"stm32f4xx__hal__def_8h.html#a7c2c23627aed2bb71d8c1ad071cda004":[4,0,0,2,6,0,3,4],
-"stm32f4xx__hal__def_8h.html#a82637a84fbdca0e2a25496089b549924":[4,0,0,2,6,0,3,5],
-"stm32f4xx__hal__def_8h.html#aaa12b03c58e2eb296bd7aa915ee540f3":[4,0,0,2,6,0,3,0],
-"stm32f4xx__hal__def_8h.html#aad28bc64749c50dcedd6bf819fdc6974":[4,0,0,2,6,0,3,7],
 "stm32f4xx__hal__def_8h.html#ab367482e943333a1299294eadaad284b":[4,0,0,2,6,0,3,9],
 "stm32f4xx__hal__def_8h.html#ab367482e943333a1299294eadaad284ba656ad5f6dad97210cf3ccf107c033e4d":[4,0,0,2,6,0,3,9,1],
 "stm32f4xx__hal__def_8h.html#ab367482e943333a1299294eadaad284ba9bd487430440139444e6e7ff226005c0":[4,0,0,2,6,0,3,9,0],
@@ -249,5 +244,10 @@ var NAVTREEINDEX187 =
 "struct_e_x_t_i___config_type_def.html#acb9a59bb7943a21c105481f85007a79c":[2,92,0,0,1,0],
 "struct_e_x_t_i___config_type_def.html#acf6d2ea84df5f2b705676584ae00707a":[2,92,0,0,1,3],
 "struct_e_x_t_i___handle_type_def.html":[2,92,0,0,0],
-"struct_e_x_t_i___handle_type_def.html#a4ae908c7b5ef022eecc64fac6241e83a":[2,92,0,0,0,1]
+"struct_e_x_t_i___handle_type_def.html#a4ae908c7b5ef022eecc64fac6241e83a":[2,92,0,0,0,1],
+"struct_e_x_t_i___handle_type_def.html#a6a2875051ad4276be5322ffa99e12566":[2,92,0,0,0,0],
+"struct_e_x_t_i___type_def.html":[2,91,0,2,6],
+"struct_e_x_t_i___type_def.html#a133294b87dbe6a01e8d9584338abc39a":[2,91,0,2,6,3],
+"struct_e_x_t_i___type_def.html#a17d061db586d4a5aa646b68495a8e6a4":[2,91,0,2,6,2],
+"struct_e_x_t_i___type_def.html#a5c1f538e64ee90918cd158b808f5d4de":[2,91,0,2,6,5]
 };

@@ -1,10 +1,5 @@
 var NAVTREEINDEX165 =
 {
-"group___peripheral___registers___bits___definition.html#ga73a879622564efeb3244262bf9419818":[2,91,0,5,1,5652],
-"group___peripheral___registers___bits___definition.html#ga73bffe5ebb8d12020ebf3f2875f4a709":[2,91,0,5,1,1517],
-"group___peripheral___registers___bits___definition.html#ga73c7205ba8d0f5e12584ccf932efbc74":[2,91,0,5,1,3031],
-"group___peripheral___registers___bits___definition.html#ga73d1e5bcfadadcb890897b907225cd73":[2,91,0,5,1,912],
-"group___peripheral___registers___bits___definition.html#ga73d9343c5adc189599178877e0a5b64c":[2,91,0,5,1,3481],
 "group___peripheral___registers___bits___definition.html#ga73daf0783ad13468420bbf4d05e150dd":[2,91,0,5,1,4540],
 "group___peripheral___registers___bits___definition.html#ga73dc96cce80c352f7bda9a3919023eef":[2,91,0,5,1,2838],
 "group___peripheral___registers___bits___definition.html#ga73e4ad22e6610c5c39fbc548b621b244":[2,91,0,5,1,3979],
@@ -249,5 +244,10 @@ var NAVTREEINDEX165 =
 "group___peripheral___registers___bits___definition.html#ga7cf2523fa4c59105d01a17d4caac3cbf":[2,91,0,5,1,6296],
 "group___peripheral___registers___bits___definition.html#ga7cf33736f41c6c0098df1ac2cb9dcb00":[2,91,0,5,1,6479],
 "group___peripheral___registers___bits___definition.html#ga7cfa0d38cd6dfd5ed09673558ccadacf":[2,91,0,5,1,72],
-"group___peripheral___registers___bits___definition.html#ga7d000805bb6f4ad68ec73159df771422":[2,91,0,5,1,1807]
+"group___peripheral___registers___bits___definition.html#ga7d000805bb6f4ad68ec73159df771422":[2,91,0,5,1,1807],
+"group___peripheral___registers___bits___definition.html#ga7d0716b2ad4127572e8b69fb92652f19":[2,91,0,5,1,800],
+"group___peripheral___registers___bits___definition.html#ga7d13b2c8e758203e32008267734f961f":[2,91,0,5,1,1766],
+"group___peripheral___registers___bits___definition.html#ga7d1ebece401aeb12abd466d2eafa78b2":[2,91,0,5,1,5135],
+"group___peripheral___registers___bits___definition.html#ga7d2f00d3372bd1d64bf4eb2271277ab0":[2,91,0,5,1,455],
+"group___peripheral___registers___bits___definition.html#ga7d4daf940040b81b93f70afed1ec62e1":[2,91,0,5,1,1341]
 };

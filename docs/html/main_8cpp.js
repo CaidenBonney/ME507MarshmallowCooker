@@ -5,7 +5,7 @@ var main_8cpp =
     [ "main", "main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe", null ],
     [ "print_str", "main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3", null ],
     [ "SystemClock_Config", "main_8cpp.html#a70af21c671abfcc773614a9a4f63d920", null ],
-    [ "hi2c3", "main_8cpp.html#ab8ef585454c6611ae2b923c23cb257b7", null ],
+    [ "hi2c3", "main_8cpp.html#a5ccf4a01a8d7f08d3190181f843f7515", null ],
     [ "htim1", "main_8cpp.html#a25fc663547539bc49fecc0011bd76ab5", null ],
     [ "htim3", "main_8cpp.html#aac3d2c59ee0e3bbae1b99529a154eb62", null ],
     [ "huart2", "main_8cpp.html#aa9479c261d65eecedd3d9582f7f0f89c", null ],

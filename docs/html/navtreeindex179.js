@@ -1,10 +1,5 @@
 var NAVTREEINDEX179 =
 {
-"group___peripheral___registers___bits___definition.html#gafeea28ea8c54145ee049e740da932291":[2,91,0,5,1,6226],
-"group___peripheral___registers___bits___definition.html#gafefdd032e0fcf3d4d73f5bf167f74c6b":[2,91,0,5,1,4499],
-"group___peripheral___registers___bits___definition.html#gafeffba32b6b0854a232493dc2e2634d4":[2,91,0,5,1,1083],
-"group___peripheral___registers___bits___definition.html#gaff08fac3bb90bd73b0bdadddb6a1411a":[2,91,0,5,1,4507],
-"group___peripheral___registers___bits___definition.html#gaff130f15493c765353ec2fd605667c5a":[2,91,0,5,1,5268],
 "group___peripheral___registers___bits___definition.html#gaff1341cabf6155e197f657b12237dbb8":[2,91,0,5,1,5917],
 "group___peripheral___registers___bits___definition.html#gaff2a24486b52bc1e86707e5e4f9ebbd9":[2,91,0,5,1,6200],
 "group___peripheral___registers___bits___definition.html#gaff38e1078878bdd79375295e7ab829b5":[2,91,0,5,1,1971],
@@ -249,5 +244,10 @@ var NAVTREEINDEX179 =
 "group___peripheral__memory__map.html#gaf0c34a518f87e1e505cd2332e989564a":[2,91,0,3,68],
 "group___peripheral__memory__map.html#gaf0e972b8f028ecf44a652029efbd4642":[2,91,0,3,87],
 "group___peripheral__memory__map.html#gaf3a9480e08c6ae94f4482e0cdaebdd17":[2,91,0,3,23],
-"group___peripheral__memory__map.html#gaf8aa324ca5011b8173ab16585ed7324a":[2,91,0,3,66]
+"group___peripheral__memory__map.html#gaf8aa324ca5011b8173ab16585ed7324a":[2,91,0,3,66],
+"group___peripheral__registers__structures.html":[2,91,0,2],
+"group___prc_cfg_inf___type.html":[2,2,0,0,0,0,0,0,0,1,0,0,0,0],
+"group___prc_cfg_inf___type.html":[2,2,0,0,0,1,0,0,0,1,0,0,0,0],
+"group___pwr_mod_ctl___type.html":[2,2,0,0,0,0,0,0,0,1,0],
+"group___pwr_mod_ctl___type.html":[2,2,0,0,0,1,0,0,0,1,0]
 };
