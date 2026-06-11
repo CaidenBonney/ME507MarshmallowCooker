@@ -113,9 +113,21 @@ Issues We Encountered:
 * Wrong pins for I2C
   * Problem: We mixed up ports A and B in the schematic. Connected traces to PA6 & PA7 instead of PB6 & PB7 for I2C1.
   * Solution: Soldered 32 AWG Kynar wire to jump pins PA8 & PB8 (I2C3) to the pull up resistor and rest of the I2C pcb wiring.
+
+<p align="center">
+  <img src="../images/I2C3_jumpers.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
 * Switching regulator placed 180 degrees
   * Problem: When purchasing the PCB we probably missed seeing that the switching regulator was placed 180 degrees incorrectly.
   * Solution: Used hot air soldering gun to remove the switching regulator, rotate it 180 degrees, and place it back on the pads.
+
+<p align="center">
+  <img src="../images/switching_reg.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
 * Thru holes for stepper motor JST connector too small
   * Problem: Did not verify the via size of the component we downloaded. Result was vias were too small for the thru hole pins of the JST-XH connector.
   * Solution: Attempted to expand the vias, but lifted the pads and some traces. Cut back the lifted traces, chipped off the solder mask to expose the copper, soldered the connector's pins onto the copper traces. Super glued the connector's body onto the board. Never unplugging the connector on the board side.
@@ -129,7 +141,11 @@ Issues We Encountered:
 
 # CAD
 
-The GitHub repository contains CAD for the marshmallow cooker. This includes a main assembly file, individual part models, and hardware (screws and nuts).
+The GitHub repository contains CAD for the marshmallow cooker. This includes a main assembly file, individual part models, and hardware components such as screws and nuts. All custom components were 3D printed from PETG using a Bambu Lab P1S printer. A combination of nyloc nuts, standard nuts, and 3D-printed threaded pilot holes was used to assemble the system. Most parts were designed with additive manufacturing in mind. Where possible, support material was minimized, and "speed holes" were added to reduce print time and material usage.
+
+The vertical gantry consists of a lead screw driven by the stepper motor and a smooth guide shaft. Because only two points define the sliding platform's plane, the mechanism can rock under the weight of the motor, thermocouple, and marshmallow. Additionally, the gantry can bind during motion. We mitigated binding by providing a small clearance fit around the guide shaft, lubricating the shaft, and commanding the stepper motor to move at least one-half revolution per motion command.
+
+The thermocouple and marshmallow mount underwent several design iterations throughout the project. Initially, the thermocouple was attached directly to the rotating motor assembly, but the thermocouple wire wrapped around the shaft and became tangled. We first mitigated this issue by rotating 360 degrees in one direction and then 360 degrees in the opposite direction. Later, we redesigned the mount so that two skewers penetrate the marshmallow. This ensures that the marshmallow rotates with the motor while separating it from the thermocouple. Since the thermocouple no longer rotates, the wire cannot wrap around the shaft, and the marshmallow does not interfere with the temperature measurement.
 
 <p align="center">
   <img src="../images/CAD_1.jpg"
@@ -224,6 +240,10 @@ error = target flame temperature - measured flame temperature
 A positive error means the measured flame temperature is too cold, so the Z target is moved downward toward the flame. A negative error means the flame is too hot, so the Z target is moved upward. The default gains are `Kp = 1.0`, `Ki = 0.02`, and `Kd = 0.10`. Each PID update is clamped to +/-750 steps with a +/-100 step deadband, and the integral term is limited to reduce wind-up. Software limits prevent commands above the home position or below the -16000 step lower cook limit.
 
 Cooking completes when the IR object temperature reaches 250.00 F continuously for 1.5 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters `Fault`, stops motion, and waits for a reset sequence.
+
+## How to Improve the Control Loop
+
+The thermocouple has a very large time constant. This means it takes a long time for the hot-junction temperature to respond to changes in the surrounding air temperature. This is undesirable because the Z-axis height control loop is closed using a sensor that is effectively reporting old data. We mitigated this issue by tuning relatively low PID gains. As a result, the vertical motion responds slowly, giving the thermocouple more time to approach the true temperature before additional control actions are taken. This behavior could be improved by using a thermocouple with lower thermal mass and, therefore, a smaller time constant
 
 ---
 

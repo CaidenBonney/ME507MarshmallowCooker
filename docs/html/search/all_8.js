@@ -38,11 +38,12 @@ var searchData=
   ['homeup_35',['homeUp',['../class_z_motor_driver.html#ab45586bd078d42179f32bf65a9ca4529',1,'ZMotorDriver']]],
   ['homing_36',['Homing',['../class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48a8dea110caafe3b2e7d6bd20b11ee4138',1,'TaskZMotor']]],
   ['homingz_37',['HomingZ',['../class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187ae4768f3e994b0df4d429727ca9a5f8f5',1,'TaskCooker']]],
-  ['hpcd_5fusb_5fotg_5ffs_38',['hpcd_USB_OTG_FS',['../stm32f4xx__it_8c.html#a3ec0d70a6cb9406d997fb3d006cc940d',1,'stm32f4xx_it.c']]],
-  ['hse_5fstartup_5ftimeout_39',['HSE_STARTUP_TIMEOUT',['../stm32f4xx__hal__conf_8h.html#a68ecbc9b0a1a40a1ec9d18d5e9747c4f',1,'stm32f4xx_hal_conf.h']]],
-  ['hse_5fvalue_40',['HSE_VALUE',['../stm32f4xx__hal__conf_8h.html#aeafcff4f57440c60e64812dddd13e7cb',1,'HSE_VALUE:&#160;stm32f4xx_hal_conf.h'],['../group___s_t_m32_f4xx___system___private___includes.html#gaeafcff4f57440c60e64812dddd13e7cb',1,'HSE_VALUE:&#160;system_stm32f4xx.c']]],
-  ['hsi_5fvalue_41',['HSI_VALUE',['../stm32f4xx__hal__conf_8h.html#aaa8c76e274d0f6dd2cefb5d0b17fbc37',1,'HSI_VALUE:&#160;stm32f4xx_hal_conf.h'],['../group___s_t_m32_f4xx___system___private___includes.html#gaaa8c76e274d0f6dd2cefb5d0b17fbc37',1,'HSI_VALUE:&#160;system_stm32f4xx.c']]],
-  ['htim1_42',['htim1',['../main_8cpp.html#a25fc663547539bc49fecc0011bd76ab5',1,'htim1:&#160;main.cpp'],['../r__motor__driver_8cpp.html#a25fc663547539bc49fecc0011bd76ab5',1,'htim1:&#160;main.cpp']]],
-  ['htim3_43',['htim3',['../main_8cpp.html#aac3d2c59ee0e3bbae1b99529a154eb62',1,'htim3:&#160;main.cpp'],['../r__motor__driver_8cpp.html#aac3d2c59ee0e3bbae1b99529a154eb62',1,'htim3:&#160;main.cpp']]],
-  ['huart2_44',['huart2',['../_task___u_i_8h.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp'],['../main_8cpp.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp'],['../stm32f4xx__it_8c.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp']]]
+  ['how_20to_20improve_20the_20control_20loop_38',['How to Improve the Control Loop',['../index.html#autotoc_md21',1,'']]],
+  ['hpcd_5fusb_5fotg_5ffs_39',['hpcd_USB_OTG_FS',['../stm32f4xx__it_8c.html#a3ec0d70a6cb9406d997fb3d006cc940d',1,'stm32f4xx_it.c']]],
+  ['hse_5fstartup_5ftimeout_40',['HSE_STARTUP_TIMEOUT',['../stm32f4xx__hal__conf_8h.html#a68ecbc9b0a1a40a1ec9d18d5e9747c4f',1,'stm32f4xx_hal_conf.h']]],
+  ['hse_5fvalue_41',['HSE_VALUE',['../stm32f4xx__hal__conf_8h.html#aeafcff4f57440c60e64812dddd13e7cb',1,'HSE_VALUE:&#160;stm32f4xx_hal_conf.h'],['../group___s_t_m32_f4xx___system___private___includes.html#gaeafcff4f57440c60e64812dddd13e7cb',1,'HSE_VALUE:&#160;system_stm32f4xx.c']]],
+  ['hsi_5fvalue_42',['HSI_VALUE',['../stm32f4xx__hal__conf_8h.html#aaa8c76e274d0f6dd2cefb5d0b17fbc37',1,'HSI_VALUE:&#160;stm32f4xx_hal_conf.h'],['../group___s_t_m32_f4xx___system___private___includes.html#gaaa8c76e274d0f6dd2cefb5d0b17fbc37',1,'HSI_VALUE:&#160;system_stm32f4xx.c']]],
+  ['htim1_43',['htim1',['../main_8cpp.html#a25fc663547539bc49fecc0011bd76ab5',1,'htim1:&#160;main.cpp'],['../r__motor__driver_8cpp.html#a25fc663547539bc49fecc0011bd76ab5',1,'htim1:&#160;main.cpp']]],
+  ['htim3_44',['htim3',['../main_8cpp.html#aac3d2c59ee0e3bbae1b99529a154eb62',1,'htim3:&#160;main.cpp'],['../r__motor__driver_8cpp.html#aac3d2c59ee0e3bbae1b99529a154eb62',1,'htim3:&#160;main.cpp']]],
+  ['huart2_45',['huart2',['../_task___u_i_8h.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp'],['../main_8cpp.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp'],['../stm32f4xx__it_8c.html#aa9479c261d65eecedd3d9582f7f0f89c',1,'huart2:&#160;main.cpp']]]
 ];

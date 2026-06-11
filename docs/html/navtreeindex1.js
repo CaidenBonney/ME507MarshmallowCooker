@@ -109,8 +109,9 @@ var NAVTREEINDEX1 =
 "index.html#autotoc_md16":[4],
 "index.html#autotoc_md18":[5],
 "index.html#autotoc_md20":[6],
-"index.html#autotoc_md22":[7],
-"index.html#autotoc_md23":[7,0],
+"index.html#autotoc_md21":[6,0],
+"index.html#autotoc_md23":[7],
+"index.html#autotoc_md24":[7,0],
 "index.html#autotoc_md3":[1],
 "index.html#autotoc_md4":[1,0],
 "index.html#autotoc_md5":[1,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "stm32f4xx__hal__conf_8h.html#a9b01c64d19f0d4839b7da08bd61c7ff7":[9,0,1,0,0,6,82],
 "stm32f4xx__hal__conf_8h.html#a9b7f5c8f71047ee449f21562d26b1b43":[9,0,1,0,0,6,34],
 "stm32f4xx__hal__conf_8h.html#a9d356ada86535630c403690bef0fb887":[9,0,1,0,0,6,48],
-"stm32f4xx__hal__conf_8h.html#aa0b1e6d4a23470fc1ac4f9222b51f8a0":[9,0,1,0,0,6,47],
-"stm32f4xx__hal__conf_8h.html#aa24a8d7886d3a497a868d5bf2417bfdf":[9,0,1,0,0,6,66]
+"stm32f4xx__hal__conf_8h.html#aa0b1e6d4a23470fc1ac4f9222b51f8a0":[9,0,1,0,0,6,47]
 };

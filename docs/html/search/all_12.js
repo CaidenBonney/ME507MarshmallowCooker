@@ -45,7 +45,7 @@ var searchData=
   ['stop_42',['stop',['../class_r_motor_driver.html#a6cd5f455aa77a5c5f09bbd60e3ebf233',1,'RMotorDriver::stop()'],['../class_z_motor_driver.html#a3941b6ade35a482080c3c98ee2b984b7',1,'ZMotorDriver::stop()']]],
   ['stopcookingrotation_43',['stopCookingRotation',['../class_task_r_motor.html#af8daed93188e6bcdaf9503ce746ce854',1,'TaskRMotor']]],
   ['stopmotion_44',['stopMotion',['../class_task_z_motor.html#a8d2711c9d958ad8db5200f990ce50570',1,'TaskZMotor']]],
-  ['structure_45',['Structure',['../index.html#autotoc_md16',1,'Main Control Structure'],['../index.html#autotoc_md22',1,'Repository Structure']]],
+  ['structure_45',['Structure',['../index.html#autotoc_md16',1,'Main Control Structure'],['../index.html#autotoc_md23',1,'Repository Structure']]],
   ['svc_5fhandler_46',['SVC_Handler',['../stm32f4xx__it_8h.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c']]],
   ['syscalls_2ec_47',['syscalls.c',['../syscalls_8c.html',1,'']]],
   ['sysmem_2ec_48',['sysmem.c',['../sysmem_8c.html',1,'']]],
