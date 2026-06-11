@@ -25,24 +25,23 @@
 var NAVTREE =
 [
   [ "ME507 Marshmallow Cooker", "index.html", [
-    [ "ME507 Marshmallow Cooker", "index.html#autotoc_md0", [
-      [ "Project Overview", "index.html#autotoc_md1", null ]
-    ] ],
-    [ "Major Hardware", "index.html#autotoc_md3", [
-      [ "Rotating Motor Assembly", "index.html#autotoc_md4", null ],
-      [ "Vertical Motion System", "index.html#autotoc_md5", null ],
-      [ "Temperature Sensors", "index.html#autotoc_md6", [
-        [ "MLX90614 Infrared Temperature Sensor", "index.html#autotoc_md7", null ],
-        [ "MCP9600 Thermocouple Amplifier", "index.html#autotoc_md8", null ]
+    [ "Project Overview", "index.html#autotoc_md0", null ],
+    [ "Major Hardware", "index.html#autotoc_md2", [
+      [ "Rotating Motor Assembly", "index.html#autotoc_md3", null ],
+      [ "Vertical Motion System", "index.html#autotoc_md4", null ],
+      [ "Temperature Sensors", "index.html#autotoc_md5", [
+        [ "MLX90614 Infrared Temperature Sensor", "index.html#autotoc_md6", null ],
+        [ "MCP9600 Thermocouple Amplifier", "index.html#autotoc_md7", null ]
       ] ],
-      [ "Custom PCB", "index.html#autotoc_md9", null ]
+      [ "Custom PCB", "index.html#autotoc_md8", null ]
     ] ],
-    [ "Software Architecture", "index.html#autotoc_md11", null ],
-    [ "Main Control Structure", "index.html#autotoc_md13", null ],
-    [ "User Interface", "index.html#autotoc_md15", null ],
-    [ "Control Loop", "index.html#autotoc_md17", null ],
-    [ "Repository Structure", "index.html#autotoc_md19", [
-      [ "Repository", "index.html#autotoc_md20", null ]
+    [ "CAD", "index.html#autotoc_md10", null ],
+    [ "Software Architecture", "index.html#autotoc_md12", null ],
+    [ "Main Control Structure", "index.html#autotoc_md14", null ],
+    [ "User Interface", "index.html#autotoc_md16", null ],
+    [ "Control Loop", "index.html#autotoc_md18", null ],
+    [ "Repository Structure", "index.html#autotoc_md20", [
+      [ "Repository", "index.html#autotoc_md21", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
