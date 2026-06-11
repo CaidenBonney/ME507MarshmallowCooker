@@ -178,10 +178,10 @@ Major software modules include:
 * DRV8833 motor driver
 * MCP9600 thermocouple driver
 * MLX90614 infrared sensor driver
-* Encoder driver
-* Rotational motor driver
-* Z-axis motor driver
-* Z-axis limit switch driver
+* \ref REncoderDriver "Encoder" driver
+* \ref RMotorDriver "Rotational motor" driver
+* \ref ZMotorDriver "Z-axis motor" driver
+* \ref ZLimitSwitches "Z-axis limit switch" driver
 
 Hardware-specific functionality is encapsulated within dedicated driver classes, allowing higher-level control logic to remain independent of hardware implementation details.
 
