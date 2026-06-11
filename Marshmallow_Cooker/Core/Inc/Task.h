@@ -1,6 +1,11 @@
 #ifndef TASK_H
 #define TASK_H
 
+#include "main.h" // For print_str, and Error_Handler
+
+// Externs
+extern char print_buf[100];
+
 class Task {
 public:
   enum class Status {

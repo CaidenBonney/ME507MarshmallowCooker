@@ -1,16 +1,20 @@
 #ifndef TASK_COOKER_H
 #define TASK_COOKER_H
 
+// Parent class include
 #include "Task.h"
+
+// User created includes
 #include "Task_R_Motor.h"
 #include "Task_Temps.h"
 #include "Task_UI.h"
 #include "Task_Z_Motor.h"
+
+// Additional includes
 #include "stm32f4xx_hal.h"
 #include <cstdlib>
 
-extern void print_str(const char* str);
-extern char print_buf[100];
+// Externs
 
 class TaskCooker : public Task {
 public:

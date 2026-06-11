@@ -75,7 +75,6 @@ static void MX_I2C3_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-void print_str(const char* str);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/

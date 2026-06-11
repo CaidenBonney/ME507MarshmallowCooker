@@ -14,8 +14,6 @@
 #include <cstdlib> // For abs
 
 // Externs
-extern void print_str(const char* str);
-extern char print_buf[100];
 
 class TaskTemps : public Task {
 public:

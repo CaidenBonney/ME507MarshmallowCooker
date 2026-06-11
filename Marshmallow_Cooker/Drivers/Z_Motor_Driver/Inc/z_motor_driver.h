@@ -1,8 +1,9 @@
 #ifndef Z_MOTOR_DRIVER_H
 #define Z_MOTOR_DRIVER_H
 
-#include "TMC2209.h" // PWM driver for Z motor
 #include "stm32f4xx_hal.h"
+
+#include "TMC2209.h" // PWM driver for Z motor
 #include <cstdint>
 
 class ZMotorDriver {
@@ -33,7 +34,8 @@ public:
   void jog(Direction direction, uint32_t speed_steps_per_second);
   void stop();
 
-  // Home toward the selected limit switch. For this project, TaskZMotor should home Up.
+  // General homing command. For this project, use Direction::Up so the
+  // top limit becomes Z = 0.
   void home(Direction direction, uint32_t speed_steps_per_second);
   void homeUp(uint32_t speed_steps_per_second);
   void homeDown(uint32_t speed_steps_per_second);
@@ -51,7 +53,6 @@ public:
   State getState() const;
 
   bool isBusy() const;
-  bool isFaulted() const;
   bool topLimitPressed() const;
   bool bottomLimitPressed() const;
   bool driverFaultActive() const;
@@ -64,8 +65,7 @@ private:
   void setDirection(Direction direction);
   bool tryStep(Direction direction);
   bool limitBlocksDirection(Direction direction) const;
-  bool homeLimitPressed(Direction direction) const;
-  State limitStateForDirection(Direction direction) const;
+  bool motionCommandActive() const;
 
   TMC2209 tmc_;
 
@@ -77,6 +77,7 @@ private:
   bool homing_;
   Direction homing_direction_;
   bool limits_active_low_;
+
   Direction current_direction_;
   State state_;
 };

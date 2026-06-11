@@ -1,11 +1,15 @@
 #ifndef TASK_UI_H
 #define TASK_UI_H
 
+// Parent class include
 #include "Task.h"
+
+// User created includes
+
+// Additional includes
 #include "stm32f4xx_hal.h"
 
-extern void print_str(const char* str);
-extern char print_buf[100];
+// Externs
 
 class TaskUI : public Task {
 public:

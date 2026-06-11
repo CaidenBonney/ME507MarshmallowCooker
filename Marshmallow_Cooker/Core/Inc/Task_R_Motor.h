@@ -12,9 +12,6 @@
 #include "stm32f4xx_hal.h" // For HAL_GetTick
 
 // Externs
-extern void Error_Handler();
-extern void print_str(const char* str);
-extern char print_buf[100];
 
 class TaskRMotor : public Task {
 public:

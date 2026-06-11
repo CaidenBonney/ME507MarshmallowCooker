@@ -1,4 +1,5 @@
 #include "z_motor_driver.h"
+
 #include "main.h"
 #include <climits>
 
@@ -50,13 +51,44 @@ void ZMotorDriver::update() {
   // but it does not stop Z motion until testing proves it is reliable.
   tmc_.updateDiagLog();
 
-  if (homing_) {
-    if (homeLimitPressed(homing_direction_)) {
-      stop();
+  // Hard software limit protection. If either limit switch is pressed while
+  // the current motion direction would push farther into that switch, stop
+  // before any more steps are issued.
+  if (motionCommandActive() && topLimitPressed() && current_direction_ == Direction::Up) {
+    stop();
+
+    if (homing_direction_ == Direction::Up) {
       zeroPosition();
-      state_ = limitStateForDirection(homing_direction_);
+    }
+
+    state_ = State::HitTopLimit;
+    return;
+  }
+
+  if (motionCommandActive() && bottomLimitPressed() && current_direction_ == Direction::Down) {
+    stop();
+
+    if (homing_direction_ == Direction::Down) {
+      zeroPosition();
+    }
+
+    state_ = State::HitBottomLimit;
+    return;
+  }
+
+  if (homing_) {
+    if (limitBlocksDirection(homing_direction_)) {
+      stop();
+
+      // For this project, homing upward defines top as Z = 0. Keeping the
+      // zero here also preserves legacy homeDown behavior if it is used.
+      zeroPosition();
+
+      state_ = (homing_direction_ == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
       return;
     }
+
+    setDirection(homing_direction_);
 
     if (tryStep(homing_direction_)) {
       state_ = State::Moving;
@@ -75,8 +107,8 @@ void ZMotorDriver::update() {
   const Direction desired_direction = (target_steps_ > position_steps_) ? Direction::Up : Direction::Down;
 
   if (limitBlocksDirection(desired_direction)) {
-    state_ = limitStateForDirection(desired_direction);
-    target_steps_ = position_steps_;
+    stop();
+    state_ = (desired_direction == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
     return;
   }
 
@@ -99,6 +131,15 @@ void ZMotorDriver::moveSteps(int32_t steps) {
     enable();
   }
 
+  const Direction desired_direction = (target_steps_ > position_steps_) ? Direction::Up : Direction::Down;
+  setDirection(desired_direction);
+
+  if (limitBlocksDirection(desired_direction)) {
+    stop();
+    state_ = (desired_direction == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
+    return;
+  }
+
   state_ = State::Moving;
 }
 
@@ -110,9 +151,21 @@ void ZMotorDriver::moveTo(int32_t target_position_steps) {
     enable();
   }
 
-  if (position_steps_ != target_steps_) {
-    state_ = State::Moving;
+  if (position_steps_ == target_steps_) {
+    state_ = State::Idle;
+    return;
   }
+
+  const Direction desired_direction = (target_steps_ > position_steps_) ? Direction::Up : Direction::Down;
+  setDirection(desired_direction);
+
+  if (limitBlocksDirection(desired_direction)) {
+    stop();
+    state_ = (desired_direction == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
+    return;
+  }
+
+  state_ = State::Moving;
 }
 
 void ZMotorDriver::jog(Direction direction, uint32_t speed_steps_per_second) {
@@ -136,12 +189,21 @@ void ZMotorDriver::stop() {
 
 void ZMotorDriver::home(Direction direction, uint32_t speed_steps_per_second) {
   setSpeed(speed_steps_per_second);
-  homing_ = true;
   homing_direction_ = direction;
+  homing_ = true;
   target_steps_ = position_steps_;
 
   if (!tmc_.isEnabled()) {
     enable();
+  }
+
+  setDirection(homing_direction_);
+
+  if (limitBlocksDirection(homing_direction_)) {
+    stop();
+    zeroPosition();
+    state_ = (homing_direction_ == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
+    return;
   }
 
   state_ = State::Moving;
@@ -209,10 +271,6 @@ bool ZMotorDriver::isBusy() const {
   return state_ == State::Moving;
 }
 
-bool ZMotorDriver::isFaulted() const {
-  return state_ == State::Fault;
-}
-
 bool ZMotorDriver::topLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_TOP_GPIO_Port, Z_TOP_Pin);
   return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
@@ -240,6 +298,12 @@ void ZMotorDriver::setDirection(Direction direction) {
 bool ZMotorDriver::tryStep(Direction direction) {
   setDirection(direction);
 
+  if (limitBlocksDirection(direction)) {
+    stop();
+    state_ = (direction == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
+    return false;
+  }
+
   if (!tmc_.stepIfDue()) {
     return false;
   }
@@ -265,18 +329,6 @@ bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
   return false;
 }
 
-bool ZMotorDriver::homeLimitPressed(Direction direction) const {
-  if (direction == Direction::Up) {
-    return topLimitPressed();
-  }
-
-  return bottomLimitPressed();
-}
-
-ZMotorDriver::State ZMotorDriver::limitStateForDirection(Direction direction) const {
-  if (direction == Direction::Up) {
-    return State::HitTopLimit;
-  }
-
-  return State::HitBottomLimit;
+bool ZMotorDriver::motionCommandActive() const {
+  return homing_ || (state_ == State::Moving && position_steps_ != target_steps_);
 }
