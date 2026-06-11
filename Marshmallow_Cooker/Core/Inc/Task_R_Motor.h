@@ -5,10 +5,11 @@
 #include "Task.h"
 
 // User created includes
-#include "r_motor_driver.h" // Motor driver for rotating motor
+#include "r_motor_driver.h"
 
 // additional includes
-#include "stdio.h" // For sprintf
+#include "stdio.h"
+#include "stm32f4xx_hal.h"
 
 // externs
 extern void Error_Handler();
@@ -17,18 +18,31 @@ extern char print_buf[100];
 
 class TaskRMotor : public Task {
 public:
+  enum class State {
+    Uninitialized,
+    Idle,
+    MovingPositive,
+    MovingNegative,
+    Fault
+  };
+
   TaskRMotor();
 
-  void run();
+  void run() override;
   void update();
 
-private:
-  // TODO: add enum for init then run state
+  Status getStatus() const override;
+  State getState() const;
 
+private:
   static constexpr uint32_t kUpdatePeriodMs = 10;
 
+  State state_ = State::Uninitialized;
+
   RMotorDriver r_motor_driver_;
-  uint32_t last_update_ms_;
+
+  uint32_t last_update_ms_ = 0;
+  bool test_move_started_ = false;
 };
 
 #endif /* TASK_R_MOTOR_H */

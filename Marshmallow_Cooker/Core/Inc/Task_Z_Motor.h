@@ -5,10 +5,11 @@
 #include "Task.h"
 
 // User created includes
-#include "Z_Limit_Switches.h" // Limit switch driver for z-axis
-#include "z_motor_driver.h" // Motor driver for veritcal stepper motor (z-axis)
+#include "Z_Limit_Switches.h"
+#include "z_motor_driver.h"
 
 // additional includes
+#include "stm32f4xx_hal.h"
 
 // externs
 extern void Error_Handler();
@@ -16,19 +17,35 @@ extern void print_str(const char* str);
 
 class TaskZMotor : public Task {
 public:
+  enum class State {
+    Uninitialized,
+    Idle,
+    MovingUp,
+    MovingDown,
+    HomingDown,
+    HitTopLimit,
+    HitBottomLimit,
+    Fault
+  };
+
   TaskZMotor();
 
-  void run();
+  void run() override;
   void update();
 
-private:
-  // TODO: add enum for init then run state
+  Status getStatus() const override;
+  State getState() const;
 
+private:
   static constexpr uint32_t kUpdatePeriodMs = 10;
+
+  State state_ = State::Uninitialized;
 
   ZMotorDriver z_motor_driver_;
   ZLimitSwitches z_limit_switches_;
-  uint32_t last_update_ms_;
+
+  uint32_t last_update_ms_ = 0;
+  bool test_move_started_ = false;
 };
 
 #endif /* TASK_Z_MOTOR_H */
