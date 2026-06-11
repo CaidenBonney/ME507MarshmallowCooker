@@ -15,6 +15,7 @@ void TaskCooker::run() {
 
   const TaskUI::Command command = task_ui_.consumeCommand();
   handleCommand(command);
+  updateStatusStream();
 
   if (task_temps_.hasValidThermocoupleReading()) {
     task_z_motor_.setMeasuredFlameTempFx100(task_temps_.getThermocoupleHotFx100());
@@ -134,15 +135,23 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
         print_str("Software reset. Send 'home' before cooking.\r\n");
         task_r_motor_.resetFault();
         task_z_motor_.resetFault();
+        stopStatusStream();
         state_ = State::WaitingForHomeCommand;
       } else {
         print_str("Reset ignored. Reset is only accepted from Fault or Done.\r\n");
       }
       break;
 
-    case TaskUI::Command::Status:
-      printStatus();
+    case TaskUI::Command::Status: {
+      const uint32_t status_duration_ms = task_ui_.consumeStatusDurationMs();
+
+      if (status_duration_ms > 0U) {
+        startStatusStream(status_duration_ms);
+      } else {
+        printStatus();
+      }
       break;
+    }
 
     case TaskUI::Command::Unknown:
       print_str("Unknown command. Use: home, start, stop, estop, reset, status\r\n");
@@ -174,4 +183,37 @@ void TaskCooker::printStatus() const {
           task_temps_.getIrObjectFx100() / 100,
           abs(task_temps_.getIrObjectFx100() % 100));
   print_str(print_buf);
+}
+
+void TaskCooker::startStatusStream(uint32_t duration_ms) {
+  status_stream_active_ = true;
+  status_stream_start_ms_ = HAL_GetTick();
+  status_stream_duration_ms_ = duration_ms;
+  last_status_stream_ms_ = status_stream_start_ms_ - kStatusStreamPeriodMs;
+
+  sprintf(print_buf, "Streaming status for %lu ms.\r\n", static_cast<unsigned long>(duration_ms));
+  print_str(print_buf);
+}
+
+void TaskCooker::updateStatusStream() {
+  if (!status_stream_active_) {
+    return;
+  }
+
+  const uint32_t now_ms = HAL_GetTick();
+
+  if ((now_ms - status_stream_start_ms_) >= status_stream_duration_ms_) {
+    status_stream_active_ = false;
+    print_str("Status stream complete.\r\n");
+    return;
+  }
+
+  if ((now_ms - last_status_stream_ms_) >= kStatusStreamPeriodMs) {
+    last_status_stream_ms_ = now_ms;
+    printStatus();
+  }
+}
+
+void TaskCooker::stopStatusStream() {
+  status_stream_active_ = false;
 }

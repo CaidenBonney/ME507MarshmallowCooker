@@ -8,7 +8,7 @@ TaskUI::TaskUI() {
 
 void TaskUI::run() {
   if (state_ == State::Uninitialized) {
-    print_str("UI initialized. Commands: home, start, stop, estop, reset, status\r\n> ");
+    print_str("UI initialized. Commands: home, start, stop, estop, reset, status, status <ms>\r\n> ");
     state_ = State::Idle;
     armReceive();
   }
@@ -46,11 +46,21 @@ TaskUI::Command TaskUI::consumeCommand() {
   Command command = pending_command_;
   pending_command_ = Command::None;
 
+  if (command != Command::Status) {
+    pending_status_duration_ms_ = 0;
+  }
+
   if (state_ == State::CommandReady) {
     state_ = State::Idle;
   }
 
   return command;
+}
+
+uint32_t TaskUI::consumeStatusDurationMs() {
+  const uint32_t duration_ms = pending_status_duration_ms_;
+  pending_status_duration_ms_ = 0;
+  return duration_ms;
 }
 
 void TaskUI::onUartReceiveComplete(UART_HandleTypeDef* huart) {
@@ -148,12 +158,14 @@ void TaskUI::handleCompletedLine() {
     return;
   }
 
-  Command parsed_command = parseCommand(command_buffer_);
+  uint32_t status_duration_ms = 0;
+  Command parsed_command = parseCommandLine(command_buffer_, status_duration_ms);
 
   if (parsed_command == Command::Unknown) {
-    print_str("Unknown command. Use: home, start, stop, estop, reset, status\r\n");
+    print_str("Unknown command. Use: home, start, stop, estop, reset, status, status <ms>\r\n");
   } else if (parsed_command != Command::None) {
     pending_command_ = parsed_command;
+    pending_status_duration_ms_ = status_duration_ms;
     state_ = State::CommandReady;
   }
 
@@ -178,19 +190,17 @@ void TaskUI::echoString(const char* str) {
                     100);
 }
 
-TaskUI::Command TaskUI::parseCommand(const char* command) const {
+TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& status_duration_ms) const {
+  status_duration_ms = 0;
+
   char normalized[kCommandBufferSize] = {};
   size_t write_index = 0;
 
-  while (*command == ' ' || *command == '\t') {
+  while (isSpace(*command)) {
     command++;
   }
 
-  while (*command != '\0' && write_index < (kCommandBufferSize - 1U)) {
-    if (*command == ' ' || *command == '\t') {
-      break;
-    }
-
+  while (*command != '\0' && !isSpace(*command) && write_index < (kCommandBufferSize - 1U)) {
     normalized[write_index] = toLower(*command);
     write_index++;
     command++;
@@ -198,28 +208,63 @@ TaskUI::Command TaskUI::parseCommand(const char* command) const {
 
   normalized[write_index] = '\0';
 
+  while (isSpace(*command)) {
+    command++;
+  }
+
+  const char* argument = command;
+
   if (stringsEqual(normalized, "home")) {
-    return Command::Home;
+    return (*argument == '\0') ? Command::Home : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "start")) {
-    return Command::Start;
+    return (*argument == '\0') ? Command::Start : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "stop")) {
-    return Command::Stop;
+    return (*argument == '\0') ? Command::Stop : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "estop") || stringsEqual(normalized, "e-stop") ||
       stringsEqual(normalized, "emergency") || stringsEqual(normalized, "emergencystop")) {
-    return Command::EmergencyStop;
+    return (*argument == '\0') ? Command::EmergencyStop : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "reset")) {
-    return Command::Reset;
+    return (*argument == '\0') ? Command::Reset : Command::Unknown;
   }
 
   if (stringsEqual(normalized, "status")) {
+    if (*argument == '\0') {
+      return Command::Status;
+    }
+
+    uint32_t value_ms = 0;
+    bool has_digit = false;
+
+    while (isDigit(*argument)) {
+      has_digit = true;
+      const uint32_t digit = static_cast<uint32_t>(*argument - '0');
+
+      if (value_ms <= ((UINT32_MAX - digit) / 10U)) {
+        value_ms = (value_ms * 10U) + digit;
+      } else {
+        return Command::Unknown;
+      }
+
+      argument++;
+    }
+
+    while (isSpace(*argument)) {
+      argument++;
+    }
+
+    if (!has_digit || *argument != '\0') {
+      return Command::Unknown;
+    }
+
+    status_duration_ms = value_ms;
     return Command::Status;
   }
 
@@ -249,4 +294,12 @@ bool TaskUI::stringsEqual(const char* a, const char* b) {
 
 extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
   task_ui.onUartReceiveComplete(huart);
+}
+
+bool TaskUI::isSpace(char c) {
+  return c == ' ' || c == '\t';
+}
+
+bool TaskUI::isDigit(char c) {
+  return c >= '0' && c <= '9';
 }

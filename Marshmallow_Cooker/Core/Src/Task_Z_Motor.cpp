@@ -343,8 +343,8 @@ void TaskZMotor::updatePidControl(uint32_t now_ms) {
   z_motor_driver_.setSpeedStepsPerSecond(kMoveSpeedStepsPerSecond);
   z_motor_driver_.moveTo(next_target_steps);
 
-  const int32_t error_fx100 = static_cast<int32_t>(target_flame_temp_fx100_) -
-                              static_cast<int32_t>(measured_flame_temp_fx100_);
+  const int32_t error_fx100 =
+      static_cast<int32_t>(target_flame_temp_fx100_) - static_cast<int32_t>(measured_flame_temp_fx100_);
 
   sprintf(print_buf,
           "Z PID: target=%d.%02dF measured=%d.%02dF error=%ld.%02ldF cmd=%ld pos=%ld target_steps=%ld\r\n",

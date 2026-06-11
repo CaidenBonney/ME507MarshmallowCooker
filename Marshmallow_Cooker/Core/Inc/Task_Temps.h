@@ -39,6 +39,7 @@ public:
   int16_t getThermocoupleHotFx100() const;
   int16_t getThermocoupleColdFx100() const;
   int16_t getIrObjectFx100() const;
+  void printTemperatures() const;
 
 private:
   State state_ = State::Uninitialized;

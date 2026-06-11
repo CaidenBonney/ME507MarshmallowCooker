@@ -37,6 +37,7 @@ public:
 
   State getState() const;
   Command consumeCommand();
+  uint32_t consumeStatusDurationMs();
   void onUartReceiveComplete(UART_HandleTypeDef* huart);
 
 private:
@@ -45,6 +46,7 @@ private:
 
   State state_ = State::Uninitialized;
   Command pending_command_ = Command::None;
+  uint32_t pending_status_duration_ms_ = 0;
 
   char command_buffer_[kCommandBufferSize] = {};
   size_t command_length_ = 0;
@@ -68,9 +70,11 @@ private:
   void clearCommandBuffer();
   void echoChar(char c);
   void echoString(const char* str);
-  Command parseCommand(const char* command) const;
+  Command parseCommandLine(const char* command, uint32_t& status_duration_ms) const;
   static char toLower(char c);
   static bool stringsEqual(const char* a, const char* b);
+  static bool isSpace(char c);
+  static bool isDigit(char c);
 };
 
 #endif /* TASK_UI_H */

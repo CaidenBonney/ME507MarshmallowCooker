@@ -52,8 +52,6 @@ void TaskTemps::update() {
     ir_object_fx100_ = ir_sensor_.getObjectFx100();
     valid_ir_reading_ = true;
 
-    sprintf(print_buf, "IR Temp: %d.%02d F\r\n", ir_object_fx100_ / 100, abs(ir_object_fx100_ % 100));
-    print_str(print_buf);
   } else {
     valid_ir_reading_ = false;
     print_str("IR Temp read failed\r\n");
@@ -66,13 +64,6 @@ void TaskTemps::update() {
     tc_cold_fx100_ = tc_sensor_.getColdFx100();
     valid_tc_reading_ = true;
 
-    sprintf(print_buf,
-            "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
-            tc_hot_fx100_ / 100,
-            abs(tc_hot_fx100_ % 100),
-            tc_cold_fx100_ / 100,
-            abs(tc_cold_fx100_ % 100));
-    print_str(print_buf);
   } else {
     valid_tc_reading_ = false;
 
@@ -115,4 +106,16 @@ int16_t TaskTemps::getThermocoupleColdFx100() const {
 
 int16_t TaskTemps::getIrObjectFx100() const {
   return ir_object_fx100_;
+}
+
+void TaskTemps::printTemperatures() const {
+  sprintf(print_buf,
+          "IR Temp: %d.%02d F, TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
+          ir_object_fx100_ / 100,
+          abs(ir_object_fx100_ % 100),
+          tc_hot_fx100_ / 100,
+          abs(tc_hot_fx100_ % 100),
+          tc_cold_fx100_ / 100,
+          abs(tc_cold_fx100_ % 100));
+  print_str(print_buf);
 }

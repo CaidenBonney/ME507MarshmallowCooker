@@ -24,11 +24,12 @@
 #include "stdio.h"
 #include <cstdlib>
 
-#include "Task_UI.h"
-#include "Task_Temps.h"
-#include "Task_R_Motor.h"
-#include "Task_Z_Motor.h"
 #include "Task_Cooker.h"
+#include "Task_R_Motor.h"
+#include "Task_Temps.h"
+#include "Task_UI.h"
+#include "Task_Z_Motor.h"
+
 
 /* USER CODE END Includes */
 
@@ -118,7 +119,7 @@ int main(void) {
   MX_TIM3_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
