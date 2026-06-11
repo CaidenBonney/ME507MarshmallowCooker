@@ -1,9 +1,6 @@
 /**
  * @file z_motor_driver.cpp
- * @brief Implementation of the Z-axis stepper position driver.
- * @details
- *   Converts task-level relative, absolute, jog, and home commands into timed step pulses while tracking position and
- * honoring top/bottom limit switches.
+ * @brief Implementation of the non-blocking Z-axis stepper driver.
  */
 
 #include "z_motor_driver.h"

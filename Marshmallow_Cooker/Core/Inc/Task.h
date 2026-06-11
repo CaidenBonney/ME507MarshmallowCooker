@@ -3,64 +3,47 @@
 
 /**
  * @file Task.h
- * @brief Abstract base interface for cooperative firmware tasks.
- * @details
- *   The marshmallow cooker firmware is organized as a set of cooperative
- *   tasks. Each task owns one subsystem and exposes a small common interface
- *   for periodic execution and high-level health reporting. The main loop calls
- *   each task's run() method frequently; tasks return quickly rather than
- *   blocking so sensor reads, command processing, and motor updates can share
- *   processor time.
+ * @brief Abstract base class for cooperative application tasks.
  */
 
-#include "main.h" // For print_str, and Error_Handler
-#include "stm32f4xx_hal.h" // For HAL_GetTick
+// User created includes
+#include "main.h" ///< Project-wide declarations, including print_str and Error_Handler.
 
-/**
- * @brief Shared formatted-print buffer used by task status messages.
- * @details
- *   The buffer is allocated in main.cpp and used by several tasks before
- *   passing the resulting null-terminated text to print_str().
- */
+// Additional includes
+#include "stm32f4xx_hal.h" ///< HAL timing and peripheral definitions.
+
+// Externs
+/** @brief Shared printf-style buffer used by task status messages. */
 extern char print_buf[100];
 
 /**
- * @class Task
- * @brief Common interface for all cooperative state-machine tasks.
- * @details
- *   Derived classes implement run() for non-blocking periodic work and
- *   getStatus() for coarse health reporting. More detailed task-specific state
- *   is provided by each child class through its own state enum.
+ * @brief Common interface for all cooperative firmware tasks.
+ *
+ * Each task owns a small state machine and is called repeatedly from the main
+ * loop. The interface keeps high-level task scheduling uniform without forcing
+ * unrelated tasks to share implementation details.
  */
 class Task {
 public:
-  /**
-   * @enum Status
-   * @brief Generic task health states used by the top-level scheduler.
-   */
+  /** @brief Generic task health state used by the task supervisor. */
   enum class Status {
-    Uninitialized, /**< Task has not completed its initialization sequence. */
-    Running, /**< Task is initialized and not faulted. */
-    Fault /**< Task detected a condition that prevents normal operation. */
+    Uninitialized, ///< Task has not completed startup initialization.
+    Running, ///< Task is initialized and not faulted.
+    Fault ///< Task has detected a fault condition.
   };
 
   /**
-   * @brief Execute one non-blocking service pass for the task.
-   * @details
-   *   Implementations should return quickly and avoid long blocking waits so
-   *   the main loop can continue servicing all other tasks.
+   * @brief Run one non-blocking iteration of the task state machine.
    */
   virtual void run() = 0;
 
   /**
-   * @brief Get the generic health status of the task.
-   * @return Current generic status for scheduler-level monitoring.
+   * @brief Get the task-level health status.
+   * @return Generic task status.
    */
   virtual Status getStatus() const = 0;
 
-  /**
-   * @brief Virtual destructor for safe cleanup through a Task pointer.
-   */
+  /** @brief Virtual destructor for safe base-class destruction. */
   virtual ~Task() = default;
 };
 

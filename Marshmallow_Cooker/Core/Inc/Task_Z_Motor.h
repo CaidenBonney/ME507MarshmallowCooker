@@ -3,247 +3,173 @@
 
 /**
  * @file Task_Z_Motor.h
- * @brief Cooperative task for the vertical Z-axis stepper motor.
- * @details
- *   TaskZMotor manages homing, commanded vertical moves, and flame-temperature
- *   PID height control for the marshmallow cooker. The Z coordinate convention
- *   is defined by the top limit switch: home is 0 steps, upward motion is
- *   positive, and downward motion toward the flame is negative.
+ * @brief Z-axis stepper task for homing, jogging, and flame-height PID control.
  */
 
+// Parent class include
 #include "Task.h"
+
+// User created includes
 #include "Z_Limit_Switches.h"
 #include "z_motor_driver.h"
 
+// Additional includes
 #include <cstdint>
 
+// Externs
+/** @brief UART print helper provided by main.cpp. */
+extern void print_str(const char* str);
+
+/** @brief Shared formatted-print buffer provided by main.cpp. */
+extern char print_buf[100];
+
 /**
- * @class TaskZMotor
- * @brief State-machine wrapper around the Z-axis stepper driver.
- * @details
- *   The task initializes the ZMotorDriver, homes toward the top limit switch,
- *   moves to cook/removal positions, and adjusts height using a conservative PID
- *   loop based on thermocouple flame temperature. TaskZMotor owns cooking-level
- *   behavior while the low-level driver owns individual step pulses and limit
- *   input interpretation.
+ * @brief Cooperative task that controls the Z lift mechanism.
+ *
+ * The Z coordinate system defines the top limit switch as zero, upward as
+ * positive, and downward toward the flame as negative. The task homes Z, moves
+ * to starting/removal heights, allows manual jogging, and performs PID flame
+ * temperature control during cooking.
  */
 class TaskZMotor : public Task {
 public:
-  /**
-   * @enum State
-   * @brief Detailed Z-axis task state.
-   */
+  /** @brief Z task state. */
   enum class State {
-    Uninitialized, /**< Driver has not been initialized. */
-    Idle, /**< Axis is stopped and ready for a command. */
-    Homing, /**< Axis is moving upward toward the top limit switch. */
-    MovingToStartPosition, /**< Axis is moving from home to the initial cook height. */
-    ControllingFlameTemp, /**< PID height control is active. */
-    MovingToRemovalHeight, /**< Axis is moving to the removal height. */
-    Fault /**< A limit, driver, or command fault has stopped the axis. */
+    Uninitialized, ///< Driver has not been initialized.
+    Idle, ///< Z is stopped and ready.
+    Homing, ///< Moving upward until the top limit is reached.
+    MovingToStartPosition, ///< Moving from home to the initial cook height.
+    ControllingFlameTemp, ///< PID height control is active.
+    MovingToRemovalHeight, ///< Moving to the removal height after cooking.
+    Fault ///< Task fault requiring reset.
   };
 
-  /** @brief Construct the Z motor task and embedded limit/driver objects. */
+  /** @brief Construct the Z motor task. */
   TaskZMotor();
 
-  /**
-   * @brief Execute one non-blocking update of the Z motor task.
-   * @details
-   *   Initializes the driver, services stepper motion, handles limit states, and
-   *   runs homing, commanded move, or PID-control state logic as appropriate.
-   */
+  /** @copydoc Task::run */
   void run() override;
 
-  /** @brief Compatibility wrapper that calls run(). */
+  /** @brief Compatibility wrapper for run(). */
   void update();
 
-  /**
-   * @brief Get generic task health status.
-   * @return Uninitialized before setup, Fault when faulted, otherwise Running.
-   */
+  /** @copydoc Task::getStatus */
   Status getStatus() const override;
 
-  /**
-   * @brief Get the detailed Z-axis task state.
-   * @return Current TaskZMotor::State value.
-   */
+  /** @brief Get the current Z task state. */
   State getState() const;
 
-  /**
-   * @brief Begin homing upward toward the top limit switch.
-   * @details
-   *   A successful home sets the Z position to 0 steps and marks the axis as
-   *   homed. Cooking and manual moves are rejected until homing completes.
-   */
+  /** @brief Start homing upward toward the top limit switch. */
   void startHoming();
 
-  /**
-   * @brief Begin the cooking height sequence and PID control.
-   * @param target_flame_temp_fx100 Flame temperature target in degrees F x100.
-   */
-  void startTemperatureControl(int16_t target_flame_temp_fx100);
+  /** @brief Begin the start-position move and then PID flame-height control. */
+  void startTemperatureControl(int32_t target_flame_temp_fx100);
 
-  /**
-   * @brief Provide the latest flame temperature measurement to the PID loop.
-   * @param measured_flame_temp_fx100 Thermocouple hot-junction temperature in degrees F x100.
-   */
-  void setMeasuredFlameTempFx100(int16_t measured_flame_temp_fx100);
+  /** @brief Update the measured flame temperature used by the PID controller. */
+  void setMeasuredFlameTempFx100(int32_t measured_flame_temp_fx100);
 
-  /** @brief Command the axis to the configured marshmallow removal height. */
+  /** @brief Enable or disable PID debug printing. */
+  void setPidDebugEnabled(bool enabled);
+
+  /** @brief Move Z to the configured removal height. */
   void moveToRemovalHeight();
 
-  /** @brief Command the axis to the configured initial cooking height. */
+  /** @brief Move Z to the configured initial cooking position. */
   void moveToStartPosition();
 
-  /** @brief Stop Z motion and return the task to Idle unless already faulted. */
+  /** @brief Jog Z by a signed relative step amount. */
+  void jogRelativeSteps(int32_t relative_steps);
+
+  /** @brief Stop Z motion and leave the task idle unless faulted. */
   void stopMotion();
 
-  /** @brief Immediately stop Z motion and place the task in Fault. */
+  /** @brief Immediately stop Z and enter Fault. */
   void emergencyStop();
 
-  /** @brief Clear a Z task fault and require homing before the next cook. */
+  /** @brief Clear a recoverable Z fault and require homing before cooking. */
   void resetFault();
 
-  /**
-   * @brief Set PID gains used for flame-temperature height control.
-   * @param kp Proportional gain in steps per degree F.
-   * @param ki Integral gain in steps per degree F-second.
-   * @param kd Derivative gain in steps per degree F per second.
-   */
+  /** @brief Set PID gains used for flame-height control. */
   void setPidGains(float kp, float ki, float kd);
 
-  /** @brief Clear PID integrator, derivative history, and update timestamp. */
+  /** @brief Clear PID integrator and derivative state. */
   void resetPid();
 
-  /**
-   * @brief Check whether the task or driver is currently moving.
-   * @return true when homing, moving, PID-controlling, or the driver is busy.
-   */
+  /** @brief Return true while Z is moving or controlling flame height. */
   bool isBusy() const;
 
-  /**
-   * @brief Check whether the task or low-level driver is faulted.
-   * @return true if either the task state or driver state indicates a fault.
-   */
+  /** @brief Return true if the Z task or driver is faulted. */
   bool isFaulted() const;
 
-  /**
-   * @brief Check whether the Z axis has completed top-limit homing.
-   * @return true after a successful home operation.
-   */
+  /** @brief Return true once the top-limit home reference has been established. */
   bool isHomed() const;
 
-  /**
-   * @brief Get the current Z position estimate.
-   * @return Current position in microstep units, with home equal to 0.
-   */
+  /** @brief Return true when the top limit switch is logically pressed. */
+  bool topLimitPressed() const;
+
+  /** @brief Return true when the bottom limit switch is logically pressed. */
+  bool bottomLimitPressed() const;
+
+  /** @brief Get the current software Z position in steps. */
   int32_t getPositionSteps() const;
 
-  /**
-   * @brief Get the current Z target position.
-   * @return Target position in microstep units.
-   */
+  /** @brief Get the current software Z target in steps. */
   int32_t getTargetSteps() const;
 
 private:
-  /** @brief Minimum period for high-level Z task state logic in milliseconds. */
-  static constexpr uint32_t kUpdatePeriodMs = 10;
+  /**
+   * @note Z coordinate convention:
+   *       top limit/home is 0 steps, upward is positive, and downward toward
+   *       the flame is negative.
+   */
+  static constexpr uint32_t kUpdatePeriodMs = 500; ///< Task state-machine update period.
+  static constexpr uint32_t kHomeSpeedStepsPerSecond = 1600; ///< Homing speed in steps/s.
+  static constexpr uint32_t kMoveSpeedStepsPerSecond = 2000; ///< Normal move speed in steps/s.
+  static constexpr uint32_t kPidUpdatePeriodMs = 500; ///< PID update period.
 
-  /** @brief Speed used while homing toward the top limit switch. */
-  static constexpr uint32_t kHomeSpeedStepsPerSecond = 300;
+  static constexpr int32_t kRemovalHeightSteps = -500; ///< Z removal height.
+  static constexpr int32_t kStartCookingPositionSteps = -15000; ///< Initial cooking height.
+  static constexpr int32_t kPidOutputLimitSteps = 750; ///< Maximum PID step correction per update.
+  static constexpr int32_t kPidDeadbandSteps = 2; ///< PID command deadband in steps.
+  static constexpr int32_t kMinCookPositionSteps = -24400; ///< Software lower travel limit.
+  static constexpr float kIntegralErrorLimit = 500.0f; ///< Integral wind-up limit.
 
-  /** @brief Speed used for normal commanded Z moves. */
-  static constexpr uint32_t kMoveSpeedStepsPerSecond = 500;
+  static constexpr float kDefaultKp = 1.0f; ///< Default proportional gain, steps/F.
+  static constexpr float kDefaultKi = 0.02f; ///< Default integral gain, steps/(F*s).
+  static constexpr float kDefaultKd = 0.10f; ///< Default derivative gain, steps/(F/s).
 
-  /** @brief Time between PID height-control updates in milliseconds. */
-  static constexpr uint32_t kPidUpdatePeriodMs = 500;
-
-  /** @brief Z position used for safe marshmallow removal. */
-  static constexpr int32_t kRemovalHeightSteps = -500;
-
-  /** @brief Initial Z cooking position before PID control begins. */
-  static constexpr int32_t kStartCookingPositionSteps = -1000;
-
-  /** @brief Maximum signed PID correction per update in steps. */
-  static constexpr int32_t kPidOutputLimitSteps = 50;
-
-  /** @brief PID output magnitude below which no retargeting occurs. */
-  static constexpr int32_t kPidDeadbandSteps = 2;
-
-  /** @brief Default proportional gain for conservative bring-up testing. */
-  static constexpr float kDefaultKp = 1.0f;
-
-  /** @brief Default integral gain for conservative bring-up testing. */
-  static constexpr float kDefaultKi = 0.02f;
-
-  /** @brief Default derivative gain for conservative bring-up testing. */
-  static constexpr float kDefaultKd = 0.10f;
-
-  /** @brief Current detailed state of the Z motor task. */
   State state_ = State::Uninitialized;
 
-  /** @brief Low-level stepper motor driver. */
   ZMotorDriver z_motor_driver_;
-
-  /** @brief Limit switch helper object for top and bottom Z switches. */
   ZLimitSwitches z_limit_switches_;
 
-  /** @brief HAL tick timestamp of the most recent state-machine update. */
   uint32_t last_update_ms_ = 0;
-
-  /** @brief HAL tick timestamp of the most recent PID update. */
   uint32_t last_pid_update_ms_ = 0;
 
-  /** @brief True after top-limit homing has completed. */
   bool homed_ = false;
-
-  /** @brief True after a valid thermocouple flame reading has been supplied. */
   bool valid_flame_temp_ = false;
+  bool pid_debug_enabled_ = false;
 
-  /** @brief Flame temperature target in degrees F x100. */
-  int16_t target_flame_temp_fx100_ = 35000;
+  int32_t target_flame_temp_fx100_ = 0;
+  int32_t measured_flame_temp_fx100_ = 0;
 
-  /** @brief Most recent flame temperature measurement in degrees F x100. */
-  int16_t measured_flame_temp_fx100_ = 0;
-
-  /** @brief Proportional PID gain. */
   float kp_ = kDefaultKp;
-
-  /** @brief Integral PID gain. */
   float ki_ = kDefaultKi;
-
-  /** @brief Derivative PID gain. */
   float kd_ = kDefaultKd;
-
-  /** @brief Accumulated PID integral error in degree F-seconds. */
   float integral_error_ = 0.0f;
-
-  /** @brief Previous PID error value used to compute derivative error. */
   float previous_error_f_ = 0.0f;
-
-  /** @brief True once previous_error_f_ contains a valid prior error. */
   bool previous_error_valid_ = false;
 
-  /**
-   * @brief Enter Z fault state and print a reason.
-   * @param reason Null-terminated text describing the fault source.
-   */
+  /** @brief Stop Z, print a fault reason, and enter Fault. */
   void enterFault(const char* reason);
 
-  /** @brief Convert low-level driver limit states into task actions. */
+  /** @brief Translate driver limit states into task-level behavior. */
   void handleDriverLimitState();
 
-  /**
-   * @brief Run one PID-control update when its update period has elapsed.
-   * @param now_ms Current HAL tick time in milliseconds.
-   */
+  /** @brief Run one scheduled PID update if enough time has elapsed. */
   void updatePidControl(uint32_t now_ms);
 
-  /**
-   * @brief Clamp a floating-point PID output to the configured step limit.
-   * @param output_steps Raw PID output in steps.
-   * @return Signed integer step correction limited to kPidOutputLimitSteps.
-   */
+  /** @brief Clamp a floating-point PID output to the configured step limit. */
   int32_t clampPidOutputSteps(float output_steps) const;
 };
 

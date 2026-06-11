@@ -1,12 +1,14 @@
 /**
  * @file Task_R_Motor.cpp
- * @brief Implementation of the rotisserie motor cooperative task.
- * @details
- *   Services the R-axis DC motor driver, alternates cooking rotations, and handles normal stop, emergency stop, and
- * fault recovery behavior.
+ * @brief Implementation of the rotisserie motor task.
  */
 
+// User created includes
 #include "Task_R_Motor.h"
+
+// Additional includes
+
+// Externs
 
 TaskRMotor::TaskRMotor()
     : r_motor_driver_() {
@@ -75,6 +77,18 @@ void TaskRMotor::run() {
       }
       break;
 
+    case State::ReturningToInitialRotation:
+      if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault while returning to initial rotation\r\n");
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
+        state_ = State::Idle;
+        stop_requested_ = false;
+        cooking_rotation_requested_ = false;
+        print_str("R returned to initial rotation.\r\n");
+      }
+      break;
+
     case State::Fault:
       r_motor_driver_.stop();
       cooking_rotation_requested_ = false;
@@ -84,7 +98,7 @@ void TaskRMotor::run() {
 }
 
 void TaskRMotor::update() {
-  r_motor_driver_.update();
+  run();
 }
 
 Task::Status TaskRMotor::getStatus() const {
@@ -105,6 +119,11 @@ TaskRMotor::State TaskRMotor::getState() const {
 
 void TaskRMotor::startCookingRotation() {
   if (state_ == State::Fault) {
+    print_str("R cooking rotation rejected: task is faulted.\r\n");
+    return;
+  }
+
+  if (state_ != State::Idle) {
     return;
   }
 
@@ -113,7 +132,30 @@ void TaskRMotor::startCookingRotation() {
 }
 
 void TaskRMotor::stopCookingRotation() {
+  cooking_rotation_requested_ = false;
   stop_requested_ = true;
+  r_motor_driver_.stop();
+
+  if (state_ != State::Fault) {
+    state_ = State::Idle;
+  }
+
+  print_str("R cooking rotation stopped.\r\n");
+}
+
+void TaskRMotor::returnToInitialRotation() {
+  if (state_ == State::Fault) {
+    print_str("R return-to-initial rejected: task is faulted.\r\n");
+    return;
+  }
+
+  cooking_rotation_requested_ = false;
+  stop_requested_ = true;
+
+  r_motor_driver_.moveToDegrees(0, cook_duty_, kReturnToInitialTimeoutMs);
+  state_ = State::ReturningToInitialRotation;
+
+  print_str("R returning to initial rotation.\r\n");
 }
 
 void TaskRMotor::emergencyStop() {
@@ -121,11 +163,18 @@ void TaskRMotor::emergencyStop() {
   cooking_rotation_requested_ = false;
   stop_requested_ = false;
   state_ = State::Fault;
+  print_str("R emergency stop. Task entered fault state.\r\n");
 }
 
 void TaskRMotor::resetFault() {
+  r_motor_driver_.stop();
+  cooking_rotation_requested_ = false;
+  stop_requested_ = false;
+
   if (state_ == State::Fault) {
     state_ = State::Uninitialized;
+  } else {
+    state_ = State::Idle;
   }
 }
 
@@ -134,7 +183,8 @@ void TaskRMotor::setCookingDuty(int16_t duty) {
 }
 
 bool TaskRMotor::isBusy() const {
-  return state_ == State::RotatingForward || state_ == State::RotatingBackward;
+  return state_ == State::RotatingForward || state_ == State::RotatingBackward ||
+         state_ == State::ReturningToInitialRotation || r_motor_driver_.isBusy();
 }
 
 bool TaskRMotor::isFaulted() const {

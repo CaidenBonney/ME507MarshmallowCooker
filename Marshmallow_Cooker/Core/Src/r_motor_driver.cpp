@@ -1,9 +1,6 @@
 /**
  * @file r_motor_driver.cpp
- * @brief Implementation of the R-axis DC motor position driver.
- * @details
- *   Combines the DRV8833 H-bridge and quadrature encoder to provide non-blocking angular moves, continuous rotation,
- * braking, and fault detection.
+ * @brief Implementation of the R-axis gearmotor driver.
  */
 
 #include "r_motor_driver.h"

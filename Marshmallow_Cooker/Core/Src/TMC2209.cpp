@@ -1,9 +1,6 @@
 /**
  * @file TMC2209.cpp
- * @brief Implementation of the TMC2209 stepper driver GPIO wrapper.
- * @details
- *   Configures step, direction, enable, and diagnostic pins and emits timed STEP pulses using the Cortex-M cycle
- * counter.
+ * @brief Implementation of the TMC2209 step/direction GPIO helper.
  */
 
 #include "TMC2209.h"

@@ -1,8 +1,6 @@
 /**
  * @file z_limit_switches.cpp
- * @brief Implementation of the Z-axis limit switch helper.
- * @details
- *   Reads the configured top and bottom GPIO limit inputs and reports whether either vertical travel limit is active.
+ * @brief Implementation of the Z-axis limit switch GPIO helper.
  */
 
 #include "z_limit_switches.h"

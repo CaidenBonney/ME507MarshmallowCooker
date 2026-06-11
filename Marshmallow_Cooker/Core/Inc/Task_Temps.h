@@ -3,132 +3,90 @@
 
 /**
  * @file Task_Temps.h
- * @brief Cooperative task for thermocouple and IR temperature sensing.
- * @details
- *   TaskTemps owns the MCP9600 thermocouple amplifier and MLX90614 infrared
- *   thermometer drivers. It periodically refreshes both sensors, caches the
- *   most recent valid readings, and exposes fixed-point Fahrenheit values to
- *   the cooker control task.
+ * @brief Temperature sensor polling task for thermocouple and IR readings.
  */
 
-#include "MCP9600.h" // Thermocouple temperature sensor
-#include "MLX90614.h" // Infrared temperature sensor
+// Parent class include
 #include "Task.h"
 
-#include "stdio.h" // For sprintf
-#include <cstdlib> // For abs
+// User created includes
+#include "MCP9600.h" ///< Thermocouple temperature sensor driver.
+#include "MLX90614.h" ///< Infrared temperature sensor driver.
+
+// Additional includes
+#include <cstdint>
+#include <cstdlib>
+#include <stdio.h>
+
+// Externs
 
 /**
- * @class TaskTemps
- * @brief Periodic temperature acquisition task.
- * @details
- *   The task initializes the sensor drivers, reads the thermocouple hot/cold
- *   junction temperatures, and reads the IR object temperature. Readings are
- *   cached so other tasks can query values without directly blocking on I2C.
+ * @brief Periodically reads temperature sensors and stores the latest values.
+ *
+ * Values are stored as fixed-point degrees Fahrenheit multiplied by 100. For
+ * example, 160.00 F is represented as 16000.
  */
 class TaskTemps : public Task {
 public:
-  /**
-   * @enum State
-   * @brief Detailed temperature task state.
-   */
+  /** @brief Internal sensor task state. */
   enum class State {
-    Uninitialized, /**< Sensors have not yet been initialized. */
-    Idle, /**< Task is initialized and waiting for the next sample period. */
-    Reading, /**< A sensor update is in progress. */
-    Fault /**< Sensor initialization or read failure forced a task fault. */
+    Uninitialized, ///< Sensors have not been initialized.
+    Idle, ///< Waiting for the next scheduled read.
+    Reading, ///< Reserved for sensor read-in-progress state.
+    Fault ///< Sensor task has faulted.
   };
 
-  /** @brief Construct the temperature task and embedded sensor drivers. */
+  /** @brief Construct the temperature task. */
   TaskTemps();
 
-  /** @brief Last HAL status observed during sensor communication. */
+  /** @brief Last HAL status reported by a sensor operation. */
   volatile HAL_StatusTypeDef status = HAL_ERROR;
 
-  /**
-   * @brief Execute one non-blocking temperature task update.
-   * @details
-   *   Initializes sensors on first run and then refreshes cached temperature
-   *   values at kUpdatePeriodMs. Successful reads mark the associated validity
-   *   flag so the cooker can ignore stale or unavailable sensors.
-   */
+  /** @copydoc Task::run */
   void run() override;
 
-  /** @brief Compatibility wrapper that calls run(). */
+  /** @brief Compatibility wrapper for run(). */
   void update();
 
-  /**
-   * @brief Get generic task health status.
-   * @return Uninitialized before sensor setup, Fault on sensor fault, otherwise Running.
-   */
+  /** @copydoc Task::getStatus */
   Status getStatus() const override;
 
-  /**
-   * @brief Get the detailed temperature task state.
-   * @return Current TaskTemps::State value.
-   */
+  /** @brief Get the current temperature task state. */
   State getState() const;
 
-  /**
-   * @brief Check whether a valid thermocouple reading has been cached.
-   * @return true when thermocouple hot/cold values are available.
-   */
+  /** @brief Check whether the thermocouple reading is valid. */
   bool hasValidThermocoupleReading() const;
 
-  /**
-   * @brief Check whether a valid infrared object reading has been cached.
-   * @return true when an IR object temperature is available.
-   */
+  /** @brief Check whether the IR object reading is valid. */
   bool hasValidIrReading() const;
 
-  /**
-   * @brief Get the cached thermocouple hot-junction temperature.
-   * @return Hot-junction temperature in degrees F x100.
-   */
-  int16_t getThermocoupleHotFx100() const;
+  /** @brief Get the latest thermocouple hot-junction temperature in F x 100. */
+  int32_t getThermocoupleHotFx100() const;
 
-  /**
-   * @brief Get the cached thermocouple cold-junction temperature.
-   * @return Cold-junction temperature in degrees F x100.
-   */
-  int16_t getThermocoupleColdFx100() const;
+  /** @brief Get the latest thermocouple cold-junction temperature in F x 100. */
+  int32_t getThermocoupleColdFx100() const;
 
-  /**
-   * @brief Get the cached IR object temperature.
-   * @return IR object temperature in degrees F x100.
-   */
-  int16_t getIrObjectFx100() const;
+  /** @brief Get the latest IR object temperature in F x 100. */
+  int32_t getIrObjectFx100() const;
+
+  /** @brief Print the latest stored temperatures over UART. */
+  void printTemperatures() const;
 
 private:
-  /** @brief Current detailed state of the temperature task. */
   State state_ = State::Uninitialized;
 
-  /** @brief Thermocouple amplifier driver. */
   MCP9600 tc_sensor_;
-
-  /** @brief Non-contact IR thermometer driver. */
   MLX90614 ir_sensor_;
 
-  /** @brief Time between sensor refresh attempts in milliseconds. */
-  static constexpr uint32_t kUpdatePeriodMs = 500;
-
-  /** @brief HAL tick timestamp of the most recent update attempt. */
+  static constexpr uint32_t kUpdatePeriodMs = 500; ///< Sensor polling interval.
   uint32_t last_update_ms_ = 0;
 
-  /** @brief True after at least one successful thermocouple update. */
   bool valid_tc_reading_ = false;
-
-  /** @brief True after at least one successful IR update. */
   bool valid_ir_reading_ = false;
 
-  /** @brief Cached hot-junction temperature in degrees F x100. */
-  int16_t tc_hot_fx100_ = 0;
-
-  /** @brief Cached cold-junction temperature in degrees F x100. */
-  int16_t tc_cold_fx100_ = 0;
-
-  /** @brief Cached IR object temperature in degrees F x100. */
-  int16_t ir_object_fx100_ = 0;
+  int32_t tc_hot_fx100_ = 0;
+  int32_t tc_cold_fx100_ = 0;
+  int32_t ir_object_fx100_ = 0;
 };
 
 #endif /* TASK_TEMPS_H */

@@ -1,13 +1,14 @@
 /**
  * @file Task_Temps.cpp
- * @brief Implementation of the temperature acquisition task.
- * @details
- *   Initializes and periodically reads the MCP9600 thermocouple amplifier and MLX90614 IR thermometer, storing
- * fixed-point Fahrenheit values for use by cooker control.
+ * @brief Implementation of the temperature sensor polling task.
  */
 
+// User created includes
 #include "Task_Temps.h"
 
+// Additional includes
+
+// Externs
 extern I2C_HandleTypeDef hi2c3;
 
 TaskTemps::TaskTemps()
@@ -60,8 +61,6 @@ void TaskTemps::update() {
     ir_object_fx100_ = ir_sensor_.getObjectFx100();
     valid_ir_reading_ = true;
 
-    sprintf(print_buf, "IR Temp: %d.%02d F\r\n", ir_object_fx100_ / 100, abs(ir_object_fx100_ % 100));
-    print_str(print_buf);
   } else {
     valid_ir_reading_ = false;
     print_str("IR Temp read failed\r\n");
@@ -74,13 +73,6 @@ void TaskTemps::update() {
     tc_cold_fx100_ = tc_sensor_.getColdFx100();
     valid_tc_reading_ = true;
 
-    sprintf(print_buf,
-            "TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
-            tc_hot_fx100_ / 100,
-            abs(tc_hot_fx100_ % 100),
-            tc_cold_fx100_ / 100,
-            abs(tc_cold_fx100_ % 100));
-    print_str(print_buf);
   } else {
     valid_tc_reading_ = false;
 
@@ -113,14 +105,26 @@ bool TaskTemps::hasValidIrReading() const {
   return valid_ir_reading_;
 }
 
-int16_t TaskTemps::getThermocoupleHotFx100() const {
+int32_t TaskTemps::getThermocoupleHotFx100() const {
   return tc_hot_fx100_;
 }
 
-int16_t TaskTemps::getThermocoupleColdFx100() const {
+int32_t TaskTemps::getThermocoupleColdFx100() const {
   return tc_cold_fx100_;
 }
 
-int16_t TaskTemps::getIrObjectFx100() const {
+int32_t TaskTemps::getIrObjectFx100() const {
   return ir_object_fx100_;
+}
+
+void TaskTemps::printTemperatures() const {
+  sprintf(print_buf,
+          "IR Temp: %ld.%02ld F, TC Hot: %ld.%02ld F, Cold: %ld.%02ld F\r\n",
+          static_cast<long>(ir_object_fx100_ / 100),
+          static_cast<long>(abs(ir_object_fx100_ % 100)),
+          static_cast<long>(tc_hot_fx100_ / 100),
+          static_cast<long>(abs(tc_hot_fx100_ % 100)),
+          static_cast<long>(tc_cold_fx100_ / 100),
+          static_cast<long>(abs(tc_cold_fx100_ % 100)));
+  print_str(print_buf);
 }
