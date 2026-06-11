@@ -1,5 +1,7 @@
 #include "Task_Temps.h"
 
+#include <cstdio>
+
 extern I2C_HandleTypeDef hi2c3;
 
 TaskTemps::TaskTemps()
@@ -13,13 +15,16 @@ void TaskTemps::run() {
       print_str("I2C3 sensors initializing\r\n");
 
       if (tc_sensor_.begin() != HAL_OK) {
-        sprintf(print_buf, "MCP9600 init failed, status=%d\r\n", tc_sensor_.getLastStatus());
+        std::snprintf(print_buf, sizeof(print_buf), "MCP9600 init failed, status=%d\r\n", tc_sensor_.getLastStatus());
         print_str(print_buf);
         state_ = State::Fault;
         return;
       }
 
-      sprintf(print_buf, "MCP9600 initialized, device_id=0x%04X\r\n", tc_sensor_.getDeviceId());
+      std::snprintf(print_buf,
+                    sizeof(print_buf),
+                    "MCP9600 initialized, device_id=0x%04X\r\n",
+                    tc_sensor_.getDeviceId());
       print_str(print_buf);
 
       state_ = State::Idle;
@@ -67,7 +72,7 @@ void TaskTemps::update() {
   } else {
     valid_tc_reading_ = false;
 
-    sprintf(print_buf, "TC Temp read failed, status=%d\r\n", tc_sensor_.getLastStatus());
+    std::snprintf(print_buf, sizeof(print_buf), "TC Temp read failed, status=%d\r\n", tc_sensor_.getLastStatus());
     print_str(print_buf);
   }
 }
@@ -96,26 +101,27 @@ bool TaskTemps::hasValidIrReading() const {
   return valid_ir_reading_;
 }
 
-int16_t TaskTemps::getThermocoupleHotFx100() const {
+int32_t TaskTemps::getThermocoupleHotFx100() const {
   return tc_hot_fx100_;
 }
 
-int16_t TaskTemps::getThermocoupleColdFx100() const {
+int32_t TaskTemps::getThermocoupleColdFx100() const {
   return tc_cold_fx100_;
 }
 
-int16_t TaskTemps::getIrObjectFx100() const {
+int32_t TaskTemps::getIrObjectFx100() const {
   return ir_object_fx100_;
 }
 
 void TaskTemps::printTemperatures() const {
-  sprintf(print_buf,
-          "IR Temp: %d.%02d F, TC Hot: %d.%02d F, Cold: %d.%02d F\r\n",
-          ir_object_fx100_ / 100,
-          abs(ir_object_fx100_ % 100),
-          tc_hot_fx100_ / 100,
-          abs(tc_hot_fx100_ % 100),
-          tc_cold_fx100_ / 100,
-          abs(tc_cold_fx100_ % 100));
+  std::snprintf(print_buf,
+                sizeof(print_buf),
+                "IR Temp: %ld.%02ld F, TC Hot: %ld.%02ld F, Cold: %ld.%02ld F\r\n",
+                static_cast<long>(ir_object_fx100_ / 100),
+                static_cast<long>(abs(ir_object_fx100_ % 100)),
+                static_cast<long>(tc_hot_fx100_ / 100),
+                static_cast<long>(abs(tc_hot_fx100_ % 100)),
+                static_cast<long>(tc_cold_fx100_ / 100),
+                static_cast<long>(abs(tc_cold_fx100_ % 100)));
   print_str(print_buf);
 }

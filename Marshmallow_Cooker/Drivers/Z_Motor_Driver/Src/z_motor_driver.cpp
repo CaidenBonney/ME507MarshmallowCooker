@@ -273,12 +273,22 @@ bool ZMotorDriver::isBusy() const {
 
 bool ZMotorDriver::topLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_TOP_GPIO_Port, Z_TOP_Pin);
-  return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
+
+  if (limits_active_low_) {
+    return pin_state == GPIO_PIN_RESET;
+  }
+
+  return pin_state == GPIO_PIN_SET;
 }
 
 bool ZMotorDriver::bottomLimitPressed() const {
   GPIO_PinState pin_state = HAL_GPIO_ReadPin(Z_BOT_GPIO_Port, Z_BOT_Pin);
-  return limits_active_low_ ? (pin_state == GPIO_PIN_RESET) : (pin_state == GPIO_PIN_SET);
+
+  if (limits_active_low_) {
+    return pin_state == GPIO_PIN_RESET;
+  }
+
+  return pin_state == GPIO_PIN_SET;
 }
 
 bool ZMotorDriver::driverFaultActive() const {

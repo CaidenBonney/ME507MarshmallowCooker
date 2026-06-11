@@ -67,6 +67,18 @@ void TaskRMotor::run() {
       }
       break;
 
+    case State::ReturningToInitialRotation:
+      if (r_motor_driver_.isFaulted()) {
+        print_str("R motor fault while returning to initial rotation\r\n");
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
+        state_ = State::Idle;
+        stop_requested_ = false;
+        cooking_rotation_requested_ = false;
+        print_str("R returned to initial rotation.\r\n");
+      }
+      break;
+
     case State::Fault:
       r_motor_driver_.stop();
       cooking_rotation_requested_ = false;
@@ -76,7 +88,7 @@ void TaskRMotor::run() {
 }
 
 void TaskRMotor::update() {
-  r_motor_driver_.update();
+  run();
 }
 
 Task::Status TaskRMotor::getStatus() const {
@@ -97,6 +109,11 @@ TaskRMotor::State TaskRMotor::getState() const {
 
 void TaskRMotor::startCookingRotation() {
   if (state_ == State::Fault) {
+    print_str("R cooking rotation rejected: task is faulted.\r\n");
+    return;
+  }
+
+  if (state_ != State::Idle) {
     return;
   }
 
@@ -105,7 +122,30 @@ void TaskRMotor::startCookingRotation() {
 }
 
 void TaskRMotor::stopCookingRotation() {
+  cooking_rotation_requested_ = false;
   stop_requested_ = true;
+  r_motor_driver_.stop();
+
+  if (state_ != State::Fault) {
+    state_ = State::Idle;
+  }
+
+  print_str("R cooking rotation stopped.\r\n");
+}
+
+void TaskRMotor::returnToInitialRotation() {
+  if (state_ == State::Fault) {
+    print_str("R return-to-initial rejected: task is faulted.\r\n");
+    return;
+  }
+
+  cooking_rotation_requested_ = false;
+  stop_requested_ = true;
+
+  r_motor_driver_.moveToDegrees(0, cook_duty_, kReturnToInitialTimeoutMs);
+  state_ = State::ReturningToInitialRotation;
+
+  print_str("R returning to initial rotation.\r\n");
 }
 
 void TaskRMotor::emergencyStop() {
@@ -113,12 +153,19 @@ void TaskRMotor::emergencyStop() {
   cooking_rotation_requested_ = false;
   stop_requested_ = false;
   state_ = State::Fault;
+  print_str("R emergency stop. Task entered fault state.\r\n");
 }
 
 void TaskRMotor::resetFault() {
-  if (state_ == State::Fault) {
-    state_ = State::Uninitialized;
-  }
+  r_motor_driver_.stop();
+  r_motor_driver_.resetEncoder();
+
+  cooking_rotation_requested_ = false;
+  stop_requested_ = false;
+
+  state_ = State::Idle;
+
+  print_str("R fault reset. Encoder zeroed. Ready after Z home.\r\n");
 }
 
 void TaskRMotor::setCookingDuty(int16_t duty) {
@@ -126,7 +173,8 @@ void TaskRMotor::setCookingDuty(int16_t duty) {
 }
 
 bool TaskRMotor::isBusy() const {
-  return state_ == State::RotatingForward || state_ == State::RotatingBackward;
+  return state_ == State::RotatingForward || state_ == State::RotatingBackward ||
+         state_ == State::ReturningToInitialRotation || r_motor_driver_.isBusy();
 }
 
 bool TaskRMotor::isFaulted() const {

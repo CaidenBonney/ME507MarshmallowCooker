@@ -27,6 +27,10 @@ public:
     EmergencyStop,
     Reset,
     Status,
+    PidDebugOn,
+    PidDebugOff,
+    ZJogDown,
+    ZJogUp,
     Unknown
   };
 
@@ -38,6 +42,7 @@ public:
   State getState() const;
   Command consumeCommand();
   uint32_t consumeStatusDurationMs();
+  uint32_t consumeJogSteps();
 
   void onUartReceiveComplete(UART_HandleTypeDef* huart);
   void onUartError(UART_HandleTypeDef* huart);
@@ -45,10 +50,12 @@ public:
 private:
   static constexpr size_t kCommandBufferSize = 32;
   static constexpr size_t kRxQueueSize = 64;
+  static constexpr uint32_t kDefaultJogSteps = 100U;
 
   State state_ = State::Uninitialized;
   Command pending_command_ = Command::None;
   uint32_t pending_status_duration_ms_ = 0;
+  uint32_t pending_jog_steps_ = 0;
 
   char command_buffer_[kCommandBufferSize] = {};
   size_t command_length_ = 0;
@@ -73,7 +80,8 @@ private:
   void clearCommandBuffer();
   void echoChar(char c);
   void echoString(const char* str);
-  Command parseCommandLine(const char* command, uint32_t& status_duration_ms) const;
+  Command parseCommandLine(const char* command, uint32_t& command_value) const;
+
   static char toLower(char c);
   static bool stringsEqual(const char* a, const char* b);
   static bool isSpace(char c);

@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include <cstdlib>
+#include <cstring>
 
 #include "Task_Cooker.h"
 #include "Task_R_Motor.h"
@@ -129,9 +130,12 @@ int main(void) {
     /* USER CODE BEGIN 3 */
     task_ui.run();
     task_temps.run();
+
+    // Run the cooker before the motors so commands are consumed before motors update
+    task_cooker.run();
+
     task_r_motor.run();
     task_z_motor.run();
-    task_cooker.run();
   }
   /* USER CODE END 3 */
 }
@@ -421,8 +425,21 @@ static void MX_GPIO_Init(void) {
 /* USER CODE BEGIN 4 */
 // User created functions
 void print_str(const char* str) {
-  print_buf_len = snprintf(print_buf, 100, "%s", str);
-  HAL_UART_Transmit(&huart2, (uint8_t*)print_buf, print_buf_len, 100);
+  if (str == nullptr) {
+    return;
+  }
+
+  size_t len = std::strlen(str);
+
+  if (len == 0U) {
+    return;
+  }
+
+  if (len > UINT16_MAX) {
+    len = UINT16_MAX;
+  }
+
+  HAL_UART_Transmit(&huart2, reinterpret_cast<uint8_t*>(const_cast<char*>(str)), static_cast<uint16_t>(len), 100);
 }
 /* USER CODE END 4 */
 

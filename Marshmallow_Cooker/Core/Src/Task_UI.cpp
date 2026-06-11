@@ -8,7 +8,9 @@ TaskUI::TaskUI() {
 
 void TaskUI::run() {
   if (state_ == State::Uninitialized) {
-    print_str("UI initialized. Commands: home, start, stop, estop, reset, status, status <ms>\r\n> ");
+    print_str("UI initialized.\r\n");
+    print_str("Commands: home start stop estop reset status\r\n");
+    print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n> ");
     state_ = State::Idle;
     armReceive();
   }
@@ -50,6 +52,10 @@ TaskUI::Command TaskUI::consumeCommand() {
     pending_status_duration_ms_ = 0;
   }
 
+  if (command != Command::ZJogDown && command != Command::ZJogUp) {
+    pending_jog_steps_ = 0;
+  }
+
   if (state_ == State::CommandReady) {
     state_ = State::Idle;
   }
@@ -61,6 +67,12 @@ uint32_t TaskUI::consumeStatusDurationMs() {
   const uint32_t duration_ms = pending_status_duration_ms_;
   pending_status_duration_ms_ = 0;
   return duration_ms;
+}
+
+uint32_t TaskUI::consumeJogSteps() {
+  const uint32_t jog_steps = pending_jog_steps_;
+  pending_jog_steps_ = 0;
+  return jog_steps;
 }
 
 void TaskUI::onUartReceiveComplete(UART_HandleTypeDef* huart) {
@@ -170,14 +182,22 @@ void TaskUI::handleCompletedLine() {
     return;
   }
 
-  uint32_t status_duration_ms = 0;
-  Command parsed_command = parseCommandLine(command_buffer_, status_duration_ms);
+  uint32_t command_value = 0;
+  Command parsed_command = parseCommandLine(command_buffer_, command_value);
 
   if (parsed_command == Command::Unknown) {
-    print_str("Unknown command. Use: home, start, stop, estop, reset, status, status <ms>\r\n");
+    print_str("Unknown command.\r\n");
+    print_str("Use: home start stop estop reset status\r\n");
+    print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n");
   } else if (parsed_command != Command::None) {
     pending_command_ = parsed_command;
-    pending_status_duration_ms_ = status_duration_ms;
+
+    if (parsed_command == Command::Status) {
+      pending_status_duration_ms_ = command_value;
+    } else if (parsed_command == Command::ZJogDown || parsed_command == Command::ZJogUp) {
+      pending_jog_steps_ = command_value;
+    }
+
     state_ = State::CommandReady;
   }
 
@@ -202,8 +222,8 @@ void TaskUI::echoString(const char* str) {
                     100);
 }
 
-TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& status_duration_ms) const {
-  status_duration_ms = 0;
+TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& command_value) const {
+  command_value = 0;
 
   char normalized[kCommandBufferSize] = {};
   size_t write_index = 0;
@@ -249,6 +269,7 @@ TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& status_d
 
   if (stringsEqual(normalized, "status")) {
     if (*argument == '\0') {
+      command_value = 0;
       return Command::Status;
     }
 
@@ -276,8 +297,107 @@ TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& status_d
       return Command::Unknown;
     }
 
-    status_duration_ms = value_ms;
+    command_value = value_ms;
     return Command::Status;
+  }
+
+  if (stringsEqual(normalized, "piddebug")) {
+    char debug_argument[kCommandBufferSize] = {};
+    size_t debug_write_index = 0;
+
+    while (*argument != '\0' && !isSpace(*argument) && debug_write_index < (kCommandBufferSize - 1U)) {
+      debug_argument[debug_write_index] = toLower(*argument);
+      debug_write_index++;
+      argument++;
+    }
+
+    debug_argument[debug_write_index] = '\0';
+
+    while (isSpace(*argument)) {
+      argument++;
+    }
+
+    if (*argument != '\0') {
+      return Command::Unknown;
+    }
+
+    if (stringsEqual(debug_argument, "on")) {
+      return Command::PidDebugOn;
+    }
+
+    if (stringsEqual(debug_argument, "off")) {
+      return Command::PidDebugOff;
+    }
+
+    return Command::Unknown;
+  }
+
+  if (stringsEqual(normalized, "-")) {
+    if (*argument == '\0') {
+      command_value = kDefaultJogSteps;
+      return Command::ZJogDown;
+    }
+
+    uint32_t jog_steps = 0;
+    bool has_digit = false;
+
+    while (isDigit(*argument)) {
+      has_digit = true;
+      const uint32_t digit = static_cast<uint32_t>(*argument - '0');
+
+      if (jog_steps <= ((UINT32_MAX - digit) / 10U)) {
+        jog_steps = (jog_steps * 10U) + digit;
+      } else {
+        return Command::Unknown;
+      }
+
+      argument++;
+    }
+
+    while (isSpace(*argument)) {
+      argument++;
+    }
+
+    if (!has_digit || *argument != '\0' || jog_steps == 0U) {
+      return Command::Unknown;
+    }
+
+    command_value = jog_steps;
+    return Command::ZJogDown;
+  }
+
+  if (stringsEqual(normalized, "=")) {
+    if (*argument == '\0') {
+      command_value = kDefaultJogSteps;
+      return Command::ZJogUp;
+    }
+
+    uint32_t jog_steps = 0;
+    bool has_digit = false;
+
+    while (isDigit(*argument)) {
+      has_digit = true;
+      const uint32_t digit = static_cast<uint32_t>(*argument - '0');
+
+      if (jog_steps <= ((UINT32_MAX - digit) / 10U)) {
+        jog_steps = (jog_steps * 10U) + digit;
+      } else {
+        return Command::Unknown;
+      }
+
+      argument++;
+    }
+
+    while (isSpace(*argument)) {
+      argument++;
+    }
+
+    if (!has_digit || *argument != '\0' || jog_steps == 0U) {
+      return Command::Unknown;
+    }
+
+    command_value = jog_steps;
+    return Command::ZJogUp;
   }
 
   return Command::Unknown;
@@ -304,14 +424,6 @@ bool TaskUI::stringsEqual(const char* a, const char* b) {
   return *a == '\0' && *b == '\0';
 }
 
-extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
-  task_ui.onUartReceiveComplete(huart);
-}
-
-extern "C" void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
-  task_ui.onUartError(huart);
-}
-
 bool TaskUI::isSpace(char c) {
   return c == ' ' || c == '\t';
 }
@@ -327,4 +439,12 @@ void TaskUI::onUartError(UART_HandleTypeDef* huart) {
 
   rx_armed_ = false;
   armReceive();
+}
+
+extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
+  task_ui.onUartReceiveComplete(huart);
+}
+
+extern "C" void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
+  task_ui.onUartError(huart);
 }

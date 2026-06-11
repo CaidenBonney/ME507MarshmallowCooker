@@ -11,6 +11,7 @@
 #include "stdio.h" // For sprintf
 
 // Externs
+extern void print_str(const char* str);
 
 class TaskRMotor : public Task {
 public:
@@ -19,6 +20,7 @@ public:
     Idle,
     RotatingForward,
     RotatingBackward,
+    ReturningToInitialRotation,
     Fault
   };
 
@@ -32,6 +34,7 @@ public:
 
   void startCookingRotation();
   void stopCookingRotation();
+  void returnToInitialRotation();
   void emergencyStop();
   void resetFault();
   void setCookingDuty(int16_t duty);
@@ -44,6 +47,7 @@ private:
   static constexpr int32_t kCookRotationDegrees = 360;
   static constexpr int16_t kDefaultCookDuty = 700;
   static constexpr uint32_t kMoveTimeoutMs = 8000;
+  static constexpr uint32_t kReturnToInitialTimeoutMs = 8000;
 
   State state_ = State::Uninitialized;
 

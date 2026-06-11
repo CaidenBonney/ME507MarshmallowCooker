@@ -15,6 +15,8 @@
 #include <cstdlib>
 
 // Externs
+extern void print_str(const char* str);
+extern char print_buf[100];
 
 class TaskCooker : public Task {
 public:
@@ -37,8 +39,8 @@ public:
   State getState() const;
 
 private:
-  static constexpr int16_t kTargetFlameTempFx100 = 35000; // TODO: tune. 350.00 F.
-  static constexpr int16_t kDoneMarshmallowTempFx100 = 16000; // TODO: tune. 160.00 F.
+  static constexpr int32_t kTargetFlameTempFx100 = 35000; // TODO: tune. 350.00 F.
+  static constexpr int32_t kDoneMarshmallowTempFx100 = 16000; // TODO: tune. 160.00 F.
   static constexpr uint32_t kStatusStreamPeriodMs = 500;
 
   State state_ = State::Uninitialized;
@@ -47,6 +49,8 @@ private:
   TaskTemps& task_temps_;
   TaskRMotor& task_r_motor_;
   TaskZMotor& task_z_motor_;
+
+  bool r_started_for_current_cook_ = false;
 
   bool status_stream_active_ = false;
   uint32_t status_stream_start_ms_ = 0;
@@ -59,6 +63,7 @@ private:
   void startStatusStream(uint32_t duration_ms);
   void updateStatusStream();
   void stopStatusStream();
+  void beginNormalStop(const char* message);
 };
 
 #endif /* TASK_COOKER_H */

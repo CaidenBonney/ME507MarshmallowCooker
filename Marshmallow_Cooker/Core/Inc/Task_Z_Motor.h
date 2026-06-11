@@ -12,6 +12,8 @@
 #include <cstdint>
 
 // Externs
+extern void print_str(const char* str);
+extern char print_buf[100];
 
 class TaskZMotor : public Task {
 public:
@@ -34,10 +36,12 @@ public:
   State getState() const;
 
   void startHoming();
-  void startTemperatureControl(int16_t target_flame_temp_fx100);
-  void setMeasuredFlameTempFx100(int16_t measured_flame_temp_fx100);
+  void startTemperatureControl(int32_t target_flame_temp_fx100);
+  void setMeasuredFlameTempFx100(int32_t measured_flame_temp_fx100);
+  void setPidDebugEnabled(bool enabled);
   void moveToRemovalHeight();
   void moveToStartPosition();
+  void jogRelativeSteps(int32_t relative_steps);
   void stopMotion();
   void emergencyStop();
   void resetFault();
@@ -48,6 +52,9 @@ public:
   bool isBusy() const;
   bool isFaulted() const;
   bool isHomed() const;
+
+  bool topLimitPressed() const;
+  bool bottomLimitPressed() const;
 
   int32_t getPositionSteps() const;
   int32_t getTargetSteps() const;
@@ -62,15 +69,18 @@ private:
    *   Cooking positions are negative step positions.
    */
   static constexpr uint32_t kUpdatePeriodMs = 10;
-  static constexpr uint32_t kHomeSpeedStepsPerSecond = 300;
-  static constexpr uint32_t kMoveSpeedStepsPerSecond = 500;
+  static constexpr uint32_t kHomeSpeedStepsPerSecond = 1600;
+  static constexpr uint32_t kMoveSpeedStepsPerSecond = 2000;
   static constexpr uint32_t kPidUpdatePeriodMs = 500;
 
   static constexpr int32_t kRemovalHeightSteps = -500;
-  static constexpr int32_t kStartCookingPositionSteps = -1000;
-  static constexpr int32_t kPidOutputLimitSteps = 50;
+  static constexpr int32_t kStartCookingPositionSteps = -15000;
+  static constexpr int32_t kPidOutputLimitSteps = 1000;
   static constexpr int32_t kPidDeadbandSteps = 2;
   static constexpr float kIntegralErrorLimit = 500.0f;
+
+  // Represents software based estop bottom (physical bottom limit switch location = -24385)
+  static constexpr int32_t kMinCookPositionSteps = -24400;
 
   // Initial PID values are intentionally conservative placeholders.
   // Units are steps per degree F for Kp, steps per degree F second for Ki,
@@ -89,9 +99,10 @@ private:
 
   bool homed_ = false;
   bool valid_flame_temp_ = false;
+  bool pid_debug_enabled_ = false;
 
-  int16_t target_flame_temp_fx100_ = 35000;
-  int16_t measured_flame_temp_fx100_ = 0;
+  int32_t target_flame_temp_fx100_ = 35000;
+  int32_t measured_flame_temp_fx100_ = 0;
 
   float kp_ = kDefaultKp;
   float ki_ = kDefaultKi;

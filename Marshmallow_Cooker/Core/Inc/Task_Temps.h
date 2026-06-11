@@ -36,9 +36,9 @@ public:
   bool hasValidThermocoupleReading() const;
   bool hasValidIrReading() const;
 
-  int16_t getThermocoupleHotFx100() const;
-  int16_t getThermocoupleColdFx100() const;
-  int16_t getIrObjectFx100() const;
+  int32_t getThermocoupleHotFx100() const;
+  int32_t getThermocoupleColdFx100() const;
+  int32_t getIrObjectFx100() const;
   void printTemperatures() const;
 
 private:
@@ -53,9 +53,9 @@ private:
   bool valid_tc_reading_ = false;
   bool valid_ir_reading_ = false;
 
-  int16_t tc_hot_fx100_ = 0;
-  int16_t tc_cold_fx100_ = 0;
-  int16_t ir_object_fx100_ = 0;
+  int32_t tc_hot_fx100_ = 0;
+  int32_t tc_cold_fx100_ = 0;
+  int32_t ir_object_fx100_ = 0;
 };
 
 #endif /* TASK_TEMPS_H */
