@@ -26,7 +26,6 @@ void ZMotorDriver::begin() {
   tmc_.begin();
   tmc_.setStepRate(speed_steps_per_second_);
   zeroPosition();
-  homing_ = false;
   state_ = State::Disabled;
 }
 
@@ -52,17 +51,10 @@ void ZMotorDriver::update() {
   tmc_.updateDiagLog();
 
   if (homing_) {
-    if (homing_direction_ == Direction::Up && topLimitPressed()) {
+    if (homeLimitPressed(homing_direction_)) {
       stop();
       zeroPosition();
-      state_ = State::HitTopLimit;
-      return;
-    }
-
-    if (homing_direction_ == Direction::Down && bottomLimitPressed()) {
-      stop();
-      zeroPosition();
-      state_ = State::HitBottomLimit;
+      state_ = limitStateForDirection(homing_direction_);
       return;
     }
 
@@ -83,7 +75,7 @@ void ZMotorDriver::update() {
   const Direction desired_direction = (target_steps_ > position_steps_) ? Direction::Up : Direction::Down;
 
   if (limitBlocksDirection(desired_direction)) {
-    state_ = (desired_direction == Direction::Up) ? State::HitTopLimit : State::HitBottomLimit;
+    state_ = limitStateForDirection(desired_direction);
     target_steps_ = position_steps_;
     return;
   }
@@ -271,4 +263,20 @@ bool ZMotorDriver::limitBlocksDirection(Direction direction) const {
   }
 
   return false;
+}
+
+bool ZMotorDriver::homeLimitPressed(Direction direction) const {
+  if (direction == Direction::Up) {
+    return topLimitPressed();
+  }
+
+  return bottomLimitPressed();
+}
+
+ZMotorDriver::State ZMotorDriver::limitStateForDirection(Direction direction) const {
+  if (direction == Direction::Up) {
+    return State::HitTopLimit;
+  }
+
+  return State::HitBottomLimit;
 }
