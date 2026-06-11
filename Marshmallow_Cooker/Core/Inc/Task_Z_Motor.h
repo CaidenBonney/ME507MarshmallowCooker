@@ -8,7 +8,10 @@
 #include "Z_Limit_Switches.h" // Limit switch driver for z-axis
 #include "z_motor_driver.h" // Motor driver for veritcal stepper motor (z-axis)
 
+// additional includes
+
 // externs
+extern void Error_Handler();
 extern void print_str(const char* str);
 
 class TaskZMotor : public Task {

@@ -10,7 +10,8 @@
 
 // additional includes
 #include "stdio.h" // For sprintf
-#include "stm32f4xx_hal.h"  // For HAL_GetTick
+#include "stm32f4xx_hal.h" // For HAL_GetTick
+#include <cstdlib> // for abs
 
 // externs
 extern void print_str(const char* str);
@@ -20,16 +21,18 @@ class TaskTemps : public Task {
 public:
   TaskTemps();
 
+  volatile HAL_StatusTypeDef status = HAL_ERROR;
+
   void run();
   void update();
 
 private:
   // TODO: add enum for init then run state
-  static constexpr uint32_t kUpdatePeriodMs = 500;
-
   MCP9600 tc_sensor_;
   MLX90614 ir_sensor_;
-  uint32_t last_update_ms_;
+
+  static constexpr uint32_t kUpdatePeriodMs = 500;
+  static uint32_t last_update_ms_;
 };
 
 #endif /* TASK_TEMPS_H */
