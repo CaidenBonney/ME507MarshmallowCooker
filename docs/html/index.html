@@ -120,41 +120,39 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
-ME507 Marshmallow Cooker</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
-Project Overview</h2>
+Project Overview</h1>
 <p>The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.</p>
 <p><img src="../images/intro.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The system uses both infrared and thermocouple-based temperature measurements to perfect cooking conditions while a rotating mechanism and vertical positioning mechanism control the marshmallow relative to the heat source.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Major Hardware</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Rotating Motor Assembly</h2>
-<p>The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver implementation.</p>
+<p>The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver was implemented to abstract direction control and PWM duty cycle commands.</p>
 <p><img src="../images/r_motor.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
-<p>The 12 CPR quadriture encoder provides position feedback that allows the software to estimate angular position and rotational velocity. Hardware timers count the encoder ticks, measuring the angular displacement of the motor.</p>
+<p>The 12 CPR quadrature encoder provides position feedback that allows the software to estimate angular position and rotational velocity. Hardware timers count the encoder ticks, measuring the angular displacement of the motor.</p>
 <p><img src="../images/r_motor_schematic.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Vertical Motion System</h2>
 <p><img src="../images/z_motor.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The distance between the marshmallow and the heat source is adjusted by a lead screw system powered by a stepper motor, DFRobot FIT0278 stepper motor. The motor is controlled by a <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> driver at 12V. The FIT0278 has 200 steps per revolution, and the motor driver is configured for 8 microsteps per step. The result is smooth, fine control of the height of the marshmallow above the fire.</p>
-<p>The <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is rougly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.</p>
+<p>The <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is roughly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.</p>
 <p><img src="../images/z_motor_schematic.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
-<p>Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins, triggers the gpio.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<p>Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins. This fail-safe behavior causes a disconnected or damaged switch to be detected as a triggered limit condition.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Temperature Sensors</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 MLX90614 Infrared Temperature Sensor</h3>
 <p>The <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow. When the marshmallows surface reaches a set temperature, the cook is done.</p>
 <p><img src="../images/ir_temp.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> is an integrated IR temperature camera and I2C device. This makes implementation very simple as it does not require an amplifier or driver. The IR temperature sensor itself communicates with the STM32 via I2C CLK and SDA.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 MCP9600 Thermocouple Amplifier</h3>
 <p>The <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple amplifier interfaces with a Type T thermocouple to provide direct hot-junction temperature measurements of the flame. The flame temperature is used in our control loop to adjust the height of the marshmallow.</p>
 <p><img src="../images/thermocouple.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
-<p>The <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR termperature sensor.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<p>The <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR temperature sensor.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Custom PCB</h2>
 <p><img src="../images/pcb.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>A custom PCB was designed to integrate all hardware components:</p>
@@ -176,7 +174,7 @@ Custom PCB</h2>
 <li>Potentiometer for <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> VREF</li>
 <li>Pads for optional stepper motor phase decoupling capacitors</li>
 </ul>
-<p>Due to the project's tight timeline, we found multiple issues with out PCB that we would fix if given time and money for another board revision.</p>
+<p>Due to the project's tight timeline, we found multiple issues with our PCB that we would fix if given time and money for another board revision.</p>
 <p>Issues We Encountered:</p><ul>
 <li>Wrong pins for I2C<ul>
 <li>Problem: We mixed up ports A and B in the schematic. Connected traces to PA6 &amp; PA7 instead of PB6 &amp; PB7 for I2C1.</li>
@@ -196,7 +194,15 @@ Custom PCB</h2>
 </ul>
 <p><img src="../images/back.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+CAD</h1>
+<p>The GitHub repository contains CAD for the marshmallow cooker. This includes a main assembly file, individual part models, and hardware (screws and nuts).</p>
+<p><img src="../images/CAD_1.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/CAD_2.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/CAD_3.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/CAD_4.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 Software Architecture</h1>
 <p>The firmware is written in C++ using STM32CubeIDE and STM32 HAL.</p>
 <p>Major software modules include:</p>
@@ -211,19 +217,19 @@ Software Architecture</h1>
 </ul>
 <p>Hardware-specific functionality is encapsulated within dedicated driver classes, allowing higher-level control logic to remain independent of hardware implementation details.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Main Control Structure</h1>
 <p>TODO</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 User Interface</h1>
 <p>TODO</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 Control Loop</h1>
 <p>Todo</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Repository Structure</h1>
 <div class="fragment"><div class="line">ME507MarshmallowCooker</div>
 <div class="line">├── Marshmallow_Cooker</div>
@@ -231,7 +237,7 @@ Repository Structure</h1>
 <div class="line">│   └── Drivers</div>
 <div class="line">├── docs</div>
 <div class="line">└── Doxyfile</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
 Repository</h2>
 <p>GitHub Repository:</p>
 <p><a href="https://github.com/CaidenBonney/ME507MarshmallowCooker">Link back to ME507MarshmallowCooker GitHub Repository</a> </p>

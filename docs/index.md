@@ -1,8 +1,6 @@
 @mainpage ME507 Marshmallow Cooker
 
-# ME507 Marshmallow Cooker
-
-## Project Overview
+# Project Overview
 
 The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.
 
@@ -19,14 +17,14 @@ The system uses both infrared and thermocouple-based temperature measurements to
 
 ## Rotating Motor Assembly
 
-The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A DRV8833 motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver implementation.
+The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A DRV8833 motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver was implemented to abstract direction control and PWM duty cycle commands.
 
 <p align="center">
   <img src="../images/r_motor.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-The 12 CPR quadriture encoder provides position feedback that allows the software to estimate angular position and rotational velocity. Hardware timers count the encoder ticks, measuring the angular displacement of the motor.
+The 12 CPR quadrature encoder provides position feedback that allows the software to estimate angular position and rotational velocity. Hardware timers count the encoder ticks, measuring the angular displacement of the motor.
 
 <p align="center">
   <img src="../images/r_motor_schematic.jpg"
@@ -42,14 +40,14 @@ The 12 CPR quadriture encoder provides position feedback that allows the softwar
 
 The distance between the marshmallow and the heat source is adjusted by a lead screw system powered by a stepper motor, DFRobot FIT0278 stepper motor. The motor is controlled by a TMC2209 driver at 12V. The FIT0278 has 200 steps per revolution, and the motor driver is configured for 8 microsteps per step. The result is smooth, fine control of the height of the marshmallow above the fire.
 
-The TMC2209 stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is rougly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.
+The TMC2209 stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is roughly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.
 
 <p align="center">
   <img src="../images/z_motor_schematic.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins, triggers the gpio.
+Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins. This fail-safe behavior causes a disconnected or damaged switch to be detected as a triggered limit condition.
 
 ## Temperature Sensors
 
@@ -73,7 +71,7 @@ The MCP9600 thermocouple amplifier interfaces with a Type T thermocouple to prov
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-The MCP9600 is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR termperature sensor.
+The MCP9600 is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR temperature sensor.
 
 ## Custom PCB
 
@@ -106,7 +104,7 @@ Key PCB Design Choices:
 * Potentiometer for TMC2209 VREF
 * Pads for optional stepper motor phase decoupling capacitors
 
-Due to the project's tight timeline, we found multiple issues with out PCB that we would fix if given time and money for another board revision.
+Due to the project's tight timeline, we found multiple issues with our PCB that we would fix if given time and money for another board revision.
 
 Issues We Encountered:
 * Wrong pins for I2C
@@ -121,6 +119,32 @@ Issues We Encountered:
 
 <p align="center">
   <img src="../images/back.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
+---
+
+# CAD
+
+The GitHub repository contains CAD for the marshmallow cooker. This includes a main assembly file, individual part models, and hardware (screws and nuts).
+
+<p align="center">
+  <img src="../images/CAD_1.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
+<p align="center">
+  <img src="../images/CAD_2.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
+<p align="center">
+  <img src="../images/CAD_3.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
+<p align="center">
+  <img src="../images/CAD_4.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
