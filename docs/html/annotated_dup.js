@@ -6,6 +6,7 @@ var annotated_dup =
     [ "REncoderDriver", "class_r_encoder_driver.html", "class_r_encoder_driver" ],
     [ "RMotorDriver", "class_r_motor_driver.html", "class_r_motor_driver" ],
     [ "Task", "class_task.html", "class_task" ],
+    [ "TaskCooker", "class_task_cooker.html", "class_task_cooker" ],
     [ "TaskRMotor", "class_task_r_motor.html", "class_task_r_motor" ],
     [ "TaskTemps", "class_task_temps.html", "class_task_temps" ],
     [ "TaskUI", "class_task_u_i.html", "class_task_u_i" ],

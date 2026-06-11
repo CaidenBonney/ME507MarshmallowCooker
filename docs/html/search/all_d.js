@@ -27,12 +27,15 @@ var searchData=
   ['modeling_20and_20data_20processing_24',['Mathematical Modeling and Data Processing',['../index.html#autotoc_md15',1,'']]],
   ['motion_20system_25',['Vertical Motion System',['../index.html#autotoc_md5',1,'']]],
   ['motor_20assembly_26',['Rotating Motor Assembly',['../index.html#autotoc_md4',1,'']]],
-  ['movedegreesblocking_27',['moveDegreesBlocking',['../class_r_motor_driver.html#a32a8372468b5d83ae8b3a8efd479cb39',1,'RMotorDriver']]],
-  ['movesteps_28',['moveSteps',['../class_z_motor_driver.html#a408a5cd10742e24471789b603160b2f7',1,'ZMotorDriver']]],
-  ['moveto_29',['moveTo',['../class_z_motor_driver.html#a97e9155f468ce06afe13414858567522',1,'ZMotorDriver']]],
-  ['moving_30',['Moving',['../class_z_motor_driver.html#ac86bbcbf8de7f3f72860a208d1615e0cadefe967ad0373b2274fc298f19125ca7',1,'ZMotorDriver']]],
-  ['movingdown_31',['MovingDown',['../class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48aa79782bf8835c8aa74a56fc91982c64d',1,'TaskZMotor']]],
-  ['movingnegative_32',['MovingNegative',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca173952659a094a431b86f53109bfd99d',1,'TaskRMotor']]],
-  ['movingpositive_33',['MovingPositive',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca3175852f76f0b17394d6e36fefd7e211',1,'TaskRMotor']]],
-  ['movingup_34',['MovingUp',['../class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48a2e7d2986477735ae5c23e812c1ccb85d',1,'TaskZMotor']]]
+  ['movedegrees_27',['moveDegrees',['../class_r_motor_driver.html#a4dd2c415d54376c40f519fd1a62452c0',1,'RMotorDriver']]],
+  ['movedegreesblocking_28',['moveDegreesBlocking',['../class_r_motor_driver.html#a32a8372468b5d83ae8b3a8efd479cb39',1,'RMotorDriver']]],
+  ['movesteps_29',['moveSteps',['../class_z_motor_driver.html#a408a5cd10742e24471789b603160b2f7',1,'ZMotorDriver']]],
+  ['moveto_30',['moveTo',['../class_z_motor_driver.html#a97e9155f468ce06afe13414858567522',1,'ZMotorDriver']]],
+  ['movetodegrees_31',['moveToDegrees',['../class_r_motor_driver.html#afa7e415f8dbfbaf775ccafc6878f51c6',1,'RMotorDriver']]],
+  ['movetoremovalheight_32',['moveToRemovalHeight',['../class_task_z_motor.html#a7ca949b5f0e9d797e5d4c103691f14b3',1,'TaskZMotor']]],
+  ['movetostartposition_33',['moveToStartPosition',['../class_task_z_motor.html#a858bb3fd35c851c6fec44be20d7e08fe',1,'TaskZMotor']]],
+  ['moving_34',['Moving',['../class_z_motor_driver.html#ac86bbcbf8de7f3f72860a208d1615e0cadefe967ad0373b2274fc298f19125ca7',1,'ZMotorDriver']]],
+  ['movingtoposition_35',['MovingToPosition',['../class_r_motor_driver.html#a2f0b85ea1415a501afe25448c475b547a30a35ec006db60af7d8b73f58d111742',1,'RMotorDriver']]],
+  ['movingtoremovalheight_36',['MovingToRemovalHeight',['../class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187ac7cc7421f4f38a5c66ce89e1f8e25f70',1,'TaskCooker::MovingToRemovalHeight'],['../class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48ac7cc7421f4f38a5c66ce89e1f8e25f70',1,'TaskZMotor::MovingToRemovalHeight']]],
+  ['movingtostartposition_37',['MovingToStartPosition',['../class_task_z_motor.html#a064ecfb479f8491d4de45f46b6fcfe48af6fa14115ce4d8f38b56e52b15edd0d6',1,'TaskZMotor']]]
 ];

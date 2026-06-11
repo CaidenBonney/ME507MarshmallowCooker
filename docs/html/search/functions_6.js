@@ -9,8 +9,14 @@ var searchData=
   ['hal_5ftim_5fencoder_5fmspinit_6',['HAL_TIM_Encoder_MspInit',['../stm32f4xx__hal__msp_8c.html#a8cc723aedb4c01bc57cbe38c21f0b0a3',1,'stm32f4xx_hal_msp.c']]],
   ['hal_5ftim_5fmsppostinit_7',['HAL_TIM_MspPostInit',['../main_8h.html#ae70bce6c39d0b570a7523b86738cec4b',1,'HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim):&#160;stm32f4xx_hal_msp.c'],['../stm32f4xx__hal__msp_8c.html#ae70bce6c39d0b570a7523b86738cec4b',1,'HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim):&#160;stm32f4xx_hal_msp.c']]],
   ['hal_5ftim_5fperiodelapsedcallback_8',['HAL_TIM_PeriodElapsedCallback',['../main_8cpp.html#a8a3b0ad512a6e6c6157440b68d395eac',1,'main.cpp']]],
-  ['hal_5fuart_5fmspdeinit_9',['HAL_UART_MspDeInit',['../stm32f4xx__hal__msp_8c.html#a718f39804e3b910d738a0e1e46151188',1,'stm32f4xx_hal_msp.c']]],
-  ['hal_5fuart_5fmspinit_10',['HAL_UART_MspInit',['../stm32f4xx__hal__msp_8c.html#a0e553b32211877322f949b14801bbfa7',1,'stm32f4xx_hal_msp.c']]],
-  ['hardfault_5fhandler_11',['HardFault_Handler',['../stm32f4xx__it_8h.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['homedown_12',['homeDown',['../class_z_motor_driver.html#a65175be37fd0d87301a8a0c1b02baca6',1,'ZMotorDriver']]]
+  ['hal_5fuart_5ferrorcallback_9',['HAL_UART_ErrorCallback',['../_task___u_i_8cpp.html#a0e0456ea96d55db31de947fb3e954f18',1,'Task_UI.cpp']]],
+  ['hal_5fuart_5fmspdeinit_10',['HAL_UART_MspDeInit',['../stm32f4xx__hal__msp_8c.html#a718f39804e3b910d738a0e1e46151188',1,'stm32f4xx_hal_msp.c']]],
+  ['hal_5fuart_5fmspinit_11',['HAL_UART_MspInit',['../stm32f4xx__hal__msp_8c.html#a0e553b32211877322f949b14801bbfa7',1,'stm32f4xx_hal_msp.c']]],
+  ['hal_5fuart_5frxcpltcallback_12',['HAL_UART_RxCpltCallback',['../_task___u_i_8cpp.html#ae494a9643f29b87d6d81e5264e60e57b',1,'Task_UI.cpp']]],
+  ['hardfault_5fhandler_13',['HardFault_Handler',['../stm32f4xx__it_8h.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c']]],
+  ['hasvalidirreading_14',['hasValidIrReading',['../class_task_temps.html#ab3678d5bc6f453cb53c4958c5c88cfec',1,'TaskTemps']]],
+  ['hasvalidthermocouplereading_15',['hasValidThermocoupleReading',['../class_task_temps.html#abe92652dd0fc5efaee0416074552c265',1,'TaskTemps']]],
+  ['home_16',['home',['../class_z_motor_driver.html#aa0c5ab3b4f3f75b2f3db5acfd1838ce6',1,'ZMotorDriver']]],
+  ['homedown_17',['homeDown',['../class_z_motor_driver.html#a65175be37fd0d87301a8a0c1b02baca6',1,'ZMotorDriver']]],
+  ['homeup_18',['homeUp',['../class_z_motor_driver.html#ab45586bd078d42179f32bf65a9ca4529',1,'ZMotorDriver']]]
 ];

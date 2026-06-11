@@ -6,6 +6,7 @@ var hierarchy =
     [ "REncoderDriver", "class_r_encoder_driver.html", null ],
     [ "RMotorDriver", "class_r_motor_driver.html", null ],
     [ "Task", "class_task.html", [
+      [ "TaskCooker", "class_task_cooker.html", null ],
       [ "TaskRMotor", "class_task_r_motor.html", null ],
       [ "TaskTemps", "class_task_temps.html", null ],
       [ "TaskUI", "class_task_u_i.html", null ],

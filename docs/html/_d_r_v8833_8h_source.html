@@ -127,36 +127,34 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_d_r_v8833_8h_
 <div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_d_r_v8833.html">    6</a></span><span class="keyword">class </span><a class="code hl_function" href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833</a> {</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833</a>(TIM_HandleTypeDef* htim,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>          uint32_t in1_channel,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>          uint32_t in2_channel);</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833</a>(TIM_HandleTypeDef* htim, uint32_t in1_channel, uint32_t in2_channel);</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  HAL_StatusTypeDef <a class="code hl_function" href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">begin</a>();</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  HAL_StatusTypeDef <a class="code hl_function" href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">begin</a>();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">   12</a></span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int16_t <a class="code hl_variable" href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">kMaxDuty</a> = 1000; <span class="comment">// 100%</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">   14</a></span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> int16_t <a class="code hl_variable" href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">kMaxDuty</a> = 1000; <span class="comment">// 100%</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">setDuty</a>(int16_t duty); <span class="comment">// -1000 to +1000</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">setDuty</a>(int16_t duty); <span class="comment">// -1000 to +1000</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">brake</a>();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">coast</a>();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordtype">void</span> write(uint16_t in1, uint16_t in2);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  uint16_t getTimerPeriod() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  TIM_HandleTypeDef* htim_;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  uint32_t in1_channel_;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  uint32_t in2_channel_;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">brake</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">coast</a>();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">void</span> write(uint16_t in1, uint16_t in2);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  uint16_t getTimerPeriod() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  TIM_HandleTypeDef* htim_;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  uint32_t in1_channel_;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  uint32_t in2_channel_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">/* DRV8833_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a03dff59e79629ce02c06728d13abea2d"><div class="ttname"><a href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">DRV8833::coast</a></div><div class="ttdeci">void coast()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:51</div></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">/* DRV8833_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a03dff59e79629ce02c06728d13abea2d"><div class="ttname"><a href="class_d_r_v8833.html#a03dff59e79629ce02c06728d13abea2d">DRV8833::coast</a></div><div class="ttdeci">void coast()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:48</div></div>
 <div class="ttc" id="aclass_d_r_v8833_html_a4ef0be927fa763f67057ca1d2f6d2a50"><div class="ttname"><a href="class_d_r_v8833.html#a4ef0be927fa763f67057ca1d2f6d2a50">DRV8833::DRV8833</a></div><div class="ttdeci">DRV8833(TIM_HandleTypeDef *htim, uint32_t in1_channel, uint32_t in2_channel)</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:3</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a70e54b165bee102e152b3a597360b484"><div class="ttname"><a href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">DRV8833::setDuty</a></div><div class="ttdeci">void setDuty(int16_t duty)</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:26</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_a82f2dbbb6e390dc552d97f741f2f7e84"><div class="ttname"><a href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">DRV8833::begin</a></div><div class="ttdeci">HAL_StatusTypeDef begin()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:11</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_ae355507ec1778a8cc9fe45eb5c9bfc01"><div class="ttname"><a href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">DRV8833::brake</a></div><div class="ttdeci">void brake()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:47</div></div>
-<div class="ttc" id="aclass_d_r_v8833_html_afc1cc14cd47b080cbaccf72200c38c36"><div class="ttname"><a href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">DRV8833::kMaxDuty</a></div><div class="ttdeci">static constexpr int16_t kMaxDuty</div><div class="ttdef"><b>Definition</b> DRV8833.h:14</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a70e54b165bee102e152b3a597360b484"><div class="ttname"><a href="class_d_r_v8833.html#a70e54b165bee102e152b3a597360b484">DRV8833::setDuty</a></div><div class="ttdeci">void setDuty(int16_t duty)</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:24</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_a82f2dbbb6e390dc552d97f741f2f7e84"><div class="ttname"><a href="class_d_r_v8833.html#a82f2dbbb6e390dc552d97f741f2f7e84">DRV8833::begin</a></div><div class="ttdeci">HAL_StatusTypeDef begin()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:9</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_ae355507ec1778a8cc9fe45eb5c9bfc01"><div class="ttname"><a href="class_d_r_v8833.html#ae355507ec1778a8cc9fe45eb5c9bfc01">DRV8833::brake</a></div><div class="ttdeci">void brake()</div><div class="ttdef"><b>Definition</b> DRV8833.cpp:44</div></div>
+<div class="ttc" id="aclass_d_r_v8833_html_afc1cc14cd47b080cbaccf72200c38c36"><div class="ttname"><a href="class_d_r_v8833.html#afc1cc14cd47b080cbaccf72200c38c36">DRV8833::kMaxDuty</a></div><div class="ttdeci">static constexpr int16_t kMaxDuty</div><div class="ttdef"><b>Definition</b> DRV8833.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

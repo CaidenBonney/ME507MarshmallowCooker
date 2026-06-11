@@ -124,6 +124,7 @@ ME507 Marshmallow Cooker</h1>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
 Project Overview</h2>
 <p>The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.</p>
+<p><img src="../images/intro.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <p>The system uses both infrared and thermocouple-based temperature measurements to evaluate cooking conditions while a rotating mechanism and vertical positioning mechanism control the marshmallow relative to the heat source.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
@@ -131,22 +132,27 @@ Major Hardware</h1>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Rotating Motor Assembly</h2>
 <p>The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. A <a class="el" href="class_d_r_v8833.html">DRV8833</a> motor driver provides bidirectional PWM control from the STM32 microcontroller.</p>
+<p><img src="../images/r_motor.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <p>The encoder provides position feedback that allows the software to estimate angular position and rotational velocity.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Vertical Motion System</h2>
 <p>Vertical positioning is performed using a stepper motor controlled by a <a class="el" href="class_t_m_c2209.html">TMC2209</a> driver. The stepper mechanism changes the distance between the marshmallow and the heat source.</p>
+<p><img src="../images/z_motor.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <p>Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Temperature Sensors</h2>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 MLX90614 Infrared Temperature Sensor</h3>
 <p>The <a class="el" href="class_m_l_x90614.html">MLX90614</a> provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow.</p>
+<p><img src="../images/ir_temp.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 MCP9600 Thermocouple Amplifier</h3>
 <p>The <a class="el" href="class_m_c_p9600.html">MCP9600</a> interfaces with a Type T thermocouple and provides direct hot-junction temperature measurements over I2C.</p>
-<p>The thermocouple is used to validate and compare measurements from the infrared sensor.</p>
+<p><img src="../images/thermocouple.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
+<p>The thermocouple is used to measure the flame temperature.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Custom PCB</h2>
+<p><img src="../images/pcb.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <p>A custom PCB was designed to integrate:</p>
 <ul>
 <li>STM32F411 microcontroller</li>
@@ -157,6 +163,7 @@ Custom PCB</h2>
 <li>Encoder inputs</li>
 <li>Limit switch inputs</li>
 </ul>
+<p><img src="../images/pcb_fusion_combined.jpg" alt="" style="max-width:100%; max-height:800px; width:auto; height:auto;" class="inline"/> </p>
 <p>The PCB simplifies wiring and provides a compact platform for system integration.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>

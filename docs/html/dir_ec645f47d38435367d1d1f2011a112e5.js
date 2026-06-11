@@ -6,8 +6,9 @@ var dir_ec645f47d38435367d1d1f2011a112e5 =
     [ "syscalls.c", "syscalls_8c.html", "syscalls_8c" ],
     [ "sysmem.c", "sysmem_8c.html", "sysmem_8c" ],
     [ "system_stm32f4xx.c", "system__stm32f4xx_8c.html", "system__stm32f4xx_8c" ],
+    [ "Task_Cooker.cpp", "_task___cooker_8cpp.html", null ],
     [ "Task_R_Motor.cpp", "_task___r___motor_8cpp.html", null ],
     [ "Task_Temps.cpp", "_task___temps_8cpp.html", "_task___temps_8cpp" ],
-    [ "Task_UI.cpp", "_task___u_i_8cpp.html", null ],
+    [ "Task_UI.cpp", "_task___u_i_8cpp.html", "_task___u_i_8cpp" ],
     [ "Task_Z_Motor.cpp", "_task___z___motor_8cpp.html", null ]
 ];
