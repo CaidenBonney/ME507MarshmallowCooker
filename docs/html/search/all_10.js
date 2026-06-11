@@ -29,6 +29,5 @@ var searchData=
   ['print_5fbuf_5flen_26',['print_buf_len',['../main_8cpp.html#a6f3d9d8a214752bc5d752a1dcea569de',1,'main.cpp']]],
   ['print_5fstr_27',['print_str',['../main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___u_i_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp']]],
   ['printtemperatures_28',['printTemperatures',['../class_task_temps.html#a8ee712777d6c67baca747c2d9b814ac3',1,'TaskTemps']]],
-  ['processing_29',['Processing',['../index.html#autotoc_md16',1,'Encoder Processing'],['../index.html#autotoc_md15',1,'Mathematical Modeling and Data Processing'],['../index.html#autotoc_md17',1,'Temperature Processing']]],
-  ['project_20overview_30',['Project Overview',['../index.html#autotoc_md1',1,'']]]
+  ['project_20overview_29',['Project Overview',['../index.html#autotoc_md1',1,'']]]
 ];

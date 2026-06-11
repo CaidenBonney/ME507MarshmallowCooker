@@ -146,33 +146,19 @@ Hardware-specific functionality is encapsulated within dedicated driver classes,
 
 # Main Control Structure
 
-The firmware operates from a central control loop which periodically:
-
-1. Reads temperature sensors
-2. Updates motor state
-3. Monitors limit switches
-4. Executes motion commands
-5. Reports diagnostic information over UART
-
-This structure allows individual subsystems to be tested independently while supporting future integration into a complete cooking sequence.
+TODO
 
 ---
 
-# Mathematical Modeling and Data Processing
+# User Interface
 
-## Encoder Processing
+TODO
 
-Quadrature encoder counts are accumulated to determine motor position and estimate angular displacement.
+---
 
-Gear ratio and encoder resolution are used to convert encoder counts into output shaft rotation.
+# Control Loop
 
-## Temperature Processing
-
-The MLX90614 provides calibrated infrared temperature measurements.
-
-The MCP9600 converts thermocouple voltage measurements into hot-junction temperatures using internal cold-junction compensation.
-
-Measurements from both sensors can be compared to evaluate sensor performance and cooking conditions.
+Todo
 
 ---
 

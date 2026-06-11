@@ -39,10 +39,8 @@ var NAVTREE =
     ] ],
     [ "Software Architecture", "index.html#autotoc_md11", null ],
     [ "Main Control Structure", "index.html#autotoc_md13", null ],
-    [ "Mathematical Modeling and Data Processing", "index.html#autotoc_md15", [
-      [ "Encoder Processing", "index.html#autotoc_md16", null ],
-      [ "Temperature Processing", "index.html#autotoc_md17", null ]
-    ] ],
+    [ "User Interface", "index.html#autotoc_md15", null ],
+    [ "Control Loop", "index.html#autotoc_md17", null ],
     [ "Repository Structure", "index.html#autotoc_md19", null ],
     [ "Topics", "topics.html", "topics" ],
     [ "Classes", "annotated.html", [
@@ -72,7 +70,7 @@ var NAVTREEINDEX =
 [
 "_d_r_v8833_8cpp.html",
 "class_task_z_motor.html#a874f811061d53e2ea3b4c0ce13177e17",
-"stm32f4xx__hal__conf_8h.html#a7833d885caa7e29abbebfb90a4b96f86"
+"stm32f4xx__hal__conf_8h.html#a7b38c01bd6621f3da5993d71eb5ff42e"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
