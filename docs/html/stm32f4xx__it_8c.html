@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('stm32f4xx__it_
 
 <p>Interrupt Service Routines.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="stm32f4xx__it_8h_source.html">stm32f4xx_it.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="stm32f4xx__it_8h_source.html">stm32f4xx_it.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -147,9 +147,12 @@ Functions</h2></td></tr>
 <tr class="memdesc:ab5e09814056d617c521549e542639b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function handles System tick timer.  <br /></td></tr>
 <tr class="memitem:a0ca6fd0e6f77921dd1123539857ba0a8" id="r_a0ca6fd0e6f77921dd1123539857ba0a8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0ca6fd0e6f77921dd1123539857ba0a8">USART2_IRQHandler</a> (void)</td></tr>
 <tr class="memdesc:a0ca6fd0e6f77921dd1123539857ba0a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function handles USART2 global interrupt.  <br /></td></tr>
+<tr class="memitem:a75135d7a041e2932e9903e8a345b3fc4" id="r_a75135d7a041e2932e9903e8a345b3fc4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a75135d7a041e2932e9903e8a345b3fc4">OTG_FS_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:a75135d7a041e2932e9903e8a345b3fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function handles USB On The Go FS global interrupt.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a3ec0d70a6cb9406d997fb3d006cc940d" id="r_a3ec0d70a6cb9406d997fb3d006cc940d"><td class="memItemLeft">PCD_HandleTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#a3ec0d70a6cb9406d997fb3d006cc940d">hpcd_USB_OTG_FS</a></td></tr>
 <tr class="memitem:aa9479c261d65eecedd3d9582f7f0f89c" id="r_aa9479c261d65eecedd3d9582f7f0f89c"><td class="memItemLeft">UART_HandleTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#aa9479c261d65eecedd3d9582f7f0f89c">huart2</a></td></tr>
 <tr class="memdesc:aa9479c261d65eecedd3d9582f7f0f89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART handle used by the command-line interface.  <br /></td></tr>
 </table>
@@ -254,6 +257,25 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a75135d7a041e2932e9903e8a345b3fc4" name="a75135d7a041e2932e9903e8a345b3fc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75135d7a041e2932e9903e8a345b3fc4">&#9670;&#160;</a></span>OTG_FS_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OTG_FS_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function handles USB On The Go FS global interrupt. </p>
+
+</div>
+</div>
 <a id="a6303e1f258cbdc1f970ce579cc015623" name="a6303e1f258cbdc1f970ce579cc015623"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6303e1f258cbdc1f970ce579cc015623">&#9670;&#160;</a></span>PendSV_Handler()</h2>
 
@@ -350,6 +372,28 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a3ec0d70a6cb9406d997fb3d006cc940d" name="a3ec0d70a6cb9406d997fb3d006cc940d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ec0d70a6cb9406d997fb3d006cc940d">&#9670;&#160;</a></span>hpcd_USB_OTG_FS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PCD_HandleTypeDef hpcd_USB_OTG_FS</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa9479c261d65eecedd3d9582f7f0f89c" name="aa9479c261d65eecedd3d9582f7f0f89c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9479c261d65eecedd3d9582f7f0f89c">&#9670;&#160;</a></span>huart2</h2>
 

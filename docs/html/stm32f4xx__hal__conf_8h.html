@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('stm32f4xx__hal
 <code>#include &quot;stm32f4xx_hal_pwr.h&quot;</code><br />
 <code>#include &quot;stm32f4xx_hal_tim.h&quot;</code><br />
 <code>#include &quot;stm32f4xx_hal_uart.h&quot;</code><br />
+<code>#include &quot;stm32f4xx_hal_pcd.h&quot;</code><br />
 </div>
 <p><a href="stm32f4xx__hal__conf_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -139,6 +140,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a19999766418b0224871f732d800841c6" id="r_a19999766418b0224871f732d800841c6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a19999766418b0224871f732d800841c6">HAL_I2C_MODULE_ENABLED</a></td></tr>
 <tr class="memitem:a23382b8f04b3e6db2c59dfa1ef5ea4a2" id="r_a23382b8f04b3e6db2c59dfa1ef5ea4a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a23382b8f04b3e6db2c59dfa1ef5ea4a2">HAL_TIM_MODULE_ENABLED</a></td></tr>
 <tr class="memitem:a167269406e73327b95c3bb7b9cfe6d89" id="r_a167269406e73327b95c3bb7b9cfe6d89"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a167269406e73327b95c3bb7b9cfe6d89">HAL_UART_MODULE_ENABLED</a></td></tr>
+<tr class="memitem:abc68645a06297042bf1f4d9f5a59f94b" id="r_abc68645a06297042bf1f4d9f5a59f94b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abc68645a06297042bf1f4d9f5a59f94b">HAL_PCD_MODULE_ENABLED</a></td></tr>
 <tr class="memitem:a86165f80d6078719ee0715afe13febf5" id="r_a86165f80d6078719ee0715afe13febf5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a86165f80d6078719ee0715afe13febf5">HAL_GPIO_MODULE_ENABLED</a></td></tr>
 <tr class="memitem:aeb359e861d8a92c233c3229657dbcd74" id="r_aeb359e861d8a92c233c3229657dbcd74"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aeb359e861d8a92c233c3229657dbcd74">HAL_EXTI_MODULE_ENABLED</a></td></tr>
 <tr class="memitem:a6552186102a1131b2849ac55a582945d" id="r_a6552186102a1131b2849ac55a582945d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6552186102a1131b2849ac55a582945d">HAL_DMA_MODULE_ENABLED</a></td></tr>
@@ -213,8 +215,8 @@ Macros</h2></td></tr>
 <tr class="memitem:a3bcc92663c42ec434f527847bbc4abc1" id="r_a3bcc92663c42ec434f527847bbc4abc1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3bcc92663c42ec434f527847bbc4abc1">MAC_ADDR5</a>&#160;&#160;&#160;0U</td></tr>
 <tr class="memitem:a0cdaf687f7a7f2dba570d5a722990786" id="r_a0cdaf687f7a7f2dba570d5a722990786"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0cdaf687f7a7f2dba570d5a722990786">ETH_RX_BUF_SIZE</a>&#160;&#160;&#160;ETH_MAX_PACKET_SIZE /* buffer size for receive               */</td></tr>
 <tr class="memitem:af83956dfc1b135c3c92ac409758b6cf4" id="r_af83956dfc1b135c3c92ac409758b6cf4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af83956dfc1b135c3c92ac409758b6cf4">ETH_TX_BUF_SIZE</a>&#160;&#160;&#160;ETH_MAX_PACKET_SIZE /* buffer size for transmit              */</td></tr>
-<tr class="memitem:a62b0f224fa9c4f2e5574c9e52526f751" id="r_a62b0f224fa9c4f2e5574c9e52526f751"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a62b0f224fa9c4f2e5574c9e52526f751">ETH_RXBUFNB</a>&#160;&#160;&#160;4U /* 4 Rx buffers of size <a class="el" href="#a0cdaf687f7a7f2dba570d5a722990786">ETH_RX_BUF_SIZE</a>  */</td></tr>
-<tr class="memitem:a4ad07ad8fa6f8639ab8ef362390d86c7" id="r_a4ad07ad8fa6f8639ab8ef362390d86c7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4ad07ad8fa6f8639ab8ef362390d86c7">ETH_TXBUFNB</a>&#160;&#160;&#160;4U /* 4 Tx buffers of size <a class="el" href="#af83956dfc1b135c3c92ac409758b6cf4">ETH_TX_BUF_SIZE</a>  */</td></tr>
+<tr class="memitem:a62b0f224fa9c4f2e5574c9e52526f751" id="r_a62b0f224fa9c4f2e5574c9e52526f751"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a62b0f224fa9c4f2e5574c9e52526f751">ETH_RXBUFNB</a>&#160;&#160;&#160;4U       /* 4 Rx buffers of size <a class="el" href="#a0cdaf687f7a7f2dba570d5a722990786">ETH_RX_BUF_SIZE</a>  */</td></tr>
+<tr class="memitem:a4ad07ad8fa6f8639ab8ef362390d86c7" id="r_a4ad07ad8fa6f8639ab8ef362390d86c7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4ad07ad8fa6f8639ab8ef362390d86c7">ETH_TXBUFNB</a>&#160;&#160;&#160;4U       /* 4 Tx buffers of size <a class="el" href="#af83956dfc1b135c3c92ac409758b6cf4">ETH_TX_BUF_SIZE</a>  */</td></tr>
 <tr class="memitem:a25f014091aaba92bdd9d95d0b2f00503" id="r_a25f014091aaba92bdd9d95d0b2f00503"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a25f014091aaba92bdd9d95d0b2f00503">DP83848_PHY_ADDRESS</a></td></tr>
 <tr class="memitem:a0ede6087f7b71403bcddb5d3a8f47ff4" id="r_a0ede6087f7b71403bcddb5d3a8f47ff4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0ede6087f7b71403bcddb5d3a8f47ff4">PHY_RESET_DELAY</a>&#160;&#160;&#160;0x000000FFU</td></tr>
 <tr class="memitem:abba7114255a2a41b81fdcb2a3702c270" id="r_abba7114255a2a41b81fdcb2a3702c270"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abba7114255a2a41b81fdcb2a3702c270">PHY_CONFIG_DELAY</a>&#160;&#160;&#160;0x00000FFFU</td></tr>
@@ -312,7 +314,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ETH_RXBUFNB&#160;&#160;&#160;4U /* 4 Rx buffers of size <a class="el" href="#a0cdaf687f7a7f2dba570d5a722990786">ETH_RX_BUF_SIZE</a>  */</td>
+          <td class="memname">#define ETH_RXBUFNB&#160;&#160;&#160;4U       /* 4 Rx buffers of size <a class="el" href="#a0cdaf687f7a7f2dba570d5a722990786">ETH_RX_BUF_SIZE</a>  */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -340,7 +342,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ETH_TXBUFNB&#160;&#160;&#160;4U /* 4 Tx buffers of size <a class="el" href="#af83956dfc1b135c3c92ac409758b6cf4">ETH_TX_BUF_SIZE</a>  */</td>
+          <td class="memname">#define ETH_TXBUFNB&#160;&#160;&#160;4U       /* 4 Tx buffers of size <a class="el" href="#af83956dfc1b135c3c92ac409758b6cf4">ETH_TX_BUF_SIZE</a>  */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -461,6 +463,20 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This is the list of modules to be used in the HAL driver. </p>
+
+</div>
+</div>
+<a id="abc68645a06297042bf1f4d9f5a59f94b" name="abc68645a06297042bf1f4d9f5a59f94b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc68645a06297042bf1f4d9f5a59f94b">&#9670;&#160;</a></span>HAL_PCD_MODULE_ENABLED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAL_PCD_MODULE_ENABLED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -611,7 +627,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Low Speed oscillator (LSE) value. </p>
-<p>&lt; Value of the Internal Low Speed oscillator in Hz \ The real value may vary depending on the variations \ in voltage and temperature. Value of the External Low Speed oscillator in Hz </p>
+<p>&lt; Value of the Internal Low Speed oscillator in Hz The real value may vary depending on the variations in voltage and temperature. Value of the External Low Speed oscillator in Hz </p>
 
 </div>
 </div>

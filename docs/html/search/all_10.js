@@ -31,5 +31,6 @@ var searchData=
   ['print_5fbuf_5flen_28',['print_buf_len',['../main_8cpp.html#a6f3d9d8a214752bc5d752a1dcea569de',1,'main.cpp']]],
   ['print_5fstr_29',['print_str',['../main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___cooker_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___r___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../_task___z___motor_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp'],['../main_8cpp.html#adb0aa71349ab66b0edb3106fb2abb5c3',1,'print_str(const char *str):&#160;main.cpp']]],
   ['printtemperatures_30',['printTemperatures',['../class_task_temps.html#a8ee712777d6c67baca747c2d9b814ac3',1,'TaskTemps']]],
-  ['project_20overview_31',['Project Overview',['../index.html#autotoc_md0',1,'']]]
+  ['project_20overview_31',['Project Overview',['../index.html#autotoc_md0',1,'']]],
+  ['pushreceivedbytesfromusb_32',['pushReceivedBytesFromUsb',['../class_task_u_i.html#ac8d644ae6efe9ebc761acd3c8c0809cf',1,'TaskUI']]]
 ];

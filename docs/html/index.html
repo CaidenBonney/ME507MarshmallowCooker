@@ -219,15 +219,44 @@ Software Architecture</h1>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Main Control Structure</h1>
-<p>TODO</p>
+<p>The application uses a cooperative task structure built around the shared <a class="el" href="class_task.html" title="Task">Task</a> interface. After STM32Cube-generated initialization configures GPIO, USART2, I2C3, TIM1 PWM, TIM3 encoder mode, and USB device support, <span class="tt"><a class="el" href="main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point.">main()</a></span> repeatedly calls the application tasks in a fixed order:</p>
+<ul>
+<li><a class="el" href="class_task_u_i.html" title="TaskUI">TaskUI</a> parses any completed user command.</li>
+<li><a class="el" href="class_task_temps.html" title="TaskTemps">TaskTemps</a> periodically updates the thermocouple and IR temperature readings.</li>
+<li><a class="el" href="class_task_cooker.html" title="TaskCooker">TaskCooker</a> consumes commands, checks sensor data, and issues high-level motion requests.</li>
+<li><a class="el" href="class_task_r_motor.html" title="TaskRMotor">TaskRMotor</a> updates the rotisserie motor.</li>
+<li><a class="el" href="class_task_z_motor.html" title="TaskZMotor">TaskZMotor</a> updates the vertical stepper motor.</li>
+</ul>
+<p>This ordering lets new command and temperature data be processed before the motor tasks act on the latest cooker decisions. The tasks are written as small non-blocking state machines using <span class="tt">HAL_GetTick()</span> timing instead of long blocking delays. The temperature and Z-control tasks run their scheduled logic every 500 ms, while the R motor task updates every 10 ms so encoder-driven rotation remains responsive.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 User Interface</h1>
-<p>TODO</p>
+<p>The firmware provides a serial command-line interface through <a class="el" href="class_task_u_i.html" title="TaskUI">TaskUI</a>. USART2 is configured for 115200 baud, 8 data bits, no parity, and 1 stop bit. The UI task receives one byte at a time with <span class="tt">HAL_UART_Receive_IT()</span>, stores characters in a small interrupt-to-task queue, echoes printable input, supports backspace, and parses commands when the user presses Enter.</p>
+<p>The user-facing cook sequence is coordinated by <a class="el" href="class_task_cooker.html" title="TaskCooker">TaskCooker</a>. On startup it waits for the <span class="tt">home</span> command, then commands <a class="el" href="class_task_z_motor.html" title="TaskZMotor">TaskZMotor</a> to home upward until the top limit switch defines Z = 0. Once homed, the cooker enters <span class="tt">ReadyToCook</span> and accepts <span class="tt">start</span>. Starting a cook moves Z to the initial cooking height, enables flame-temperature control, and then starts the R-axis rotisserie once Z reaches active control. A normal stop, completed cook, or bottom-limit condition commands the R motor back to its initial rotation and moves Z to the removal height. Faults and emergency stops immediately stop both motor tasks and require <span class="tt">reset</span> followed by another <span class="tt">home</span> before cooking again.</p>
+<p>Supported commands are:</p>
+<ul>
+<li><span class="tt">home</span> - home the Z axis against the top limit switch and prepare the cooker.</li>
+<li><span class="tt">start</span> - begin a cooking cycle after Z has been homed.</li>
+<li><span class="tt">stop</span> - perform a normal stop by returning R to zero and moving Z to removal height.</li>
+<li><span class="tt">estop</span> - immediately enter the fault state and stop both motors.</li>
+<li><span class="tt">reset</span> - clear a <span class="tt">Fault</span> or <span class="tt">Done</span> state and require another home cycle.</li>
+<li><span class="tt">status</span> - print one status line.</li>
+<li><span class="tt">status &lt;ms&gt;</span> - stream status lines for the requested duration in milliseconds.</li>
+<li><span class="tt">rotate</span> - toggle manual R-axis cooking rotation while ready.</li>
+<li><span class="tt">piddebug on</span> / <span class="tt">piddebug off</span> - enable or disable Z PID debug messages.</li>
+<li><span class="tt">- &lt;steps&gt;</span> - jog Z downward by the requested number of steps.</li>
+<li><span class="tt">= &lt;steps&gt;</span> - jog Z upward by the requested number of steps.</li>
+</ul>
+<p>If no step count is supplied for <span class="tt">-</span> or <span class="tt">=</span>, the default jog distance is 100 steps. Status output reports the cooker state, Z task state, R task state, Z position, top and bottom limit switch states, thermocouple hot-junction temperature, and IR object temperature. <span class="tt"><a class="el" href="main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3">print_str()</a></span> sends firmware messages over USART2 and also mirrors them to USB CDC when USB support is present in the build.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 Control Loop</h1>
-<p>Todo</p>
+<p>The cooking loop uses two temperature measurements for two different jobs. <a class="el" href="class_task_temps.html" title="TaskTemps">TaskTemps</a> polls the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple amplifier and <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> IR sensor over I2C3 every 500 ms. The thermocouple hot-junction reading is treated as the flame temperature used by Z-axis control, while the IR object reading is used as the marshmallow done-temperature measurement.</p>
+<p>When <span class="tt">start</span> is accepted, <a class="el" href="class_task_cooker.html" title="TaskCooker">TaskCooker</a> commands <a class="el" href="class_task_z_motor.html" title="TaskZMotor">TaskZMotor</a> to move from the homed top reference to the starting cook position at -11000 steps. Once that move finishes, Z enters <span class="tt">ControllingFlameTemp</span>. The cooker then starts the R-axis cooking motion, which alternates +360 degree and -360 degree moves so the marshmallow rotates without winding wires indefinitely. Since writing code, the mechanical system has changed and this is no longer necessary. The motor could spin in one direction indefinitely.</p>
+<p>The Z-axis PID loop runs every 500 ms with a target flame temperature of 240.00 F. Temperatures are stored as fixed-point Fahrenheit values multiplied by 100. The PID error is:</p>
+<div class="fragment"><div class="line">error = target flame temperature - measured flame temperature</div>
+</div><!-- fragment --><p>A positive error means the measured flame temperature is too cold, so the Z target is moved downward toward the flame. A negative error means the flame is too hot, so the Z target is moved upward. The default gains are <span class="tt">Kp = 1.0</span>, <span class="tt">Ki = 0.02</span>, and <span class="tt">Kd = 0.10</span>. Each PID update is clamped to +/-750 steps with a +/-100 step deadband, and the integral term is limited to reduce wind-up. Software limits prevent commands above the home position or below the -16000 step lower cook limit.</p>
+<p>Cooking completes when the IR object temperature reaches 240.00 F continuously for 1 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters <span class="tt">Fault</span>, stops motion, and waits for a reset sequence.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Repository Structure</h1>

@@ -5,6 +5,7 @@ var class_task_cooker =
       [ "WaitingForHomeCommand", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187ae3ec8fef6dcd85ced49b9ea01cd67426", null ],
       [ "HomingZ", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187ae4768f3e994b0df4d429727ca9a5f8f5", null ],
       [ "ReadyToCook", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187a53bd040abf0c650cd88e82bac97fbc4d", null ],
+      [ "ManualRotating", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187a73aa668d3890f4d1e8aa5a0d17cbe06c", null ],
       [ "Cooking", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187a3b962574887f124e78bfd9b4685f3b39", null ],
       [ "MovingToRemovalHeight", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187ac7cc7421f4f38a5c66ce89e1f8e25f70", null ],
       [ "Done", "class_task_cooker.html#a5a6c0e8caefb73ec59244565f2400187af92965e2c8a7afb3c1b9a5c09a263636", null ],

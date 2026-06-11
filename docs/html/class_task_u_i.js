@@ -12,6 +12,7 @@ var class_task_u_i =
       [ "PidDebugOff", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4ac9683ad685b368c14da7bacbd2073073", null ],
       [ "ZJogDown", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4aa362d77f2806789ae6d0fc3df6273454", null ],
       [ "ZJogUp", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a0edf905f4852a8ddbf6abf5492b7e710", null ],
+      [ "Rotate", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a8d2de5368588552fbae54044ac5c7b3d", null ],
       [ "Unknown", "class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a88183b946cc5f0e8c96b2e66e1c74a7e", null ]
     ] ],
     [ "State", "class_task_u_i.html#a032eff94777a73f3212a33ba5aaec992", [
@@ -28,5 +29,6 @@ var class_task_u_i =
     [ "getStatus", "class_task_u_i.html#a02c9bee0a5f7cd954f68bc86e29b670a", null ],
     [ "onUartError", "class_task_u_i.html#a42db10851f777f4c15ddc339fb33cb27", null ],
     [ "onUartReceiveComplete", "class_task_u_i.html#a3736b90ac091611cdc6a0378f7f49901", null ],
+    [ "pushReceivedBytesFromUsb", "class_task_u_i.html#ac8d644ae6efe9ebc761acd3c8c0809cf", null ],
     [ "run", "class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a", null ]
 ];

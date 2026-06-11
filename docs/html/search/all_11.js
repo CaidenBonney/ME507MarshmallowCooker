@@ -30,11 +30,12 @@ var searchData=
   ['returntoinitialrotation_27',['returnToInitialRotation',['../class_task_r_motor.html#a116d6a50b3a338981196160a503aee6f',1,'TaskRMotor']]],
   ['reverse_28',['Reverse',['../class_t_m_c2209.html#ad17f90ce02f1601f38e98085519e1aaaa67f115c1fddc4ce1aeb1c754001585bc',1,'TMC2209']]],
   ['rmotordriver_29',['RMotorDriver',['../class_r_motor_driver.html',1,'RMotorDriver'],['../class_r_motor_driver.html#a9f1b82a1ac5dcda588ff97d6fa70dd02',1,'RMotorDriver::RMotorDriver()']]],
-  ['rotatecontinuous_30',['rotateContinuous',['../class_r_motor_driver.html#a7cd2e0d9a1ce79bbaea43616bba46c3c',1,'RMotorDriver']]],
-  ['rotating_20motor_20assembly_31',['Rotating Motor Assembly',['../index.html#autotoc_md3',1,'']]],
-  ['rotatingbackward_32',['RotatingBackward',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32',1,'TaskRMotor']]],
-  ['rotatingcontinuous_33',['RotatingContinuous',['../class_r_motor_driver.html#a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0',1,'RMotorDriver']]],
-  ['rotatingforward_34',['RotatingForward',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e',1,'TaskRMotor']]],
-  ['run_35',['run',['../class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc',1,'Task::run()'],['../class_task_cooker.html#a6a0e3eb685e662009f62b83b571e6628',1,'TaskCooker::run()'],['../class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135',1,'TaskRMotor::run()'],['../class_task_temps.html#af49bb7c432a41fe2a331f52560de475c',1,'TaskTemps::run()'],['../class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a',1,'TaskUI::run()'],['../class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293',1,'TaskZMotor::run()']]],
-  ['running_36',['Running',['../class_task.html#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09',1,'Task']]]
+  ['rotate_30',['Rotate',['../class_task_u_i.html#aa52991beb913e9e208e763ed5058acd4a8d2de5368588552fbae54044ac5c7b3d',1,'TaskUI']]],
+  ['rotatecontinuous_31',['rotateContinuous',['../class_r_motor_driver.html#a7cd2e0d9a1ce79bbaea43616bba46c3c',1,'RMotorDriver']]],
+  ['rotating_20motor_20assembly_32',['Rotating Motor Assembly',['../index.html#autotoc_md3',1,'']]],
+  ['rotatingbackward_33',['RotatingBackward',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6cae5377a7e855d281ad2856b379323cf32',1,'TaskRMotor']]],
+  ['rotatingcontinuous_34',['RotatingContinuous',['../class_r_motor_driver.html#a2f0b85ea1415a501afe25448c475b547a652535f09e564a78b97a59ddb12875a0',1,'RMotorDriver']]],
+  ['rotatingforward_35',['RotatingForward',['../class_task_r_motor.html#a29fdd19646fedf07daac0672429a8b6ca78e4c7b1232ff1abf781e2cc689fcb2e',1,'TaskRMotor']]],
+  ['run_36',['run',['../class_task.html#ad820b9c0e8b6eeca2af6f483fc8465bc',1,'Task::run()'],['../class_task_cooker.html#a6a0e3eb685e662009f62b83b571e6628',1,'TaskCooker::run()'],['../class_task_r_motor.html#ab24b24894b23fca98845ba8d34d33135',1,'TaskRMotor::run()'],['../class_task_temps.html#af49bb7c432a41fe2a331f52560de475c',1,'TaskTemps::run()'],['../class_task_u_i.html#a93ff5ebdd5347f393e20fee224f3a26a',1,'TaskUI::run()'],['../class_task_z_motor.html#abc7d55ea5e92a221146c5a537f9ca293',1,'TaskZMotor::run()']]],
+  ['running_37',['Running',['../class_task.html#a4397689d62196d2cfecf970fcbed6cb5a5bda814c4aedb126839228f1a3d92f09',1,'Task']]]
 ];
