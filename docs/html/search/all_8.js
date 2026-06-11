@@ -26,7 +26,7 @@ var searchData=
   ['hal_5fuart_5fmspinit_23',['HAL_UART_MspInit',['../stm32f4xx__hal__msp_8c.html#a0e553b32211877322f949b14801bbfa7',1,'stm32f4xx_hal_msp.c']]],
   ['hal_5fuart_5frxcpltcallback_24',['HAL_UART_RxCpltCallback',['../_task___u_i_8cpp.html#ae494a9643f29b87d6d81e5264e60e57b',1,'Task_UI.cpp']]],
   ['hardfault_5fhandler_25',['HardFault_Handler',['../stm32f4xx__it_8h.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a2bffc10d5bd4106753b7c30e86903bea',1,'HardFault_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['hardware_26',['Major Hardware',['../index.html#autotoc_md2',1,'']]],
+  ['hardware_26',['Major Hardware',['../index.html#autotoc_md3',1,'']]],
   ['hasvalidirreading_27',['hasValidIrReading',['../class_task_temps.html#ab3678d5bc6f453cb53c4958c5c88cfec',1,'TaskTemps']]],
   ['hasvalidthermocouplereading_28',['hasValidThermocoupleReading',['../class_task_temps.html#abe92652dd0fc5efaee0416074552c265',1,'TaskTemps']]],
   ['hi2c3_29',['hi2c3',['../main_8cpp.html#a5ccf4a01a8d7f08d3190181f843f7515',1,'hi2c3:&#160;main.cpp'],['../_task___temps_8cpp.html#a5ccf4a01a8d7f08d3190181f843f7515',1,'hi2c3:&#160;main.cpp']]],

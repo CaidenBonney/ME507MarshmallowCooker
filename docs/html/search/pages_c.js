@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['vertical_20motion_20system_0',['Vertical Motion System',['../index.html#autotoc_md4',1,'']]]
+  ['temperature_20sensor_0',['MLX90614 Infrared Temperature Sensor',['../index.html#autotoc_md8',1,'']]],
+  ['temperature_20sensors_1',['Temperature Sensors',['../index.html#autotoc_md7',1,'']]],
+  ['thermocouple_20amplifier_2',['MCP9600 Thermocouple Amplifier',['../index.html#autotoc_md9',1,'']]]
 ];

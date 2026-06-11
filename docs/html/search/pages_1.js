@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['cad_0',['CAD',['../index.html#autotoc_md10',1,'']]],
-  ['control_20loop_1',['Control Loop',['../index.html#autotoc_md18',1,'']]],
-  ['control_20structure_2',['Main Control Structure',['../index.html#autotoc_md14',1,'']]],
-  ['cooker_3',['ME507 Marshmallow Cooker',['../index.html',1,'']]],
-  ['custom_20pcb_4',['Custom PCB',['../index.html#autotoc_md8',1,'']]]
+  ['bom_0',['BOM',['../index.html#autotoc_md4',1,'']]]
 ];

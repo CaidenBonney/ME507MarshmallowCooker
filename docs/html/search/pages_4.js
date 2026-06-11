@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loop_0',['Control Loop',['../index.html#autotoc_md18',1,'']]]
+  ['hardware_0',['Major Hardware',['../index.html#autotoc_md3',1,'']]]
 ];

@@ -5,22 +5,30 @@
 The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.
 
 <p align="center">
-  <img src="../images/intro.jpg"
+  <img src="../images/main.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
 The system uses both infrared and thermocouple-based temperature measurements to perfect cooking conditions while a rotating mechanism and vertical positioning mechanism control the marshmallow relative to the heat source.
 
+## Video Demonstration
+
+[Click here to watch the Marshmallow Cooker in action!](https://cpslo-my.sharepoint.com/:v:/g/personal/clbonney_calpoly_edu/IQBmmSWm59pES4WM_rZA4jZBAax7FDM9BySxYHA97Abe1Qw?e=9FayDm)
+
 ---
 
 # Major Hardware
+
+## BOM
+
+Here is a link to our [Bill of Materials](https://cpslo-my.sharepoint.com/:x:/g/personal/clbonney_calpoly_edu/IQCO9qkZxfa1SrjVX5YEZTvCAYXNW5hFe5g4LbXm4rrSlMY?e=KhwhCP) (does not include CAD components)
 
 ## Rotating Motor Assembly
 
 The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A DRV8833 motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver was implemented to abstract direction control and PWM duty cycle commands.
 
 <p align="center">
-  <img src="../images/r_motor.jpg"
+  <img src="../images/2_moving.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
@@ -34,7 +42,7 @@ The 12 CPR quadrature encoder provides position feedback that allows the softwar
 ## Vertical Motion System
 
 <p align="center">
-  <img src="../images/z_motor.jpg"
+  <img src="../images/1_front.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
@@ -51,25 +59,20 @@ Top and bottom limit switches are used to prevent the mechanism from exceeding i
 
 ## Temperature Sensors
 
+<p align="center">
+  <img src="../images/3_tc_temp.jpg"
+       style="max-width:100%; max-height:400px; width:auto; height:auto;">
+</p>
+
 ### MLX90614 Infrared Temperature Sensor
 
 The MLX90614 provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow. When the marshmallows surface reaches a set temperature, the cook is done.
-
-<p align="center">
-  <img src="../images/ir_temp.jpg"
-       style="max-width:100%; max-height:400px; width:auto; height:auto;">
-</p>
 
 The MLX90614 is an integrated IR temperature camera and I2C device. This makes implementation very simple as it does not require an amplifier or driver. The IR temperature sensor itself communicates with the STM32 via I2C CLK and SDA.
 
 ### MCP9600 Thermocouple Amplifier
 
 The MCP9600 thermocouple amplifier interfaces with a Type T thermocouple to provide direct hot-junction temperature measurements of the flame. The flame temperature is used in our control loop to adjust the height of the marshmallow.
-
-<p align="center">
-  <img src="../images/thermocouple.jpg"
-       style="max-width:100%; max-height:400px; width:auto; height:auto;">
-</p>
 
 The MCP9600 is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR temperature sensor.
 
@@ -118,7 +121,7 @@ Issues We Encountered:
   * Solution: Attempted to expand the vias, but lifted the pads and some traces. Cut back the lifted traces, chipped off the solder mask to expose the copper, soldered the connector's pins onto the copper traces. Super glued the connector's body onto the board. Never unplugging the connector on the board side.
 
 <p align="center">
-  <img src="../images/back.jpg"
+  <img src="../images/4_back.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
@@ -220,7 +223,7 @@ error = target flame temperature - measured flame temperature
 
 A positive error means the measured flame temperature is too cold, so the Z target is moved downward toward the flame. A negative error means the flame is too hot, so the Z target is moved upward. The default gains are `Kp = 1.0`, `Ki = 0.02`, and `Kd = 0.10`. Each PID update is clamped to +/-750 steps with a +/-100 step deadband, and the integral term is limited to reduce wind-up. Software limits prevent commands above the home position or below the -16000 step lower cook limit.
 
-Cooking completes when the IR object temperature reaches 240.00 F continuously for 1 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters `Fault`, stops motion, and waits for a reset sequence.
+Cooking completes when the IR object temperature reaches 250.00 F continuously for 1.5 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters `Fault`, stops motion, and waits for a reset sequence.
 
 ---
 

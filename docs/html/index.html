@@ -122,37 +122,42 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
 Project Overview</h1>
 <p>The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.</p>
-<p><img src="../images/intro.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/main.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The system uses both infrared and thermocouple-based temperature measurements to perfect cooking conditions while a rotating mechanism and vertical positioning mechanism control the marshmallow relative to the heat source.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Video Demonstration</h2>
+<p><a href="https://cpslo-my.sharepoint.com/:v:/g/personal/clbonney_calpoly_edu/IQBmmSWm59pES4WM_rZA4jZBAax7FDM9BySxYHA97Abe1Qw?e=9FayDm">Click here to watch the Marshmallow Cooker in action!</a></p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Major Hardware</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+BOM</h2>
+<p>Here is a link to our <a href="https://cpslo-my.sharepoint.com/:x:/g/personal/clbonney_calpoly_edu/IQCO9qkZxfa1SrjVX5YEZTvCAYXNW5hFe5g4LbXm4rrSlMY?e=KhwhCP">Bill of Materials</a> (does not include CAD components)</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Rotating Motor Assembly</h2>
 <p>The rotating axis uses a Pololu 5120 gearmotor with integrated quadrature encoder. The 297.92:1, 45 rpm max motor provides slow, yet steady rotation of the marshmallow. A <a class="el" href="class_d_r_v8833.html" title="Controls a DRV8833 H-bridge using two timer PWM channels.">DRV8833</a> motor driver at 5V allows bidirectional PWM control from the STM32 microcontroller. A simple software driver was implemented to abstract direction control and PWM duty cycle commands.</p>
-<p><img src="../images/r_motor.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/2_moving.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The 12 CPR quadrature encoder provides position feedback that allows the software to estimate angular position and rotational velocity. Hardware timers count the encoder ticks, measuring the angular displacement of the motor.</p>
 <p><img src="../images/r_motor_schematic.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Vertical Motion System</h2>
-<p><img src="../images/z_motor.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/1_front.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The distance between the marshmallow and the heat source is adjusted by a lead screw system powered by a stepper motor, DFRobot FIT0278 stepper motor. The motor is controlled by a <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> driver at 12V. The FIT0278 has 200 steps per revolution, and the motor driver is configured for 8 microsteps per step. The result is smooth, fine control of the height of the marshmallow above the fire.</p>
 <p>The <a class="el" href="class_t_m_c2209.html" title="Minimal TMC2209 step/dir interface.">TMC2209</a> stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is roughly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.</p>
 <p><img src="../images/z_motor_schematic.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins. This fail-safe behavior causes a disconnected or damaged switch to be detected as a triggered limit condition.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Temperature Sensors</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<p><img src="../images/3_tc_temp.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 MLX90614 Infrared Temperature Sensor</h3>
 <p>The <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow. When the marshmallows surface reaches a set temperature, the cook is done.</p>
-<p><img src="../images/ir_temp.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> is an integrated IR temperature camera and I2C device. This makes implementation very simple as it does not require an amplifier or driver. The IR temperature sensor itself communicates with the STM32 via I2C CLK and SDA.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 MCP9600 Thermocouple Amplifier</h3>
 <p>The <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple amplifier interfaces with a Type T thermocouple to provide direct hot-junction temperature measurements of the flame. The flame temperature is used in our control loop to adjust the height of the marshmallow.</p>
-<p><img src="../images/thermocouple.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>The <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> is also an I2C device. It has a configurable address pin, which is grounded, setting the address to 0x60. The hot junction temperature is read via the hardware I2C bus as the IR temperature sensor.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Custom PCB</h2>
 <p><img src="../images/pcb.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p>A custom PCB was designed to integrate all hardware components:</p>
@@ -192,9 +197,9 @@ Custom PCB</h2>
 </ul>
 </li>
 </ul>
-<p><img src="../images/back.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
+<p><img src="../images/4_back.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 CAD</h1>
 <p>The GitHub repository contains CAD for the marshmallow cooker. This includes a main assembly file, individual part models, and hardware (screws and nuts).</p>
 <p><img src="../images/CAD_1.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
@@ -202,7 +207,7 @@ CAD</h1>
 <p><img src="../images/CAD_3.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <p><img src="../images/CAD_4.jpg" alt="" style="max-width:100%; max-height:400px; width:auto; height:auto;" class="inline"/> </p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Software Architecture</h1>
 <p>The firmware is written in C++ using STM32CubeIDE and STM32 HAL.</p>
 <p>Major software modules include:</p>
@@ -217,7 +222,7 @@ Software Architecture</h1>
 </ul>
 <p>Hardware-specific functionality is encapsulated within dedicated driver classes, allowing higher-level control logic to remain independent of hardware implementation details.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 Main Control Structure</h1>
 <p>The application uses a cooperative task structure built around the shared <a class="el" href="class_task.html" title="Task">Task</a> interface. After STM32Cube-generated initialization configures GPIO, USART2, I2C3, TIM1 PWM, TIM3 encoder mode, and USB device support, <span class="tt"><a class="el" href="main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="The application entry point.">main()</a></span> repeatedly calls the application tasks in a fixed order:</p>
 <ul>
@@ -229,7 +234,7 @@ Main Control Structure</h1>
 </ul>
 <p>This ordering lets new command and temperature data be processed before the motor tasks act on the latest cooker decisions. The tasks are written as small non-blocking state machines using <span class="tt">HAL_GetTick()</span> timing instead of long blocking delays. The temperature and Z-control tasks run their scheduled logic every 500 ms, while the R motor task updates every 10 ms so encoder-driven rotation remains responsive.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 User Interface</h1>
 <p>The firmware provides a serial command-line interface through <a class="el" href="class_task_u_i.html" title="TaskUI">TaskUI</a>. USART2 is configured for 115200 baud, 8 data bits, no parity, and 1 stop bit. The UI task receives one byte at a time with <span class="tt">HAL_UART_Receive_IT()</span>, stores characters in a small interrupt-to-task queue, echoes printable input, supports backspace, and parses commands when the user presses Enter.</p>
 <p>The user-facing cook sequence is coordinated by <a class="el" href="class_task_cooker.html" title="TaskCooker">TaskCooker</a>. On startup it waits for the <span class="tt">home</span> command, then commands <a class="el" href="class_task_z_motor.html" title="TaskZMotor">TaskZMotor</a> to home upward until the top limit switch defines Z = 0. Once homed, the cooker enters <span class="tt">ReadyToCook</span> and accepts <span class="tt">start</span>. Starting a cook moves Z to the initial cooking height, enables flame-temperature control, and then starts the R-axis rotisserie once Z reaches active control. A normal stop, completed cook, or bottom-limit condition commands the R motor back to its initial rotation and moves Z to the removal height. Faults and emergency stops immediately stop both motor tasks and require <span class="tt">reset</span> followed by another <span class="tt">home</span> before cooking again.</p>
@@ -249,16 +254,16 @@ User Interface</h1>
 </ul>
 <p>If no step count is supplied for <span class="tt">-</span> or <span class="tt">=</span>, the default jog distance is 100 steps. Status output reports the cooker state, Z task state, R task state, Z position, top and bottom limit switch states, thermocouple hot-junction temperature, and IR object temperature. <span class="tt"><a class="el" href="main_8h.html#adb0aa71349ab66b0edb3106fb2abb5c3">print_str()</a></span> sends firmware messages over USART2 and also mirrors them to USB CDC when USB support is present in the build.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Control Loop</h1>
 <p>The cooking loop uses two temperature measurements for two different jobs. <a class="el" href="class_task_temps.html" title="TaskTemps">TaskTemps</a> polls the <a class="el" href="class_m_c_p9600.html" title="I2C driver for the MCP9600 thermocouple-to-digital converter.">MCP9600</a> thermocouple amplifier and <a class="el" href="class_m_l_x90614.html" title="I2C driver for the MLX90614 non-contact infrared temperature sensor.">MLX90614</a> IR sensor over I2C3 every 500 ms. The thermocouple hot-junction reading is treated as the flame temperature used by Z-axis control, while the IR object reading is used as the marshmallow done-temperature measurement.</p>
 <p>When <span class="tt">start</span> is accepted, <a class="el" href="class_task_cooker.html" title="TaskCooker">TaskCooker</a> commands <a class="el" href="class_task_z_motor.html" title="TaskZMotor">TaskZMotor</a> to move from the homed top reference to the starting cook position at -11000 steps. Once that move finishes, Z enters <span class="tt">ControllingFlameTemp</span>. The cooker then starts the R-axis cooking motion, which alternates +360 degree and -360 degree moves so the marshmallow rotates without winding wires indefinitely. Since writing code, the mechanical system has changed and this is no longer necessary. The motor could spin in one direction indefinitely.</p>
 <p>The Z-axis PID loop runs every 500 ms with a target flame temperature of 240.00 F. Temperatures are stored as fixed-point Fahrenheit values multiplied by 100. The PID error is:</p>
 <div class="fragment"><div class="line">error = target flame temperature - measured flame temperature</div>
 </div><!-- fragment --><p>A positive error means the measured flame temperature is too cold, so the Z target is moved downward toward the flame. A negative error means the flame is too hot, so the Z target is moved upward. The default gains are <span class="tt">Kp = 1.0</span>, <span class="tt">Ki = 0.02</span>, and <span class="tt">Kd = 0.10</span>. Each PID update is clamped to +/-750 steps with a +/-100 step deadband, and the integral term is limited to reduce wind-up. Software limits prevent commands above the home position or below the -16000 step lower cook limit.</p>
-<p>Cooking completes when the IR object temperature reaches 240.00 F continuously for 1 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters <span class="tt">Fault</span>, stops motion, and waits for a reset sequence.</p>
+<p>Cooking completes when the IR object temperature reaches 250.00 F continuously for 1.5 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters <span class="tt">Fault</span>, stops motion, and waits for a reset sequence.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
 Repository Structure</h1>
 <div class="fragment"><div class="line">ME507MarshmallowCooker</div>
 <div class="line">├── Marshmallow_Cooker</div>
@@ -266,7 +271,7 @@ Repository Structure</h1>
 <div class="line">│   └── Drivers</div>
 <div class="line">├── docs</div>
 <div class="line">└── Doxyfile</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 Repository</h2>
 <p>GitHub Repository:</p>
 <p><a href="https://github.com/CaidenBonney/ME507MarshmallowCooker">Link back to ME507MarshmallowCooker GitHub Repository</a> </p>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['temperature_20sensor_0',['MLX90614 Infrared Temperature Sensor',['../index.html#autotoc_md6',1,'']]],
-  ['temperature_20sensors_1',['Temperature Sensors',['../index.html#autotoc_md5',1,'']]],
-  ['thermocouple_20amplifier_2',['MCP9600 Thermocouple Amplifier',['../index.html#autotoc_md7',1,'']]]
+  ['repository_0',['Repository',['../index.html#autotoc_md23',1,'']]],
+  ['repository_20structure_1',['Repository Structure',['../index.html#autotoc_md22',1,'']]],
+  ['rotating_20motor_20assembly_2',['Rotating Motor Assembly',['../index.html#autotoc_md5',1,'']]]
 ];
