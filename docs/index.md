@@ -2,14 +2,14 @@
 
 # Project Overview
 
-The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to monitor temperature and control marshmallow position and orientation during cooking.
+The ME507 Marshmallow Cooker is an automated marshmallow roasting system designed to cook the perfect marshmallow for s'mores. Using sensor feedback and motorized positioning, the system monitors temperature and automatically adjusts the marshmallow's position and orientation to achieve a consistent, repeatable roast.
 
 <p align="center">
   <img src="../images/main.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-The system uses both infrared and thermocouple-based temperature measurements to perfect cooking conditions while a rotating mechanism and vertical positioning mechanism control the marshmallow relative to the heat source.
+The system is based on an STM32F411 microcontroller and uses both infrared and thermocouple-based temperature measurements to monitor cooking conditions. A rotating mechanism (rotisserie) ensures an even cook, while a vertical positioning system adjusts the distance between the marshmallow and the heat source (demonstrated using a Sterno) to regulate roasting temperature. This combination of sensor feedback and motorized positioning allows the marshmallow to be cooked consistently to a desired temperature.
 
 ## Video Demonstration
 
@@ -48,14 +48,14 @@ The 12 CPR quadrature encoder provides position feedback that allows the softwar
 
 The distance between the marshmallow and the heat source is adjusted by a lead screw system powered by a stepper motor, DFRobot FIT0278 stepper motor. The motor is controlled by a TMC2209 driver at 12V. The FIT0278 has 200 steps per revolution, and the motor driver is configured for 8 microsteps per step. The result is smooth, fine control of the height of the marshmallow above the fire.
 
-The TMC2209 stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is roughly 0.8V to 2.5V. Additionally, we sized shunt resistor for the driver to sense the current.
+The TMC2209 stepper motor driver schematic is shown below. We installed a potentiometer into the resistor divider for VREF, so we could tune the maximum current sent to the stepper motor. Our VREF range is roughly 0.8V to 2.5V. Additionally, we selected the shunt resistor value used by the driver to sense motor current.
 
 <p align="center">
   <img src="../images/z_motor_schematic.jpg"
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. This means that a limit switch failure, or unplugging the pins. This fail-safe behavior causes a disconnected or damaged switch to be detected as a triggered limit condition.
+Top and bottom limit switches are used to prevent the mechanism from exceeding its allowable travel range. The limit switches are wired normally closed (NC), with internal pull up resistors configured on the STM32. When a limit switch is pressed, the ground connection is broken, and the pin is forced high by the pull up resistor. When a limit switch is pressed, the ground connection is broken and the pin is forced high by the pull-up resistor. This fail-safe design causes a disconnected cable, damaged switch, or wiring failure to be detected as an active limit condition. This fail-safe behavior causes a disconnected or damaged switch to be detected as a triggered limit condition.
 
 ## Temperature Sensors
 
@@ -66,7 +66,7 @@ Top and bottom limit switches are used to prevent the mechanism from exceeding i
 
 ### MLX90614 Infrared Temperature Sensor
 
-The MLX90614 provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow. When the marshmallows surface reaches a set temperature, the cook is done.
+The MLX90614 provides non-contact temperature measurements of the marshmallow surface. This allows surface temperature to be monitored without physically touching the marshmallow. When the marshmallow's surface reaches a set temperature, the cook is done.
 
 The MLX90614 is an integrated IR temperature camera and I2C device. This makes implementation very simple as it does not require an amplifier or driver. The IR temperature sensor itself communicates with the STM32 via I2C CLK and SDA.
 
@@ -98,7 +98,7 @@ A custom PCB was designed to integrate all hardware components:
        style="max-width:100%; max-height:400px; width:auto; height:auto;">
 </p>
 
-The PCB simplifies wiring and provides a compact platform for system integration. Our board begins with the 12 VDC barrel plug, designed for an external wall AC to DC converter. The 12 VIN goes through a fuse (MFU0805FF03000P500) and p-fet reverse polarity circuit (SI4435FDY-T1-GE3). Then, a high efficient switching buck regulator (MP2338GTL-Z) drops the voltage to 5V for the rotating motor. Finally, a linear dropout regulator (LDL1117S33R) reduces the voltage to 3.3V, our digital logic level (VDD).
+The PCB simplifies wiring and provides a compact platform for system integration. Our board begins with the 12 VDC barrel plug, designed for an external wall AC to DC converter. The 12 VIN goes through a fuse (MFU0805FF03000P500) and p-fet reverse polarity circuit (SI4435FDY-T1-GE3). Then, a high efficiency switching buck regulator (MP2338GTL-Z) drops the voltage to 5V for the rotating motor. Finally, a linear dropout regulator (LDL1117S33R) reduces the voltage to 3.3V, our digital logic level (VDD).
 
 Key PCB Design Choices:
 * Internal planes for GND and VDD
@@ -129,7 +129,7 @@ Issues We Encountered:
 </p>
 
 * Thru holes for stepper motor JST connector too small
-  * Problem: Did not verify the via size of the component we downloaded. Result was vias were too small for the thru hole pins of the JST-XH connector.
+  * Problem: We did not verify the recommended hole size of the downloaded connector footprint. Result was vias were too small for the thru hole pins of the JST-XH connector.
   * Solution: Attempted to expand the vias, but lifted the pads and some traces. Cut back the lifted traces, chipped off the solder mask to expose the copper, soldered the connector's pins onto the copper traces. Super glued the connector's body onto the board. Never unplugging the connector on the board side.
 
 <p align="center">
@@ -239,11 +239,11 @@ error = target flame temperature - measured flame temperature
 
 A positive error means the measured flame temperature is too cold, so the Z target is moved downward toward the flame. A negative error means the flame is too hot, so the Z target is moved upward. The default gains are `Kp = 1.0`, `Ki = 0.02`, and `Kd = 0.10`. Each PID update is clamped to +/-750 steps with a +/-100 step deadband, and the integral term is limited to reduce wind-up. Software limits prevent commands above the home position or below the -16000 step lower cook limit.
 
-Cooking completes when the IR object temperature reaches 250.00 F continuously for 1.5 second. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters `Fault`, stops motion, and waits for a reset sequence.
+Cooking completes when the IR object temperature reaches 250.00 F continuously for 1.5 seconds. At that point the cooker begins a normal stop: the R motor returns to encoder zero and Z moves to the -500 step removal height. If a motor fault or emergency stop occurs, the cooker enters `Fault`, stops motion, and waits for a reset sequence.
 
 ## How to Improve the Control Loop
 
-The thermocouple has a very large time constant. This means it takes a long time for the hot-junction temperature to respond to changes in the surrounding air temperature. This is undesirable because the Z-axis height control loop is closed using a sensor that is effectively reporting old data. We mitigated this issue by tuning relatively low PID gains. As a result, the vertical motion responds slowly, giving the thermocouple more time to approach the true temperature before additional control actions are taken. This behavior could be improved by using a thermocouple with lower thermal mass and, therefore, a smaller time constant
+The thermocouple has a very large time constant. This means it takes a long time for the hot-junction temperature to respond to changes in the surrounding air temperature. This is undesirable because the Z-axis height control loop is closed using a sensor that is effectively reporting old data. We mitigated this issue by tuning relatively low PID gains. As a result, the vertical motion responds slowly, giving the thermocouple more time to approach the true temperature before additional control actions are taken. This behavior could be improved by using a thermocouple with lower thermal mass and, therefore, a smaller time constant.
 
 ---
 

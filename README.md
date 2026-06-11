@@ -4,7 +4,7 @@
 
 The ME507 Marshmallow Cooker is an automated system designed to cook the perfect marshmallow for s'mores! The marshmallow cooker roasts the marshmallows to a desired temperature using sensor feedback and motorized positioning.
 
-The system is based around a STM32F411 microcontroller and incorporates both contact and non-contact temperature sensing. The rotating mechanism (rotisserie) ensures an even cook while the vertical positioning system modulates the distance between the marshmallow and the heat source (demoing with a Sterno).
+The system is based on an STM32F411 microcontroller and incorporates both contact and non-contact temperature sensing. The rotating mechanism (rotisserie) ensures an even cook while the vertical positioning system modulates the distance between the marshmallow and the heat source (demoing with a Sterno).
 
 ## Team Members
 
@@ -21,7 +21,7 @@ The system is based around a STM32F411 microcontroller and incorporates both con
 
 ### Actuators
 
-* Pololu 5120 gearmotor with quadrature encoder with DRV8833 brushed DC motor driver
+* Pololu 5120 gearmotor with quadrature encoder and DRV8833 brushed DC motor driver
 * DF Robot Fit0278 stepper motor with TMC2209 stepper motor driver
 
 ### Custom Electronics
@@ -44,7 +44,6 @@ Major drivers include:
 * DRV8833 motor driver
 * Rotational motor driver
 * Z-axis limit switch driver
-* DRV8833 motor driver
 * Z-axis motor driver
 
 ## Documentation
@@ -65,7 +64,6 @@ ME507MarshmallowCooker
 │   └── Drivers
 ├── Doxyfile
 └── README
-
 ```
 
 ## Building the Project
@@ -77,4 +75,4 @@ ME507MarshmallowCooker
 
 ## License
 
-This repository was created for ME507 at California Polytechnic State University.
+This repository was created as part of the ME507 Mechatronics course at California Polytechnic State University.
