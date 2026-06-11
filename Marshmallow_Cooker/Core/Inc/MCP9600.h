@@ -79,10 +79,10 @@ public:
   int16_t getDeltaCx100() const;
 
   /** @brief Get cached hot junction temperature in degrees F x100. */
-  int16_t getHotFx100() const;
+  int32_t getHotFx100() const;
 
   /** @brief Get cached cold junction temperature in degrees F x100. */
-  int16_t getColdFx100() const;
+  int32_t getColdFx100() const;
 
   /** @brief Get the most recently cached MCP9600 status register value. */
   uint8_t getStatus() const;
@@ -229,7 +229,7 @@ private:
    * @param cx100 Temperature in degrees C x100.
    * @return Temperature in degrees F x100.
    */
-  int16_t cToFx100(int16_t cx100) const;
+  int32_t cToFx100(int16_t cx100) const;
 
   /** @brief STM32 HAL I2C handle used by the driver. */
   I2C_HandleTypeDef* hi2c_;

@@ -102,11 +102,11 @@ int16_t MCP9600::getDeltaCx100() const {
   return delta_cx100_;
 }
 
-int16_t MCP9600::getHotFx100() const {
+int32_t MCP9600::getHotFx100() const {
   return cToFx100(hot_cx100_);
 }
 
-int16_t MCP9600::getColdFx100() const {
+int32_t MCP9600::getColdFx100() const {
   return cToFx100(cold_cx100_);
 }
 
@@ -310,7 +310,7 @@ int16_t MCP9600::rawTempToCx100(int16_t raw) const {
   return static_cast<int16_t>((static_cast<int32_t>(raw) * 625) / 100);
 }
 
-int16_t MCP9600::cToFx100(int16_t cx100) const {
+int32_t MCP9600::cToFx100(int16_t cx100) const {
   // F = C * 9/5 + 32
-  return static_cast<int16_t>(((static_cast<int32_t>(cx100) * 9) / 5) + 3200);
+  return ((static_cast<int32_t>(cx100) * 9) / 5) + 3200;
 }
