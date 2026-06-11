@@ -32,10 +32,12 @@ void TaskCooker::run() {
       break;
 
     case State::HomingZ:
-      if (task_z_motor_.isFaulted()) {
+      if (task_r_motor_.isFaulted()) {
+        enterFault("R fault while returning to initial rotation during home");
+      } else if (task_z_motor_.isFaulted()) {
         enterFault("Z fault during homing");
-      } else if (task_z_motor_.isHomed() && !task_z_motor_.isBusy()) {
-        print_str("Setup complete. Send 'start' to cook.\r\n");
+      } else if (task_z_motor_.isHomed() && !task_z_motor_.isBusy() && !task_r_motor_.isBusy()) {
+        print_str("Setup complete. R is at initial rotation. Send 'start' to cook.\r\n");
         state_ = State::ReadyToCook;
       }
       break;
@@ -66,7 +68,33 @@ void TaskCooker::run() {
       }
 
       if (task_temps_.hasValidIrReading() && task_temps_.getIrObjectFx100() >= kDoneMarshmallowTempFx100) {
-        beginNormalStop("Marshmallow done. Moving to removal height and returning R to initial rotation.\r\n");
+        if (!done_temp_timer_active_) {
+          done_temp_timer_active_ = true;
+          done_temp_start_ms_ = HAL_GetTick();
+          print_str("IR done temperature reached. Starting hold timer.\r\n");
+        }
+
+        const uint32_t elapsed_done_ms = HAL_GetTick() - done_temp_start_ms_;
+
+        if (elapsed_done_ms >= kDoneTempHoldTimeMs) {
+          print_str("Marshmallow done. Moving to removal height and returning R to initial rotation.\r\n");
+
+          done_temp_timer_active_ = false;
+          done_temp_start_ms_ = 0;
+
+          task_r_motor_.returnToInitialRotation();
+          task_z_motor_.stopMotion();
+          task_z_motor_.moveToRemovalHeight();
+
+          state_ = State::MovingToRemovalHeight;
+        }
+      } else {
+        if (done_temp_timer_active_) {
+          print_str("IR done temperature dropped. Hold timer reset.\r\n");
+        }
+
+        done_temp_timer_active_ = false;
+        done_temp_start_ms_ = 0;
       }
       break;
 
@@ -109,25 +137,39 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       break;
 
     case TaskUI::Command::Home:
-      if (state_ == State::WaitingForHomeCommand || state_ == State::ReadyToCook || state_ == State::Done) {
-        print_str("Starting Z home.\r\n");
-        r_started_for_current_cook_ = false;
-        task_z_motor_.startHoming();
-        state_ = State::HomingZ;
-      } else {
-        print_str("Home command ignored in current state.\r\n");
+      if (state_ == State::Fault) {
+        print_str("Home rejected. Send reset first.\r\n");
+        break;
       }
+
+      if (state_ == State::Cooking || state_ == State::MovingToRemovalHeight) {
+        print_str("Home rejected. Cooker is busy.\r\n");
+        break;
+      }
+
+      print_str("Starting home. Returning R to initial rotation and homing Z.\r\n");
+
+      r_started_for_current_cook_ = false;
+      task_r_motor_.returnToInitialRotation();
+      task_z_motor_.startHoming();
+
+      state_ = State::HomingZ;
       break;
 
     case TaskUI::Command::Start:
-      if (state_ == State::ReadyToCook && task_z_motor_.isHomed()) {
-        r_started_for_current_cook_ = false;
-        task_z_motor_.startTemperatureControl(kTargetFlameTempFx100);
-        state_ = State::Cooking;
-        print_str("Cooking started. Moving Z to initial cook position.\r\n");
-      } else {
+      if (state_ != State::ReadyToCook) {
         print_str("Start rejected. Home Z first.\r\n");
+        break;
       }
+
+      r_started_for_current_cook_ = false;
+      done_temp_timer_active_ = false;
+      done_temp_start_ms_ = 0;
+
+      task_z_motor_.startTemperatureControl(kTargetFlameTempFx100);
+
+      state_ = State::Cooking;
+      print_str("Cooking started. Moving Z to initial cook position.\r\n");
       break;
 
     case TaskUI::Command::Stop:
@@ -146,6 +188,8 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
       if (state_ == State::Fault || state_ == State::Done) {
         print_str("Software reset. Send 'home' before cooking.\r\n");
         stopStatusStream();
+        done_temp_timer_active_ = false;
+        done_temp_start_ms_ = 0;
         r_started_for_current_cook_ = false;
         task_r_motor_.resetFault();
         task_z_motor_.resetFault();
@@ -220,8 +264,9 @@ void TaskCooker::enterFault(const char* reason) {
     print_str(reason);
     print_str("\r\n");
   }
-
   stopStatusStream();
+  done_temp_timer_active_ = false;
+  done_temp_start_ms_ = 0;
   r_started_for_current_cook_ = false;
   task_r_motor_.emergencyStop();
   task_z_motor_.emergencyStop();

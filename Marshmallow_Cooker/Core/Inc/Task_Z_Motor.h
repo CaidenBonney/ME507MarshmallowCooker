@@ -74,7 +74,7 @@ private:
   static constexpr uint32_t kPidUpdatePeriodMs = 500;
 
   static constexpr int32_t kRemovalHeightSteps = -500;
-  static constexpr int32_t kStartCookingPositionSteps = -15000;
+  static constexpr int32_t kStartCookingPositionSteps = -7500;
   static constexpr int32_t kPidOutputLimitSteps = 750;
   static constexpr int32_t kPidDeadbandSteps = 2;
   static constexpr float kIntegralErrorLimit = 500.0f;
@@ -85,9 +85,9 @@ private:
   // Initial PID values are intentionally conservative placeholders.
   // Units are steps per degree F for Kp, steps per degree F second for Ki,
   // and steps per degree F per second for Kd.
-  static constexpr float kDefaultKp = 1.0f;
-  static constexpr float kDefaultKi = 0.02f;
-  static constexpr float kDefaultKd = 0.10f;
+  static constexpr float kDefaultKp = 0.25f;
+  static constexpr float kDefaultKi = 0.025f;
+  static constexpr float kDefaultKd = 0.01f;
 
   State state_ = State::Uninitialized;
 
@@ -101,7 +101,7 @@ private:
   bool valid_flame_temp_ = false;
   bool pid_debug_enabled_ = false;
 
-  int32_t target_flame_temp_fx100_ = 19000;
+  int32_t target_flame_temp_fx100_ = 0; // Set by TaskCooker::kTargetFlameTempFx100 when cooking starts.
   int32_t measured_flame_temp_fx100_ = 0;
 
   float kp_ = kDefaultKp;

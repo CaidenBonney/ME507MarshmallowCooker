@@ -39,9 +39,10 @@ public:
   State getState() const;
 
 private:
-  static constexpr int32_t kTargetFlameTempFx100 = 35000; // TODO: tune. 350.00 F.
-  static constexpr int32_t kDoneMarshmallowTempFx100 = 16000; // TODO: tune. 160.00 F.
+  static constexpr int32_t kTargetFlameTempFx100 = 20000; // TODO: tune. 200.00 F.
+  static constexpr int32_t kDoneMarshmallowTempFx100 = 21500; // TODO: tune. 215.00 F.
   static constexpr uint32_t kStatusStreamPeriodMs = 500;
+  static constexpr uint32_t kDoneTempHoldTimeMs = 3000; // IR temp must stay above done temp for 3 seconds.
 
   State state_ = State::Uninitialized;
 
@@ -56,6 +57,8 @@ private:
   uint32_t status_stream_start_ms_ = 0;
   uint32_t status_stream_duration_ms_ = 0;
   uint32_t last_status_stream_ms_ = 0;
+  bool done_temp_timer_active_ = false;
+  uint32_t done_temp_start_ms_ = 0;
 
   void handleCommand(TaskUI::Command command);
   void enterFault(const char* reason);

@@ -68,13 +68,8 @@ void TaskRMotor::run() {
       break;
 
     case State::ReturningToInitialRotation:
-      if (r_motor_driver_.isFaulted()) {
-        print_str("R motor fault while returning to initial rotation\r\n");
-        state_ = State::Fault;
-      } else if (!r_motor_driver_.isBusy()) {
+      if (!r_motor_driver_.isBusy()) {
         state_ = State::Idle;
-        stop_requested_ = false;
-        cooking_rotation_requested_ = false;
         print_str("R returned to initial rotation.\r\n");
       }
       break;
@@ -143,8 +138,8 @@ void TaskRMotor::returnToInitialRotation() {
   stop_requested_ = true;
 
   r_motor_driver_.moveToDegrees(0, cook_duty_, kReturnToInitialTimeoutMs);
-  state_ = State::ReturningToInitialRotation;
 
+  state_ = State::ReturningToInitialRotation;
   print_str("R returning to initial rotation.\r\n");
 }
 
@@ -158,14 +153,20 @@ void TaskRMotor::emergencyStop() {
 
 void TaskRMotor::resetFault() {
   r_motor_driver_.stop();
-  cooking_rotation_requested_ = false;
-  stop_requested_ = false;
 
-  if (state_ == State::Fault) {
-    state_ = State::Uninitialized;
-  } else {
+  cooking_rotation_requested_ = false;
+  stop_requested_ = true;
+
+  if (r_motor_driver_.getPositionDegrees() == 0) {
     state_ = State::Idle;
+    print_str("R fault reset. R already at initial rotation.\r\n");
+    return;
   }
+
+  r_motor_driver_.moveToDegrees(0, cook_duty_, kReturnToInitialTimeoutMs);
+  state_ = State::ReturningToInitialRotation;
+
+  print_str("R fault reset. Returning R to initial rotation.\r\n");
 }
 
 void TaskRMotor::setCookingDuty(int16_t duty) {
