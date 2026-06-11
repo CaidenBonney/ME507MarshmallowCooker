@@ -68,14 +68,14 @@ private:
    *   The flame is below the mechanism.
    *   Cooking positions are negative step positions.
    */
-  static constexpr uint32_t kUpdatePeriodMs = 10;
+  static constexpr uint32_t kUpdatePeriodMs = 500;
   static constexpr uint32_t kHomeSpeedStepsPerSecond = 1600;
   static constexpr uint32_t kMoveSpeedStepsPerSecond = 2000;
   static constexpr uint32_t kPidUpdatePeriodMs = 500;
 
   static constexpr int32_t kRemovalHeightSteps = -500;
   static constexpr int32_t kStartCookingPositionSteps = -15000;
-  static constexpr int32_t kPidOutputLimitSteps = 1000;
+  static constexpr int32_t kPidOutputLimitSteps = 750;
   static constexpr int32_t kPidDeadbandSteps = 2;
   static constexpr float kIntegralErrorLimit = 500.0f;
 
@@ -101,7 +101,7 @@ private:
   bool valid_flame_temp_ = false;
   bool pid_debug_enabled_ = false;
 
-  int32_t target_flame_temp_fx100_ = 35000;
+  int32_t target_flame_temp_fx100_ = 19000;
   int32_t measured_flame_temp_fx100_ = 0;
 
   float kp_ = kDefaultKp;

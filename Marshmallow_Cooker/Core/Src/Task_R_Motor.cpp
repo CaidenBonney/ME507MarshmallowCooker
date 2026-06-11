@@ -158,14 +158,14 @@ void TaskRMotor::emergencyStop() {
 
 void TaskRMotor::resetFault() {
   r_motor_driver_.stop();
-  r_motor_driver_.resetEncoder();
-
   cooking_rotation_requested_ = false;
   stop_requested_ = false;
 
-  state_ = State::Idle;
-
-  print_str("R fault reset. Encoder zeroed. Ready after Z home.\r\n");
+  if (state_ == State::Fault) {
+    state_ = State::Uninitialized;
+  } else {
+    state_ = State::Idle;
+  }
 }
 
 void TaskRMotor::setCookingDuty(int16_t duty) {

@@ -197,9 +197,8 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
     }
 
     case TaskUI::Command::Unknown:
-      print_str("Unknown command.\r\n");
-      print_str("Use: home start stop estop reset status\r\n");
-      print_str("More: status <ms>, piddebug on/off, - <steps>, = <steps>\r\n");
+      print_str("Unknown command. Use: home, start, stop, estop, reset, status, status <ms>, piddebug on, "
+                "piddebug off, -, - <steps>, =, = <steps>\r\n");
       break;
   }
 }
@@ -234,7 +233,7 @@ void TaskCooker::printStatus() const {
   const int32_t ir_object = task_temps_.getIrObjectFx100();
 
   std::snprintf(print_buf,
-                sizeof(print_buf),
+                100,
                 "Status: cooker=%d z=%d r=%d zpos=%ld top=%d bottom=%d tc=%ld.%02ldF ir=%ld.%02ldF\r\n",
                 static_cast<int>(state_),
                 static_cast<int>(task_z_motor_.getState()),
