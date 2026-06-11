@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['infrared_20temperature_20sensor_0',['MLX90614 Infrared Temperature Sensor',['../index.html#autotoc_md7',1,'']]]
+  ['main_20control_20structure_0',['Main Control Structure',['../index.html#autotoc_md13',1,'']]],
+  ['major_20hardware_1',['Major Hardware',['../index.html#autotoc_md3',1,'']]],
+  ['marshmallow_20cooker_2',['Marshmallow Cooker',['../index.html',1,'ME507 Marshmallow Cooker'],['../index.html#autotoc_md0',1,'ME507 Marshmallow Cooker']]],
+  ['mcp9600_20thermocouple_20amplifier_3',['MCP9600 Thermocouple Amplifier',['../index.html#autotoc_md8',1,'']]],
+  ['me507_20marshmallow_20cooker_4',['ME507 Marshmallow Cooker',['../index.html',1,'ME507 Marshmallow Cooker'],['../index.html#autotoc_md0',1,'ME507 Marshmallow Cooker']]],
+  ['mlx90614_20infrared_20temperature_20sensor_5',['MLX90614 Infrared Temperature Sensor',['../index.html#autotoc_md7',1,'']]],
+  ['motion_20system_6',['Vertical Motion System',['../index.html#autotoc_md5',1,'']]],
+  ['motor_20assembly_7',['Rotating Motor Assembly',['../index.html#autotoc_md4',1,'']]]
 ];

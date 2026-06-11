@@ -213,27 +213,15 @@ Software Architecture</h1>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
 Main Control Structure</h1>
-<p>The firmware operates from a central control loop which periodically:</p>
-<ol type="1">
-<li>Reads temperature sensors</li>
-<li>Updates motor state</li>
-<li>Monitors limit switches</li>
-<li>Executes motion commands</li>
-<li>Reports diagnostic information over UART</li>
-</ol>
-<p>This structure allows individual subsystems to be tested independently while supporting future integration into a complete cooking sequence.</p>
+<p>TODO</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
-Mathematical Modeling and Data Processing</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
-Encoder Processing</h2>
-<p>Quadrature encoder counts are accumulated to determine motor position and estimate angular displacement.</p>
-<p>Gear ratio and encoder resolution are used to convert encoder counts into output shaft rotation.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
-Temperature Processing</h2>
-<p>The <a class="el" href="class_m_l_x90614.html">MLX90614</a> provides calibrated infrared temperature measurements.</p>
-<p>The <a class="el" href="class_m_c_p9600.html">MCP9600</a> converts thermocouple voltage measurements into hot-junction temperatures using internal cold-junction compensation.</p>
-<p>Measurements from both sensors can be compared to evaluate sensor performance and cooking conditions.</p>
+User Interface</h1>
+<p>TODO</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+Control Loop</h1>
+<p>Todo</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
 Repository Structure</h1>
