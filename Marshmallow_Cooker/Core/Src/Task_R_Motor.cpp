@@ -13,64 +13,70 @@ void TaskRMotor::run() {
 
   last_update_ms_ = now_ms;
 
+  if (emergency_stop_requested_) {
+    r_motor_driver_.stop();
+    state_ = State::Fault;
+    return;
+  }
+
+  r_motor_driver_.update();
+
   switch (state_) {
     case State::Uninitialized:
       if (r_motor_driver_.begin() != HAL_OK) {
         state_ = State::Fault;
-        Error_Handler();
         return;
       }
 
-      print_str("R motor driver initialized\r\n");
       state_ = State::Idle;
       break;
 
     case State::Idle:
-      if (!test_move_started_) {
-        test_move_started_ = true;
-
-        print_str("R move +360 degrees\r\n");
-        r_motor_driver_.moveDegrees(360, 1000, 8000);
-
-        state_ = State::MovingPositive;
+      if (cooking_rotation_requested_) {
+        r_motor_driver_.moveDegrees(kCookRotationDegrees,
+                                    cook_duty_,
+                                    kMoveTimeoutMs);
+        state_ = State::RotatingForward;
       }
       break;
 
-    case State::MovingPositive:
-      r_motor_driver_.update();
-
-      if (r_motor_driver_.isFaulted()) {
-        print_str("R motor fault during +360\r\n");
-        state_ = State::Fault;
-      } else if (!r_motor_driver_.isBusy()) {
-        sprintf(print_buf,
-                "Done +360: counts=%ld deg=%ld\r\n",
-                static_cast<long>(r_motor_driver_.getPosition()),
-                static_cast<long>(r_motor_driver_.getPositionDegrees()));
-        print_str(print_buf);
-
-        print_str("R move -360 degrees\r\n");
-        r_motor_driver_.moveDegrees(-360, 1000, 8000);
-
-        state_ = State::MovingNegative;
-      }
-      break;
-
-    case State::MovingNegative:
-      r_motor_driver_.update();
-
-      if (r_motor_driver_.isFaulted()) {
-        print_str("R motor fault during -360\r\n");
-        state_ = State::Fault;
-      } else if (!r_motor_driver_.isBusy()) {
-        sprintf(print_buf,
-                "Done -360: counts=%ld deg=%ld\r\n",
-                static_cast<long>(r_motor_driver_.getPosition()),
-                static_cast<long>(r_motor_driver_.getPositionDegrees()));
-        print_str(print_buf);
-
+    case State::RotatingForward:
+      if (stop_requested_) {
+        r_motor_driver_.stop();
+        cooking_rotation_requested_ = false;
+        stop_requested_ = false;
         state_ = State::Idle;
+      } else if (r_motor_driver_.isFaulted()) {
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
+        r_motor_driver_.moveDegrees(-kCookRotationDegrees,
+                                    cook_duty_,
+                                    kMoveTimeoutMs);
+        state_ = State::RotatingBackward;
       }
+      break;
+
+    case State::RotatingBackward:
+      if (stop_requested_) {
+        r_motor_driver_.stop();
+        cooking_rotation_requested_ = false;
+        stop_requested_ = false;
+        state_ = State::Idle;
+      } else if (r_motor_driver_.isFaulted()) {
+        state_ = State::Fault;
+      } else if (!r_motor_driver_.isBusy()) {
+        r_motor_driver_.moveDegrees(kCookRotationDegrees,
+                                    cook_duty_,
+                                    kMoveTimeoutMs);
+        state_ = State::RotatingForward;
+      }
+      break;
+
+    case State::Stopping:
+      r_motor_driver_.stop();
+      cooking_rotation_requested_ = false;
+      stop_requested_ = false;
+      state_ = State::Idle;
       break;
 
     case State::Fault:
@@ -97,4 +103,26 @@ Task::Status TaskRMotor::getStatus() const {
   }
 
   return Task::Status::Running;
+}
+
+void TaskRMotor::startCookingRotation() {
+  cooking_rotation_requested_ = true;
+  stop_requested_ = false;
+}
+
+void TaskRMotor::stopCookingRotation() {
+  stop_requested_ = true;
+}
+
+void TaskRMotor::emergencyStop() {
+  emergency_stop_requested_ = true;
+}
+
+bool TaskRMotor::isBusy() const {
+  return state_ == State::RotatingForward ||
+         state_ == State::RotatingBackward;
+}
+
+TaskRMotor::State TaskRMotor::getState() const {
+  return state_;
 }

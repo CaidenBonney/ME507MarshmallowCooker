@@ -21,28 +21,41 @@ public:
   enum class State {
     Uninitialized,
     Idle,
-    MovingPositive,
-    MovingNegative,
+    RotatingForward,
+    RotatingBackward,
+    Stopping,
     Fault
   };
 
   TaskRMotor();
 
-  void run() override;
+  void run();
   void update();
 
-  Status getStatus() const override;
+  void startCookingRotation();
+  void stopCookingRotation();
+  void emergencyStop();
+
+  bool isBusy() const;
   State getState() const;
 
 private:
   static constexpr uint32_t kUpdatePeriodMs = 10;
+  static constexpr int32_t kCookRotationDegrees = 360;
+  static constexpr int16_t kDefaultCookDuty = 700;
+  static constexpr uint32_t kMoveTimeoutMs = 8000;
 
   State state_ = State::Uninitialized;
 
   RMotorDriver r_motor_driver_;
 
   uint32_t last_update_ms_ = 0;
-  bool test_move_started_ = false;
+
+  bool cooking_rotation_requested_ = false;
+  bool stop_requested_ = false;
+  bool emergency_stop_requested_ = false;
+
+  int16_t cook_duty_ = kDefaultCookDuty;
 };
 
 #endif /* TASK_R_MOTOR_H */
