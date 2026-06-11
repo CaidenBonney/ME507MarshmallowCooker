@@ -1,4 +1,4 @@
-#include "Z_Limit_Switches.h"
+#include "z_limit_switches.h"
 
 ZLimitSwitches::ZLimitSwitches(
     GPIO_TypeDef* top_port,
