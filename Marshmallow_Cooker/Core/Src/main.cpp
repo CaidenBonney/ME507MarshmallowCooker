@@ -56,12 +56,14 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+// Creating Tasks
 TaskUI task_ui;
 TaskTemps task_temps;
 TaskRMotor task_r_motor;
 TaskZMotor task_z_motor;
 TaskCooker task_cooker(task_ui, task_temps, task_r_motor, task_z_motor);
 
+// buffer and length for printing
 char print_buf[100];
 uint8_t print_buf_len;
 /* USER CODE END PV */
@@ -84,6 +86,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
 
 /* USER CODE END 0 */
 
+/**
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void) {
 
   /* USER CODE BEGIN 1 */
@@ -134,13 +140,22 @@ int main(void) {
   /* USER CODE END 3 */
 }
 
+/**
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
+  /** Configure the main internal regulator output voltage
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
+  /** Initializes the RCC Oscillators according to the specified parameters
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -153,6 +168,8 @@ void SystemClock_Config(void) {
     Error_Handler();
   }
 
+  /** Initializes the CPU, AHB and APB buses clocks
+   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
@@ -164,6 +181,11 @@ void SystemClock_Config(void) {
   }
 }
 
+/**
+ * @brief I2C3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C3_Init(void) {
 
   /* USER CODE BEGIN I2C3_Init 0 */
@@ -190,6 +212,11 @@ static void MX_I2C3_Init(void) {
   /* USER CODE END I2C3_Init 2 */
 }
 
+/**
+ * @brief TIM1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM1_Init(void) {
 
   /* USER CODE BEGIN TIM1_Init 0 */
@@ -255,6 +282,11 @@ static void MX_TIM1_Init(void) {
   HAL_TIM_MspPostInit(&htim1);
 }
 
+/**
+ * @brief TIM3 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM3_Init(void) {
 
   /* USER CODE BEGIN TIM3_Init 0 */
@@ -295,6 +327,11 @@ static void MX_TIM3_Init(void) {
   /* USER CODE END TIM3_Init 2 */
 }
 
+/**
+ * @brief USART2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART2_UART_Init(void) {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -320,6 +357,11 @@ static void MX_USART2_UART_Init(void) {
   /* USER CODE END USART2_Init 2 */
 }
 
+/**
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void) {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
@@ -401,6 +443,10 @@ void print_str(const char* str) {
 }
 /* USER CODE END 4 */
 
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
@@ -410,6 +456,13 @@ void Error_Handler(void) {
   /* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT
+/**
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t* file, uint32_t line) {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
