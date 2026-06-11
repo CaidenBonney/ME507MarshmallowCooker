@@ -51,7 +51,7 @@ Major drivers include:
 
 Project documentation:
 
-[Documentation Website](INSERT_DOCUMENTATION_LINK_HERE)
+[ME507 Marshmallow Cooker Documentation](https://caidenbonney.github.io/ME507MarshmallowCooker/)
 
 ## Repository Structure
 
