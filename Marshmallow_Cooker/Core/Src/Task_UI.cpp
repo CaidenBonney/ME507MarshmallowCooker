@@ -8,11 +8,9 @@
 
 extern TaskUI task_ui;
 
-/** @copydoc TaskUI::TaskUI */
 TaskUI::TaskUI() {
 }
 
-/** @copydoc TaskUI::run */
 void TaskUI::run() {
   if (state_ == State::Uninitialized) {
     print_str("UI initialized. Commands: home, start, stop, estop, reset, status, status <ms>, piddebug on, "
@@ -34,7 +32,6 @@ void TaskUI::run() {
   processReceivedCharacters();
 }
 
-/** @copydoc TaskUI::getStatus */
 Task::Status TaskUI::getStatus() const {
   if (state_ == State::Uninitialized) {
     return Task::Status::Uninitialized;
@@ -47,12 +44,10 @@ Task::Status TaskUI::getStatus() const {
   return Task::Status::Running;
 }
 
-/** @copydoc TaskUI::getState */
 TaskUI::State TaskUI::getState() const {
   return state_;
 }
 
-/** @copydoc TaskUI::consumeCommand */
 TaskUI::Command TaskUI::consumeCommand() {
   Command command = pending_command_;
   pending_command_ = Command::None;
@@ -72,21 +67,18 @@ TaskUI::Command TaskUI::consumeCommand() {
   return command;
 }
 
-/** @copydoc TaskUI::consumeStatusDurationMs */
 uint32_t TaskUI::consumeStatusDurationMs() {
   const uint32_t duration_ms = pending_status_duration_ms_;
   pending_status_duration_ms_ = 0;
   return duration_ms;
 }
 
-/** @copydoc TaskUI::consumeJogSteps */
 uint32_t TaskUI::consumeJogSteps() {
   const uint32_t jog_steps = pending_jog_steps_;
   pending_jog_steps_ = 0;
   return jog_steps;
 }
 
-/** @copydoc TaskUI::onUartReceiveComplete */
 void TaskUI::onUartReceiveComplete(UART_HandleTypeDef* huart) {
   if (huart != &huart2) {
     return;
@@ -97,7 +89,6 @@ void TaskUI::onUartReceiveComplete(UART_HandleTypeDef* huart) {
   armReceive();
 }
 
-/** @copydoc TaskUI::armReceive */
 void TaskUI::armReceive() {
   if (rx_armed_) {
     return;
@@ -114,7 +105,6 @@ void TaskUI::armReceive() {
   }
 }
 
-/** @copydoc TaskUI::processReceivedCharacters */
 void TaskUI::processReceivedCharacters() {
   char c = '\0';
 
@@ -123,7 +113,6 @@ void TaskUI::processReceivedCharacters() {
   }
 }
 
-/** @copydoc TaskUI::popReceivedChar */
 bool TaskUI::popReceivedChar(char& c) {
   if (rx_queue_tail_ == rx_queue_head_) {
     return false;
@@ -134,7 +123,6 @@ bool TaskUI::popReceivedChar(char& c) {
   return true;
 }
 
-/** @copydoc TaskUI::pushReceivedCharFromIsr */
 void TaskUI::pushReceivedCharFromIsr(uint8_t c) {
   const size_t next_head = (rx_queue_head_ + 1U) % kRxQueueSize;
 
@@ -147,7 +135,6 @@ void TaskUI::pushReceivedCharFromIsr(uint8_t c) {
   rx_queue_head_ = next_head;
 }
 
-/** @copydoc TaskUI::handleReceivedChar */
 void TaskUI::handleReceivedChar(char c) {
   if (c == '\n' && last_was_cr_) {
     last_was_cr_ = false;
@@ -187,7 +174,6 @@ void TaskUI::handleReceivedChar(char c) {
   }
 }
 
-/** @copydoc TaskUI::handleCompletedLine */
 void TaskUI::handleCompletedLine() {
   if (overflowed_) {
     print_str("Command too long. Try again.\r\n");
@@ -221,20 +207,17 @@ void TaskUI::handleCompletedLine() {
   clearCommandBuffer();
 }
 
-/** @copydoc TaskUI::clearCommandBuffer */
 void TaskUI::clearCommandBuffer() {
   command_length_ = 0;
   overflowed_ = false;
   command_buffer_[0] = '\0';
 }
 
-/** @copydoc TaskUI::echoChar */
 void TaskUI::echoChar(char c) {
   char out[2] = {c, '\0'};
   echoString(out);
 }
 
-/** @copydoc TaskUI::echoString */
 void TaskUI::echoString(const char* str) {
   HAL_UART_Transmit(&huart2,
                     reinterpret_cast<uint8_t*>(const_cast<char*>(str)),
@@ -242,7 +225,6 @@ void TaskUI::echoString(const char* str) {
                     100);
 }
 
-/** @copydoc TaskUI::parseCommandLine */
 TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& command_value) const {
   command_value = 0;
 
@@ -424,7 +406,6 @@ TaskUI::Command TaskUI::parseCommandLine(const char* command, uint32_t& command_
   return Command::Unknown;
 }
 
-/** @copydoc TaskUI::toLower */
 char TaskUI::toLower(char c) {
   if (c >= 'A' && c <= 'Z') {
     return static_cast<char>(c - 'A' + 'a');
@@ -433,7 +414,6 @@ char TaskUI::toLower(char c) {
   return c;
 }
 
-/** @copydoc TaskUI::stringsEqual */
 bool TaskUI::stringsEqual(const char* a, const char* b) {
   while (*a != '\0' && *b != '\0') {
     if (*a != *b) {
@@ -447,33 +427,22 @@ bool TaskUI::stringsEqual(const char* a, const char* b) {
   return *a == '\0' && *b == '\0';
 }
 
-/**
- * @brief Forward the HAL UART receive-complete callback to the UI task.
- * @param huart UART handle that completed reception.
- */
 extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart) {
   task_ui.onUartReceiveComplete(huart);
 }
 
-/**
- * @brief Forward the HAL UART error callback to the UI task.
- * @param huart UART handle that reported an error.
- */
 extern "C" void HAL_UART_ErrorCallback(UART_HandleTypeDef* huart) {
   task_ui.onUartError(huart);
 }
 
-/** @copydoc TaskUI::isSpace */
 bool TaskUI::isSpace(char c) {
   return c == ' ' || c == '\t';
 }
 
-/** @copydoc TaskUI::isDigit */
 bool TaskUI::isDigit(char c) {
   return c >= '0' && c <= '9';
 }
 
-/** @copydoc TaskUI::onUartError */
 void TaskUI::onUartError(UART_HandleTypeDef* huart) {
   if (huart != &huart2) {
     return;

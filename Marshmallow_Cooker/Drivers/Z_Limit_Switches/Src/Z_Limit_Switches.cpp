@@ -5,7 +5,6 @@
 
 #include "z_limit_switches.h"
 
-/** @copydoc ZLimitSwitches::ZLimitSwitches */
 ZLimitSwitches::ZLimitSwitches(GPIO_TypeDef* top_port, uint16_t top_pin, GPIO_TypeDef* bottom_port, uint16_t bottom_pin)
     : top_port_(top_port),
       top_pin_(top_pin),
@@ -13,17 +12,14 @@ ZLimitSwitches::ZLimitSwitches(GPIO_TypeDef* top_port, uint16_t top_pin, GPIO_Ty
       bottom_pin_(bottom_pin) {
 }
 
-/** @copydoc ZLimitSwitches::isTopTriggered */
 bool ZLimitSwitches::isTopTriggered() const {
   return HAL_GPIO_ReadPin(top_port_, top_pin_) == GPIO_PIN_SET;
 }
 
-/** @copydoc ZLimitSwitches::isBottomTriggered */
 bool ZLimitSwitches::isBottomTriggered() const {
   return HAL_GPIO_ReadPin(bottom_port_, bottom_pin_) == GPIO_PIN_SET;
 }
 
-/** @copydoc ZLimitSwitches::isAnyTriggered */
 bool ZLimitSwitches::isAnyTriggered() const {
   return isTopTriggered() || isBottomTriggered();
 }

@@ -21,7 +21,7 @@ public:
   /** @brief Physical driver direction before optional inversion. */
   enum class Direction {
     Forward, ///< Forward DIR pin state.
-    Reverse ///< Reverse DIR pin state.
+    Reverse  ///< Reverse DIR pin state.
   };
 
   /**
@@ -88,8 +88,8 @@ public:
   uint32_t micros() const;
 
 private:
-  static constexpr uint32_t kMinStepPulseUs = 3; ///< Minimum STEP high pulse width.
-  static constexpr uint32_t kDefaultStepRateStepsPerSecond = 250; ///< Default step rate.
+  static constexpr uint32_t kMinStepPulseUs = 3;                    ///< Minimum STEP high pulse width.
+  static constexpr uint32_t kDefaultStepRateStepsPerSecond = 250;   ///< Default step rate.
 
   /** @brief Configure GPIO output/input defaults. */
   void configureGpioPins();

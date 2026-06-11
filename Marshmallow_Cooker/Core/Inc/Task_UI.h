@@ -25,26 +25,26 @@ class TaskUI : public Task {
 public:
   /** @brief Internal state of the UI command parser. */
   enum class State {
-    Uninitialized, ///< UART receive has not been armed yet.
-    Idle, ///< Waiting for a completed command line.
-    CommandReady, ///< A parsed command is ready to be consumed.
-    Fault ///< UI task has entered a fault state.
+    Uninitialized,  ///< UART receive has not been armed yet.
+    Idle,           ///< Waiting for a completed command line.
+    CommandReady,   ///< A parsed command is ready to be consumed.
+    Fault           ///< UI task has entered a fault state.
   };
 
   /** @brief Commands supported by the UART terminal. */
   enum class Command {
-    None, ///< No command is pending.
-    Home, ///< Home/setup the cooker.
-    Start, ///< Begin a cooking cycle.
-    Stop, ///< Perform a normal stop.
-    EmergencyStop, ///< Immediately fault and stop all motion.
-    Reset, ///< Reset recoverable task faults and require homing.
-    Status, ///< Print one status line or start a status stream.
-    PidDebugOn, ///< Enable Z PID debug printing.
-    PidDebugOff, ///< Disable Z PID debug printing.
-    ZJogDown, ///< Jog Z downward by a step amount.
-    ZJogUp, ///< Jog Z upward by a step amount.
-    Unknown ///< Command text did not match a supported command.
+    None,           ///< No command is pending.
+    Home,           ///< Home/setup the cooker.
+    Start,          ///< Begin a cooking cycle.
+    Stop,           ///< Perform a normal stop.
+    EmergencyStop,  ///< Immediately fault and stop all motion.
+    Reset,          ///< Reset recoverable task faults and require homing.
+    Status,         ///< Print one status line or start a status stream.
+    PidDebugOn,     ///< Enable Z PID debug printing.
+    PidDebugOff,    ///< Disable Z PID debug printing.
+    ZJogDown,       ///< Jog Z downward by a step amount.
+    ZJogUp,         ///< Jog Z upward by a step amount.
+    Unknown         ///< Command text did not match a supported command.
   };
 
   /** @brief Construct the UI task. */
@@ -93,9 +93,9 @@ public:
   void onUartError(UART_HandleTypeDef* huart);
 
 private:
-  static constexpr size_t kCommandBufferSize = 32; ///< Maximum command line length, including null terminator.
-  static constexpr size_t kRxQueueSize = 64; ///< ISR-to-task receive queue size.
-  static constexpr uint32_t kDefaultJogSteps = 100U; ///< Default Z jog distance when no argument is supplied.
+  static constexpr size_t kCommandBufferSize = 32;  ///< Maximum command line length, including null terminator.
+  static constexpr size_t kRxQueueSize = 64;        ///< ISR-to-task receive queue size.
+  static constexpr uint32_t kDefaultJogSteps = 100U;///< Default Z jog distance when no argument is supplied.
 
   State state_ = State::Uninitialized;
   Command pending_command_ = Command::None;

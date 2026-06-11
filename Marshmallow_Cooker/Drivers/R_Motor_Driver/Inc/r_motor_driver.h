@@ -20,11 +20,11 @@ class RMotorDriver {
 public:
   /** @brief Low-level R motor driver state. */
   enum class State {
-    Disabled, ///< Driver has not been initialized.
-    Idle, ///< Motor is stopped and ready.
-    MovingToPosition, ///< Position move is active.
+    Disabled,           ///< Driver has not been initialized.
+    Idle,               ///< Motor is stopped and ready.
+    MovingToPosition,   ///< Position move is active.
     RotatingContinuous, ///< Open-loop continuous rotation is active.
-    Fault ///< Driver fault or timeout occurred.
+    Fault               ///< Driver fault or timeout occurred.
   };
 
   /** @brief Construct the R motor driver with project timer assignments. */
@@ -82,10 +82,10 @@ public:
   void moveDegreesBlocking(int32_t degrees, int16_t duty, uint32_t timeout_ms);
 
 private:
-  static constexpr int32_t kCountsPerOutputRev = 3626; ///< Encoder counts per output revolution.
-  static constexpr int16_t kMinMovingPower = 350; ///< Minimum useful motor command.
-  static constexpr int16_t kMaxPower = 1000; ///< Maximum absolute motor command.
-  static constexpr int32_t kPositionToleranceCounts = 8; ///< Position move tolerance.
+  static constexpr int32_t kCountsPerOutputRev = 3626;     ///< Encoder counts per output revolution.
+  static constexpr int16_t kMinMovingPower = 350;          ///< Minimum useful motor command.
+  static constexpr int16_t kMaxPower = 1000;               ///< Maximum absolute motor command.
+  static constexpr int32_t kPositionToleranceCounts = 8;   ///< Position move tolerance.
 
   /** @brief Convert output shaft degrees to encoder counts. */
   int32_t degreesToCounts(int32_t degrees) const;

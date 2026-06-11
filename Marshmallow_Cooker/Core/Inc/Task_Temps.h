@@ -6,9 +6,9 @@
  * @brief Temperature sensor polling task for thermocouple and IR readings.
  */
 
-#include "MCP9600.h" ///< Thermocouple temperature sensor driver.
-#include "MLX90614.h" ///< Infrared temperature sensor driver.
 #include "Task.h"
+#include "MCP9600.h"   ///< Thermocouple temperature sensor driver.
+#include "MLX90614.h"  ///< Infrared temperature sensor driver.
 
 #include <cstdint>
 
@@ -22,10 +22,10 @@ class TaskTemps : public Task {
 public:
   /** @brief Internal sensor task state. */
   enum class State {
-    Uninitialized, ///< Sensors have not been initialized.
-    Idle, ///< Waiting for the next scheduled read.
-    Reading, ///< Reserved for sensor read-in-progress state.
-    Fault ///< Sensor task has faulted.
+    Uninitialized,  ///< Sensors have not been initialized.
+    Idle,           ///< Waiting for the next scheduled read.
+    Reading,        ///< Reserved for sensor read-in-progress state.
+    Fault           ///< Sensor task has faulted.
   };
 
   /** @brief Construct the temperature task. */
@@ -70,7 +70,7 @@ private:
   MCP9600 tc_sensor_;
   MLX90614 ir_sensor_;
 
-  static constexpr uint32_t kUpdatePeriodMs = 500; ///< Sensor polling interval.
+  static constexpr uint32_t kUpdatePeriodMs = 500;  ///< Sensor polling interval.
   uint32_t last_update_ms_ = 0;
 
   bool valid_tc_reading_ = false;

@@ -31,14 +31,14 @@ class TaskCooker : public Task {
 public:
   /** @brief High-level cooker state. */
   enum class State {
-    Uninitialized, ///< Cooker has not completed startup.
-    WaitingForHomeCommand, ///< Waiting for the user to send home.
-    HomingZ, ///< Returning R to zero and homing Z.
-    ReadyToCook, ///< Setup complete and ready to start.
-    Cooking, ///< Active cooking cycle.
-    MovingToRemovalHeight, ///< Normal stop or done move is in progress.
-    Done, ///< Marshmallow is ready to remove.
-    Fault ///< Faulted state requiring reset.
+    Uninitialized,          ///< Cooker has not completed startup.
+    WaitingForHomeCommand,  ///< Waiting for the user to send home.
+    HomingZ,                ///< Returning R to zero and homing Z.
+    ReadyToCook,            ///< Setup complete and ready to start.
+    Cooking,                ///< Active cooking cycle.
+    MovingToRemovalHeight,  ///< Normal stop or done move is in progress.
+    Done,                   ///< Marshmallow is ready to remove.
+    Fault                   ///< Faulted state requiring reset.
   };
 
   /**
@@ -60,9 +60,9 @@ public:
   State getState() const;
 
 private:
-  static constexpr int32_t kTargetFlameTempFx100 = 35000; ///< Target flame temperature, 350.00 F.
-  static constexpr int32_t kDoneMarshmallowTempFx100 = 16000; ///< Done IR object temperature, 160.00 F.
-  static constexpr uint32_t kStatusStreamPeriodMs = 500; ///< Status stream update period.
+  static constexpr int32_t kTargetFlameTempFx100 = 35000;       ///< Target flame temperature, 350.00 F.
+  static constexpr int32_t kDoneMarshmallowTempFx100 = 16000;   ///< Done IR object temperature, 160.00 F.
+  static constexpr uint32_t kStatusStreamPeriodMs = 500;        ///< Status stream update period.
 
   State state_ = State::Uninitialized;
 

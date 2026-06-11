@@ -20,18 +20,18 @@ class ZMotorDriver {
 public:
   /** @brief Logical Z motion directions. */
   enum class Direction {
-    Up, ///< Move toward the top/home limit.
-    Down ///< Move toward the bottom/flame side.
+    Up,   ///< Move toward the top/home limit.
+    Down  ///< Move toward the bottom/flame side.
   };
 
   /** @brief Low-level Z driver state. */
   enum class State {
-    Disabled, ///< Driver output is disabled.
-    Idle, ///< Driver is enabled but not moving.
-    Moving, ///< A position or homing move is active.
-    Fault, ///< Driver fault input is active.
-    HitTopLimit, ///< Motion stopped because the top limit was hit.
-    HitBottomLimit ///< Motion stopped because the bottom limit was hit.
+    Disabled,       ///< Driver output is disabled.
+    Idle,           ///< Driver is enabled but not moving.
+    Moving,         ///< A position or homing move is active.
+    Fault,          ///< Driver fault input is active.
+    HitTopLimit,    ///< Motion stopped because the top limit was hit.
+    HitBottomLimit  ///< Motion stopped because the bottom limit was hit.
   };
 
   /** @brief Construct the Z motor driver with project pin assignments. */
@@ -111,8 +111,8 @@ public:
 
 private:
   static constexpr uint32_t kDefaultSpeedStepsPerSecond = 250; ///< Default motion speed.
-  static constexpr uint16_t kDefaultMicrosteps = 8; ///< Default microstep setting.
-  static constexpr int32_t kFullStepsPerRev = 200; ///< Full steps per motor revolution.
+  static constexpr uint16_t kDefaultMicrosteps = 8;            ///< Default microstep setting.
+  static constexpr int32_t kFullStepsPerRev = 200;             ///< Full steps per motor revolution.
 
   /** @brief Set the hardware direction pin for a logical direction. */
   void setDirection(Direction direction);

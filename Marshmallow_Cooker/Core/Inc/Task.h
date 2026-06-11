@@ -6,8 +6,8 @@
  * @brief Abstract base class for cooperative application tasks.
  */
 
-#include "main.h" ///< Project-wide declarations, including print_str and Error_Handler.
-#include "stm32f4xx_hal.h" ///< HAL timing and peripheral definitions.
+#include "main.h"           ///< Project-wide declarations, including print_str and Error_Handler.
+#include "stm32f4xx_hal.h"  ///< HAL timing and peripheral definitions.
 
 /** @brief Shared printf-style buffer used by task status messages. */
 extern char print_buf[100];
@@ -23,9 +23,9 @@ class Task {
 public:
   /** @brief Generic task health state used by the task supervisor. */
   enum class Status {
-    Uninitialized, ///< Task has not completed startup initialization.
-    Running, ///< Task is initialized and not faulted.
-    Fault ///< Task has detected a fault condition.
+    Uninitialized,  ///< Task has not completed startup initialization.
+    Running,        ///< Task is initialized and not faulted.
+    Fault           ///< Task has detected a fault condition.
   };
 
   /**

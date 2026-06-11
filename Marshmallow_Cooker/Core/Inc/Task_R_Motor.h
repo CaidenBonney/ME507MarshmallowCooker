@@ -23,12 +23,12 @@ class TaskRMotor : public Task {
 public:
   /** @brief R motor task state. */
   enum class State {
-    Uninitialized, ///< Driver has not been initialized.
-    Idle, ///< Motor is stopped and ready.
-    RotatingForward, ///< Current cooking move is in the positive direction.
-    RotatingBackward, ///< Current cooking move is in the negative direction.
+    Uninitialized,              ///< Driver has not been initialized.
+    Idle,                       ///< Motor is stopped and ready.
+    RotatingForward,            ///< Current cooking move is in the positive direction.
+    RotatingBackward,           ///< Current cooking move is in the negative direction.
     ReturningToInitialRotation, ///< Motor is returning to encoder zero.
-    Fault ///< Task has faulted and requires reset.
+    Fault                       ///< Task has faulted and requires reset.
   };
 
   /** @brief Construct the R motor task. */
@@ -71,10 +71,10 @@ public:
   bool isFaulted() const;
 
 private:
-  static constexpr uint32_t kUpdatePeriodMs = 10; ///< R task update period.
-  static constexpr int32_t kCookRotationDegrees = 360; ///< Oscillation size for each cooking move.
-  static constexpr int16_t kDefaultCookDuty = 700; ///< Default DRV8833 duty command.
-  static constexpr uint32_t kMoveTimeoutMs = 8000; ///< Timeout for cooking rotation moves.
+  static constexpr uint32_t kUpdatePeriodMs = 10;          ///< R task update period.
+  static constexpr int32_t kCookRotationDegrees = 360;     ///< Oscillation size for each cooking move.
+  static constexpr int16_t kDefaultCookDuty = 700;         ///< Default DRV8833 duty command.
+  static constexpr uint32_t kMoveTimeoutMs = 8000;         ///< Timeout for cooking rotation moves.
   static constexpr uint32_t kReturnToInitialTimeoutMs = 8000; ///< Timeout for return-to-zero moves.
 
   State state_ = State::Uninitialized;

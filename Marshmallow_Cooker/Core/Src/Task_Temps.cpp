@@ -4,17 +4,14 @@
  */
 
 #include "Task_Temps.h"
-#include "stdio.h"
 
 extern I2C_HandleTypeDef hi2c3;
 
-/** @copydoc TaskTemps::TaskTemps */
 TaskTemps::TaskTemps()
     : tc_sensor_(&hi2c3),
       ir_sensor_(&hi2c3) {
 }
 
-/** @copydoc TaskTemps::run */
 void TaskTemps::run() {
   switch (state_) {
     case State::Uninitialized:
@@ -53,7 +50,6 @@ void TaskTemps::run() {
   }
 }
 
-/** @copydoc TaskTemps::update */
 void TaskTemps::update() {
   status = ir_sensor_.update();
 
@@ -81,7 +77,6 @@ void TaskTemps::update() {
   }
 }
 
-/** @copydoc TaskTemps::getStatus */
 Task::Status TaskTemps::getStatus() const {
   if (state_ == State::Uninitialized) {
     return Task::Status::Uninitialized;
@@ -94,37 +89,30 @@ Task::Status TaskTemps::getStatus() const {
   return Task::Status::Running;
 }
 
-/** @copydoc TaskTemps::getState */
 TaskTemps::State TaskTemps::getState() const {
   return state_;
 }
 
-/** @copydoc TaskTemps::hasValidThermocoupleReading */
 bool TaskTemps::hasValidThermocoupleReading() const {
   return valid_tc_reading_;
 }
 
-/** @copydoc TaskTemps::hasValidIrReading */
 bool TaskTemps::hasValidIrReading() const {
   return valid_ir_reading_;
 }
 
-/** @copydoc TaskTemps::getThermocoupleHotFx100 */
 int32_t TaskTemps::getThermocoupleHotFx100() const {
   return tc_hot_fx100_;
 }
 
-/** @copydoc TaskTemps::getThermocoupleColdFx100 */
 int32_t TaskTemps::getThermocoupleColdFx100() const {
   return tc_cold_fx100_;
 }
 
-/** @copydoc TaskTemps::getIrObjectFx100 */
 int32_t TaskTemps::getIrObjectFx100() const {
   return ir_object_fx100_;
 }
 
-/** @copydoc TaskTemps::printTemperatures */
 void TaskTemps::printTemperatures() const {
   sprintf(print_buf,
           "IR Temp: %ld.%02ld F, TC Hot: %ld.%02ld F, Cold: %ld.%02ld F\r\n",

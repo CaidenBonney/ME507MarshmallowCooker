@@ -11,7 +11,6 @@
 #define TMC2209_ENABLE_PRINTF_DIAG 1
 #endif
 
-/** @copydoc TMC2209::TMC2209 */
 TMC2209::TMC2209(GPIO_TypeDef* step_port,
                  uint16_t step_pin,
                  GPIO_TypeDef* dir_port,
@@ -37,7 +36,6 @@ TMC2209::TMC2209(GPIO_TypeDef* step_port,
       last_step_time_us_(0) {
 }
 
-/** @copydoc TMC2209::begin */
 void TMC2209::begin() {
   configureGpioPins();
   enableCycleCounter();
@@ -50,7 +48,6 @@ void TMC2209::begin() {
   last_step_time_us_ = micros();
 }
 
-/** @copydoc TMC2209::configureGpioPins */
 void TMC2209::configureGpioPins() {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -79,14 +76,12 @@ void TMC2209::configureGpioPins() {
   HAL_GPIO_Init(diag_port_, &GPIO_InitStruct);
 }
 
-/** @copydoc TMC2209::enableCycleCounter */
 void TMC2209::enableCycleCounter() {
   CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
   DWT->CYCCNT = 0;
   DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 }
 
-/** @copydoc TMC2209::enable */
 void TMC2209::enable() {
   // TMC2209 ENN is active-low: LOW enables the driver power stage.
   HAL_GPIO_WritePin(enn_port_, enn_pin_, GPIO_PIN_RESET);
@@ -94,41 +89,34 @@ void TMC2209::enable() {
   last_step_time_us_ = micros();
 }
 
-/** @copydoc TMC2209::disable */
 void TMC2209::disable() {
   // TMC2209 ENN is active-low: HIGH disables the driver power stage.
   HAL_GPIO_WritePin(enn_port_, enn_pin_, GPIO_PIN_SET);
   enabled_ = false;
 }
 
-/** @copydoc TMC2209::isEnabled */
 bool TMC2209::isEnabled() const {
   return enabled_;
 }
 
-/** @copydoc TMC2209::setDirection */
 void TMC2209::setDirection(Direction direction) {
   direction_ = direction;
   writeDirectionPin(direction_);
 }
 
-/** @copydoc TMC2209::getDirection */
 TMC2209::Direction TMC2209::getDirection() const {
   return direction_;
 }
 
-/** @copydoc TMC2209::setDirectionInverted */
 void TMC2209::setDirectionInverted(bool inverted) {
   direction_inverted_ = inverted;
   writeDirectionPin(direction_);
 }
 
-/** @copydoc TMC2209::directionInverted */
 bool TMC2209::directionInverted() const {
   return direction_inverted_;
 }
 
-/** @copydoc TMC2209::setStepRate */
 void TMC2209::setStepRate(uint32_t steps_per_second) {
   if (steps_per_second == 0) {
     steps_per_second = 1;
@@ -143,17 +131,14 @@ void TMC2209::setStepRate(uint32_t steps_per_second) {
   }
 }
 
-/** @copydoc TMC2209::getStepRate */
 uint32_t TMC2209::getStepRate() const {
   return step_rate_steps_per_second_;
 }
 
-/** @copydoc TMC2209::getStepIntervalUs */
 uint32_t TMC2209::getStepIntervalUs() const {
   return step_interval_us_;
 }
 
-/** @copydoc TMC2209::stepNow */
 void TMC2209::stepNow() {
   if (!enabled_) {
     return;
@@ -166,7 +151,6 @@ void TMC2209::stepNow() {
   last_step_time_us_ = micros();
 }
 
-/** @copydoc TMC2209::stepIfDue */
 bool TMC2209::stepIfDue() {
   if (!enabled_) {
     return false;
@@ -183,12 +167,10 @@ bool TMC2209::stepIfDue() {
   return true;
 }
 
-/** @copydoc TMC2209::diagActive */
 bool TMC2209::diagActive() const {
   return HAL_GPIO_ReadPin(diag_port_, diag_pin_) == GPIO_PIN_SET;
 }
 
-/** @copydoc TMC2209::updateDiagLog */
 bool TMC2209::updateDiagLog() {
   const bool active = diagActive();
 
@@ -202,7 +184,6 @@ bool TMC2209::updateDiagLog() {
   return active;
 }
 
-/** @copydoc TMC2209::resetDiagLatch */
 void TMC2209::resetDiagLatch() {
   // Many latched driver errors are cleared by disabling and re-enabling ENN.
   const bool was_enabled = enabled_;
@@ -215,19 +196,16 @@ void TMC2209::resetDiagLatch() {
   }
 }
 
-/** @copydoc TMC2209::micros */
 uint32_t TMC2209::micros() const {
   return DWT->CYCCNT / (HAL_RCC_GetHCLKFreq() / 1000000UL);
 }
 
-/** @copydoc TMC2209::delayUs */
 void TMC2209::delayUs(uint32_t delay_us) const {
   const uint32_t start_us = micros();
   while ((uint32_t)(micros() - start_us) < delay_us) {
   }
 }
 
-/** @copydoc TMC2209::writeDirectionPin */
 void TMC2209::writeDirectionPin(Direction direction) {
   bool forward_high = (direction == Direction::Forward);
 

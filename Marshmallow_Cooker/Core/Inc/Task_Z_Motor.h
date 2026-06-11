@@ -30,13 +30,13 @@ class TaskZMotor : public Task {
 public:
   /** @brief Z task state. */
   enum class State {
-    Uninitialized, ///< Driver has not been initialized.
-    Idle, ///< Z is stopped and ready.
-    Homing, ///< Moving upward until the top limit is reached.
-    MovingToStartPosition, ///< Moving from home to the initial cook height.
-    ControllingFlameTemp, ///< PID height control is active.
-    MovingToRemovalHeight, ///< Moving to the removal height after cooking.
-    Fault ///< Task fault requiring reset.
+    Uninitialized,          ///< Driver has not been initialized.
+    Idle,                   ///< Z is stopped and ready.
+    Homing,                 ///< Moving upward until the top limit is reached.
+    MovingToStartPosition,  ///< Moving from home to the initial cook height.
+    ControllingFlameTemp,   ///< PID height control is active.
+    MovingToRemovalHeight,  ///< Moving to the removal height after cooking.
+    Fault                   ///< Task fault requiring reset.
   };
 
   /** @brief Construct the Z motor task. */
@@ -117,21 +117,21 @@ private:
    *       top limit/home is 0 steps, upward is positive, and downward toward
    *       the flame is negative.
    */
-  static constexpr uint32_t kUpdatePeriodMs = 10; ///< Task state-machine update period.
-  static constexpr uint32_t kHomeSpeedStepsPerSecond = 300; ///< Homing speed in steps/s.
-  static constexpr uint32_t kMoveSpeedStepsPerSecond = 500; ///< Normal move speed in steps/s.
-  static constexpr uint32_t kPidUpdatePeriodMs = 500; ///< PID update period.
+  static constexpr uint32_t kUpdatePeriodMs = 10;                 ///< Task state-machine update period.
+  static constexpr uint32_t kHomeSpeedStepsPerSecond = 300;       ///< Homing speed in steps/s.
+  static constexpr uint32_t kMoveSpeedStepsPerSecond = 500;       ///< Normal move speed in steps/s.
+  static constexpr uint32_t kPidUpdatePeriodMs = 500;             ///< PID update period.
 
-  static constexpr int32_t kRemovalHeightSteps = -500; ///< Z removal height.
-  static constexpr int32_t kStartCookingPositionSteps = -1000; ///< Initial cooking height.
-  static constexpr int32_t kPidOutputLimitSteps = 50; ///< Maximum PID step correction per update.
-  static constexpr int32_t kPidDeadbandSteps = 2; ///< PID command deadband in steps.
-  static constexpr int32_t kMinCookPositionSteps = -3000; ///< Software lower travel limit.
-  static constexpr float kIntegralErrorLimit = 500.0f; ///< Integral wind-up limit.
+  static constexpr int32_t kRemovalHeightSteps = -500;            ///< Z removal height.
+  static constexpr int32_t kStartCookingPositionSteps = -1000;    ///< Initial cooking height.
+  static constexpr int32_t kPidOutputLimitSteps = 50;             ///< Maximum PID step correction per update.
+  static constexpr int32_t kPidDeadbandSteps = 2;                 ///< PID command deadband in steps.
+  static constexpr int32_t kMinCookPositionSteps = -3000;         ///< Software lower travel limit.
+  static constexpr float kIntegralErrorLimit = 500.0f;            ///< Integral wind-up limit.
 
-  static constexpr float kDefaultKp = 1.0f; ///< Default proportional gain, steps/F.
-  static constexpr float kDefaultKi = 0.02f; ///< Default integral gain, steps/(F*s).
-  static constexpr float kDefaultKd = 0.10f; ///< Default derivative gain, steps/(F/s).
+  static constexpr float kDefaultKp = 1.0f;   ///< Default proportional gain, steps/F.
+  static constexpr float kDefaultKi = 0.02f;  ///< Default integral gain, steps/(F*s).
+  static constexpr float kDefaultKd = 0.10f;  ///< Default derivative gain, steps/(F/s).
 
   State state_ = State::Uninitialized;
 

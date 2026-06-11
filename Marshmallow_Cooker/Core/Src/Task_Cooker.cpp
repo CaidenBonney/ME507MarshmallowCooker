@@ -7,7 +7,6 @@
 
 #include <cstdio>
 
-/** @copydoc TaskCooker::TaskCooker */
 TaskCooker::TaskCooker(TaskUI& task_ui, TaskTemps& task_temps, TaskRMotor& task_r_motor, TaskZMotor& task_z_motor)
     : task_ui_(task_ui),
       task_temps_(task_temps),
@@ -15,7 +14,6 @@ TaskCooker::TaskCooker(TaskUI& task_ui, TaskTemps& task_temps, TaskRMotor& task_
       task_z_motor_(task_z_motor) {
 }
 
-/** @copydoc TaskCooker::run */
 void TaskCooker::run() {
   if (state_ == State::Uninitialized) {
     print_str("Cooker initialized. Send 'home' to begin setup.\r\n");
@@ -94,7 +92,6 @@ void TaskCooker::run() {
   }
 }
 
-/** @copydoc TaskCooker::getStatus */
 Task::Status TaskCooker::getStatus() const {
   if (state_ == State::Uninitialized) {
     return Task::Status::Uninitialized;
@@ -107,12 +104,10 @@ Task::Status TaskCooker::getStatus() const {
   return Task::Status::Running;
 }
 
-/** @copydoc TaskCooker::getState */
 TaskCooker::State TaskCooker::getState() const {
   return state_;
 }
 
-/** @copydoc TaskCooker::handleCommand */
 void TaskCooker::handleCommand(TaskUI::Command command) {
   switch (command) {
     case TaskUI::Command::None:
@@ -213,7 +208,6 @@ void TaskCooker::handleCommand(TaskUI::Command command) {
   }
 }
 
-/** @copydoc TaskCooker::beginNormalStop */
 void TaskCooker::beginNormalStop(const char* message) {
   print_str(message);
 
@@ -225,7 +219,6 @@ void TaskCooker::beginNormalStop(const char* message) {
   state_ = State::MovingToRemovalHeight;
 }
 
-/** @copydoc TaskCooker::enterFault */
 void TaskCooker::enterFault(const char* reason) {
   if (state_ != State::Fault) {
     print_str("Cooker fault: ");
@@ -240,7 +233,6 @@ void TaskCooker::enterFault(const char* reason) {
   state_ = State::Fault;
 }
 
-/** @copydoc TaskCooker::printStatus */
 void TaskCooker::printStatus() const {
   const int32_t tc_hot = task_temps_.getThermocoupleHotFx100();
   const int32_t ir_object = task_temps_.getIrObjectFx100();
@@ -261,7 +253,6 @@ void TaskCooker::printStatus() const {
   print_str(print_buf);
 }
 
-/** @copydoc TaskCooker::startStatusStream */
 void TaskCooker::startStatusStream(uint32_t duration_ms) {
   status_stream_active_ = true;
   status_stream_duration_ms_ = duration_ms;
@@ -270,7 +261,6 @@ void TaskCooker::startStatusStream(uint32_t duration_ms) {
   printStatus();
 }
 
-/** @copydoc TaskCooker::updateStatusStream */
 void TaskCooker::updateStatusStream() {
   if (!status_stream_active_) {
     return;
@@ -289,7 +279,6 @@ void TaskCooker::updateStatusStream() {
   }
 }
 
-/** @copydoc TaskCooker::stopStatusStream */
 void TaskCooker::stopStatusStream() {
   status_stream_active_ = false;
   status_stream_duration_ms_ = 0;
